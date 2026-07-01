@@ -1,0 +1,177 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-ivory: var(--ivory);
+  --color-cream: var(--cream);
+  --color-charcoal: var(--charcoal);
+  --color-forest: var(--forest);
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Brand palette */
+  --ivory: oklch(0.975 0.012 85);
+  --cream: oklch(0.955 0.018 82);
+  --gold-soft: oklch(0.86 0.09 78);
+  --gold: oklch(0.76 0.135 72);
+  --gold-deep: oklch(0.65 0.14 65);
+  --charcoal: oklch(0.22 0.012 80);
+  --forest: oklch(0.32 0.06 145);
+
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--charcoal);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--charcoal);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--charcoal);
+  --muted: var(--cream);
+  --muted-foreground: oklch(0.45 0.02 80);
+  --accent: var(--gold);
+  --accent-foreground: var(--charcoal);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.9 0.015 80);
+  --input: oklch(0.9 0.015 80);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+}
+
+@utility fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@utility fade-in {
+  opacity: 0;
+  animation: fadeIn 1.4s ease-out forwards;
+}
+@utility delay-1 { animation-delay: 0.15s; }
+@utility delay-2 { animation-delay: 0.3s; }
+@utility delay-3 { animation-delay: 0.45s; }
+@utility delay-4 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes particleRise {
+  0% { transform: translateY(20px) translateX(0); opacity: 0; }
+  20% { opacity: 0.5; }
+  100% { transform: translateY(-120vh) translateX(var(--drift, 30px)); opacity: 0; }
+}
+
+@utility float-y {
+  animation: floatY 7s ease-in-out infinite;
+}
+
+/* Hero responsive sizing */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.hero-bottle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(340px, 32vw, 500px);
+  height: auto;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-capsules {
+  position: absolute;
+  left: 50%;
+  top: auto;
+  bottom: 38%;
+  transform: translateX(-50%);
+  width: clamp(240px, 24vw, 360px);
+  height: auto;
+  object-fit: contain;
+  z-index: 4;
+  pointer-events: none;
+}
+.hero-heading {
+  font-size: clamp(48px, 5vw, 82px);
+  line-height: 0.9;
+}
+@media (max-width: 768px) {
+  .hero-bottle {
+    width: 58vw;
+    max-width: 320px;
+  }
+  .hero-capsules {
+    width: 200px;
+    bottom: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .hero-heading {
+    font-size: 38px;
+  }
+}

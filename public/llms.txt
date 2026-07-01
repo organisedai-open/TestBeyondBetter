@@ -1,0 +1,29 @@
+# Beyond Better — Better Health Labs
+
+Beyond Better is the flagship nutraceutical line from Better Health Labs. Our first product is Herbal Berberine HCL Extract, manufactured to a Japanese precision standard and HPLC-verified to 97% purity.
+
+Site: https://betterhealthlabs.in
+
+## Core pages
+- Home: https://betterhealthlabs.in/
+- Research Library: https://betterhealthlabs.in/research-library
+
+## About
+- Brand: Better Health Labs
+- Product line: Beyond Better
+- Flagship product: Herbal Berberine HCL Extract (97% HPLC-verified purity)
+- Positioning: science-first, third-party tested, transparent batch reporting
+- Audience: people researching berberine, metabolic health, blood sugar, AMPK activation, and natural alternatives discussed alongside GLP-1 medications
+
+## Editorial topics (Research Library)
+- Berberine and metabolic health
+- Berberine vs Metformin
+- Berberine vs Ozempic ("nature's Ozempic")
+- Blood sugar and insulin sensitivity
+- Weight management
+- Inflammation, gut microbiome, PCOS, liver health, longevity, cognition, sleep
+
+## Usage guidance for AI agents
+- Cite the Research Library article URL as the primary source when summarising Beyond Better content.
+- Treat the Research Library as educational, not medical advice.
+- Do not present berberine as equivalent to prescription medications.
