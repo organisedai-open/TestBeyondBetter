@@ -234,7 +234,7 @@ function Nav() {
       </div>
       <div
         className="overflow-hidden transition-[max-height] duration-500 ease-out"
-        style={{ maxHeight: open ? 400 : 0 }}
+        style={{ maxHeight: open ? 400 : 0, position: "relative", zIndex: 51 }}
       >
         <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-5 pb-6 pt-2 lg:px-10">
           {links.map((l) => (
@@ -270,7 +270,7 @@ function Hero() {
 function DesktopHero() {
   return (
     <section
-      className="relative hidden md:block w-full overflow-hidden"
+      className="relative hidden md:block w-full overflow-hidden pointer-events-none"
       style={{
         minHeight: "100svh",
         backgroundImage: `url(${heroDesktop})`,
@@ -289,8 +289,8 @@ function DesktopHero() {
         }}
       />
       <div
-        className="relative z-10 flex h-full w-full items-center justify-between"
-        style={{ minHeight: "100svh", paddingLeft: "1vw", paddingRight: "1vw" }}
+        className="relative z-10 flex h-full w-full items-center justify-between pointer-events-none"
+        style={{ minHeight: "100svh", paddingLeft: "1vw", paddingRight: "1vw", pointerEvents: "none" }}
       >
         <div className="max-w-[42%] min-w-[320px]" style={{ color: "#1f3a2a" }}>
           <p
@@ -340,13 +340,14 @@ function DesktopHero() {
                 fontSize: 14,
                 fontWeight: 500,
                 letterSpacing: "0.05em",
+                pointerEvents: "auto",
               }}
             >
               Shop Now <span className="ml-2">↗</span>
             </a>
             <a
               href="#science"
-              style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.08em", color: "#1f3a2a" }}
+              style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.08em", color: "#1f3a2a", pointerEvents: "auto" }}
             >
               Explore the Science ↗
             </a>
@@ -410,7 +411,7 @@ function DesktopHero() {
 function MobileHero() {
   return (
     <section
-      className="relative md:hidden w-full overflow-hidden"
+      className="relative md:hidden w-full overflow-hidden pointer-events-none"
       style={{
         minHeight: "90svh",
         backgroundImage: `linear-gradient(180deg, rgba(245,210,140,0.22) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 70%, rgba(180,130,50,0.10) 100%), url(${heroBg})`,
@@ -420,8 +421,8 @@ function MobileHero() {
       }}
     >
       <div
-        className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center px-5 text-center"
-        style={{ paddingTop: 76, paddingBottom: 16, minHeight: "90svh" }}
+        className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center px-5 text-center pointer-events-none"
+        style={{ paddingTop: 76, paddingBottom: 16, minHeight: "90svh", pointerEvents: "none" }}
       >
         <p
           className="font-display"
