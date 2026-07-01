@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import productTube from "@/assets/hero-berberine-product.png";
-import logoLeaf from "@/assets/logo-leaf.png";
+import logoLeaf from "@/assets/logo-leaf.webp";
 import {
   ArrowUpRight,
   ArrowRight,

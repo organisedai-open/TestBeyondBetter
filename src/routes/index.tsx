@@ -4,12 +4,12 @@ import { Reveal } from "@/components/Reveal";
 import { PowderParticles } from "@/components/PowderParticles";
 import productTube from "@/assets/hero-berberine-product.png";
 import innerBottle from "@/assets/shop-berberine.webp";
-import berberineCapsule from "@/assets/berberine-capsule.png";
-import logoLeaf from "@/assets/logo-leaf.png";
+import berberineCapsule from "@/assets/berberine-capsule.webp";
+import logoLeaf from "@/assets/logo-leaf.webp";
 
 import heroBg from "@/assets/berberine-hero-mobile.webp";
 import heroDesktop from "@/assets/berberine-hero-desktop.webp";
-import transparencyHero from "@/assets/transparency-hero.jpeg";
+import transparencyHero from "@/assets/transparency-hero.webp";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -709,25 +709,7 @@ function LabReport() {
               <br />
               <span style={{ color: "var(--forest)" }}>Every batch verified.</span>
             </h2>
-            <a
-              href="#"
-              className="group inline-flex items-center self-start transition-transform duration-300 hover:scale-[1.03]"
-              style={{
-                marginTop: "clamp(6px, 1vw, 14px)",
-                padding: "clamp(8px, 1.1vw, 16px) clamp(14px, 1.8vw, 28px)",
-                background: "linear-gradient(135deg, var(--forest) 0%, color-mix(in oklab, var(--forest) 70%, black) 100%)",
-                color: "var(--ivory)",
-                borderRadius: "16px",
-                fontSize: "clamp(11px, 1.25vw, 18px)",
-                fontWeight: 500,
-                gap: "10px",
-                boxShadow: "0 16px 32px -16px color-mix(in oklab, var(--forest) 60%, transparent)",
-                width: "fit-content",
-              }}
-            >
-              View Certificate
-              <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" style={{ width: "1em", height: "1em" }} strokeWidth={1.75} />
-            </a>
+
           </div>
         </div>
 
@@ -756,25 +738,7 @@ function LabReport() {
               </h2>
             </div>
           </div>
-          <div className="flex justify-center px-6 py-8" style={{ background: "#F1ECE2" }}>
-            <a
-              href="#"
-              className="group inline-flex items-center justify-center"
-              style={{
-                padding: "14px 28px",
-                background: "linear-gradient(135deg, var(--forest) 0%, color-mix(in oklab, var(--forest) 70%, black) 100%)",
-                color: "var(--ivory)",
-                borderRadius: "16px",
-                fontSize: "15px",
-                fontWeight: 500,
-                gap: "10px",
-                boxShadow: "0 16px 32px -16px color-mix(in oklab, var(--forest) 60%, transparent)",
-              }}
-            >
-              View Certificate
-              <ArrowRight style={{ width: "1em", height: "1em" }} strokeWidth={1.75} />
-            </a>
-          </div>
+
         </div>
 
       </Reveal>

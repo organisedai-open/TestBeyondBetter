@@ -12,6 +12,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "@posthog/react";
 
 import appCss from "../styles.css?url";
+import logoLeaf from "@/assets/logo-leaf.webp";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 if (typeof window !== "undefined" && !(window as unknown as { __ph_init?: boolean }).__ph_init) {
@@ -99,6 +100,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        href: logoLeaf,
+        type: "image/webp",
       },
     ],
   }),
