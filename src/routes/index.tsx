@@ -109,6 +109,18 @@ export const Route = createFileRoute("/")({
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
+        rel: "preload",
+        as: "image",
+        href: heroDesktop,
+        media: "(min-width: 768px)",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        href: heroBg,
+        media: "(max-width: 767px)",
+      },
+      {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&display=swap",
       },
@@ -172,15 +184,30 @@ function Nav() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     let lastY = window.scrollY;
-    const onScroll = () => {
+    let ticking = false;
+
+    const update = () => {
       const y = window.scrollY;
-      setScrolled(y > 24);
+      setScrolled((prev) => (prev === (y > 24) ? prev : y > 24));
+
       if (y > lastY && y > 80) {
         setHidden(true);
         setOpen(false);
-      } else if (y < lastY) setHidden(false);
+      } else if (y < lastY) {
+        setHidden(false);
+      }
+
       lastY = y;
+      ticking = false;
     };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -195,11 +222,8 @@ function Nav() {
     { href: "#faq", label: "FAQ" },
   ];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (open) {
       setOpen(false);
     }
   };
@@ -241,7 +265,7 @@ function Nav() {
             <a
               key={l.href}
               href={l.href}
-              onClick={(e) => handleClick(e, l.href)}
+              onClick={handleClick}
               className="font-display py-2 text-[18px] tracking-tight transition-opacity hover:opacity-60"
               style={{ color: "var(--forest)" }}
             >
@@ -686,7 +710,10 @@ function LabReport() {
             src={transparencyHero}
             alt="Beyond Better Berberine HCL — lab tested supplement"
             className="absolute inset-0 h-full w-full select-none object-cover"
+            width={1920}
+            height={1071}
             loading="lazy"
+            decoding="async"
           />
           <div
             className="absolute z-10 flex flex-col justify-center"
@@ -720,7 +747,10 @@ function LabReport() {
               src={transparencyHero}
               alt="Beyond Better Berberine HCL — lab tested supplement"
               className="block w-full h-auto select-none"
+              width={1920}
+              height={1071}
               loading="lazy"
+              decoding="async"
             />
             <div
               className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 pb-6 pt-16"
@@ -797,7 +827,16 @@ function Ingredients() {
     <section className="bg-background py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
         <Reveal>
-          <img src={berberineCapsule} alt="Berberine HCL extract" className="w-full object-contain" />
+          <img
+            src={berberineCapsule}
+            alt="Berberine HCL extract"
+            className="w-full object-contain"
+            width={700}
+            height={700}
+            loading="lazy"
+            decoding="async"
+            style={{ aspectRatio: "1 / 1" }}
+          />
         </Reveal>
         <Reveal delay={0.1}>
           <div>
@@ -961,7 +1000,11 @@ function FinalCTA() {
           <img
             src={innerBottle}
             alt="Berberine capsules"
-            className="mx-auto mt-10 w-56 md:w-72"
+            className="mx-auto mt-10 max-w-full"
+            width={384}
+            height={576}
+            loading="lazy"
+            decoding="async"
             style={{ filter: "drop-shadow(0 30px 40px rgba(60,40,10,0.25))" }}
           />
         </Reveal>

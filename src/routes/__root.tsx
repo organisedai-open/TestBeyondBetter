@@ -8,23 +8,10 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import posthog from "posthog-js";
-import { PostHogProvider } from "@posthog/react";
 
 import appCss from "../styles.css?url";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-
-if (typeof window !== "undefined" && !(window as unknown as { __ph_init?: boolean }).__ph_init) {
-  (window as unknown as { __ph_init?: boolean }).__ph_init = true;
-  posthog.init("phc_oEcog6RkFixVSJ2MFe63pi7xpfRp4FLkpmaRjkDgsxCV", {
-    api_host: "https://us.i.posthog.com",
-    person_profiles: "identified_only",
-    capture_pageview: false,
-    capture_pageleave: true,
-    autocapture: true,
-  });
-}
 
 
 function NotFoundComponent() {
@@ -131,12 +118,33 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    if (typeof window === "undefined" || (window as unknown as { __ph_init?: boolean }).__ph_init) {
+      return;
+    }
+
+    (window as unknown as { __ph_init?: boolean }).__ph_init = true;
+
+    import("posthog-js")
+      .then((module) => {
+        const posthog = module.default;
+        posthog.init("phc_oEcog6RkFixVSJ2MFe63pi7xpfRp4FLkpmaRjkDgsxCV", {
+          api_host: "https://us.i.posthog.com",
+          person_profiles: "identified_only",
+          capture_pageview: false,
+          capture_pageleave: true,
+          autocapture: true,
+        });
+      })
+      .catch((error) => {
+        console.error("PostHog failed to load", error);
+      });
+  }, []);
+
   return (
-    <PostHogProvider client={posthog}>
-      <QueryClientProvider client={queryClient}>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </QueryClientProvider>
-    </PostHogProvider>
+    <QueryClientProvider client={queryClient}>
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Outlet />
+    </QueryClientProvider>
   );
 }
