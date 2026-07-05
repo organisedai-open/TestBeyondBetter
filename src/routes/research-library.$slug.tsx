@@ -157,14 +157,13 @@ function Header() {
           <Link to="/research-library" className="hover:opacity-60 transition">Research</Link>
           <Link to="/" hash="faq" className="hover:opacity-60 transition">FAQ</Link>
         </nav>
-        <Link
-          to="/"
-          hash="shop"
+        <a
+          href="https://pages.razorpay.com/beyondbetter"
           className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
           Shop <ArrowUpRight className="h-3.5 w-3.5" />
-        </Link>
+        </a>
       </div>
     </header>
   );
@@ -210,14 +209,13 @@ function StickyShop() {
         show ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0 pointer-events-none"
       }`}
     >
-      <Link
-        to="/"
-        hash="shop"
+      <a
+        href="https://pages.razorpay.com/beyondbetter"
         className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm shadow-[0_20px_50px_-15px_rgba(23,61,36,0.45)] transition hover:opacity-90"
         style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
       >
         Shop Berberine <ArrowRight className="h-4 w-4" />
-      </Link>
+      </a>
     </div>
   );
 }
@@ -274,7 +272,7 @@ function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><Link to="/" hash="shop" className="hover:opacity-60">Berberine HCL</Link></li>
+                <li><a href="https://pages.razorpay.com/beyondbetter" className="hover:opacity-60">Berberine HCL</a></li>
                 <li><Link to="/" hash="lab" className="hover:opacity-60">Lab Report</Link></li>
               </ul>
             </div>
@@ -557,14 +555,13 @@ function ArticlePage() {
                   <p className="mt-2 text-xs opacity-80">
                     97% HPLC verified purity. Water extraction. Independent testing.
                   </p>
-                  <Link
-                    to="/"
-                    hash="shop"
+                  <a
+                    href="https://pages.razorpay.com/beyondbetter"
                     className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs transition hover:opacity-90"
                     style={{ backgroundColor: "var(--ivory)", color: "var(--forest)" }}
                   >
                     Shop Now <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </aside>
@@ -652,14 +649,13 @@ function ArticlePage() {
                 97% HPLC verified purity. Water-only extraction. Full transparency at every batch.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  to="/"
-                  hash="shop"
+                <a
+                  href="https://pages.razorpay.com/beyondbetter"
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-90"
                   style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
                 >
                   Shop Beyond Better <ArrowRight className="h-4 w-4" />
-                </Link>
+                </a>
                 <Link
                   to="/research-library"
                   className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition hover:bg-white"
