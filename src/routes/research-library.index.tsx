@@ -703,8 +703,8 @@ function Footer() {
         <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} Beyond Better. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href="#" aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
-            <a href="#" aria-label="Facebook"><Facebook className="h-4 w-4" /></a>
+            <a href="#" onClick={(e) => e.preventDefault()} aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
+            <a href="#" onClick={(e) => e.preventDefault()} aria-label="Facebook"><Facebook className="h-4 w-4" /></a>
           </div>
           <p className="opacity-70">
             *These statements have not been evaluated by any food or drug authority. This product is

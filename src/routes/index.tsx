@@ -1045,7 +1045,7 @@ function FinalCTA() {
 
         <Reveal delay={0.3}>
           <a
-            href="#"
+            href="#shop"
             className="mt-7 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-full px-9 py-5 text-[15px] font-medium tracking-wide transition hover:opacity-95 active:scale-[0.99]"
             style={{
               backgroundColor: "var(--forest)",
@@ -1136,8 +1136,8 @@ function Footer() {
         <div className="mt-6 flex flex-col items-center justify-between gap-3 text-xs text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} Beyond Better. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href="#" aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
-            <a href="#" aria-label="Facebook"><Facebook className="h-4 w-4" /></a>
+            <a href="#" onClick={(e) => e.preventDefault()} aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
+            <a href="#" onClick={(e) => e.preventDefault()} aria-label="Facebook"><Facebook className="h-4 w-4" /></a>
           </div>
         </div>
         <p className="mt-4 text-center text-[10px] opacity-60 md:text-left">*These statements have not been evaluated by any food or drug authority. Not intended to diagnose, treat or cure any disease.</p>
