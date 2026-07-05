@@ -239,12 +239,19 @@ function Nav() {
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-10">
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); setOpen(false); }} className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setOpen(false);
+          }}
+          className="flex items-center gap-2 bg-transparent border-none p-0 cursor-pointer"
+        >
           <img src={logoLeaf} alt="" className="h-5 w-5 object-contain" />
           <span className="font-display text-[13px] tracking-tight" style={{ color: "var(--forest)" }}>
             Beyond Better
           </span>
-        </a>
+        </button>
         <button
           aria-label="Menu"
           aria-expanded={open}
@@ -1136,8 +1143,22 @@ function Footer() {
         <div className="mt-6 flex flex-col items-center justify-between gap-3 text-xs text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} Beyond Better. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <a href="#" onClick={(e) => e.preventDefault()} aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
-            <a href="#" onClick={(e) => e.preventDefault()} aria-label="Facebook"><Facebook className="h-4 w-4" /></a>
+            <button
+              type="button"
+              onClick={() => {}}
+              aria-label="Instagram"
+              className="bg-transparent border-none p-0 cursor-pointer"
+            >
+              <Instagram className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => {}}
+              aria-label="Facebook"
+              className="bg-transparent border-none p-0 cursor-pointer"
+            >
+              <Facebook className="h-4 w-4" />
+            </button>
           </div>
         </div>
         <p className="mt-4 text-center text-[10px] opacity-60 md:text-left">*These statements have not been evaluated by any food or drug authority. Not intended to diagnose, treat or cure any disease.</p>
