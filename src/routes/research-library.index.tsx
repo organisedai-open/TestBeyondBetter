@@ -134,7 +134,7 @@ function Header() {
           <Link to="/" hash="faq" className="hover:opacity-60 transition">FAQ</Link>
         </nav>
         <a
-          href="https://pages.razorpay.com/beyondbetter"
+          href="/coming-soon"
           className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
@@ -178,7 +178,7 @@ function Hero() {
               Explore Research <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="https://pages.razorpay.com/beyondbetter"
+              href="/coming-soon"
               className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition hover:bg-white"
               style={{ borderColor: "color-mix(in oklab, var(--forest) 25%, transparent)", color: "var(--forest)" }}
             >
@@ -635,7 +635,7 @@ function FinalCTA() {
             Science-backed wellness starts with uncompromising quality.
           </p>
           <a
-            href="https://pages.razorpay.com/beyondbetter"
+            href="/coming-soon"
             className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm transition hover:opacity-90"
             style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
           >
@@ -683,7 +683,7 @@ function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><a href="https://pages.razorpay.com/beyondbetter" className="hover:opacity-60">Berberine HCL</a></li>
+                <li><a href="/coming-soon" className="hover:opacity-60">Berberine HCL</a></li>
                 <li><Link to="/" hash="lab" className="hover:opacity-60">Lab Report</Link></li>
               </ul>
             </div>
@@ -737,7 +737,7 @@ function StickyShop() {
   }, []);
   return (
     <a
-      href="https://pages.razorpay.com/beyondbetter"
+      href="/coming-soon"
       className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm shadow-[0_20px_50px_-15px_rgba(23,61,36,0.6)] transition"
       style={{
         backgroundColor: "var(--forest)",

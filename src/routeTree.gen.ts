@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResearchLibraryIndexRouteImport } from './routes/research-library.index'
 import { Route as ResearchLibrarySlugRouteImport } from './routes/research-library.$slug'
 
+const ComingSoonRoute = ComingSoonRouteImport.update({
+  id: '/coming-soon',
+  path: '/coming-soon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,53 @@ const ResearchLibrarySlugRoute = ResearchLibrarySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library': typeof ResearchLibraryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/research-library/$slug' | '/research-library/'
+  fullPaths:
+    '/' | '/coming-soon' | '/research-library/$slug' | '/research-library/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/research-library/$slug' | '/research-library'
-  id: '__root__' | '/' | '/research-library/$slug' | '/research-library/'
+  to: '/' | '/coming-soon' | '/research-library/$slug' | '/research-library'
+  id:
+    | '__root__'
+    | '/'
+    | '/coming-soon'
+    | '/research-library/$slug'
+    | '/research-library/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComingSoonRoute: typeof ComingSoonRoute
   ResearchLibrarySlugRoute: typeof ResearchLibrarySlugRoute
   ResearchLibraryIndexRoute: typeof ResearchLibraryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/coming-soon': {
+      id: '/coming-soon'
+      path: '/coming-soon'
+      fullPath: '/coming-soon'
+      preLoaderRoute: typeof ComingSoonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +110,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComingSoonRoute: ComingSoonRoute,
   ResearchLibrarySlugRoute: ResearchLibrarySlugRoute,
   ResearchLibraryIndexRoute: ResearchLibraryIndexRoute,
 }

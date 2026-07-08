@@ -155,7 +155,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">{children}</p>;
 }
 
-function CTAButton({ children, href = "https://pages.razorpay.com/beyondbetter", variant = "solid" }: { children: React.ReactNode; href?: string; variant?: "solid" | "ghost" }) {
+function CTAButton({ children, href = "/coming-soon", variant = "solid" }: { children: React.ReactNode; href?: string; variant?: "solid" | "ghost" }) {
   if (variant === "ghost") {
     return (
       <a
@@ -360,7 +360,7 @@ function DesktopHero() {
           </p>
           <div className="flex items-center gap-5" style={{ marginTop: 28 }}>
             <a
-              href="https://pages.razorpay.com/beyondbetter"
+              href="/coming-soon"
               className="flex items-center justify-center"
               style={{
                 height: 52,
@@ -528,7 +528,7 @@ function MobileHero() {
           ))}
         </div>
         <a
-          href="https://pages.razorpay.com/beyondbetter"
+          href="/coming-soon"
           className="flex items-center justify-center"
           style={{
             marginTop: 20,
@@ -649,7 +649,7 @@ function Comparison() {
         <Reveal delay={0.2}>
           <div className="mt-10 flex justify-center">
             <a
-              href="https://pages.razorpay.com/beyondbetter"
+              href="/coming-soon"
               className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm transition hover:opacity-90"
               style={{ backgroundColor: "var(--ivory)", color: "var(--forest)" }}
             >
@@ -1052,7 +1052,7 @@ function FinalCTA() {
 
         <Reveal delay={0.3}>
           <a
-            href="https://pages.razorpay.com/beyondbetter"
+            href="/coming-soon"
             className="mt-7 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-full px-9 py-5 text-[15px] font-medium tracking-wide transition hover:opacity-95 active:scale-[0.99]"
             style={{
               backgroundColor: "var(--forest)",
@@ -1099,7 +1099,7 @@ function StickyBuy() {
         <span className="font-display text-lg" style={{ color: "var(--forest)" }}><PriceTag /></span>
       </div>
       <a
-        href="https://pages.razorpay.com/beyondbetter"
+        href="/coming-soon"
         className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm transition active:opacity-80"
         style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
       >
@@ -1127,7 +1127,7 @@ function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><a href="https://pages.razorpay.com/beyondbetter" className="hover:opacity-60">Berberine HCL</a></li>
+                <li><a href="/coming-soon" className="hover:opacity-60">Berberine HCL</a></li>
                 <li><a href="#lab" className="hover:opacity-60">Lab Report</a></li>
               </ul>
             </div>
