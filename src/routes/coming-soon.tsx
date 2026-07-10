@@ -1,28 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import logoLeaf from "@/assets/logo-leaf.webp";
-import productPreview from "@/assets/hero-berberine-product.png";
+import productPreview from "@/assets/Berberine Herosection.webp";
 
 export const Route = createFileRoute("/coming-soon")({
   head: () => ({
     meta: [
-      { title: "Coming Soon | Beyond Better" },
+      { title: "Back Soon | Beyond Better" },
       {
         name: "description",
         content:
           "Beyond Better is preparing its first premium nutraceutical collection. Join the waitlist to be notified when we launch.",
       },
       { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "Coming Soon | Beyond Better" },
+      { property: "og:title", content: "Back Soon | Beyond Better" },
       {
         property: "og:description",
         content:
           "Beyond Better is preparing its first premium nutraceutical collection. Join the waitlist to be notified when we launch.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://betterhealthlabs.in/coming-soon" },
+      { property: "og:url", content: "https://bebeyondbetter.com/coming-soon" },
     ],
-    links: [{ rel: "canonical", href: "https://betterhealthlabs.in/coming-soon" }],
+    links: [{ rel: "canonical", href: "https://bebeyondbetter.com/coming-soon" }],
   }),
   component: ComingSoonPage,
 });
@@ -105,14 +105,14 @@ function ComingSoonPage() {
                 className="text-[11px] uppercase tracking-[0.34em]"
                 style={{ color: "var(--forest)" }}
               >
-                Coming Soon
+                Back Soon
               </p>
               <h1 className="mt-5 max-w-2xl text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
                 Something Better Is Coming
               </h1>
               <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-                We&apos;re preparing the first Beyond Better collection with uncompromising attention to quality,
-                formulation, and experience. Join the waitlist and we&apos;ll let you know the moment it becomes available.
+                We're preparing the next production run with the same uncompromising attention to quality and testing.
+                Join the waitlist and we'll notify you the moment it's back in stock.
               </p>
 
               <form
@@ -192,7 +192,7 @@ function ComingSoonPage() {
 
                 {!submitted && !error && (
                   <p aria-live="polite" className="mt-4 text-sm text-muted-foreground">
-                    No spam. Just first access when the collection launches.
+                    No spam. Just first access with best offer, when back in stock.
                   </p>
                 )}
               </form>
@@ -231,7 +231,7 @@ function ComingSoonPage() {
         <section className="py-8 sm:py-10">
           <div className="text-center">
             <p className="text-[11px] uppercase tracking-[0.34em]" style={{ color: "var(--forest)" }}>
-              Why We&apos;re Taking Our Time
+              Why We're Taking Our Time
             </p>
             <h2 className="mt-3 font-display text-2xl sm:text-3xl">Thoughtful standards. Quiet confidence.</h2>
           </div>
@@ -248,7 +248,7 @@ function ComingSoonPage() {
               },
               {
                 title: "Worth Waiting For",
-                body: "We&apos;re building an experience that reflects the same standards as the products themselves.",
+                body: "We're building an experience that reflects the same standards as the products themselves.",
               },
             ].map((item) => (
               <div

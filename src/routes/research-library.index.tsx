@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import productTube from "@/assets/hero-berberine-product.png";
+import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import { ARTICLES } from "@/data/articles";
 import {
@@ -20,7 +20,6 @@ import {
   Activity,
   Atom,
   Sparkles,
-  Mail,
 } from "lucide-react";
 
 export const Route = createFileRoute("/research-library/")({
@@ -39,9 +38,9 @@ export const Route = createFileRoute("/research-library/")({
           "Science-backed education on berberine, metabolic health and supplement quality.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://betterhealthlabs.in/research-library" },
+      { property: "og:url", content: "https://bebeyondbetter.com/research-library" },
     ],
-    links: [{ rel: "canonical", href: "https://betterhealthlabs.in/research-library" }],
+    links: [{ rel: "canonical", href: "https://bebeyondbetter.com/research-library" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -563,57 +562,6 @@ function FaqAccordion() {
   );
 }
 
-function Newsletter() {
-  return (
-    <section className="px-6 py-24 lg:px-10" style={{ backgroundColor: "var(--ivory)" }}>
-      <div className="mx-auto max-w-5xl">
-        <Reveal>
-          <div
-            className="overflow-hidden rounded-[28px] px-8 py-16 text-center shadow-[0_30px_80px_-40px_rgba(23,61,36,0.4)] lg:px-16"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--forest) 0%, color-mix(in oklab, var(--forest) 80%, black) 100%)",
-              color: "var(--ivory)",
-            }}
-          >
-            <div className="text-[11px] uppercase tracking-[0.32em] opacity-70">
-              The Research Circle
-            </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl">
-              Stay Ahead Of The Science.
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed opacity-80">
-              Get evidence-based health education, research updates, and supplement science
-              delivered weekly.
-            </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mx-auto mt-9 flex max-w-md flex-col gap-3 sm:flex-row"
-            >
-              <div className="relative flex-1">
-                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 opacity-60" />
-                <input
-                  type="email"
-                  required
-                  placeholder="Your email address"
-                  className="w-full rounded-full border border-white/20 bg-white/10 px-12 py-3.5 text-sm placeholder:text-white/60 outline-none transition focus:border-white/50"
-                />
-              </div>
-              <button
-                type="submit"
-                className="rounded-full px-6 py-3.5 text-sm transition hover:opacity-90"
-                style={{ backgroundColor: "var(--ivory)", color: "var(--forest)" }}
-              >
-                Join The Research Circle
-              </button>
-            </form>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function FinalCTA() {
   return (
     <section
@@ -763,11 +711,9 @@ function ResearchLibraryPage() {
         <TrustSection />
         <Infographic />
         <FaqAccordion />
-        <Newsletter />
         <FinalCTA />
       </main>
       <Footer />
-      <StickyShop />
     </div>
   );
 }

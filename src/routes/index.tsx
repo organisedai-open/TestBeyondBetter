@@ -2,19 +2,23 @@ import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { PowderParticles } from "@/components/PowderParticles";
-import productTube from "@/assets/hero-berberine-product.png";
+import productTube from "@/assets/hero-berberine-product.webp";
 import innerBottle from "@/assets/shop-berberine.webp";
+import shopSectionBackground from "@/assets/Berberine Shop background.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 
-import heroBg from "@/assets/berberine-hero-mobile.webp";
-import heroDesktop from "@/assets/berberine-hero-desktop.webp";
+import heroSectionImage from "@/assets/Berberine Herosection.webp";
+import mobileHeroSectionImage from "@/assets/Berberine Mobile Hero.webp";
 import transparencyHero from "@/assets/transparency-hero.webp";
 import {
   ArrowUpRight,
   ArrowRight,
   FlaskConical,
   Mountain,
+  Droplet,
+  Shield,
+  Leaf,
   Plus,
   Minus,
   Instagram,
@@ -23,13 +27,13 @@ import {
   X,
   Star,
   ShoppingBag,
-  ShieldCheck,
 } from "lucide-react";
 
-const SITE_URL = "https://betterhealthlabs.in";
+const SITE_URL = "https://bebeyondbetter.com";
 const PRODUCT_NAME = "Herbal Berberine HCL Extract";
 const PRICE = "₹999";
 const MRP = "₹1749";
+const SHOW_TESTIMONIALS = false;
 const PriceTag = ({ className = "" }: { className?: string }) => (
   <span className={`inline-flex items-baseline gap-2 ${className}`}>
     <span className="opacity-60 line-through">{MRP}</span>
@@ -39,7 +43,10 @@ const PriceTag = ({ className = "" }: { className?: string }) => (
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "What is berberine?", a: "A plant compound studied for healthy glucose, lipid balance and energy metabolism." },
-  { q: "Why 97% purity?", a: "Most brands sit at 70–90%. At 97% HPLC-verified, you get a precise, clinically meaningful dose — not filler." },
+  {
+    q: "Why does purity actually matter?",
+    a: "Berberine HCl below 97% purity often contains residual solvents, fillers, or degraded compound left over from cheaper extraction methods. Most drugstore — and even many premium — brands sit between 70–90% purity without disclosing it. Ours is tested via HPLC (high-performance liquid chromatography), the same standard used in pharmaceutical testing, and every batch result is published, not just claimed.",
+  },
   { q: "How do I take it?", a: "500 mg, two to three times daily with meals. Always consult your physician." },
   { q: "Is it third-party tested?", a: "Yes. Every batch is independently verified. A Certificate of Analysis is published for each lot." },
   { q: "Is it safe long-term?", a: "Berberine has a long safety record in clinical research. Consult your physician if on medication." },
@@ -95,7 +102,7 @@ function OrgJsonLd() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Beyond Better — 97% HPLC Verified Berberine HCL" },
+      { title: "Beyond Better — Berberine HCL 97% " },
       { name: "description", content: "97% HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard." },
       { name: "keywords", content: "berberine, berberine HCL, best berberine India, HPLC berberine, metabolic health" },
       { property: "og:title", content: "Beyond Better — The Transparent Berberine Standard" },
@@ -111,14 +118,7 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        href: heroDesktop,
-        media: "(min-width: 768px)",
-      },
-      {
-        rel: "preload",
-        as: "image",
-        href: heroBg,
-        media: "(max-width: 767px)",
+        href: heroSectionImage,
       },
       {
         rel: "stylesheet",
@@ -141,7 +141,7 @@ function Landing() {
       <FinalCTA />
       <Benefits />
       <LabReport />
-      <SocialProof />
+      {SHOW_TESTIMONIALS ? <SocialProof /> : null}
       <Ingredients />
       <ResearchSimple />
       <FAQ />
@@ -217,8 +217,8 @@ function Nav() {
     { href: "#shop", label: "Shop" },
     { href: "#benefits", label: "Benefits" },
     { href: "#lab", label: "Transparency" },
-    { href: "#reviews", label: "Reviews" },
-    { href: "#science", label: "Science" },
+    ...(SHOW_TESTIMONIALS ? [{ href: "#reviews", label: "Reviews" }] : []),
+    { href: "/research-library", label: "Research Library" },
     { href: "#faq", label: "FAQ" },
   ];
 
@@ -304,21 +304,12 @@ function DesktopHero() {
       className="relative hidden md:block w-full overflow-hidden pointer-events-none"
       style={{
         minHeight: "100svh",
-        backgroundImage: `url(${heroDesktop})`,
+        backgroundImage: `url(${heroSectionImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Soft left vignette for text legibility */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(120,75,15,0.35) 0%, rgba(120,75,15,0.12) 28%, rgba(0,0,0,0) 45%)",
-        }}
-      />
       <div
         className="relative z-10 flex h-full w-full items-center justify-between pointer-events-none"
         style={{ minHeight: "100svh", paddingLeft: "1vw", paddingRight: "1vw", pointerEvents: "none" }}
@@ -353,10 +344,10 @@ function DesktopHero() {
               fontSize: 11,
               lineHeight: 1.6,
               opacity: 0.9,
-              maxWidth: 285,
+              maxWidth: 315,
             }}
           >
-            Pure-form berberine, HPLC-verified to 97% purity and crafted to a Japanese precision standard.
+            Most berberine brands ask you to trust the label. We publish the batch report instead.
           </p>
           <div className="flex items-center gap-5" style={{ marginTop: 28 }}>
             <a
@@ -386,50 +377,80 @@ function DesktopHero() {
         </div>
         <div className="flex flex-col items-center shrink-0" style={{ color: "#1f3a2a" }}>
           {[
-            { Icon: FlaskConical, title: "HPLC VERIFIED", sub: "Independent lab certified" },
-            { Icon: Mountain, title: "JAPANESE STANDARD", sub: "Precision-grade formulation" },
-            { Icon: ShieldCheck, title: "97% PURITY", sub: "Maximum active potency" },
-          ].map(({ Icon, title, sub }, i) => (
-            <div key={title} className="flex flex-col items-center">
+            {
+              icon: "droplet",
+              title: (
+                <>
+                  Supports Healthy
+                  <br />
+                  Blood Sugar
+                </>
+              ),
+              sub: "Daily Glucose Support",
+            },
+            { icon: "mountain", title: "Japanese Standard", sub: "Precision Tested" },
+            {
+              icon: "leaf-shield",
+              title: (
+                <>
+                  Supports Healthy
+                  <br />
+                  Metabolism
+                </>
+              ),
+              sub: "Metabolic Wellness",
+            },
+          ].map(({ icon, title, sub }, i) => (
+            <div key={sub} className="group flex flex-col items-center" style={{ pointerEvents: "auto" }}>
               {i > 0 && (
                 <div
                   aria-hidden
                   style={{
                     width: 1,
-                    height: 28,
-                    background: "currentColor",
-                    opacity: 0.18,
-                    marginTop: 11,
-                    marginBottom: 11,
+                    height: 34,
+                    background: "rgba(30,75,54,0.12)",
+                    marginTop: 16,
+                    marginBottom: 16,
                   }}
                 />
               )}
               <div
-                className="flex items-center justify-center rounded-full"
+                className="flex items-center justify-center rounded-full text-[#1E4B36] transition-[transform,box-shadow,color] duration-300 group-hover:-translate-y-[2px] group-hover:text-[#2D6248] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.08),0_1px_2px_rgba(255,255,255,0.9)_inset]"
                 style={{
-                  width: 44,
-                  height: 44,
-                  border: "1px solid rgba(31,58,42,0.18)",
-                  background: "rgba(255,253,247,0.35)",
-                  backdropFilter: "blur(2px)",
+                  width: 50,
+                  height: 50,
+                  background: "rgba(255,252,247,0.88)",
+                  backdropFilter: "blur(14px)",
+                  border: "1px solid rgba(25,70,45,0.08)",
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.05), 0 1px 2px rgba(255,255,255,0.8) inset",
                 }}
               >
-                <Icon style={{ width: 22, height: 22 }} strokeWidth={1.4} />
+                {icon === "droplet" ? (
+                  <Droplet style={{ width: 24, height: 24 }} strokeWidth={1.55} />
+                ) : icon === "mountain" ? (
+                  <Mountain style={{ width: 24, height: 24 }} strokeWidth={1.55} />
+                ) : (
+                  <span className="relative inline-flex" style={{ width: 24, height: 24 }}>
+                    <Shield className="h-full w-full" strokeWidth={1.45} />
+                    <Leaf className="absolute left-1/2 top-1/2 h-[11px] w-[11px] -translate-x-1/2 -translate-y-1/2" strokeWidth={1.75} />
+                  </span>
+                )}
               </div>
               <div
                 className="text-center"
-                style={{ marginTop: 10, fontSize: 13, fontWeight: 500, letterSpacing: "0.04em", lineHeight: 1.2 }}
+                style={{ marginTop: 12, fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", lineHeight: 1.25, color: "#173F2F" }}
               >
                 {title}
               </div>
               <div
                 className="text-center"
-                style={{ marginTop: 6, fontSize: 11, opacity: 0.75, letterSpacing: "0.005em", lineHeight: 1.35 }}
+                style={{ marginTop: 10, fontSize: 11, fontWeight: 400, color: "#6E766F", letterSpacing: "0.01em", lineHeight: 1.35 }}
               >
                 {sub}
               </div>
             </div>
           ))}
+          
         </div>
       </div>
 
@@ -445,7 +466,7 @@ function MobileHero() {
       className="relative md:hidden w-full overflow-hidden pointer-events-none"
       style={{
         minHeight: "90svh",
-        backgroundImage: `linear-gradient(180deg, rgba(245,210,140,0.22) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 70%, rgba(180,130,50,0.10) 100%), url(${heroBg})`,
+        backgroundImage: `url(${mobileHeroSectionImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -471,85 +492,97 @@ function MobileHero() {
         <p
           style={{
             marginTop: 12,
-            color: "#3a4a3a",
-            fontSize: 10.5,
-            fontWeight: 500,
-            letterSpacing: "0.24em",
-            lineHeight: 1.7,
+            color: "#1f3a2a",
+            fontSize: 12,
+            fontWeight: 400,
+            letterSpacing: "0.01em",
+            lineHeight: 1.6,
+            maxWidth: 330,
           }}
         >
-          PURE FORM. PROVEN BY SCIENCE.
-          <br />
-          CRAFTED FOR RESULTS.
+          Most berberine brands ask you to trust the label. We publish the batch report instead.
         </p>
+        <a
+          href="#science"
+          style={{ marginTop: 12, color: "#1f3a2a", fontSize: 12, fontWeight: 500, letterSpacing: "0.08em", pointerEvents: "auto" }}
+        >
+          Explore Science ↗
+        </a>
         <div style={{ flex: 1, minHeight: "49svh" }} />
         <div className="flex w-full items-start justify-between" style={{ marginTop: 12, color: "#1f3a2a" }}>
           {[
-            { Icon: FlaskConical, title: "HPLC VERIFIED", sub: "Third-party tested" },
-            { Icon: Mountain, title: "JAPANESE STANDARD", sub: "Precision tested" },
-            { Icon: ShieldCheck, title: "97% PURITY", sub: "High purity extract" },
-          ].map(({ Icon, title, sub }, i) => (
-            <React.Fragment key={title}>
+            {
+              icon: "droplet",
+              title: (
+                <>
+                  Supports Healthy
+                  <br />
+                  Blood Sugar
+                </>
+              ),
+              sub: "Daily Glucose Support",
+            },
+            { icon: "mountain", title: "Japanese Standard", sub: "Precision Tested" },
+            {
+              icon: "leaf-shield",
+              title: (
+                <>
+                  Supports Healthy
+                  <br />
+                  Metabolism
+                </>
+              ),
+              sub: "Metabolic Wellness",
+            },
+          ].map(({ icon, title, sub }, i) => (
+            <React.Fragment key={sub}>
               {i > 0 && (
                 <div
                   aria-hidden
                   style={{
                     width: 22,
                     height: 1,
-                    background: "currentColor",
-                    opacity: 0.18,
+                    background: "rgba(30,75,54,0.12)",
                     alignSelf: "center",
-                    marginTop: 22,
+                    marginTop: 26,
                     flexShrink: 0,
                   }}
                 />
               )}
-              <div className="flex flex-1 flex-col items-center text-center px-1">
+              <div className="group flex flex-1 flex-col items-center text-center px-1" style={{ pointerEvents: "auto" }}>
                 <div
-                  className="flex items-center justify-center rounded-full"
+                  className="flex items-center justify-center rounded-full text-[#1E4B36] transition-[transform,box-shadow,color] duration-300 group-hover:-translate-y-[2px] group-hover:text-[#2D6248] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.08),0_1px_2px_rgba(255,255,255,0.9)_inset]"
                   style={{
-                    width: 44,
-                    height: 44,
-                    border: "1px solid rgba(31,58,42,0.18)",
-                    background: "rgba(255,253,247,0.35)",
-                    backdropFilter: "blur(2px)",
+                    width: 50,
+                    height: 50,
+                    background: "rgba(255,252,247,0.88)",
+                    backdropFilter: "blur(14px)",
+                    border: "1px solid rgba(25,70,45,0.08)",
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.05), 0 1px 2px rgba(255,255,255,0.8) inset",
                   }}
                 >
-                  <Icon style={{ width: 20, height: 20 }} strokeWidth={1.4} />
+                  {icon === "droplet" ? (
+                    <Droplet style={{ width: 24, height: 24 }} strokeWidth={1.55} />
+                  ) : icon === "mountain" ? (
+                    <Mountain style={{ width: 24, height: 24 }} strokeWidth={1.55} />
+                  ) : (
+                    <span className="relative inline-flex" style={{ width: 24, height: 24 }}>
+                      <Shield className="h-full w-full" strokeWidth={1.45} />
+                      <Leaf className="absolute left-1/2 top-1/2 h-[11px] w-[11px] -translate-x-1/2 -translate-y-1/2" strokeWidth={1.75} />
+                    </span>
+                  )}
                 </div>
-                <div style={{ marginTop: 8, fontSize: 10, fontWeight: 500, letterSpacing: "0.08em", lineHeight: 1.2 }}>
+                <div style={{ marginTop: 12, fontSize: 10.5, fontWeight: 600, letterSpacing: "0.06em", lineHeight: 1.25, color: "#173F2F" }}>
                   {title}
                 </div>
-                <div style={{ marginTop: 4, fontSize: 9, opacity: 0.7, letterSpacing: "0.01em", lineHeight: 1.3 }}>
+                <div style={{ marginTop: 9, fontSize: 9, fontWeight: 400, color: "#6E766F", letterSpacing: "0.01em", lineHeight: 1.3 }}>
                   {sub}
                 </div>
               </div>
             </React.Fragment>
           ))}
         </div>
-        <a
-          href="/coming-soon"
-          className="flex items-center justify-center"
-          style={{
-            marginTop: 20,
-            width: "85%",
-            height: 54,
-            borderRadius: 12,
-            background: "#1f3a2a",
-            color: "#fff",
-            fontSize: 14,
-            fontWeight: 500,
-            letterSpacing: "0.05em",
-          }}
-        >
-          Shop Now <span className="ml-2">↗</span>
-        </a>
-        <a
-          href="#science"
-          style={{ marginTop: 12, color: "#1f3a2a", fontSize: 12, fontWeight: 500, letterSpacing: "0.08em" }}
-        >
-          Explore the Science ↗
-        </a>
+        
       </div>
     </section>
   );
@@ -646,17 +679,6 @@ function Comparison() {
             ))}
           </div>
         </Reveal>
-        <Reveal delay={0.2}>
-          <div className="mt-10 flex justify-center">
-            <a
-              href="/coming-soon"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm transition hover:opacity-90"
-              style={{ backgroundColor: "var(--ivory)", color: "var(--forest)" }}
-            >
-              Shop Now <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
@@ -664,10 +686,9 @@ function Comparison() {
 
 function Benefits() {
   const items = [
-    "Supports healthy glucose balance",
-    "Supports daily energy",
-    "Supports metabolic health",
-    "Supports overall wellness",
+    "Most supplement brands blend, dilute, or round up their purity numbers, because nobody checks.",
+    "We built Beyond Better for the people who do — the ones who want the batch report, not just the buzzword.",
+    "Better was never enough. We wanted proof.",
   ];
   return (
     <section id="benefits" className="bg-background py-20 md:py-28">
@@ -675,13 +696,10 @@ function Benefits() {
         <Reveal>
           <SectionLabel>Benefits</SectionLabel>
           <h2 className="mt-4 font-display text-3xl leading-[1.1] md:text-5xl">
-            Better balance.
+            Berberine isn&apos;t the problem.
             <br />
-            <em style={{ color: "var(--gold-deep)" }}>Better health.</em>
+            <em style={{ color: "var(--gold-deep)" }}>The industry&apos;s honesty is.</em>
           </h2>
-          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground">
-            Take control of your metabolic health — naturally.
-          </p>
         </Reveal>
         <Reveal delay={0.1}>
           <ul className="mx-auto mt-12 max-w-md divide-y" style={{ borderTop: "1px solid color-mix(in oklab, var(--charcoal) 10%, transparent)", borderBottom: "1px solid color-mix(in oklab, var(--charcoal) 10%, transparent)", borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)" }}>
@@ -743,6 +761,18 @@ function LabReport() {
               <br />
               <span style={{ color: "var(--forest)" }}>Every batch verified.</span>
             </h2>
+            <p style={{ maxWidth: "450px", fontSize: "clamp(12px, 0.95vw, 14px)", lineHeight: 1.6, color: "#355142" }}>
+              This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
+            </p>
+            <div>
+              <a
+                href="/coming-soon"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-85"
+                style={{ backgroundColor: "var(--forest)", color: "var(--ivory)", width: "fit-content" }}
+              >
+                View the full lab report <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
 
           </div>
         </div>
@@ -762,7 +792,7 @@ function LabReport() {
             <div
               className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 pb-6 pt-16"
               style={{
-                background: "linear-gradient(to top, rgba(241,236,226,0.95) 0%, rgba(241,236,226,0.75) 55%, rgba(241,236,226,0) 100%)",
+                background: "linear-gradient(to top, rgba(241,236,226,0.95) 0.65%, rgba(241,236,226,0.75) 0.3%, rgba(241,236,226,0) 100%)",
               }}
             >
               <div style={{ fontSize: "11px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#8a6b50", fontWeight: 500 }}>
@@ -773,6 +803,16 @@ function LabReport() {
                 <br />
                 <span style={{ color: "var(--forest)" }}>Every batch verified.</span>
               </h2>
+              <p style={{ marginTop: 6, fontSize: "12px", lineHeight: 1.55, color: "#355142" }}>
+                This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
+              </p>
+              <a
+                href="/coming-soon"
+                className="mt-2 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs transition hover:opacity-85"
+                style={{ backgroundColor: "var(--forest)", color: "var(--ivory)", width: "fit-content", pointerEvents: "auto" }}
+              >
+                View the full lab report <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
             </div>
           </div>
 
@@ -785,16 +825,34 @@ function LabReport() {
 
 
 function SocialProof() {
+  const featuredReview = { q: "Finally a brand I actually trust. The COA sealed it.", n: "Arjun M." };
   const reviews = [
     { q: "I noticed better energy levels within weeks.", n: "Priya R." },
-    { q: "Finally a brand I actually trust. The COA sealed it.", n: "Arjun M." },
     { q: "Quality feels far superior to anything else I've tried.", n: "Sneha K." },
   ];
   return (
     <section id="reviews" className="py-20 md:py-28" style={{ background: "#F8F5EF" }}>
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
         <Reveal>
-          <div className="text-center">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <figure className="mx-auto mt-10 max-w-3xl rounded-3xl border px-8 py-9 text-center shadow-[0_24px_60px_-40px_rgba(23,63,47,0.35)]" style={{ borderColor: "color-mix(in oklab, var(--forest) 14%, transparent)", background: "color-mix(in oklab, #fff 92%, var(--ivory) 8%)" }}>
+            <div className="flex justify-center gap-1" style={{ color: "var(--gold-deep)" }}>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-5 w-5 fill-current" />
+              ))}
+            </div>
+            <blockquote className="mt-5 font-display text-2xl leading-tight md:text-3xl">&quot;{featuredReview.q}&quot;</blockquote>
+            <figcaption className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">— {featuredReview.n}</figcaption>
+          </figure>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <div className="mt-12 text-center">
             <div className="flex justify-center gap-1" style={{ color: "var(--gold-deep)" }}>
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} className="h-5 w-5 fill-current" />
@@ -804,7 +862,7 @@ function SocialProof() {
             <p className="mt-1 text-sm text-muted-foreground">Trusted by 1,000+ customers</p>
           </div>
         </Reveal>
-        <div className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
           {reviews.map((r, i) => (
             <Reveal key={r.n} delay={i * 0.08}>
               <figure className="text-center md:text-left">
@@ -851,6 +909,9 @@ function Ingredients() {
             <h2 className="mt-4 font-display text-3xl leading-[1.1] md:text-5xl">One ingredient. Done right.</h2>
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
               Pure Berberine HCL — extracted with water, verified at 97% by HPLC. Nothing else.
+            </p>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+              Most extractors use solvents to hit purity targets faster and cheaper. We use a water-only extraction process — slower, more expensive, and free of chemical residue. It&apos;s the difference between a number on a label and a number you can actually stand behind.
             </p>
             <dl className="mt-10 grid grid-cols-3 gap-6 border-t pt-6" style={{ borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)" }}>
               {[
@@ -957,17 +1018,19 @@ function FAQ() {
 
 function FinalCTA() {
   const bullets = [
-    "Supports healthy blood sugar",
-    "Helps reduce sugar cravings",
-    "Sustained daily energy support",
+    "500mg HPLC-verified per capsule — not a proprietary blend hiding the real number",
+    "97% purity, tested to Japanese HPLC standard — most berberine on the market sits between 70–90%",
+    "No fillers, no binders, no rounding up — built for people who read the label before the reviews",
   ];
   return (
     <section
       id="shop"
       className="relative overflow-hidden py-24 md:py-32"
       style={{
-        background:
-          "radial-gradient(ellipse at 50% 50%, oklch(0.84 0.105 78) 0%, oklch(0.74 0.135 72) 60%, oklch(0.64 0.14 65) 100%)",
+        backgroundImage: `url(${shopSectionBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <PowderParticles count={16} />
@@ -979,7 +1042,7 @@ function FinalCTA() {
           >
             Supports Better Metabolism.
             <br />
-            <span style={{ color: "var(--ivory)" }}>Less Cravings. More Energy.</span>
+            <span style={{ color: "#8B6B2E" }}>Less Cravings. More Energy.</span>
           </h2>
         </Reveal>
 
@@ -1021,7 +1084,7 @@ function FinalCTA() {
             className="mt-4 text-[11px] uppercase tracking-[0.22em]"
             style={{ color: "color-mix(in oklab, var(--forest) 70%, transparent)" }}
           >
-            60 Capsules · 30 Day Supply
+            60 Capsules · 60 Day Supply
           </p>
         </Reveal>
 
@@ -1034,7 +1097,7 @@ function FinalCTA() {
                 color: "var(--forest)",
               }}
             >
-              42% OFF · LIMITED OFFER
+              New Batch Pricing — locked in for early customers, ends when this batch sells out.
             </span>
             <div className="flex items-baseline justify-center gap-3">
               <span
@@ -1067,13 +1130,13 @@ function FinalCTA() {
         <Reveal delay={0.35}>
           <p
             className="mt-5 text-[11px] tracking-[0.14em]"
-            style={{ color: "color-mix(in oklab, var(--forest) 65%, transparent)" }}
+            style={{ color: "color-mix(in oklab, var(--white) 65%, transparent)" }}
           >
             Third Party Tested · Vegan Capsules · No Fillers
           </p>
           <p
             className="mt-2 text-[10px] uppercase tracking-[0.22em]"
-            style={{ color: "color-mix(in oklab, var(--forest) 55%, transparent)" }}
+            style={{ color: "color-mix(in oklab, var(--white) 55%, transparent)" }}
           >
             97% Verified Purity · Premium Berberine HCL Extract
           </p>

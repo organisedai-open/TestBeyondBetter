@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
-import productTube from "@/assets/hero-berberine-product.png";
+import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import {
   ArrowUpRight,
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/research-library/$slug")({
         meta: [{ title: "Article Not Found — Beyond Better" }],
       };
     }
-    const url = `https://betterhealthlabs.in/research-library/${params.slug}`;
+    const url = `https://bebeyondbetter.com/research-library/${params.slug}`;
     return {
       meta: [
         { title: loaderData.seoTitle },
@@ -64,7 +64,7 @@ export const Route = createFileRoute("/research-library/$slug")({
               name: "Beyond Better",
               logo: {
                 "@type": "ImageObject",
-                url: "https://betterhealthlabs.in/favicon.ico",
+                url: "https://bebeyondbetter.com/favicon.ico",
               },
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -89,8 +89,8 @@ export const Route = createFileRoute("/research-library/$slug")({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://betterhealthlabs.in/" },
-              { "@type": "ListItem", position: 2, name: "Research Library", item: "https://betterhealthlabs.in/research-library" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://bebeyondbetter.com/" },
+              { "@type": "ListItem", position: 2, name: "Research Library", item: "https://bebeyondbetter.com/research-library" },
               { "@type": "ListItem", position: 3, name: loaderData.title, item: url },
             ],
           }),
@@ -512,7 +512,7 @@ function ArticlePage() {
                     How To Cite This Article
                   </div>
                   <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                    {ARTICLE_AUTHOR}. ({new Date(article.publishedDate).getFullYear()}). {article.title}. Beyond Better Research Library. Retrieved from https://betterhealthlabs.in/research-library/{article.slug}
+                    {ARTICLE_AUTHOR}. ({new Date(article.publishedDate).getFullYear()}). {article.title}. Beyond Better Research Library. Retrieved from https://bebeyondbetter.com/research-library/{article.slug}
                   </p>
                 </div>
               </Reveal>

@@ -1,15 +1,15 @@
-# Beyond Better — Better Health Labs
+# Beyond Better
 
-Beyond Better is the flagship nutraceutical line from Better Health Labs. Our first product is Herbal Berberine HCL Extract, manufactured to a Japanese precision standard and HPLC-verified to 97% purity.
+Beyond Better is a premium science-backed nutraceutical brand focused on transparency, rigorous testing, and evidence-informed formulations. Our first product is Herbal Berberine HCL Extract, manufactured to a Japanese precision standard and HPLC-verified to 97% purity.
 
-Site: https://betterhealthlabs.in
+Site: https://bebeyondbetter.com
 
 ## Core pages
-- Home: https://betterhealthlabs.in/
-- Research Library: https://betterhealthlabs.in/research-library
+- Home: https://bebeyondbetter.com/
+- Research Library: https://bebeyondbetter.com/research-library
 
 ## About
-- Brand: Better Health Labs
+- Brand: Beyond Better
 - Product line: Beyond Better
 - Flagship product: Herbal Berberine HCL Extract (97% HPLC-verified purity)
 - Positioning: science-first, third-party tested, transparent batch reporting
