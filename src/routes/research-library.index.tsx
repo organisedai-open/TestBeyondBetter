@@ -222,23 +222,6 @@ function Hero() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <div
-              className="absolute bottom-[10%] left-[4%] h-[34%] w-[36%] overflow-hidden rounded-2xl border bg-white/80 p-4 shadow-[0_20px_60px_-25px_rgba(23,61,36,0.25)] backdrop-blur"
-              style={{ borderColor: "color-mix(in oklab, var(--forest) 12%, transparent)" }}
-            >
-              <FileText className="h-4 w-4" style={{ color: "var(--forest)" }} />
-              <div className="mt-2 text-[10px] uppercase tracking-[0.2em]" style={{ color: "var(--forest)" }}>
-                Research Paper
-              </div>
-              <div className="mt-1 font-display text-xs leading-tight" style={{ color: "var(--forest)" }}>
-                Berberine &amp; AMPK Activation
-              </div>
-              <div className="mt-3 space-y-1">
-                <div className="h-1 w-full rounded bg-[color:var(--forest)]/15" />
-                <div className="h-1 w-4/5 rounded bg-[color:var(--forest)]/15" />
-                <div className="h-1 w-3/5 rounded bg-[color:var(--forest)]/15" />
-              </div>
-            </div>
           </div>
         </Reveal>
       </div>

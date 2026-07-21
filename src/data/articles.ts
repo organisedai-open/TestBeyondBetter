@@ -14,6 +14,9 @@ export interface ArticleFAQ {
   a: string;
 }
 
+import berberineInsulinResearch from "../assets/Berberine Insulin research.webp";
+import berberineNatureOzempic from "../assets/Berberine Nature Ozempic.webp";
+
 export interface Article {
   slug: string;
   title: string;
@@ -418,8 +421,7 @@ export const ARTICLES: Article[] = [
     tag: "Insulin",
     readTime: "11 min read",
     publishedDate: "January 14, 2026",
-    image:
-      "https://images.unsplash.com/photo-1626202378061-c537d7b3a0a4?auto=format&fit=crop&w=1600&q=75",
+    image: berberineInsulinResearch,
     excerpt:
       "Why modern lifestyles produce chronic insulin resistance — and what the research says about reversing it.",
     description:
@@ -1127,8 +1129,7 @@ export const ARTICLES: Article[] = [
     tag: "Featured",
     readTime: "10 min read",
     publishedDate: "October 15, 2025",
-    image:
-      "https://images.unsplash.com/photo-1559757175-7cb036e0d465?auto=format&fit=crop&w=1600&q=75",
+    image: berberineNatureOzempic,
     excerpt:
       "Berberine is increasingly nicknamed \"nature's Ozempic\" online. The mechanisms behind each compound tell a more nuanced story.",
     description:
