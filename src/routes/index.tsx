@@ -15,6 +15,7 @@ import shopSectionBackground from "@/assets/Berberine Shop background.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import { PRODUCT_PRICING, formatInr } from "@/lib/pricing";
+import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 
 import heroSectionImage from "@/assets/Berberine Herosection.webp";
 import mobileHeroSectionImage from "@/assets/Berberine Mobile Hero.webp";
@@ -163,26 +164,42 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">{children}</p>;
 }
 
-function CTAButton({ children, href = "/coming-soon", variant = "solid" }: { children: React.ReactNode; href?: string; variant?: "solid" | "ghost" }) {
+function CTAButton({
+  children,
+  href,
+  onClick,
+  disabled,
+  variant = "solid",
+}: {
+  children: React.ReactNode;
+  href?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  variant?: "solid" | "ghost";
+}) {
   if (variant === "ghost") {
-    return (
-      <a
-        href={href}
-        className="inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm transition hover:opacity-80"
-        style={{ borderColor: "var(--forest)", color: "var(--forest)" }}
-      >
+    const className = "inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm transition hover:opacity-80";
+    const style = { borderColor: "var(--forest)", color: "var(--forest)" };
+    return href ? (
+      <a href={href} className={className} style={style}>
         {children} <ArrowRight className="h-4 w-4" />
       </a>
+    ) : (
+      <button type="button" onClick={onClick} disabled={disabled} className={`${className} disabled:cursor-not-allowed disabled:opacity-70`} style={style}>
+        {children} <ArrowRight className="h-4 w-4" />
+      </button>
     );
   }
-  return (
-    <a
-      href={href}
-      className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm transition hover:opacity-90"
-      style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
-    >
+  const className = "inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm transition hover:opacity-90";
+  const style = { backgroundColor: "var(--forest)", color: "var(--ivory)" };
+  return href ? (
+    <a href={href} className={className} style={style}>
       {children} <ArrowUpRight className="h-4 w-4" />
     </a>
+  ) : (
+    <button type="button" onClick={onClick} disabled={disabled} className={`${className} disabled:cursor-not-allowed disabled:opacity-70`} style={style}>
+      {children} <ArrowUpRight className="h-4 w-4" />
+    </button>
   );
 }
 
@@ -307,6 +324,7 @@ function Hero() {
 }
 
 function DesktopHero() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <section
       className="relative hidden md:block w-full overflow-hidden pointer-events-none"
@@ -358,9 +376,11 @@ function DesktopHero() {
             Most berberine brands ask you to trust the label. We publish the batch report instead.
           </p>
           <div className="flex items-center gap-5" style={{ marginTop: 28 }}>
-            <a
-              href="/coming-soon"
-              className="flex items-center justify-center"
+            <button
+              type="button"
+              onClick={openCheckout}
+              disabled={isLoading}
+              className="flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-70"
               style={{
                 height: 52,
                 padding: "0 28px",
@@ -374,7 +394,7 @@ function DesktopHero() {
               }}
             >
               Shop Now <span className="ml-2">↗</span>
-            </a>
+            </button>
             <a
               href="#science"
               style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.08em", color: "#1f3a2a", pointerEvents: "auto" }}
@@ -718,6 +738,7 @@ function Comparison() {
 }
 
 function Benefits() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   const items = [
     "Most supplement brands blend, dilute, or round up their purity numbers, because nobody checks.",
     "We built Beyond Better for the people who do — the ones who want the batch report, not just the buzzword.",
@@ -764,7 +785,7 @@ function Benefits() {
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-10 lg:mt-12">
-                <CTAButton>Buy Now — <PriceTag /></CTAButton>
+                <CTAButton onClick={openCheckout} disabled={isLoading}>Buy Now — <PriceTag /></CTAButton>
               </div>
             </Reveal>
           </div>
@@ -819,7 +840,7 @@ function LabReport() {
             </p>
             <div>
               <a
-                href="/coming-soon"
+                href="#lab"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-85"
                 style={{ backgroundColor: "var(--forest)", color: "var(--ivory)", width: "fit-content" }}
               >
@@ -860,7 +881,7 @@ function LabReport() {
                 This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
               </p>
               <a
-                href="/coming-soon"
+                href="#lab"
                 className="mt-2 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs transition hover:opacity-85"
                 style={{ backgroundColor: "var(--forest)", color: "var(--ivory)", width: "fit-content", pointerEvents: "auto" }}
               >
@@ -878,6 +899,7 @@ function LabReport() {
 
 
 function SocialProof() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   const featuredReview = { q: "Finally a brand I actually trust. The COA sealed it.", n: "Arjun M." };
   const reviews = [
     { q: "I noticed better energy levels within weeks.", n: "Priya R." },
@@ -932,7 +954,7 @@ function SocialProof() {
         </div>
         <Reveal delay={0.3}>
           <div className="mt-14 flex justify-center">
-            <CTAButton>Shop Now — <PriceTag /></CTAButton>
+            <CTAButton onClick={openCheckout} disabled={isLoading}>Shop Now — <PriceTag /></CTAButton>
           </div>
         </Reveal>
       </div>
@@ -1070,6 +1092,7 @@ function FAQ() {
 }
 
 function FinalCTA() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   const bullets = [
     "500mg HPLC-verified per capsule — not a proprietary blend hiding the real number",
     "97% purity, tested to Japanese HPLC standard — most berberine on the market sits between 70–90%",
@@ -1192,9 +1215,11 @@ function FinalCTA() {
             </Reveal>
 
             <Reveal delay={0.3}>
-              <a
-                href="/coming-soon"
-                className="mt-7 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-full px-9 py-5 text-[15px] font-medium tracking-wide transition hover:opacity-95 active:scale-[0.99] lg:mt-4 lg:max-w-[360px]"
+              <button
+                type="button"
+                onClick={openCheckout}
+                disabled={isLoading}
+                className="mt-7 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-full px-9 py-5 text-[15px] font-medium tracking-wide transition hover:opacity-95 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70 lg:mt-4 lg:max-w-[360px]"
                 style={{
                   backgroundColor: "var(--forest)",
                   color: "var(--ivory)",
@@ -1202,7 +1227,7 @@ function FinalCTA() {
                 }}
               >
                 Balance Your Life <ArrowUpRight className="h-4 w-4" />
-              </a>
+              </button>
             </Reveal>
           </div>
         </div>
@@ -1213,6 +1238,7 @@ function FinalCTA() {
 
 
 function StickyBuy() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-3 border-t px-4 py-3 md:hidden"
@@ -1226,18 +1252,21 @@ function StickyBuy() {
         <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Berberine HCL</span>
         <span className="font-display text-lg" style={{ color: "var(--forest)" }}><PriceTag /></span>
       </div>
-      <a
-        href="/coming-soon"
-        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm transition active:opacity-80"
+      <button
+        type="button"
+        onClick={openCheckout}
+        disabled={isLoading}
+        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
         style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
       >
         <ShoppingBag className="h-4 w-4" /> Buy Now
-      </a>
+      </button>
     </div>
   );
 }
 
 function Footer() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <footer className="bg-background py-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -1255,7 +1284,7 @@ function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><a href="/coming-soon" className="hover:opacity-60">Berberine HCL</a></li>
+                <li><button type="button" onClick={openCheckout} disabled={isLoading} className="hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-70">Berberine HCL</button></li>
                 <li><a href="#lab" className="hover:opacity-60">Lab Report</a></li>
               </ul>
             </div>

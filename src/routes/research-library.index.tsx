@@ -4,6 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import { ARTICLES } from "@/data/articles";
+import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -97,6 +98,7 @@ const FAQS = [
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { openCheckout, isLoading } = useMagicCheckout();
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -132,19 +134,22 @@ function Header() {
           </Link>
           <Link to="/" hash="faq" className="hover:opacity-60 transition">FAQ</Link>
         </nav>
-        <a
-          href="/coming-soon"
-          className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90"
+        <button
+          type="button"
+          onClick={openCheckout}
+          disabled={isLoading}
+          className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
           Shop <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
+        </button>
       </div>
     </header>
   );
 }
 
 function Hero() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <section
       className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28"
@@ -176,13 +181,15 @@ function Hero() {
             >
               Explore Research <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href="/coming-soon"
-              className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition hover:bg-white"
+            <button
+              type="button"
+              onClick={openCheckout}
+              disabled={isLoading}
+              className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-70"
               style={{ borderColor: "color-mix(in oklab, var(--forest) 25%, transparent)", color: "var(--forest)" }}
             >
               Shop Berberine
-            </a>
+            </button>
           </div>
         </Reveal>
 
@@ -546,6 +553,7 @@ function FaqAccordion() {
 }
 
 function FinalCTA() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <section
       className="relative overflow-hidden px-6 py-24 lg:px-10 lg:py-32"
@@ -565,13 +573,15 @@ function FinalCTA() {
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Science-backed wellness starts with uncompromising quality.
           </p>
-          <a
-            href="/coming-soon"
-            className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm transition hover:opacity-90"
+          <button
+            type="button"
+            onClick={openCheckout}
+            disabled={isLoading}
+            className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
             style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
           >
             Shop Beyond Better <ArrowRight className="h-4 w-4" />
-          </a>
+          </button>
         </Reveal>
         <Reveal delay={0.15}>
           <div className="relative mx-auto flex aspect-square w-full max-w-[460px] items-center justify-center">
@@ -595,6 +605,7 @@ function FinalCTA() {
 }
 
 function Footer() {
+  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <footer className="bg-background py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -614,7 +625,7 @@ function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><a href="/coming-soon" className="hover:opacity-60">Berberine HCL</a></li>
+                <li><button type="button" onClick={openCheckout} disabled={isLoading} className="hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-70">Berberine HCL</button></li>
                 <li><Link to="/" hash="lab" className="hover:opacity-60">Lab Report</Link></li>
               </ul>
             </div>
@@ -660,6 +671,7 @@ function Footer() {
 
 function StickyShop() {
   const [show, setShow] = useState(false);
+  const { openCheckout, isLoading } = useMagicCheckout();
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
     onScroll();
@@ -667,19 +679,21 @@ function StickyShop() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <a
-      href="/coming-soon"
-      className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm shadow-[0_20px_50px_-15px_rgba(23,61,36,0.6)] transition"
+    <button
+      type="button"
+      onClick={openCheckout}
+      disabled={isLoading}
+      className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm shadow-[0_20px_50px_-15px_rgba(23,61,36,0.6)] transition disabled:cursor-not-allowed"
       style={{
         backgroundColor: "var(--forest)",
         color: "var(--ivory)",
-        opacity: show ? 1 : 0,
+        opacity: show ? (isLoading ? 0.7 : 1) : 0,
         transform: show ? "translateY(0)" : "translateY(20px)",
         pointerEvents: show ? "auto" : "none",
       }}
     >
       Shop Now <ArrowUpRight className="h-3.5 w-3.5" />
-    </a>
+    </button>
   );
 }
 
