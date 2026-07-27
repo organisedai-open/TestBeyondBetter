@@ -73,6 +73,7 @@ export const createRazorpayOrder = createServerFn({ method: "POST" })
           description: PRODUCT_CATALOG.description,
           image_url: PRODUCT_CATALOG.imageUrl,
           product_url: PRODUCT_CATALOG.productUrl,
+          weight: PRODUCT_CATALOG.weightGrams,
         },
       ],
       notes: { productId: PRODUCT_CATALOG.id },

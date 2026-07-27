@@ -17,4 +17,7 @@ export const PRODUCT_CATALOG = {
   currency: PRODUCT_PRICING.currency,
   unitPrice: PRODUCT_PRICING.sellingPrice,
   unitMrp: PRODUCT_PRICING.mrp,
+  // Shipped weight of one bottle (60 capsules), in grams. Magic Checkout's Shiprocket-backed
+  // serviceability lookup needs this to resolve courier availability for an address.
+  weightGrams: 500,
 } as const;
