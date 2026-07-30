@@ -61,11 +61,10 @@ export const Route = createFileRoute("/research-library/")({
 
 // Articles are sourced from src/data/articles.ts
 
+// Dosage and purity questions live on the homepage FAQ (closer to point of purchase,
+// treated as canonical — see Part 6.1). Only genuinely distinct questions stay here, to
+// avoid two near-identical FAQPage schemas competing for the same rich-result slot.
 const FAQS = [
-  {
-    q: "What is berberine used for?",
-    a: "Berberine is a plant-derived alkaloid widely studied for supporting healthy blood sugar levels, insulin sensitivity, lipid balance and overall metabolic function through activation of the AMPK pathway.",
-  },
   {
     q: "Is berberine good for blood sugar support?",
     a: "Yes — multiple peer-reviewed clinical studies have examined berberine's role in supporting healthy glucose metabolism and post-meal glucose response in adults.",
@@ -75,20 +74,8 @@ const FAQS = [
     a: "Research suggests berberine may influence metabolic rate, lipid metabolism and insulin signaling — pathways closely linked with healthy weight regulation when combined with diet and exercise.",
   },
   {
-    q: "When should I take berberine?",
-    a: "Berberine is commonly taken with meals, typically 500 mg two to three times daily, to align with post-meal glucose response and improve absorption.",
-  },
-  {
-    q: "How much berberine should I take daily?",
-    a: "Most clinical studies use 900–1500 mg per day, divided into two or three doses. Always consult a qualified healthcare professional for personalized dosage.",
-  },
-  {
     q: "How is Beyond Better berberine different?",
     a: "Beyond Better publishes 97%+ HPLC-verified purity, uses water-only extraction, and provides third-party Certificates of Analysis for every batch — full transparency over marketing claims.",
-  },
-  {
-    q: "Why does purity matter in supplements?",
-    a: "Lower purity means more plant residues and by-products per capsule, reducing the active dose. Verified high purity ensures a precise, reliable dose of the compound studied in research.",
   },
   {
     q: "Are herbal extracts better than synthetic alternatives?",
@@ -617,22 +604,22 @@ function FaqAccordion() {
             );
           })}
         </div>
-      </div>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: FAQS.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
-        }}
-      />
+        <Reveal delay={0.2}>
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Questions about dosage or purity testing? See the{" "}
+            <Link
+              to="/"
+              hash="faq"
+              className="underline hover:opacity-70"
+              style={{ color: "var(--forest)" }}
+            >
+              full FAQ on the product page
+            </Link>
+            .
+          </p>
+        </Reveal>
+      </div>
     </section>
   );
 }

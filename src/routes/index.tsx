@@ -69,6 +69,42 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
     q: "When will I feel results?",
     a: "Most customers notice changes in 4–8 weeks of consistent daily use.",
   },
+  {
+    q: "Who should not take berberine?",
+    a: "Berberine should be avoided or used only under medical supervision by pregnant or breastfeeding women, people taking diabetes medication (due to hypoglycemia risk), people on anticoagulants, and children. Always consult a physician before starting.",
+  },
+  {
+    q: "Does berberine interact with any medications?",
+    a: "Yes. It can intensify the effect of diabetes medications, raising hypoglycemia risk, and may interact with anticoagulants such as warfarin. Always check with your physician before combining berberine with a prescription medication.",
+  },
+  {
+    q: "Can I take berberine with metformin?",
+    a: "Only with medical supervision. Berberine and metformin lower blood glucose through overlapping mechanisms, so taking them together can increase hypoglycemia risk. Your physician can advise on whether combining them is appropriate for you.",
+  },
+  {
+    q: "What does 97% HPLC purity actually mean, in plain terms?",
+    a: "It means 97% of the tested material is confirmed, via high-performance liquid chromatography, to be actual berberine HCl — not fillers, solvents, or degraded compound. Most drugstore brands test between 70–90% and don't publish the number.",
+  },
+  {
+    q: "How is Beyond Better's berberine different from other brands?",
+    a: "Every batch is HPLC-verified to 97% purity and the Certificate of Analysis is published, not just claimed. Extraction is water-only, not solvent-based, and testing is done by an independent third party.",
+  },
+  {
+    q: "Where is Beyond Better's berberine manufactured and tested?",
+    a: "Manufactured in India from Berberis aristata root. Every batch is HPLC-tested and third-party verified before release, with the Certificate of Analysis published for that batch.",
+  },
+  {
+    q: "How should I store the capsules?",
+    a: "Store in a cool, dry place away from direct sunlight, with the cap closed. Shelf life is 3 years from the manufacture date printed on the bottle.",
+  },
+  {
+    q: "Is this suitable for vegetarians/vegans?",
+    a: "Yes. The capsules are HPMC — plant-based, not gelatin — so they're suitable for vegetarians and vegans.",
+  },
+  {
+    q: "Can I take this alongside other supplements?",
+    a: "Generally yes. Berberine's main interactions are with medications that affect blood sugar or blood clotting (see above), not with most other supplements. If you're on medication or unsure, check with your physician first.",
+  },
 ];
 
 function FaqJsonLd() {
