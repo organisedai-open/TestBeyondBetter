@@ -108,7 +108,7 @@ function ComingSoonPage() {
                 Back Soon
               </p>
               <h1 className="mt-5 max-w-2xl text-4xl leading-[0.95] sm:text-5xl lg:text-6xl">
-                Something Better Is Coming
+                Get 40% Off. Join The Waitlist.
               </h1>
               <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
                 We're preparing the next production run with the same uncompromising attention to quality and testing.
