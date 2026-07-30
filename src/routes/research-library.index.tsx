@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
-import berberineIngredientInfo from "@/assets/Berberine Ingredient info.webp";
-import berberineCapsule from "@/assets/berberine-capsule.webp";
+import mostStudiedBerberine from "@/assets/Most Studied Berberine.webp";
+import weightBerberine from "@/assets/Weight Berberine.webp";
+import bloodSugarBerberine from "@/assets/Blood Sugar Berberine.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
@@ -210,8 +211,8 @@ function Hero() {
               style={{ animation: "floatY 8s ease-in-out infinite" }}
             >
               <img
-                src={productTube}
-                alt="Beyond Better Berberine HCL bottle and capsules"
+                src={mostStudiedBerberine}
+                alt="Beyond Better berberine — most studied natural compound for metabolic health"
                 loading="eager"
                 decoding="async"
                 className="h-full w-full object-cover"
@@ -222,8 +223,8 @@ function Hero() {
               style={{ animation: "floatY 9s ease-in-out infinite", animationDelay: "-2s" }}
             >
               <img
-                src={berberineIngredientInfo}
-                alt="Beyond Better berberine ingredient information graphic"
+                src={weightBerberine}
+                alt="Beyond Better berberine and weight management"
                 loading="eager"
                 decoding="async"
                 className="h-full w-full object-cover"
@@ -234,8 +235,8 @@ function Hero() {
               style={{ animation: "floatY 10s ease-in-out infinite", animationDelay: "-4s" }}
             >
               <img
-                src={berberineCapsule}
-                alt="Beyond Better Berberine HCL capsule close-up"
+                src={bloodSugarBerberine}
+                alt="Beyond Better berberine and blood sugar support"
                 loading="eager"
                 decoding="async"
                 className="h-full w-full object-cover"
