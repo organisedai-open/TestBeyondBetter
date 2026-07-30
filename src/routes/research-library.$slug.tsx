@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { getArticleBySlug, getRelatedArticles, ARTICLE_AUTHOR, type Article } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
+import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 
 export const Route = createFileRoute("/research-library/$slug")({
   loader: ({ params }) => {
@@ -125,6 +126,7 @@ export const Route = createFileRoute("/research-library/$slug")({
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -166,7 +168,7 @@ function Header() {
           className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
-          Shop <ArrowUpRight className="h-3.5 w-3.5" />
+          {ctaLabel} <ArrowUpRight className="h-3.5 w-3.5" />
         </button>
       </div>
     </header>
@@ -202,6 +204,7 @@ function ReadingProgress() {
 function StickyShop() {
   const [show, setShow] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
     onScroll();
@@ -221,7 +224,7 @@ function StickyShop() {
         className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm shadow-[0_20px_50px_-15px_rgba(23,61,36,0.45)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
         style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
       >
-        Shop Berberine <ArrowRight className="h-4 w-4" />
+        {ctaLabel} <ArrowRight className="h-4 w-4" />
       </button>
     </div>
   );
@@ -328,6 +331,7 @@ function ArticlePage() {
   const article = Route.useLoaderData() as Article;
   const related = getRelatedArticles(article.relatedSlugs);
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F7F4ED" }}>
@@ -571,7 +575,7 @@ function ArticlePage() {
                     className="mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
                     style={{ backgroundColor: "var(--ivory)", color: "var(--forest)" }}
                   >
-                    Shop Now <ArrowRight className="h-3.5 w-3.5" />
+                    {ctaLabel} <ArrowRight className="h-3.5 w-3.5" />
                   </button>
                 </div>
               </div>
@@ -667,7 +671,7 @@ function ArticlePage() {
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
                   style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
                 >
-                  Shop Beyond Better <ArrowRight className="h-4 w-4" />
+                  {ctaLabel} <ArrowRight className="h-4 w-4" />
                 </button>
                 <Link
                   to="/research-library"

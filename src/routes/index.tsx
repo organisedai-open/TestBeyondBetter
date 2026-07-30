@@ -14,8 +14,11 @@ import berberineDirectionToUse from "@/assets/Berberine Direction to use.webp";
 import shopSectionBackground from "@/assets/Berberine Shop background.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
-import { PRODUCT_PRICING, formatInr } from "@/lib/pricing";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
+import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
+import { PriceDisplay } from "@/components/PriceDisplay";
+import { RestockCountdown } from "@/components/RestockCountdown";
+import { PREORDER_RESTOCK_CAPTION, PREORDER_FULL_PAYMENT_NOTE } from "@/lib/pricing";
 
 import heroSectionImage from "@/assets/Berberine Herosection.webp";
 import mobileHeroSectionImage from "@/assets/Berberine Mobile Hero.webp";
@@ -39,16 +42,7 @@ import {
 } from "lucide-react";
 
 const SITE_URL = "https://bebeyondbetter.com";
-const PRODUCT_NAME = "Herbal Berberine HCL Extract";
-const PRICE = formatInr(PRODUCT_PRICING.sellingPrice);
-const MRP = formatInr(PRODUCT_PRICING.mrp);
 const SHOW_TESTIMONIALS = false;
-const PriceTag = ({ className = "" }: { className?: string }) => (
-  <span className={`inline-flex items-baseline gap-2 ${className}`}>
-    <span className="opacity-60 line-through">{MRP}</span>
-    <span>{PRICE}</span>
-  </span>
-);
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: "What is berberine?", a: "A plant compound studied for healthy glucose, lipid balance and energy metabolism." },
@@ -75,27 +69,6 @@ function FaqJsonLd() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
 
-function ProductJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: PRODUCT_NAME,
-    brand: { "@type": "Brand", name: "Beyond Better" },
-    description: "97% HPLC-verified Berberine HCL extract. Water-only extraction. Third-party tested in India.",
-    image: [productTube],
-    category: "DietarySupplement",
-    aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "1024" },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: PRODUCT_PRICING.currency,
-      price: String(PRODUCT_PRICING.sellingPrice),
-      availability: "https://schema.org/InStock",
-      url: `${SITE_URL}/#shop`,
-    },
-  };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
-}
-
 function OrgJsonLd() {
   const data = {
     "@context": "https://schema.org",
@@ -118,7 +91,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "97% HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open." },
       { property: "og:image", content: productTube },
       { property: "og:url", content: SITE_URL },
-      { property: "og:type", content: "product" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "canonical", href: SITE_URL + "/" },
@@ -142,7 +115,6 @@ function Landing() {
   return (
     <div className="bg-background text-foreground pb-20 md:pb-0">
       <OrgJsonLd />
-      <ProductJsonLd />
       <FaqJsonLd />
       <Nav />
       <Hero />
@@ -325,6 +297,7 @@ function Hero() {
 
 function DesktopHero() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   return (
     <section
       className="relative hidden md:block w-full overflow-hidden pointer-events-none"
@@ -393,7 +366,7 @@ function DesktopHero() {
                 pointerEvents: "auto",
               }}
             >
-              Shop Now <span className="ml-2">↗</span>
+              {ctaLabel} <span className="ml-2">↗</span>
             </button>
             <a
               href="#science"
@@ -402,6 +375,14 @@ function DesktopHero() {
               Explore the Science ↗
             </a>
           </div>
+          {preorder && (
+            <div style={{ marginTop: 22, pointerEvents: "auto" }}>
+              <RestockCountdown variant="hero" />
+              <p style={{ marginTop: 10, fontSize: 10.5, lineHeight: 1.5, opacity: 0.82, maxWidth: 280 }}>
+                {PREORDER_RESTOCK_CAPTION}
+              </p>
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-center shrink-0" style={{ color: "#1f3a2a" }}>
           {[
@@ -489,6 +470,7 @@ function DesktopHero() {
 }
 
 function MobileHero() {
+  const { isPreorderActive: preorder } = usePreorderStatus();
   return (
     <section
       className="relative md:hidden w-full overflow-hidden pointer-events-none"
@@ -536,7 +518,15 @@ function MobileHero() {
         >
           Explore Science ↗
         </a>
-        <div style={{ flex: 1, minHeight: "49svh" }} />
+        {preorder && (
+          <div style={{ marginTop: 18, pointerEvents: "auto" }}>
+            <RestockCountdown variant="compact" className="justify-center" />
+            <p style={{ marginTop: 8, fontSize: 10, lineHeight: 1.5, opacity: 0.82, maxWidth: 260 }}>
+              {PREORDER_RESTOCK_CAPTION}
+            </p>
+          </div>
+        )}
+        <div style={{ flex: 1, minHeight: preorder ? "38svh" : "49svh" }} />
         <div className="flex w-full items-start justify-between" style={{ marginTop: 12, color: "#1f3a2a" }}>
           {[
             {
@@ -739,6 +729,7 @@ function Comparison() {
 
 function Benefits() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   const items = [
     "Most supplement brands blend, dilute, or round up their purity numbers, because nobody checks.",
     "We built Beyond Better for the people who do — the ones who want the batch report, not just the buzzword.",
@@ -785,7 +776,7 @@ function Benefits() {
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-10 lg:mt-12">
-                <CTAButton onClick={openCheckout} disabled={isLoading}>Buy Now — <PriceTag /></CTAButton>
+                <CTAButton onClick={openCheckout} disabled={isLoading}>{ctaLabel}</CTAButton>
               </div>
             </Reveal>
           </div>
@@ -900,6 +891,7 @@ function LabReport() {
 
 function SocialProof() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   const featuredReview = { q: "Finally a brand I actually trust. The COA sealed it.", n: "Arjun M." };
   const reviews = [
     { q: "I noticed better energy levels within weeks.", n: "Priya R." },
@@ -954,7 +946,7 @@ function SocialProof() {
         </div>
         <Reveal delay={0.3}>
           <div className="mt-14 flex justify-center">
-            <CTAButton onClick={openCheckout} disabled={isLoading}>Shop Now — <PriceTag /></CTAButton>
+            <CTAButton onClick={openCheckout} disabled={isLoading}>{ctaLabel}</CTAButton>
           </div>
         </Reveal>
       </div>
@@ -1093,6 +1085,7 @@ function FAQ() {
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   const bullets = [
     "500mg HPLC-verified per capsule — not a proprietary blend hiding the real number",
     "97% purity, tested to Japanese HPLC standard — most berberine on the market sits between 70–90%",
@@ -1199,18 +1192,7 @@ function FinalCTA() {
 
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-col items-center gap-3 lg:mt-5">
-                
-                <div className="flex items-baseline justify-center gap-3">
-                  <span
-                    className="font-display text-[15px] line-through"
-                    style={{ color: "color-mix(in oklab, var(--forest) 55%, transparent)" }}
-                  >
-                    {MRP}
-                  </span>
-                  <span className="font-display text-4xl md:text-5xl lg:text-[58px]" style={{ color: "var(--forest)" }}>
-                    {PRICE}
-                  </span>
-                </div>
+                <PriceDisplay variant="block" align="center" />
               </div>
             </Reveal>
 
@@ -1226,8 +1208,13 @@ function FinalCTA() {
                   boxShadow: "0 14px 30px -10px rgba(30,55,35,0.45)",
                 }}
               >
-                Balance Your Life <ArrowUpRight className="h-4 w-4" />
+                {ctaLabel} <ArrowUpRight className="h-4 w-4" />
               </button>
+              {preorder && (
+                <p className="mt-3 text-[11px]" style={{ color: "color-mix(in oklab, var(--forest) 65%, transparent)" }}>
+                  {PREORDER_FULL_PAYMENT_NOTE}
+                </p>
+              )}
             </Reveal>
           </div>
         </div>
@@ -1239,28 +1226,41 @@ function FinalCTA() {
 
 function StickyBuy() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-3 border-t px-4 py-3 md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t md:hidden"
       style={{
         backgroundColor: "color-mix(in oklab, var(--ivory) 96%, transparent)",
         backdropFilter: "blur(14px)",
         borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)",
       }}
     >
-      <div className="flex flex-col leading-tight">
-        <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Berberine HCL</span>
-        <span className="font-display text-lg" style={{ color: "var(--forest)" }}><PriceTag /></span>
+      {preorder && (
+        <div
+          className="flex items-center justify-center border-b py-1.5"
+          style={{ borderColor: "color-mix(in oklab, var(--charcoal) 8%, transparent)" }}
+        >
+          <RestockCountdown variant="compact" />
+        </div>
+      )}
+      <div className="flex items-center justify-between gap-3 px-4 py-3">
+        <div className="flex flex-col leading-tight">
+          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Berberine HCL</span>
+          <span className="font-display text-lg" style={{ color: "var(--forest)" }}>
+            <PriceDisplay variant="inline" />
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={openCheckout}
+          disabled={isLoading}
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[13px] transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
+          style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
+        >
+          <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={openCheckout}
-        disabled={isLoading}
-        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
-        style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
-      >
-        <ShoppingBag className="h-4 w-4" /> Buy Now
-      </button>
     </div>
   );
 }
