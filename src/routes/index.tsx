@@ -75,8 +75,23 @@ function OrgJsonLd() {
     "@type": "Organization",
     name: "Beyond Better",
     url: SITE_URL,
-    logo: logoLeaf,
-    sameAs: ["https://www.instagram.com/", "https://www.facebook.com/"],
+    logo: `${SITE_URL}${logoLeaf}`,
+    description:
+      "Beyond Better manufactures HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
+    // TODO(founder): add sameAs (real social handles) and contactPoint (support
+    // email/phone) once available — intentionally omitted rather than filled with
+    // placeholders.
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
+function WebSiteJsonLd() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: SITE_URL,
+    name: "Beyond Better",
+    // No potentialAction/SearchAction — the site has no on-site search to point it at.
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
 }
@@ -115,6 +130,7 @@ function Landing() {
   return (
     <div className="bg-background text-foreground pb-20 md:pb-0">
       <OrgJsonLd />
+      <WebSiteJsonLd />
       <FaqJsonLd />
       <Nav />
       <main>

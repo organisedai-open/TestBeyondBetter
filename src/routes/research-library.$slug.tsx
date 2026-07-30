@@ -18,6 +18,7 @@ import {
 import { getArticleBySlug, getRelatedArticles, ARTICLE_AUTHOR, type Article } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
+import { toIsoDate } from "@/lib/dates";
 
 export const Route = createFileRoute("/research-library/$slug")({
   loader: ({ params }) => {
@@ -32,6 +33,9 @@ export const Route = createFileRoute("/research-library/$slug")({
       };
     }
     const url = `https://bebeyondbetter.com/research-library/${params.slug}`;
+    // schema.org/Open Graph expect ISO 8601 dates, not the human-readable "March 4, 2026"
+    // format this data is authored in for on-page display.
+    const isoPublishedDate = toIsoDate(loaderData.publishedDate);
     return {
       meta: [
         { title: loaderData.seoTitle },
@@ -41,7 +45,7 @@ export const Route = createFileRoute("/research-library/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
         { property: "og:image", content: loaderData.image },
-        { property: "article:published_time", content: loaderData.publishedDate },
+        { property: "article:published_time", content: isoPublishedDate },
         { property: "article:author", content: ARTICLE_AUTHOR },
         { property: "article:section", content: loaderData.category },
         { name: "twitter:card", content: "summary_large_image" },
@@ -59,14 +63,14 @@ export const Route = createFileRoute("/research-library/$slug")({
             headline: loaderData.title,
             description: loaderData.seoDescription,
             image: [loaderData.image],
-            datePublished: loaderData.publishedDate,
+            datePublished: isoPublishedDate,
             author: { "@type": "Organization", name: ARTICLE_AUTHOR },
             publisher: {
               "@type": "Organization",
               name: "Beyond Better",
               logo: {
                 "@type": "ImageObject",
-                url: "https://bebeyondbetter.com/favicon.ico",
+                url: `https://bebeyondbetter.com${logoLeaf}`,
               },
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },

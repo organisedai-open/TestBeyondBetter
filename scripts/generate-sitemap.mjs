@@ -19,11 +19,6 @@ const STATIC_ROUTES = [
   { loc: `${SITE_URL}/products/berberine-hcl`, priority: "0.9" },
 ];
 
-function toIsoDate(dateStr) {
-  const d = new Date(dateStr);
-  return Number.isNaN(d.getTime()) ? new Date().toISOString().slice(0, 10) : d.toISOString().slice(0, 10);
-}
-
 async function main() {
   const server = await createServer({
     root: ROOT,
@@ -32,14 +27,16 @@ async function main() {
     logLevel: "error",
   });
 
-  let articles;
+  let articles, toIsoDate;
   try {
     ({ ARTICLES: articles } = await server.ssrLoadModule("/src/data/articles.ts"));
+    ({ toIsoDate } = await server.ssrLoadModule("/src/lib/dates.ts"));
   } finally {
     await server.close();
   }
 
-  const today = new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const urls = [
     ...STATIC_ROUTES.map((r) => ({ loc: r.loc, lastmod: today, priority: r.priority })),
     ...articles.map((a) => ({
