@@ -18,7 +18,9 @@ export function PriceDisplay({
   if (variant === "inline") {
     return (
       <span className={`inline-flex items-baseline gap-2 ${className}`}>
-        <span className="opacity-60 line-through">{formatInr(mrp)}</span>
+        <span className="line-through" style={{ color: "color-mix(in oklab, currentColor 80%, transparent)" }}>
+          {formatInr(mrp)}
+        </span>
         <span>{formatInr(price)}</span>
       </span>
     );
@@ -39,7 +41,7 @@ export function PriceDisplay({
       <div className="flex items-baseline gap-3">
         <span
           className="font-display text-[15px] line-through"
-          style={{ color: "color-mix(in oklab, var(--forest) 55%, transparent)" }}
+          style={{ color: "color-mix(in oklab, var(--forest) 80%, transparent)" }}
         >
           {formatInr(mrp)}
         </span>

@@ -117,15 +117,17 @@ function Landing() {
       <OrgJsonLd />
       <FaqJsonLd />
       <Nav />
-      <Hero />
-      <Comparison />
-      <FinalCTA />
-      <Benefits />
-      <LabReport />
-      {SHOW_TESTIMONIALS ? <SocialProof /> : null}
-      <Ingredients />
-      <ResearchSimple />
-      <FAQ />
+      <main>
+        <Hero />
+        <Comparison />
+        <FinalCTA />
+        <Benefits />
+        <LabReport />
+        {SHOW_TESTIMONIALS ? <SocialProof /> : null}
+        <Ingredients />
+        <ResearchSimple />
+        <FAQ />
+      </main>
       <Footer />
       <StickyBuy />
     </div>
@@ -453,7 +455,7 @@ function DesktopHero() {
               </div>
               <div
                 className="text-center"
-                style={{ marginTop: 10, fontSize: 11, fontWeight: 400, color: "#6E766F", letterSpacing: "0.01em", lineHeight: 1.35 }}
+                style={{ marginTop: 10, fontSize: 11, fontWeight: 400, color: "#5C645D", letterSpacing: "0.01em", lineHeight: 1.35 }}
               >
                 {sub}
               </div>
@@ -593,7 +595,7 @@ function MobileHero() {
                 <div style={{ marginTop: 12, fontSize: 10.5, fontWeight: 600, letterSpacing: "0.06em", lineHeight: 1.25, color: "#173F2F" }}>
                   {title}
                 </div>
-                <div style={{ marginTop: 9, fontSize: 9, fontWeight: 400, color: "#6E766F", letterSpacing: "0.01em", lineHeight: 1.3 }}>
+                <div style={{ marginTop: 9, fontSize: 9, fontWeight: 400, color: "#5C645D", letterSpacing: "0.01em", lineHeight: 1.3 }}>
                   {sub}
                 </div>
               </div>
@@ -1211,7 +1213,7 @@ function FinalCTA() {
                 {ctaLabel} <ArrowUpRight className="h-4 w-4" />
               </button>
               {preorder && (
-                <p className="mt-3 text-[11px]" style={{ color: "color-mix(in oklab, var(--forest) 65%, transparent)" }}>
+                <p className="mt-3 text-[11px]" style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}>
                   {PREORDER_FULL_PAYMENT_NOTE}
                 </p>
               )}
@@ -1318,7 +1320,7 @@ function Footer() {
             </button>
           </div>
         </div>
-        <p className="mt-4 text-center text-[10px] opacity-60 md:text-left">*These statements have not been evaluated by any food or drug authority. Not intended to diagnose, treat or cure any disease.</p>
+        <p className="mt-4 text-center text-[10px] opacity-70 md:text-left">*These statements have not been evaluated by any food or drug authority. Not intended to diagnose, treat or cure any disease.</p>
       </div>
     </footer>
   );

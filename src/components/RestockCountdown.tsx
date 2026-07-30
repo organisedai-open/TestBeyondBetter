@@ -56,21 +56,32 @@ export function RestockCountdown({
   const labelSize = variant === "hero" ? "text-[9px]" : "text-[8px]";
   const gap = variant === "hero" ? "gap-3 md:gap-4" : "gap-2";
 
+  const numberColor = variant === "hero" ? "#1f3a2a" : "var(--forest)";
+  // Solid, WCAG-AA-checked colors rather than opacity dimming — opacity multiplies against
+  // whatever sits behind it, which silently drops below 4.5:1 on the cream/ivory
+  // backgrounds this renders on.
+  const captionColor = variant === "hero" ? "#4a5a4f" : "color-mix(in oklab, var(--forest) 78%, transparent)";
+  const colonColor = variant === "hero" ? "#5c6b60" : "color-mix(in oklab, var(--forest) 60%, transparent)";
+
   return (
-    <div
-      aria-hidden="true"
-      className={`flex items-start ${gap} ${className}`}
-      style={{ color: variant === "hero" ? "#1f3a2a" : "var(--forest)" }}
-    >
+    <div className={`flex items-start ${gap} ${className}`}>
       {UNITS.map((unit, i) => (
         <div key={unit.key} className="flex items-start">
           <div className="flex flex-col items-center">
-            <span className={`font-display tabular-nums ${numberSize}`} style={{ fontWeight: 500, letterSpacing: "-0.01em" }}>
+            <span
+              className={`font-display tabular-nums ${numberSize}`}
+              style={{ fontWeight: 500, letterSpacing: "-0.01em", color: numberColor }}
+              // The rendered digit legitimately differs by up to a second between the
+              // server-rendered HTML and the client's first paint (it's a live clock) —
+              // this is React's documented, sanctioned case for suppressHydrationWarning
+              // rather than a real markup mismatch.
+              suppressHydrationWarning
+            >
               {pad(remaining[unit.key])}
             </span>
             <span
               className={`${labelSize} mt-1 uppercase`}
-              style={{ letterSpacing: "0.18em", opacity: 0.62, fontWeight: 500 }}
+              style={{ letterSpacing: "0.18em", fontWeight: 500, color: captionColor }}
             >
               {unit.label}
             </span>
@@ -78,7 +89,8 @@ export function RestockCountdown({
           {i < UNITS.length - 1 && (
             <span
               className={`font-display ${numberSize} px-1 md:px-1.5`}
-              style={{ opacity: 0.3, fontWeight: 300 }}
+              style={{ fontWeight: 300, color: colonColor }}
+              aria-hidden="true"
             >
               :
             </span>

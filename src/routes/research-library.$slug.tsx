@@ -317,7 +317,7 @@ function Footer() {
               <Facebook className="h-4 w-4" />
             </button>
           </div>
-          <p className="opacity-70 max-w-md">
+          <p className="max-w-md">
             *These statements have not been evaluated by any food or drug authority. This product is
             not intended to diagnose, treat, cure or prevent any disease.
           </p>
@@ -338,6 +338,7 @@ function ArticlePage() {
       <ReadingProgress />
       <Header />
 
+      <main>
       {/* HERO */}
       <article>
         <section className="px-6 pt-32 pb-10 lg:px-10 lg:pt-40">
@@ -704,6 +705,7 @@ function ArticlePage() {
           </div>
         </section>
       </article>
+      </main>
 
       <Footer />
       <StickyShop />

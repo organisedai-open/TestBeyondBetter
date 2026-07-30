@@ -459,7 +459,7 @@ function Infographic() {
                   </div>
                   <div
                     className="mt-5 text-[10px] uppercase tracking-[0.28em]"
-                    style={{ color: "var(--forest)", opacity: 0.6 }}
+                    style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
                   >
                     Step {s.n}
                   </div>
@@ -663,7 +663,7 @@ function Footer() {
               <Facebook className="h-4 w-4" />
             </button>
           </div>
-          <p className="opacity-70">
+          <p>
             *These statements have not been evaluated by any food or drug authority. This product is
             not intended to diagnose, treat, cure or prevent any disease.
           </p>
