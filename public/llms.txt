@@ -2,11 +2,11 @@
 
 Beyond Better is a premium science-backed nutraceutical brand focused on transparency, rigorous testing, and evidence-informed formulations. Our first product is Herbal Berberine HCL Extract, manufactured to a Japanese precision standard and HPLC-verified to 97% purity.
 
-Site: https://bebeyondbetter.com
+Site: https://www.bebeyondbetter.com
 
 ## Core pages
-- Home: https://bebeyondbetter.com/
-- Research Library: https://bebeyondbetter.com/research-library
+- Home: https://www.bebeyondbetter.com/
+- Research Library: https://www.bebeyondbetter.com/research-library
 
 ## About
 - Brand: Beyond Better

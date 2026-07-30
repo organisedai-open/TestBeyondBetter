@@ -41,7 +41,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
-const SITE_URL = "https://bebeyondbetter.com";
+const SITE_URL = "https://www.bebeyondbetter.com";
 const SHOW_TESTIMONIALS = false;
 
 const FAQ_ITEMS: { q: string; a: string }[] = [

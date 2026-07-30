@@ -18,7 +18,7 @@ import berberineCapsule from "@/assets/berberine-capsule.webp";
 import transparencyHero from "@/assets/transparency-hero.webp";
 import { ArrowUpRight, ArrowRight, Instagram, Facebook, ShoppingBag } from "lucide-react";
 
-const SITE_URL = "https://bebeyondbetter.com";
+const SITE_URL = "https://www.bebeyondbetter.com";
 const PAGE_URL = `${SITE_URL}/products/berberine-hcl`;
 
 function ProductJsonLd() {

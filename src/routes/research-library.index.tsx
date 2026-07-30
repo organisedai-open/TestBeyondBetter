@@ -42,9 +42,9 @@ export const Route = createFileRoute("/research-library/")({
         content: "Science-backed education on berberine, metabolic health and supplement quality.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bebeyondbetter.com/research-library" },
+      { property: "og:url", content: "https://www.bebeyondbetter.com/research-library" },
     ],
-    links: [{ rel: "canonical", href: "https://bebeyondbetter.com/research-library" }],
+    links: [{ rel: "canonical", href: "https://www.bebeyondbetter.com/research-library" }],
     scripts: [
       {
         type: "application/ld+json",

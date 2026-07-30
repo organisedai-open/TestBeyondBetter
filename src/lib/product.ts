@@ -1,7 +1,7 @@
 import { CURRENCY, MRP_INR } from "@/lib/pricing";
 import productImage from "@/assets/hero-berberine-product.webp";
 
-const SITE_URL = "https://bebeyondbetter.com";
+const SITE_URL = "https://www.bebeyondbetter.com";
 
 // Single-SKU store: every "Buy"/"Shop" CTA on the site checks out this product.
 // The unit price is NOT here — it's pre-order/in-stock dependent, so it's computed fresh

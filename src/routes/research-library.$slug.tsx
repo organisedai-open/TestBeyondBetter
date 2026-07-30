@@ -37,7 +37,7 @@ export const Route = createFileRoute("/research-library/$slug")({
         meta: [{ title: "Article Not Found — Beyond Better" }],
       };
     }
-    const url = `https://bebeyondbetter.com/research-library/${params.slug}`;
+    const url = `https://www.bebeyondbetter.com/research-library/${params.slug}`;
     // schema.org/Open Graph expect ISO 8601 dates, not the human-readable "March 4, 2026"
     // format this data is authored in for on-page display.
     const isoPublishedDate = toIsoDate(loaderData.publishedDate);
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/research-library/$slug")({
               name: "Beyond Better",
               logo: {
                 "@type": "ImageObject",
-                url: `https://bebeyondbetter.com${logoLeaf}`,
+                url: `https://www.bebeyondbetter.com${logoLeaf}`,
               },
             },
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
@@ -104,13 +104,13 @@ export const Route = createFileRoute("/research-library/$slug")({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://bebeyondbetter.com/",
+                item: "https://www.bebeyondbetter.com/",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Research Library",
-                item: "https://bebeyondbetter.com/research-library",
+                item: "https://www.bebeyondbetter.com/research-library",
               },
               { "@type": "ListItem", position: 3, name: loaderData.title, item: url },
             ],
@@ -609,7 +609,7 @@ function ArticlePage() {
                     <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                       {ARTICLE_AUTHOR}. ({new Date(article.publishedDate).getFullYear()}).{" "}
                       {article.title}. Beyond Better Research Library. Retrieved from
-                      https://bebeyondbetter.com/research-library/{article.slug}
+                      https://www.bebeyondbetter.com/research-library/{article.slug}
                     </p>
                   </div>
                 </Reveal>

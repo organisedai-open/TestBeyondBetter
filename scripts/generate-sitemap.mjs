@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const SITE_URL = "https://bebeyondbetter.com";
+const SITE_URL = "https://www.bebeyondbetter.com";
 
 const STATIC_ROUTES = [
   { loc: `${SITE_URL}/`, priority: "1.0" },
