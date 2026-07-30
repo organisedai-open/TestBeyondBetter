@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
+import berberineIngredientInfo from "@/assets/Berberine Ingredient info.webp";
+import berberineCapsule from "@/assets/berberine-capsule.webp";
+import berberineIndustrySolution from "@/assets/Berberine Industry Solution.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
@@ -208,9 +211,10 @@ function Hero() {
               style={{ animation: "floatY 8s ease-in-out infinite" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=700&q=70"
-                alt="Molecular science"
-                loading="lazy"
+                src={productTube}
+                alt="Beyond Better Berberine HCL bottle and capsules"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -219,9 +223,10 @@ function Hero() {
               style={{ animation: "floatY 9s ease-in-out infinite", animationDelay: "-2s" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=600&q=70"
-                alt="Berberine root and herbs"
-                loading="lazy"
+                src={berberineIngredientInfo}
+                alt="Beyond Better berberine ingredient information graphic"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -230,9 +235,10 @@ function Hero() {
               style={{ animation: "floatY 10s ease-in-out infinite", animationDelay: "-4s" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=70"
-                alt="Supplement capsules"
-                loading="lazy"
+                src={berberineCapsule}
+                alt="Beyond Better Berberine HCL capsule close-up"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -254,8 +260,8 @@ function FeaturedArticle() {
           >
             <div className="relative aspect-[4/3] lg:aspect-auto">
               <img
-                src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=75"
-                alt="Berberine research"
+                src={berberineIndustrySolution}
+                alt="Beyond Better berberine industry solution graphic"
                 loading="lazy"
                 className="h-full w-full object-cover"
               />

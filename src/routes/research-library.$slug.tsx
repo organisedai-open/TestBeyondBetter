@@ -463,7 +463,8 @@ function ArticlePage() {
                   <img
                     src={article.image}
                     alt={article.title}
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                     className="h-full w-full object-cover"
                     style={{ aspectRatio: "16/9" }}
                   />
