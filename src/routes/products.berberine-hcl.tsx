@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { getArticleBySlug } from "@/data/articles";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
@@ -392,7 +393,7 @@ function CoaSection() {
               heavy metals screening, and microbial profile, every result published. The same report
               ships with every batch we sell.
             </p>
-            <div>
+            <div className="flex flex-wrap items-center gap-4">
               <a
                 href="/berberine-coa.pdf"
                 target="_blank"
@@ -406,6 +407,14 @@ function CoaSection() {
               >
                 View the full lab report <ArrowUpRight className="h-4 w-4" />
               </a>
+              <Link
+                to="/research-library/$slug"
+                params={{ slug: "berberine-hplc-purity-testing" }}
+                className="text-sm underline"
+                style={{ color: "#355142" }}
+              >
+                How HPLC testing works
+              </Link>
             </div>
           </div>
         </div>

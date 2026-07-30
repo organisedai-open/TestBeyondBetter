@@ -78,7 +78,9 @@ async function handleCheckoutCompleted(response: RazorpayHandlerResponse) {
           preorder ? { description: PREORDER_FULFILLMENT_NOTE } : undefined,
         );
       } else {
-        toast.error("We couldn't verify that payment. If you were charged, please contact support.");
+        toast.error(
+          "We couldn't verify that payment. If you were charged, please contact support.",
+        );
       }
     } else {
       // COD orders placed through Magic Checkout without an upfront payment.
