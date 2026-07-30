@@ -36,8 +36,7 @@ export const Route = createFileRoute("/research-library/")({
       { property: "og:title", content: "Research Library — Berberine Science | Beyond Better" },
       {
         property: "og:description",
-        content:
-          "Science-backed education on berberine, metabolic health and supplement quality.",
+        content: "Science-backed education on berberine, metabolic health and supplement quality.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://bebeyondbetter.com/research-library" },
@@ -112,7 +111,9 @@ function Header() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
         backdropFilter: scrolled ? "blur(14px)" : "none",
-        backgroundColor: scrolled ? "color-mix(in oklab, var(--ivory) 78%, transparent)" : "transparent",
+        backgroundColor: scrolled
+          ? "color-mix(in oklab, var(--ivory) 78%, transparent)"
+          : "transparent",
         borderBottom: scrolled
           ? "1px solid color-mix(in oklab, var(--charcoal) 8%, transparent)"
           : "1px solid transparent",
@@ -121,7 +122,10 @@ function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <Link to="/" className="flex items-center gap-2.5">
           <img src={logoLeaf} alt="" className="h-7 w-7 object-contain" />
-          <span className="font-display text-base tracking-tight" style={{ color: "var(--forest)" }}>
+          <span
+            className="font-display text-base tracking-tight"
+            style={{ color: "var(--forest)" }}
+          >
             Beyond Better
           </span>
         </Link>
@@ -129,12 +133,22 @@ function Header() {
           className="hidden items-center gap-8 text-sm md:flex"
           style={{ color: "var(--forest)" }}
         >
-          <Link to="/" className="hover:opacity-60 transition">Home</Link>
-          <Link to="/" hash="science" className="hover:opacity-60 transition">Science</Link>
-          <Link to="/research-library" className="hover:opacity-60 transition" style={{ opacity: 0.7 }}>
+          <Link to="/" className="hover:opacity-60 transition">
+            Home
+          </Link>
+          <Link to="/" hash="science" className="hover:opacity-60 transition">
+            Science
+          </Link>
+          <Link
+            to="/research-library"
+            className="hover:opacity-60 transition"
+            style={{ opacity: 0.7 }}
+          >
             Research
           </Link>
-          <Link to="/" hash="faq" className="hover:opacity-60 transition">FAQ</Link>
+          <Link to="/" hash="faq" className="hover:opacity-60 transition">
+            FAQ
+          </Link>
         </nav>
         <button
           type="button"
@@ -189,7 +203,10 @@ function Hero() {
               onClick={openCheckout}
               disabled={isLoading}
               className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-70"
-              style={{ borderColor: "color-mix(in oklab, var(--forest) 25%, transparent)", color: "var(--forest)" }}
+              style={{
+                borderColor: "color-mix(in oklab, var(--forest) 25%, transparent)",
+                color: "var(--forest)",
+              }}
             >
               {ctaLabel}
             </button>
@@ -259,7 +276,10 @@ function FeaturedArticle() {
             <div className="flex flex-col justify-center p-8 lg:p-14">
               <span
                 className="inline-flex w-fit items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.25em]"
-                style={{ backgroundColor: "color-mix(in oklab, var(--forest) 8%, transparent)", color: "var(--forest)" }}
+                style={{
+                  backgroundColor: "color-mix(in oklab, var(--forest) 8%, transparent)",
+                  color: "var(--forest)",
+                }}
               >
                 Featured Research
               </span>
@@ -296,15 +316,25 @@ function FeaturedArticle() {
 
 function ArticleGrid() {
   return (
-    <section id="articles" className="px-6 py-20 lg:px-10 lg:py-28" style={{ backgroundColor: "var(--ivory)" }}>
+    <section
+      id="articles"
+      className="px-6 py-20 lg:px-10 lg:py-28"
+      style={{ backgroundColor: "var(--ivory)" }}
+    >
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="mb-14 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+              <div
+                className="text-[11px] uppercase tracking-[0.32em]"
+                style={{ color: "var(--forest)" }}
+              >
                 The Library
               </div>
-              <h2 className="mt-3 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+              <h2
+                className="mt-3 font-display text-4xl lg:text-5xl"
+                style={{ color: "var(--forest)" }}
+              >
                 Evidence. Distilled.
               </h2>
             </div>
@@ -348,7 +378,9 @@ function ArticleGrid() {
                   >
                     {a.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {a.description}
+                  </p>
                   <div className="mt-6 flex items-center justify-between border-t pt-4">
                     <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Clock className="h-3.5 w-3.5" /> {a.readTime}
@@ -372,20 +404,38 @@ function ArticleGrid() {
 
 function TrustSection() {
   const items = [
-    { icon: ShieldCheck, title: "97% Purity Verified", desc: "Every batch undergoes advanced purity testing." },
-    { icon: FlaskConical, title: "Japanese Standard HPLC Testing", desc: "Precision verification beyond industry standards." },
+    {
+      icon: ShieldCheck,
+      title: "97% Purity Verified",
+      desc: "Every batch undergoes advanced purity testing.",
+    },
+    {
+      icon: FlaskConical,
+      title: "Japanese Standard HPLC Testing",
+      desc: "Precision verification beyond industry standards.",
+    },
     { icon: Droplets, title: "Water Only Extraction", desc: "No chemical solvent contamination." },
-    { icon: FileText, title: "Full Transparency", desc: "Every product backed by verifiable quality reports." },
+    {
+      icon: FileText,
+      title: "Full Transparency",
+      desc: "Every product backed by verifiable quality reports.",
+    },
   ];
   return (
     <section className="px-6 py-24 lg:px-10 lg:py-32" style={{ backgroundColor: "#F7F4ED" }}>
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+            <div
+              className="text-[11px] uppercase tracking-[0.32em]"
+              style={{ color: "var(--forest)" }}
+            >
               Quality Obsession
             </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+            <h2
+              className="mt-4 font-display text-4xl lg:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
               Why We Obsess Over Quality.
             </h2>
           </div>
@@ -418,20 +468,46 @@ function TrustSection() {
 
 function Infographic() {
   const steps = [
-    { n: "01", icon: Atom, title: "Supports AMPK Activation", desc: "Switches on the body's master metabolic enzyme." },
-    { n: "02", icon: Activity, title: "Improves Glucose Uptake", desc: "Helps cells absorb glucose efficiently." },
-    { n: "03", icon: Sparkles, title: "Supports Insulin Sensitivity", desc: "Improves how cells respond to insulin." },
-    { n: "04", icon: BookOpen, title: "Supports Metabolic Function", desc: "Promotes balanced long-term metabolic health." },
+    {
+      n: "01",
+      icon: Atom,
+      title: "Supports AMPK Activation",
+      desc: "Switches on the body's master metabolic enzyme.",
+    },
+    {
+      n: "02",
+      icon: Activity,
+      title: "Improves Glucose Uptake",
+      desc: "Helps cells absorb glucose efficiently.",
+    },
+    {
+      n: "03",
+      icon: Sparkles,
+      title: "Supports Insulin Sensitivity",
+      desc: "Improves how cells respond to insulin.",
+    },
+    {
+      n: "04",
+      icon: BookOpen,
+      title: "Supports Metabolic Function",
+      desc: "Promotes balanced long-term metabolic health.",
+    },
   ];
   return (
     <section className="px-6 py-24 lg:px-10 lg:py-32" style={{ backgroundColor: "var(--ivory)" }}>
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+            <div
+              className="text-[11px] uppercase tracking-[0.32em]"
+              style={{ color: "var(--forest)" }}
+            >
               Mechanism Of Action
             </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+            <h2
+              className="mt-4 font-display text-4xl lg:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
               How Berberine Works Inside The Body
             </h2>
           </div>
@@ -486,10 +562,16 @@ function FaqAccordion() {
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <div className="text-center">
-            <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+            <div
+              className="text-[11px] uppercase tracking-[0.32em]"
+              style={{ color: "var(--forest)" }}
+            >
               Answers
             </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+            <h2
+              className="mt-4 font-display text-4xl lg:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
               Frequently Asked Questions About Berberine
             </h2>
           </div>
@@ -565,7 +647,10 @@ function FinalCTA() {
     >
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
         <Reveal>
-          <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+          <div
+            className="text-[11px] uppercase tracking-[0.32em]"
+            style={{ color: "var(--forest)" }}
+          >
             The Standard
           </div>
           <h2
@@ -609,7 +694,6 @@ function FinalCTA() {
 }
 
 function Footer() {
-  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <footer className="bg-background py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -622,23 +706,44 @@ function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              The transparent berberine standard. Verified purity. Independent testing. Published proof.
+              The transparent berberine standard. Verified purity. Independent testing. Published
+              proof.
             </p>
           </div>
           <div className="flex gap-10 text-sm">
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><button type="button" onClick={openCheckout} disabled={isLoading} className="hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-70">Berberine HCL</button></li>
-                <li><Link to="/" hash="lab" className="hover:opacity-60">Lab Report</Link></li>
+                <li>
+                  <Link to="/products/berberine-hcl" className="hover:opacity-60">
+                    Berberine HCL
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" hash="lab" className="hover:opacity-60">
+                    Lab Report
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Learn</div>
               <ul className="mt-4 space-y-2">
-                <li><Link to="/research-library" className="hover:opacity-60">Research Library</Link></li>
-                <li><Link to="/" hash="science" className="hover:opacity-60">Science</Link></li>
-                <li><Link to="/" hash="faq" className="hover:opacity-60">FAQ</Link></li>
+                <li>
+                  <Link to="/research-library" className="hover:opacity-60">
+                    Research Library
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" hash="science" className="hover:opacity-60">
+                    Science
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" hash="faq" className="hover:opacity-60">
+                    FAQ
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
