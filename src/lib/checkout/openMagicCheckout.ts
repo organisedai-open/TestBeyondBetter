@@ -2,6 +2,7 @@ import { toast } from "sonner";
 
 import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/api/checkout.functions";
 import { PRODUCT_CATALOG } from "@/lib/product";
+import { isPreorderActive } from "@/lib/pricing";
 import logoLeaf from "@/assets/logo-leaf.webp";
 
 import { loadMagicCheckoutScript } from "./loadMagicCheckoutScript";
@@ -53,7 +54,14 @@ export async function openMagicCheckout(quantity = 1) {
   }
 }
 
+const PREORDER_FULFILLMENT_NOTE =
+  "This is a pre-order — your Beyond Better berberine ships starting August 20, 2026.";
+
 async function handleCheckoutCompleted(response: RazorpayHandlerResponse) {
+  // Purely a display decision (which confirmation copy to show) — the amount actually
+  // charged was already decided authoritatively server-side at order creation.
+  const preorder = isPreorderActive();
+
   try {
     if (response.razorpay_payment_id && response.razorpay_signature) {
       const { verified } = await verifyRazorpayPayment({
@@ -65,13 +73,19 @@ async function handleCheckoutCompleted(response: RazorpayHandlerResponse) {
       });
 
       if (verified) {
-        toast.success("Payment received — your order is confirmed!");
+        toast.success(
+          preorder ? "Pre-order confirmed!" : "Payment received — your order is confirmed!",
+          preorder ? { description: PREORDER_FULFILLMENT_NOTE } : undefined,
+        );
       } else {
         toast.error("We couldn't verify that payment. If you were charged, please contact support.");
       }
     } else {
       // COD orders placed through Magic Checkout without an upfront payment.
-      toast.success("Order placed! We'll send a confirmation shortly.");
+      toast.success(
+        preorder ? "Pre-order placed!" : "Order placed! We'll send a confirmation shortly.",
+        preorder ? { description: PREORDER_FULFILLMENT_NOTE } : undefined,
+      );
     }
   } catch (error) {
     console.error("Failed to verify Razorpay payment", error);
