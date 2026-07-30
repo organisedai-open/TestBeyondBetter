@@ -876,50 +876,70 @@ function Comparison() {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div
-                className="mt-12 overflow-hidden rounded-2xl"
+              <table
+                className="mt-12 block w-full overflow-hidden rounded-2xl"
                 style={{ background: "color-mix(in oklab, var(--ivory) 10%, transparent)" }}
               >
-                <div
-                  className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-[10px] uppercase tracking-[0.18em] md:px-8 md:text-xs"
-                  style={{
-                    borderBottom: "1px solid color-mix(in oklab, var(--ivory) 18%, transparent)",
-                    color: "color-mix(in oklab, var(--ivory) 70%, transparent)",
-                  }}
-                >
-                  <span></span>
-                  <span className="text-center font-medium" style={{ color: "var(--ivory)" }}>
-                    Beyond Better
-                  </span>
-                  <span className="text-center">Others</span>
-                </div>
-                {rows.map((r) => (
-                  <div
-                    key={r.k}
-                    className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-sm md:px-8 md:py-5"
+                <caption className="sr-only">
+                  Comparison of Beyond Better Berberine HCL against other brands
+                </caption>
+                <thead className="block">
+                  <tr
+                    className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-[10px] uppercase tracking-[0.18em] md:px-8 md:text-xs"
                     style={{
-                      borderBottom: "1px solid color-mix(in oklab, var(--ivory) 10%, transparent)",
+                      borderBottom: "1px solid color-mix(in oklab, var(--ivory) 18%, transparent)",
+                      color: "color-mix(in oklab, var(--ivory) 70%, transparent)",
                     }}
                   >
-                    <span style={{ color: "color-mix(in oklab, var(--ivory) 92%, transparent)" }}>
-                      {r.k}
-                    </span>
-                    <span className="flex justify-center">
-                      <Check
-                        className="h-5 w-5"
-                        style={{ color: "var(--gold-soft)" }}
-                        strokeWidth={2.5}
-                      />
-                    </span>
-                    <span
-                      className="flex justify-center"
-                      style={{ color: "color-mix(in oklab, var(--ivory) 40%, transparent)" }}
+                    <th scope="col" className="text-left font-normal"></th>
+                    <th
+                      scope="col"
+                      className="text-center font-medium"
+                      style={{ color: "var(--ivory)" }}
                     >
-                      <X className="h-5 w-5" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                ))}
-              </div>
+                      Beyond Better
+                    </th>
+                    <th scope="col" className="text-center font-normal">
+                      Others
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="block">
+                  {rows.map((r) => (
+                    <tr
+                      key={r.k}
+                      className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-sm md:px-8 md:py-5"
+                      style={{
+                        borderBottom:
+                          "1px solid color-mix(in oklab, var(--ivory) 10%, transparent)",
+                      }}
+                    >
+                      <th
+                        scope="row"
+                        className="text-left font-normal"
+                        style={{ color: "color-mix(in oklab, var(--ivory) 92%, transparent)" }}
+                      >
+                        {r.k}
+                      </th>
+                      <td className="flex justify-center">
+                        <Check
+                          className="h-5 w-5"
+                          style={{ color: "var(--gold-soft)" }}
+                          strokeWidth={2.5}
+                        />
+                        <span className="sr-only">Yes</span>
+                      </td>
+                      <td
+                        className="flex justify-center"
+                        style={{ color: "color-mix(in oklab, var(--ivory) 40%, transparent)" }}
+                      >
+                        <X className="h-5 w-5" strokeWidth={1.5} />
+                        <span className="sr-only">No</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </Reveal>
           </div>
 
