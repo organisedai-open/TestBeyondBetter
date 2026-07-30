@@ -5,7 +5,6 @@ import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import berberineIngredientInfo from "@/assets/Berberine Ingredient info.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
-import berberineIndustrySolution from "@/assets/Berberine Industry Solution.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
@@ -249,64 +248,6 @@ function Hero() {
   );
 }
 
-function FeaturedArticle() {
-  return (
-    <section className="px-6 py-20 lg:px-10 lg:py-28" style={{ backgroundColor: "#F7F4ED" }}>
-      <div className="mx-auto max-w-7xl">
-        <Reveal>
-          <div
-            className="grid overflow-hidden rounded-[28px] border bg-white shadow-[0_30px_80px_-40px_rgba(23,61,36,0.25)] lg:grid-cols-2"
-            style={{ borderColor: "color-mix(in oklab, var(--forest) 10%, transparent)" }}
-          >
-            <div className="relative aspect-[4/3] lg:aspect-auto">
-              <img
-                src={berberineIndustrySolution}
-                alt="Beyond Better berberine industry solution graphic"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-8 lg:p-14">
-              <span
-                className="inline-flex w-fit items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.25em]"
-                style={{
-                  backgroundColor: "color-mix(in oklab, var(--forest) 8%, transparent)",
-                  color: "var(--forest)",
-                }}
-              >
-                Featured Research
-              </span>
-              <h2
-                className="mt-5 font-display text-3xl leading-tight lg:text-[2.4rem]"
-                style={{ color: "var(--forest)" }}
-              >
-                Why Berberine Is Becoming The Most Studied Natural Compound For Metabolic Health
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                Berberine has emerged as one of the most researched plant compounds for supporting
-                blood sugar regulation, insulin sensitivity, and long-term metabolic wellness.
-                Scientists are increasingly comparing its mechanisms with pharmaceutical
-                interventions.
-              </p>
-              <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
-                <Clock className="h-3.5 w-3.5" /> 8 min read
-              </div>
-              <Link
-                to="/research-library/$slug"
-                params={{ slug: "berberine-metabolic-health" }}
-                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-90"
-                style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
-              >
-                Read Full Research <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function ArticleGrid() {
   return (
     <section
@@ -347,14 +288,6 @@ function ArticleGrid() {
                 className="group flex h-full flex-col overflow-hidden rounded-[22px] border bg-white shadow-[0_20px_60px_-40px_rgba(23,61,36,0.25)] transition hover:shadow-[0_30px_80px_-40px_rgba(23,61,36,0.4)]"
                 style={{ borderColor: "color-mix(in oklab, var(--forest) 10%, transparent)" }}
               >
-                <div className="relative aspect-[5/3.2] overflow-hidden">
-                  <img
-                    src={a.image}
-                    alt={a.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </div>
                 <div className="flex flex-1 flex-col p-6">
                   <span
                     className="inline-flex w-fit items-center rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.22em]"
@@ -806,7 +739,6 @@ function ResearchLibraryPage() {
       <Header />
       <main>
         <Hero />
-        <FeaturedArticle />
         <ArticleGrid />
         <TrustSection />
         <Infographic />
