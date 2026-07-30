@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.bebeyondbetter.com" }],
+      "destination": "https://bebeyondbetter.com/:path*",
+      "permanent": true
+    }
+  ]
+}
