@@ -43,6 +43,11 @@ export const Route = createFileRoute("/research-library/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.bebeyondbetter.com/research-library" },
+      {
+        property: "og:image",
+        content: `https://www.bebeyondbetter.com${productTube}`,
+      },
+      { name: "twitter:image", content: `https://www.bebeyondbetter.com${productTube}` },
     ],
     links: [{ rel: "canonical", href: "https://www.bebeyondbetter.com/research-library" }],
     scripts: [

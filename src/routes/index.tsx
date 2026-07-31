@@ -172,7 +172,7 @@ export const Route = createFileRoute("/")({
         content:
           "97% HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open.",
       },
-      { property: "og:image", content: productTube },
+      { property: "og:image", content: `${SITE_URL}${productTube}` },
       { property: "og:url", content: SITE_URL },
       { property: "og:type", content: "website" },
     ],
