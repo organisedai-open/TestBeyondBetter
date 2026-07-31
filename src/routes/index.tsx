@@ -627,7 +627,6 @@ function DesktopHero() {
 }
 
 function MobileHero() {
-  const { isPreorderActive: preorder } = usePreorderStatus();
   return (
     <section
       className="relative md:hidden w-full overflow-hidden pointer-events-none"
@@ -684,17 +683,7 @@ function MobileHero() {
         >
           Explore Science ↗
         </a>
-        {preorder && (
-          <div style={{ marginTop: 18, pointerEvents: "auto" }}>
-            <RestockCountdown variant="compact" className="justify-center" />
-            <p
-              style={{ marginTop: 8, fontSize: 10, lineHeight: 1.5, opacity: 0.82, maxWidth: 260 }}
-            >
-              {PREORDER_RESTOCK_CAPTION}
-            </p>
-          </div>
-        )}
-        <div style={{ flex: 1, minHeight: preorder ? "38svh" : "49svh" }} />
+        <div style={{ flex: 1, minHeight: "49svh" }} />
         <div
           className="flex w-full items-start justify-between"
           style={{ marginTop: 12, color: "#1f3a2a" }}
