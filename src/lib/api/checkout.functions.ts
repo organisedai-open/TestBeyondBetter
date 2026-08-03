@@ -81,7 +81,17 @@ export const createRazorpayOrder = createServerFn({ method: "POST" })
           weight: PRODUCT_CATALOG.weightGrams,
         },
       ],
-      notes: { productId: PRODUCT_CATALOG.id, preorder: String(isPreorderActive()) },
+      // `quantity` and `sku` are read back by the Razorpay -> Shiprocket webhook when it
+      // builds the shipment (see lib/integrations/fulfillment.ts). Razorpay's Fetch Order
+      // response returns line_items_total but not the line items themselves, so recording
+      // the count here is what lets fulfilment know how many units to ship instead of
+      // inferring it by dividing totals by a price that may since have changed.
+      notes: {
+        productId: PRODUCT_CATALOG.id,
+        sku: PRODUCT_CATALOG.sku,
+        quantity: String(quantity),
+        preorder: String(isPreorderActive()),
+      },
     };
 
     const auth = Buffer.from(`${keyId}:${keySecret}`).toString("base64");

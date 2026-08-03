@@ -20,4 +20,13 @@ export const PRODUCT_CATALOG = {
   // Shipped weight of one bottle (60 capsules), in grams. Magic Checkout's Shiprocket-backed
   // serviceability lookup needs this to resolve courier availability for an address.
   weightGrams: 500,
+  // Outer parcel dimensions in cm for one bottle, used when creating the Shiprocket order.
+  // Shiprocket rejects zero/missing dimensions, and bills on volumetric weight when it
+  // exceeds actual weight — so these must describe the box you actually ship, not the
+  // bottle. Update here if the packaging changes.
+  parcel: {
+    lengthCm: 12,
+    breadthCm: 10,
+    heightCm: 10,
+  },
 } as const;
