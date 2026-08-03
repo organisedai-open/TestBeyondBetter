@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResearchLibraryIndexRouteImport } from './routes/research-library.index'
 import { Route as ResearchLibrarySlugRouteImport } from './routes/research-library.$slug'
+import { Route as ProductsBerberineHclRouteImport } from './routes/products.berberine-hcl'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,33 +29,55 @@ const ResearchLibrarySlugRoute = ResearchLibrarySlugRouteImport.update({
   path: '/research-library/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsBerberineHclRoute = ProductsBerberineHclRouteImport.update({
+  id: '/products/berberine-hcl',
+  path: '/products/berberine-hcl',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library': typeof ResearchLibraryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/research-library/$slug' | '/research-library/'
+  fullPaths:
+    | '/'
+    | '/products/berberine-hcl'
+    | '/research-library/$slug'
+    | '/research-library/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/research-library/$slug' | '/research-library'
-  id: '__root__' | '/' | '/research-library/$slug' | '/research-library/'
+  to:
+    | '/'
+    | '/products/berberine-hcl'
+    | '/research-library/$slug'
+    | '/research-library'
+  id:
+    | '__root__'
+    | '/'
+    | '/products/berberine-hcl'
+    | '/research-library/$slug'
+    | '/research-library/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsBerberineHclRoute: typeof ProductsBerberineHclRoute
   ResearchLibrarySlugRoute: typeof ResearchLibrarySlugRoute
   ResearchLibraryIndexRoute: typeof ResearchLibraryIndexRoute
 }
@@ -82,11 +105,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchLibrarySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/berberine-hcl': {
+      id: '/products/berberine-hcl'
+      path: '/products/berberine-hcl'
+      fullPath: '/products/berberine-hcl'
+      preLoaderRoute: typeof ProductsBerberineHclRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsBerberineHclRoute: ProductsBerberineHclRoute,
   ResearchLibrarySlugRoute: ResearchLibrarySlugRoute,
   ResearchLibraryIndexRoute: ResearchLibraryIndexRoute,
 }

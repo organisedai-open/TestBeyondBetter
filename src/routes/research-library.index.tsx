@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import productTube from "@/assets/hero-berberine-product.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
+import mostStudiedBerberine from "@/assets/Most Studied Berberine.webp";
+import weightBerberine from "@/assets/Weight Berberine.webp";
+import bloodSugarBerberine from "@/assets/Blood Sugar Berberine.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
+import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -35,13 +39,17 @@ export const Route = createFileRoute("/research-library/")({
       { property: "og:title", content: "Research Library — Berberine Science | Beyond Better" },
       {
         property: "og:description",
-        content:
-          "Science-backed education on berberine, metabolic health and supplement quality.",
+        content: "Science-backed education on berberine, metabolic health and supplement quality.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bebeyondbetter.com/research-library" },
+      { property: "og:url", content: "https://www.bebeyondbetter.com/research-library" },
+      {
+        property: "og:image",
+        content: `https://www.bebeyondbetter.com${productTube}`,
+      },
+      { name: "twitter:image", content: `https://www.bebeyondbetter.com${productTube}` },
     ],
-    links: [{ rel: "canonical", href: "https://bebeyondbetter.com/research-library" }],
+    links: [{ rel: "canonical", href: "https://www.bebeyondbetter.com/research-library" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -61,11 +69,10 @@ export const Route = createFileRoute("/research-library/")({
 
 // Articles are sourced from src/data/articles.ts
 
+// Dosage and purity questions live on the homepage FAQ (closer to point of purchase,
+// treated as canonical — see Part 6.1). Only genuinely distinct questions stay here, to
+// avoid two near-identical FAQPage schemas competing for the same rich-result slot.
 const FAQS = [
-  {
-    q: "What is berberine used for?",
-    a: "Berberine is a plant-derived alkaloid widely studied for supporting healthy blood sugar levels, insulin sensitivity, lipid balance and overall metabolic function through activation of the AMPK pathway.",
-  },
   {
     q: "Is berberine good for blood sugar support?",
     a: "Yes — multiple peer-reviewed clinical studies have examined berberine's role in supporting healthy glucose metabolism and post-meal glucose response in adults.",
@@ -75,20 +82,8 @@ const FAQS = [
     a: "Research suggests berberine may influence metabolic rate, lipid metabolism and insulin signaling — pathways closely linked with healthy weight regulation when combined with diet and exercise.",
   },
   {
-    q: "When should I take berberine?",
-    a: "Berberine is commonly taken with meals, typically 500 mg two to three times daily, to align with post-meal glucose response and improve absorption.",
-  },
-  {
-    q: "How much berberine should I take daily?",
-    a: "Most clinical studies use 900–1500 mg per day, divided into two or three doses. Always consult a qualified healthcare professional for personalized dosage.",
-  },
-  {
     q: "How is Beyond Better berberine different?",
     a: "Beyond Better publishes 97%+ HPLC-verified purity, uses water-only extraction, and provides third-party Certificates of Analysis for every batch — full transparency over marketing claims.",
-  },
-  {
-    q: "Why does purity matter in supplements?",
-    a: "Lower purity means more plant residues and by-products per capsule, reducing the active dose. Verified high purity ensures a precise, reliable dose of the compound studied in research.",
   },
   {
     q: "Are herbal extracts better than synthetic alternatives?",
@@ -99,6 +94,7 @@ const FAQS = [
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -110,7 +106,9 @@ function Header() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
         backdropFilter: scrolled ? "blur(14px)" : "none",
-        backgroundColor: scrolled ? "color-mix(in oklab, var(--ivory) 78%, transparent)" : "transparent",
+        backgroundColor: scrolled
+          ? "color-mix(in oklab, var(--ivory) 78%, transparent)"
+          : "transparent",
         borderBottom: scrolled
           ? "1px solid color-mix(in oklab, var(--charcoal) 8%, transparent)"
           : "1px solid transparent",
@@ -119,7 +117,10 @@ function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <Link to="/" className="flex items-center gap-2.5">
           <img src={logoLeaf} alt="" className="h-7 w-7 object-contain" />
-          <span className="font-display text-base tracking-tight" style={{ color: "var(--forest)" }}>
+          <span
+            className="font-display text-base tracking-tight"
+            style={{ color: "var(--forest)" }}
+          >
             Beyond Better
           </span>
         </Link>
@@ -127,12 +128,22 @@ function Header() {
           className="hidden items-center gap-8 text-sm md:flex"
           style={{ color: "var(--forest)" }}
         >
-          <Link to="/" className="hover:opacity-60 transition">Home</Link>
-          <Link to="/" hash="science" className="hover:opacity-60 transition">Science</Link>
-          <Link to="/research-library" className="hover:opacity-60 transition" style={{ opacity: 0.7 }}>
+          <Link to="/" className="hover:opacity-60 transition">
+            Home
+          </Link>
+          <Link to="/" hash="science" className="hover:opacity-60 transition">
+            Science
+          </Link>
+          <Link
+            to="/research-library"
+            className="hover:opacity-60 transition"
+            style={{ opacity: 0.7 }}
+          >
             Research
           </Link>
-          <Link to="/" hash="faq" className="hover:opacity-60 transition">FAQ</Link>
+          <Link to="/" hash="faq" className="hover:opacity-60 transition">
+            FAQ
+          </Link>
         </nav>
         <button
           type="button"
@@ -141,7 +152,7 @@ function Header() {
           className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
-          Shop <ArrowUpRight className="h-3.5 w-3.5" />
+          {ctaLabel} <ArrowUpRight className="h-3.5 w-3.5" />
         </button>
       </div>
     </header>
@@ -150,6 +161,7 @@ function Header() {
 
 function Hero() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   return (
     <section
       className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28"
@@ -186,9 +198,12 @@ function Hero() {
               onClick={openCheckout}
               disabled={isLoading}
               className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-70"
-              style={{ borderColor: "color-mix(in oklab, var(--forest) 25%, transparent)", color: "var(--forest)" }}
+              style={{
+                borderColor: "color-mix(in oklab, var(--forest) 25%, transparent)",
+                color: "var(--forest)",
+              }}
             >
-              Shop Berberine
+              {ctaLabel}
             </button>
           </div>
         </Reveal>
@@ -201,9 +216,10 @@ function Hero() {
               style={{ animation: "floatY 8s ease-in-out infinite" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=700&q=70"
-                alt="Molecular science"
-                loading="lazy"
+                src={mostStudiedBerberine}
+                alt="Beyond Better berberine — most studied natural compound for metabolic health"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -212,9 +228,10 @@ function Hero() {
               style={{ animation: "floatY 9s ease-in-out infinite", animationDelay: "-2s" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=600&q=70"
-                alt="Berberine root and herbs"
-                loading="lazy"
+                src={weightBerberine}
+                alt="Beyond Better berberine and weight management"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -223,66 +240,12 @@ function Hero() {
               style={{ animation: "floatY 10s ease-in-out infinite", animationDelay: "-4s" }}
             >
               <img
-                src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=600&q=70"
-                alt="Supplement capsules"
-                loading="lazy"
+                src={bloodSugarBerberine}
+                alt="Beyond Better berberine and blood sugar support"
+                loading="eager"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedArticle() {
-  return (
-    <section className="px-6 py-20 lg:px-10 lg:py-28" style={{ backgroundColor: "#F7F4ED" }}>
-      <div className="mx-auto max-w-7xl">
-        <Reveal>
-          <div
-            className="grid overflow-hidden rounded-[28px] border bg-white shadow-[0_30px_80px_-40px_rgba(23,61,36,0.25)] lg:grid-cols-2"
-            style={{ borderColor: "color-mix(in oklab, var(--forest) 10%, transparent)" }}
-          >
-            <div className="relative aspect-[4/3] lg:aspect-auto">
-              <img
-                src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=75"
-                alt="Berberine research"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-8 lg:p-14">
-              <span
-                className="inline-flex w-fit items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.25em]"
-                style={{ backgroundColor: "color-mix(in oklab, var(--forest) 8%, transparent)", color: "var(--forest)" }}
-              >
-                Featured Research
-              </span>
-              <h2
-                className="mt-5 font-display text-3xl leading-tight lg:text-[2.4rem]"
-                style={{ color: "var(--forest)" }}
-              >
-                Why Berberine Is Becoming The Most Studied Natural Compound For Metabolic Health
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                Berberine has emerged as one of the most researched plant compounds for supporting
-                blood sugar regulation, insulin sensitivity, and long-term metabolic wellness.
-                Scientists are increasingly comparing its mechanisms with pharmaceutical
-                interventions.
-              </p>
-              <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
-                <Clock className="h-3.5 w-3.5" /> 8 min read
-              </div>
-              <Link
-                to="/research-library/$slug"
-                params={{ slug: "berberine-metabolic-health" }}
-                className="mt-7 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-90"
-                style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
-              >
-                Read Full Research <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
           </div>
         </Reveal>
@@ -293,15 +256,25 @@ function FeaturedArticle() {
 
 function ArticleGrid() {
   return (
-    <section id="articles" className="px-6 py-20 lg:px-10 lg:py-28" style={{ backgroundColor: "var(--ivory)" }}>
+    <section
+      id="articles"
+      className="px-6 py-20 lg:px-10 lg:py-28"
+      style={{ backgroundColor: "var(--ivory)" }}
+    >
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="mb-14 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+              <div
+                className="text-[11px] uppercase tracking-[0.32em]"
+                style={{ color: "var(--forest)" }}
+              >
                 The Library
               </div>
-              <h2 className="mt-3 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+              <h2
+                className="mt-3 font-display text-4xl lg:text-5xl"
+                style={{ color: "var(--forest)" }}
+              >
                 Evidence. Distilled.
               </h2>
             </div>
@@ -321,14 +294,6 @@ function ArticleGrid() {
                 className="group flex h-full flex-col overflow-hidden rounded-[22px] border bg-white shadow-[0_20px_60px_-40px_rgba(23,61,36,0.25)] transition hover:shadow-[0_30px_80px_-40px_rgba(23,61,36,0.4)]"
                 style={{ borderColor: "color-mix(in oklab, var(--forest) 10%, transparent)" }}
               >
-                <div className="relative aspect-[5/3.2] overflow-hidden">
-                  <img
-                    src={a.image}
-                    alt={a.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </div>
                 <div className="flex flex-1 flex-col p-6">
                   <span
                     className="inline-flex w-fit items-center rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.22em]"
@@ -345,7 +310,9 @@ function ArticleGrid() {
                   >
                     {a.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {a.description}
+                  </p>
                   <div className="mt-6 flex items-center justify-between border-t pt-4">
                     <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Clock className="h-3.5 w-3.5" /> {a.readTime}
@@ -369,20 +336,38 @@ function ArticleGrid() {
 
 function TrustSection() {
   const items = [
-    { icon: ShieldCheck, title: "97% Purity Verified", desc: "Every batch undergoes advanced purity testing." },
-    { icon: FlaskConical, title: "Japanese Standard HPLC Testing", desc: "Precision verification beyond industry standards." },
+    {
+      icon: ShieldCheck,
+      title: "97% Purity Verified",
+      desc: "Every batch undergoes advanced purity testing.",
+    },
+    {
+      icon: FlaskConical,
+      title: "Japanese Standard HPLC Testing",
+      desc: "Precision verification beyond industry standards.",
+    },
     { icon: Droplets, title: "Water Only Extraction", desc: "No chemical solvent contamination." },
-    { icon: FileText, title: "Full Transparency", desc: "Every product backed by verifiable quality reports." },
+    {
+      icon: FileText,
+      title: "Full Transparency",
+      desc: "Every product backed by verifiable quality reports.",
+    },
   ];
   return (
     <section className="px-6 py-24 lg:px-10 lg:py-32" style={{ backgroundColor: "#F7F4ED" }}>
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+            <div
+              className="text-[11px] uppercase tracking-[0.32em]"
+              style={{ color: "var(--forest)" }}
+            >
               Quality Obsession
             </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+            <h2
+              className="mt-4 font-display text-4xl lg:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
               Why We Obsess Over Quality.
             </h2>
           </div>
@@ -415,20 +400,46 @@ function TrustSection() {
 
 function Infographic() {
   const steps = [
-    { n: "01", icon: Atom, title: "Supports AMPK Activation", desc: "Switches on the body's master metabolic enzyme." },
-    { n: "02", icon: Activity, title: "Improves Glucose Uptake", desc: "Helps cells absorb glucose efficiently." },
-    { n: "03", icon: Sparkles, title: "Supports Insulin Sensitivity", desc: "Improves how cells respond to insulin." },
-    { n: "04", icon: BookOpen, title: "Supports Metabolic Function", desc: "Promotes balanced long-term metabolic health." },
+    {
+      n: "01",
+      icon: Atom,
+      title: "Supports AMPK Activation",
+      desc: "Switches on the body's master metabolic enzyme.",
+    },
+    {
+      n: "02",
+      icon: Activity,
+      title: "Improves Glucose Uptake",
+      desc: "Helps cells absorb glucose efficiently.",
+    },
+    {
+      n: "03",
+      icon: Sparkles,
+      title: "Supports Insulin Sensitivity",
+      desc: "Improves how cells respond to insulin.",
+    },
+    {
+      n: "04",
+      icon: BookOpen,
+      title: "Supports Metabolic Function",
+      desc: "Promotes balanced long-term metabolic health.",
+    },
   ];
   return (
     <section className="px-6 py-24 lg:px-10 lg:py-32" style={{ backgroundColor: "var(--ivory)" }}>
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+            <div
+              className="text-[11px] uppercase tracking-[0.32em]"
+              style={{ color: "var(--forest)" }}
+            >
               Mechanism Of Action
             </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+            <h2
+              className="mt-4 font-display text-4xl lg:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
               How Berberine Works Inside The Body
             </h2>
           </div>
@@ -456,7 +467,7 @@ function Infographic() {
                   </div>
                   <div
                     className="mt-5 text-[10px] uppercase tracking-[0.28em]"
-                    style={{ color: "var(--forest)", opacity: 0.6 }}
+                    style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
                   >
                     Step {s.n}
                   </div>
@@ -483,10 +494,16 @@ function FaqAccordion() {
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <div className="text-center">
-            <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+            <div
+              className="text-[11px] uppercase tracking-[0.32em]"
+              style={{ color: "var(--forest)" }}
+            >
               Answers
             </div>
-            <h2 className="mt-4 font-display text-4xl lg:text-5xl" style={{ color: "var(--forest)" }}>
+            <h2
+              className="mt-4 font-display text-4xl lg:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
               Frequently Asked Questions About Berberine
             </h2>
           </div>
@@ -532,28 +549,29 @@ function FaqAccordion() {
             );
           })}
         </div>
-      </div>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: FAQS.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
-        }}
-      />
+        <Reveal delay={0.2}>
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Questions about dosage or purity testing? See the{" "}
+            <Link
+              to="/"
+              hash="faq"
+              className="underline hover:opacity-70"
+              style={{ color: "var(--forest)" }}
+            >
+              full FAQ on the product page
+            </Link>
+            .
+          </p>
+        </Reveal>
+      </div>
     </section>
   );
 }
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   return (
     <section
       className="relative overflow-hidden px-6 py-24 lg:px-10 lg:py-32"
@@ -561,7 +579,10 @@ function FinalCTA() {
     >
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
         <Reveal>
-          <div className="text-[11px] uppercase tracking-[0.32em]" style={{ color: "var(--forest)" }}>
+          <div
+            className="text-[11px] uppercase tracking-[0.32em]"
+            style={{ color: "var(--forest)" }}
+          >
             The Standard
           </div>
           <h2
@@ -580,7 +601,7 @@ function FinalCTA() {
             className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
             style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
           >
-            Shop Beyond Better <ArrowRight className="h-4 w-4" />
+            {ctaLabel} <ArrowRight className="h-4 w-4" />
           </button>
         </Reveal>
         <Reveal delay={0.15}>
@@ -605,7 +626,6 @@ function FinalCTA() {
 }
 
 function Footer() {
-  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <footer className="bg-background py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -618,23 +638,44 @@ function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              The transparent berberine standard. Verified purity. Independent testing. Published proof.
+              The transparent berberine standard. Verified purity. Independent testing. Published
+              proof.
             </p>
           </div>
           <div className="flex gap-10 text-sm">
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><button type="button" onClick={openCheckout} disabled={isLoading} className="hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-70">Berberine HCL</button></li>
-                <li><Link to="/" hash="lab" className="hover:opacity-60">Lab Report</Link></li>
+                <li>
+                  <Link to="/products/berberine-hcl" className="hover:opacity-60">
+                    Berberine HCL
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" hash="lab" className="hover:opacity-60">
+                    Lab Report
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Learn</div>
               <ul className="mt-4 space-y-2">
-                <li><Link to="/research-library" className="hover:opacity-60">Research Library</Link></li>
-                <li><Link to="/" hash="science" className="hover:opacity-60">Science</Link></li>
-                <li><Link to="/" hash="faq" className="hover:opacity-60">FAQ</Link></li>
+                <li>
+                  <Link to="/research-library" className="hover:opacity-60">
+                    Research Library
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" hash="science" className="hover:opacity-60">
+                    Science
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" hash="faq" className="hover:opacity-60">
+                    FAQ
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -659,7 +700,7 @@ function Footer() {
               <Facebook className="h-4 w-4" />
             </button>
           </div>
-          <p className="opacity-70">
+          <p>
             *These statements have not been evaluated by any food or drug authority. This product is
             not intended to diagnose, treat, cure or prevent any disease.
           </p>
@@ -672,6 +713,7 @@ function Footer() {
 function StickyShop() {
   const [show, setShow] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
     onScroll();
@@ -692,7 +734,7 @@ function StickyShop() {
         pointerEvents: show ? "auto" : "none",
       }}
     >
-      Shop Now <ArrowUpRight className="h-3.5 w-3.5" />
+      {ctaLabel} <ArrowUpRight className="h-3.5 w-3.5" />
     </button>
   );
 }
@@ -703,7 +745,6 @@ function ResearchLibraryPage() {
       <Header />
       <main>
         <Hero />
-        <FeaturedArticle />
         <ArticleGrid />
         <TrustSection />
         <Infographic />

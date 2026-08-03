@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { PowderParticles } from "@/components/PowderParticles";
@@ -14,8 +14,11 @@ import berberineDirectionToUse from "@/assets/Berberine Direction to use.webp";
 import shopSectionBackground from "@/assets/Berberine Shop background.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
-import { PRODUCT_PRICING, formatInr } from "@/lib/pricing";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
+import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
+import { PriceDisplay } from "@/components/PriceDisplay";
+import { RestockCountdown } from "@/components/RestockCountdown";
+import { PREORDER_RESTOCK_CAPTION, PREORDER_FULL_PAYMENT_NOTE } from "@/lib/pricing";
 
 import heroSectionImage from "@/assets/Berberine Herosection.webp";
 import mobileHeroSectionImage from "@/assets/Berberine Mobile Hero.webp";
@@ -38,28 +41,70 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
-const SITE_URL = "https://bebeyondbetter.com";
-const PRODUCT_NAME = "Herbal Berberine HCL Extract";
-const PRICE = formatInr(PRODUCT_PRICING.sellingPrice);
-const MRP = formatInr(PRODUCT_PRICING.mrp);
+const SITE_URL = "https://www.bebeyondbetter.com";
 const SHOW_TESTIMONIALS = false;
-const PriceTag = ({ className = "" }: { className?: string }) => (
-  <span className={`inline-flex items-baseline gap-2 ${className}`}>
-    <span className="opacity-60 line-through">{MRP}</span>
-    <span>{PRICE}</span>
-  </span>
-);
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
-  { q: "What is berberine?", a: "A plant compound studied for healthy glucose, lipid balance and energy metabolism." },
+  {
+    q: "What is berberine?",
+    a: "A plant compound studied for healthy glucose, lipid balance and energy metabolism.",
+  },
   {
     q: "Why does purity actually matter?",
     a: "Berberine HCl below 97% purity often contains residual solvents, fillers, or degraded compound left over from cheaper extraction methods. Most drugstore — and even many premium — brands sit between 70–90% purity without disclosing it. Ours is tested via HPLC (high-performance liquid chromatography), the same standard used in pharmaceutical testing, and every batch result is published, not just claimed.",
   },
-  { q: "How do I take it?", a: "500 mg, two to three times daily with meals. Always consult your physician." },
-  { q: "Is it third-party tested?", a: "Yes. Every batch is independently verified. A Certificate of Analysis is published for each lot." },
-  { q: "Is it safe long-term?", a: "Berberine has a long safety record in clinical research. Consult your physician if on medication." },
-  { q: "When will I feel results?", a: "Most customers notice changes in 4–8 weeks of consistent daily use." },
+  {
+    q: "How do I take it?",
+    a: "500 mg, two to three times daily with meals. Always consult your physician.",
+  },
+  {
+    q: "Is it third-party tested?",
+    a: "Yes. Every batch is independently verified. A Certificate of Analysis is published for each lot.",
+  },
+  {
+    q: "Is it safe long-term?",
+    a: "Berberine has a long safety record in clinical research. Consult your physician if on medication.",
+  },
+  {
+    q: "When will I feel results?",
+    a: "Most customers notice changes in 4–8 weeks of consistent daily use.",
+  },
+  {
+    q: "Who should not take berberine?",
+    a: "Berberine should be avoided or used only under medical supervision by pregnant or breastfeeding women, people taking diabetes medication (due to hypoglycemia risk), people on anticoagulants, and children. Always consult a physician before starting.",
+  },
+  {
+    q: "Does berberine interact with any medications?",
+    a: "Yes. It can intensify the effect of diabetes medications, raising hypoglycemia risk, and may interact with anticoagulants such as warfarin. Always check with your physician before combining berberine with a prescription medication.",
+  },
+  {
+    q: "Can I take berberine with metformin?",
+    a: "Only with medical supervision. Berberine and metformin lower blood glucose through overlapping mechanisms, so taking them together can increase hypoglycemia risk. Your physician can advise on whether combining them is appropriate for you.",
+  },
+  {
+    q: "What does 97% HPLC purity actually mean, in plain terms?",
+    a: "It means 97% of the tested material is confirmed, via high-performance liquid chromatography, to be actual berberine HCl — not fillers, solvents, or degraded compound. Most drugstore brands test between 70–90% and don't publish the number.",
+  },
+  {
+    q: "How is Beyond Better's berberine different from other brands?",
+    a: "Every batch is HPLC-verified to 97% purity and the Certificate of Analysis is published, not just claimed. Extraction is water-only, not solvent-based, and testing is done by an independent third party.",
+  },
+  {
+    q: "Where is Beyond Better's berberine manufactured and tested?",
+    a: "Manufactured in India from Berberis aristata root. Every batch is HPLC-tested and third-party verified before release, with the Certificate of Analysis published for that batch.",
+  },
+  {
+    q: "How should I store the capsules?",
+    a: "Store in a cool, dry place away from direct sunlight, with the cap closed. Shelf life is 3 years from the manufacture date printed on the bottle.",
+  },
+  {
+    q: "Is this suitable for vegetarians/vegans?",
+    a: "Yes. The capsules are HPMC — plant-based, not gelatin — so they're suitable for vegetarians and vegans.",
+  },
+  {
+    q: "Can I take this alongside other supplements?",
+    a: "Generally yes. Berberine's main interactions are with medications that affect blood sugar or blood clotting (see above), not with most other supplements. If you're on medication or unsure, check with your physician first.",
+  },
 ];
 
 function FaqJsonLd() {
@@ -72,28 +117,9 @@ function FaqJsonLd() {
       acceptedAnswer: { "@type": "Answer", text: it.a },
     })),
   };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
-}
-
-function ProductJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: PRODUCT_NAME,
-    brand: { "@type": "Brand", name: "Beyond Better" },
-    description: "97% HPLC-verified Berberine HCL extract. Water-only extraction. Third-party tested in India.",
-    image: [productTube],
-    category: "DietarySupplement",
-    aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "1024" },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: PRODUCT_PRICING.currency,
-      price: String(PRODUCT_PRICING.sellingPrice),
-      availability: "https://schema.org/InStock",
-      url: `${SITE_URL}/#shop`,
-    },
-  };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  );
 }
 
 function OrgJsonLd() {
@@ -102,23 +128,53 @@ function OrgJsonLd() {
     "@type": "Organization",
     name: "Beyond Better",
     url: SITE_URL,
-    logo: logoLeaf,
-    sameAs: ["https://www.instagram.com/", "https://www.facebook.com/"],
+    logo: `${SITE_URL}${logoLeaf}`,
+    description:
+      "Beyond Better manufactures HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
+    // TODO(founder): add sameAs (real social handles) and contactPoint (support
+    // email/phone) once available — intentionally omitted rather than filled with
+    // placeholders.
   };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  );
+}
+
+function WebSiteJsonLd() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: SITE_URL,
+    name: "Beyond Better",
+    // No potentialAction/SearchAction — the site has no on-site search to point it at.
+  };
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  );
 }
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Beyond Better — Berberine HCL 97% " },
-      { name: "description", content: "97% HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard." },
-      { name: "keywords", content: "berberine, berberine HCL, best berberine India, HPLC berberine, metabolic health" },
+      {
+        name: "description",
+        content:
+          "97% HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.",
+      },
+      {
+        name: "keywords",
+        content: "berberine, berberine HCL, best berberine India, HPLC berberine, metabolic health",
+      },
       { property: "og:title", content: "Beyond Better — The Transparent Berberine Standard" },
-      { property: "og:description", content: "97% HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open." },
-      { property: "og:image", content: productTube },
+      {
+        property: "og:description",
+        content:
+          "97% HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open.",
+      },
+      { property: "og:image", content: `${SITE_URL}${productTube}` },
       { property: "og:url", content: SITE_URL },
-      { property: "og:type", content: "product" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "canonical", href: SITE_URL + "/" },
@@ -142,18 +198,20 @@ function Landing() {
   return (
     <div className="bg-background text-foreground pb-20 md:pb-0">
       <OrgJsonLd />
-      <ProductJsonLd />
+      <WebSiteJsonLd />
       <FaqJsonLd />
       <Nav />
-      <Hero />
-      <Comparison />
-      <FinalCTA />
-      <Benefits />
-      <LabReport />
-      {SHOW_TESTIMONIALS ? <SocialProof /> : null}
-      <Ingredients />
-      <ResearchSimple />
-      <FAQ />
+      <main>
+        <Hero />
+        <Comparison />
+        <FinalCTA />
+        <Benefits />
+        <LabReport />
+        {SHOW_TESTIMONIALS ? <SocialProof /> : null}
+        <Ingredients />
+        <ResearchSimple />
+        <FAQ />
+      </main>
       <Footer />
       <StickyBuy />
     </div>
@@ -178,26 +236,40 @@ function CTAButton({
   variant?: "solid" | "ghost";
 }) {
   if (variant === "ghost") {
-    const className = "inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm transition hover:opacity-80";
+    const className =
+      "inline-flex items-center gap-2 rounded-full border px-7 py-3 text-sm transition hover:opacity-80";
     const style = { borderColor: "var(--forest)", color: "var(--forest)" };
     return href ? (
       <a href={href} className={className} style={style}>
         {children} <ArrowRight className="h-4 w-4" />
       </a>
     ) : (
-      <button type="button" onClick={onClick} disabled={disabled} className={`${className} disabled:cursor-not-allowed disabled:opacity-70`} style={style}>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={disabled}
+        className={`${className} disabled:cursor-not-allowed disabled:opacity-70`}
+        style={style}
+      >
         {children} <ArrowRight className="h-4 w-4" />
       </button>
     );
   }
-  const className = "inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm transition hover:opacity-90";
+  const className =
+    "inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm transition hover:opacity-90";
   const style = { backgroundColor: "var(--forest)", color: "var(--ivory)" };
   return href ? (
     <a href={href} className={className} style={style}>
       {children} <ArrowUpRight className="h-4 w-4" />
     </a>
   ) : (
-    <button type="button" onClick={onClick} disabled={disabled} className={`${className} disabled:cursor-not-allowed disabled:opacity-70`} style={style}>
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`${className} disabled:cursor-not-allowed disabled:opacity-70`}
+      style={style}
+    >
       {children} <ArrowUpRight className="h-4 w-4" />
     </button>
   );
@@ -213,7 +285,7 @@ function Nav() {
 
     const update = () => {
       const y = window.scrollY;
-      setScrolled((prev) => (prev === (y > 24) ? prev : y > 24));
+      setScrolled((prev) => (prev === y > 24 ? prev : y > 24));
 
       if (y > lastY && y > 80) {
         setHidden(true);
@@ -259,8 +331,12 @@ function Nav() {
       style={{
         transform: hidden ? "translateY(-100%)" : "translateY(0)",
         backdropFilter: scrolled || open ? "blur(14px)" : "none",
-        backgroundColor: scrolled || open ? "color-mix(in oklab, var(--ivory) 78%, transparent)" : "transparent",
-        borderBottom: scrolled || open ? "1px solid color-mix(in oklab, var(--charcoal) 8%, transparent)" : "1px solid transparent",
+        backgroundColor:
+          scrolled || open ? "color-mix(in oklab, var(--ivory) 78%, transparent)" : "transparent",
+        borderBottom:
+          scrolled || open
+            ? "1px solid color-mix(in oklab, var(--charcoal) 8%, transparent)"
+            : "1px solid transparent",
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-10">
@@ -273,7 +349,10 @@ function Nav() {
           className="flex items-center gap-2 bg-transparent border-none p-0 cursor-pointer"
         >
           <img src={logoLeaf} alt="" className="h-5 w-5 object-contain" />
-          <span className="font-display text-[13px] tracking-tight" style={{ color: "var(--forest)" }}>
+          <span
+            className="font-display text-[13px] tracking-tight"
+            style={{ color: "var(--forest)" }}
+          >
             Beyond Better
           </span>
         </button>
@@ -283,9 +362,24 @@ function Nav() {
           onClick={() => setOpen((v) => !v)}
           className="flex flex-col items-end gap-[5px] p-2"
         >
-          <span className="block h-px w-5 transition-transform" style={{ background: "var(--forest)", transform: open ? "translateY(6px) rotate(45deg)" : "none" }} />
-          <span className="block h-px w-5 transition-opacity" style={{ background: "var(--forest)", opacity: open ? 0 : 1 }} />
-          <span className="block h-px w-5 transition-transform" style={{ background: "var(--forest)", transform: open ? "translateY(-6px) rotate(-45deg)" : "none" }} />
+          <span
+            className="block h-px w-5 transition-transform"
+            style={{
+              background: "var(--forest)",
+              transform: open ? "translateY(6px) rotate(45deg)" : "none",
+            }}
+          />
+          <span
+            className="block h-px w-5 transition-opacity"
+            style={{ background: "var(--forest)", opacity: open ? 0 : 1 }}
+          />
+          <span
+            className="block h-px w-5 transition-transform"
+            style={{
+              background: "var(--forest)",
+              transform: open ? "translateY(-6px) rotate(-45deg)" : "none",
+            }}
+          />
         </button>
       </div>
       <div
@@ -310,9 +404,6 @@ function Nav() {
   );
 }
 
-
-
-
 function Hero() {
   return (
     <>
@@ -325,6 +416,7 @@ function Hero() {
 
 function DesktopHero() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   return (
     <section
       className="relative hidden md:block w-full overflow-hidden pointer-events-none"
@@ -338,7 +430,12 @@ function DesktopHero() {
     >
       <div
         className="relative z-10 flex h-full w-full items-center justify-between pointer-events-none"
-        style={{ minHeight: "100svh", paddingLeft: "1vw", paddingRight: "1vw", pointerEvents: "none" }}
+        style={{
+          minHeight: "100svh",
+          paddingLeft: "1vw",
+          paddingRight: "1vw",
+          pointerEvents: "none",
+        }}
       >
         <div className="max-w-[42%] min-w-[320px]" style={{ color: "#1f3a2a" }}>
           <p
@@ -362,7 +459,9 @@ function DesktopHero() {
               letterSpacing: "-0.02em",
             }}
           >
-            Better was<br />never enough.
+            Better was
+            <br />
+            never enough.
           </p>
           <p
             style={{
@@ -393,15 +492,37 @@ function DesktopHero() {
                 pointerEvents: "auto",
               }}
             >
-              Shop Now <span className="ml-2">↗</span>
+              {ctaLabel} <span className="ml-2">↗</span>
             </button>
             <a
               href="#science"
-              style={{ fontSize: 13, fontWeight: 500, letterSpacing: "0.08em", color: "#1f3a2a", pointerEvents: "auto" }}
+              style={{
+                fontSize: 13,
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                color: "#1f3a2a",
+                pointerEvents: "auto",
+              }}
             >
               Explore the Science ↗
             </a>
           </div>
+          {preorder && (
+            <div style={{ marginTop: 22, pointerEvents: "auto" }}>
+              <RestockCountdown variant="hero" />
+              <p
+                style={{
+                  marginTop: 10,
+                  fontSize: 10.5,
+                  lineHeight: 1.5,
+                  opacity: 0.82,
+                  maxWidth: 280,
+                }}
+              >
+                {PREORDER_RESTOCK_CAPTION}
+              </p>
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-center shrink-0" style={{ color: "#1f3a2a" }}>
           {[
@@ -429,7 +550,11 @@ function DesktopHero() {
               sub: "Metabolic Wellness",
             },
           ].map(({ icon, title, sub }, i) => (
-            <div key={sub} className="group flex flex-col items-center" style={{ pointerEvents: "auto" }}>
+            <div
+              key={sub}
+              className="group flex flex-col items-center"
+              style={{ pointerEvents: "auto" }}
+            >
               {i > 0 && (
                 <div
                   aria-hidden
@@ -460,30 +585,43 @@ function DesktopHero() {
                 ) : (
                   <span className="relative inline-flex" style={{ width: 24, height: 24 }}>
                     <Shield className="h-full w-full" strokeWidth={1.45} />
-                    <Leaf className="absolute left-1/2 top-1/2 h-[11px] w-[11px] -translate-x-1/2 -translate-y-1/2" strokeWidth={1.75} />
+                    <Leaf
+                      className="absolute left-1/2 top-1/2 h-[11px] w-[11px] -translate-x-1/2 -translate-y-1/2"
+                      strokeWidth={1.75}
+                    />
                   </span>
                 )}
               </div>
               <div
                 className="text-center"
-                style={{ marginTop: 12, fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", lineHeight: 1.25, color: "#173F2F" }}
+                style={{
+                  marginTop: 12,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: "0.06em",
+                  lineHeight: 1.25,
+                  color: "#173F2F",
+                }}
               >
                 {title}
               </div>
               <div
                 className="text-center"
-                style={{ marginTop: 10, fontSize: 11, fontWeight: 400, color: "#6E766F", letterSpacing: "0.01em", lineHeight: 1.35 }}
+                style={{
+                  marginTop: 10,
+                  fontSize: 11,
+                  fontWeight: 400,
+                  color: "#5C645D",
+                  letterSpacing: "0.01em",
+                  lineHeight: 1.35,
+                }}
               >
                 {sub}
               </div>
             </div>
           ))}
-          
         </div>
       </div>
-
-
-
     </section>
   );
 }
@@ -515,7 +653,9 @@ function MobileHero() {
             letterSpacing: "-0.025em",
           }}
         >
-          Better was<br />never enough.
+          Better was
+          <br />
+          never enough.
         </p>
         <p
           style={{
@@ -532,12 +672,22 @@ function MobileHero() {
         </p>
         <a
           href="#science"
-          style={{ marginTop: 12, color: "#1f3a2a", fontSize: 12, fontWeight: 500, letterSpacing: "0.08em", pointerEvents: "auto" }}
+          style={{
+            marginTop: 12,
+            color: "#1f3a2a",
+            fontSize: 12,
+            fontWeight: 500,
+            letterSpacing: "0.08em",
+            pointerEvents: "auto",
+          }}
         >
           Explore Science ↗
         </a>
         <div style={{ flex: 1, minHeight: "49svh" }} />
-        <div className="flex w-full items-start justify-between" style={{ marginTop: 12, color: "#1f3a2a" }}>
+        <div
+          className="flex w-full items-start justify-between"
+          style={{ marginTop: 12, color: "#1f3a2a" }}
+        >
           {[
             {
               icon: "droplet",
@@ -577,7 +727,10 @@ function MobileHero() {
                   }}
                 />
               )}
-              <div className="group flex flex-1 flex-col items-center text-center px-1" style={{ pointerEvents: "auto" }}>
+              <div
+                className="group flex flex-1 flex-col items-center text-center px-1"
+                style={{ pointerEvents: "auto" }}
+              >
                 <div
                   className="flex items-center justify-center rounded-full text-[#1E4B36] transition-[transform,box-shadow,color] duration-300 group-hover:-translate-y-[2px] group-hover:text-[#2D6248] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.08),0_1px_2px_rgba(255,255,255,0.9)_inset]"
                   style={{
@@ -596,27 +749,45 @@ function MobileHero() {
                   ) : (
                     <span className="relative inline-flex" style={{ width: 24, height: 24 }}>
                       <Shield className="h-full w-full" strokeWidth={1.45} />
-                      <Leaf className="absolute left-1/2 top-1/2 h-[11px] w-[11px] -translate-x-1/2 -translate-y-1/2" strokeWidth={1.75} />
+                      <Leaf
+                        className="absolute left-1/2 top-1/2 h-[11px] w-[11px] -translate-x-1/2 -translate-y-1/2"
+                        strokeWidth={1.75}
+                      />
                     </span>
                   )}
                 </div>
-                <div style={{ marginTop: 12, fontSize: 10.5, fontWeight: 600, letterSpacing: "0.06em", lineHeight: 1.25, color: "#173F2F" }}>
+                <div
+                  style={{
+                    marginTop: 12,
+                    fontSize: 10.5,
+                    fontWeight: 600,
+                    letterSpacing: "0.06em",
+                    lineHeight: 1.25,
+                    color: "#173F2F",
+                  }}
+                >
                   {title}
                 </div>
-                <div style={{ marginTop: 9, fontSize: 9, fontWeight: 400, color: "#6E766F", letterSpacing: "0.01em", lineHeight: 1.3 }}>
+                <div
+                  style={{
+                    marginTop: 9,
+                    fontSize: 9,
+                    fontWeight: 400,
+                    color: "#5C645D",
+                    letterSpacing: "0.01em",
+                    lineHeight: 1.3,
+                  }}
+                >
                   {sub}
                 </div>
               </div>
             </React.Fragment>
           ))}
         </div>
-        
       </div>
     </section>
   );
 }
-
-
 
 function TrustStrip() {
   const badges = [
@@ -649,7 +820,10 @@ function TrustStrip() {
                     <span style={{ fontSize: 11, fontWeight: 500 }}>{b.label}</span>
                   )}
                 </span>
-                <h3 className="mt-3 font-display text-[10px] sm:text-[11px]" style={{ color: "#1E1E1E", fontWeight: 500, letterSpacing: "0.18em" }}>
+                <h3
+                  className="mt-3 font-display text-[10px] sm:text-[11px]"
+                  style={{ color: "#1E1E1E", fontWeight: 500, letterSpacing: "0.18em" }}
+                >
                   {b.title}
                 </h3>
               </div>
@@ -670,44 +844,91 @@ function Comparison() {
     { k: "Japanese HPLC Standard", us: true, them: false },
   ];
   return (
-    <section className="py-20 md:py-28" style={{ background: "var(--forest)", color: "var(--ivory)" }}>
+    <section
+      className="py-20 md:py-28"
+      style={{ background: "var(--forest)", color: "var(--ivory)" }}
+    >
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <div className="flex flex-col gap-12 lg:grid lg:grid-cols-[minmax(0,1fr)_440px] lg:items-center lg:gap-16">
           <div>
             <Reveal>
               <div className="text-center lg:text-left">
-                <p className="text-[11px] uppercase tracking-[0.3em]" style={{ color: "color-mix(in oklab, var(--ivory) 70%, transparent)" }}>
+                <p
+                  className="text-[11px] uppercase tracking-[0.3em]"
+                  style={{ color: "color-mix(in oklab, var(--ivory) 70%, transparent)" }}
+                >
                   The difference
                 </p>
-                <h2 className="mt-4 font-display text-3xl leading-tight md:text-5xl">Why Beyond Better.</h2>
+                <h2 className="mt-4 font-display text-3xl leading-tight md:text-5xl">
+                  Why Beyond Better.
+                </h2>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="mt-12 overflow-hidden rounded-2xl" style={{ background: "color-mix(in oklab, var(--ivory) 10%, transparent)" }}>
-                <div
-                  className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-[10px] uppercase tracking-[0.18em] md:px-8 md:text-xs"
-                  style={{ borderBottom: "1px solid color-mix(in oklab, var(--ivory) 18%, transparent)", color: "color-mix(in oklab, var(--ivory) 70%, transparent)" }}
-                >
-                  <span></span>
-                  <span className="text-center font-medium" style={{ color: "var(--ivory)" }}>Beyond Better</span>
-                  <span className="text-center">Others</span>
-                </div>
-                {rows.map((r) => (
-                  <div
-                    key={r.k}
-                    className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-sm md:px-8 md:py-5"
-                    style={{ borderBottom: "1px solid color-mix(in oklab, var(--ivory) 10%, transparent)" }}
+              <table
+                className="mt-12 block w-full overflow-hidden rounded-2xl"
+                style={{ background: "color-mix(in oklab, var(--ivory) 10%, transparent)" }}
+              >
+                <caption className="sr-only">
+                  Comparison of Beyond Better Berberine HCL against other brands
+                </caption>
+                <thead className="block">
+                  <tr
+                    className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-[10px] uppercase tracking-[0.18em] md:px-8 md:text-xs"
+                    style={{
+                      borderBottom: "1px solid color-mix(in oklab, var(--ivory) 18%, transparent)",
+                      color: "color-mix(in oklab, var(--ivory) 70%, transparent)",
+                    }}
                   >
-                    <span style={{ color: "color-mix(in oklab, var(--ivory) 92%, transparent)" }}>{r.k}</span>
-                    <span className="flex justify-center">
-                      <Check className="h-5 w-5" style={{ color: "var(--gold-soft)" }} strokeWidth={2.5} />
-                    </span>
-                    <span className="flex justify-center" style={{ color: "color-mix(in oklab, var(--ivory) 40%, transparent)" }}>
-                      <X className="h-5 w-5" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                ))}
-              </div>
+                    <th scope="col" className="text-left font-normal"></th>
+                    <th
+                      scope="col"
+                      className="text-center font-medium"
+                      style={{ color: "var(--ivory)" }}
+                    >
+                      Beyond Better
+                    </th>
+                    <th scope="col" className="text-center font-normal">
+                      Others
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="block">
+                  {rows.map((r) => (
+                    <tr
+                      key={r.k}
+                      className="grid grid-cols-[1.4fr_1fr_1fr] items-center gap-2 px-5 py-4 text-sm md:px-8 md:py-5"
+                      style={{
+                        borderBottom:
+                          "1px solid color-mix(in oklab, var(--ivory) 10%, transparent)",
+                      }}
+                    >
+                      <th
+                        scope="row"
+                        className="text-left font-normal"
+                        style={{ color: "color-mix(in oklab, var(--ivory) 92%, transparent)" }}
+                      >
+                        {r.k}
+                      </th>
+                      <td className="flex justify-center">
+                        <Check
+                          className="h-5 w-5"
+                          style={{ color: "var(--gold-soft)" }}
+                          strokeWidth={2.5}
+                        />
+                        <span className="sr-only">Yes</span>
+                      </td>
+                      <td
+                        className="flex justify-center"
+                        style={{ color: "color-mix(in oklab, var(--ivory) 40%, transparent)" }}
+                      >
+                        <X className="h-5 w-5" strokeWidth={1.5} />
+                        <span className="sr-only">No</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </Reveal>
           </div>
 
@@ -739,6 +960,7 @@ function Comparison() {
 
 function Benefits() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel } = usePreorderStatus();
   const items = [
     "Most supplement brands blend, dilute, or round up their purity numbers, because nobody checks.",
     "We built Beyond Better for the people who do — the ones who want the batch report, not just the buzzword.",
@@ -750,7 +972,10 @@ function Benefits() {
         <div className="flex flex-col gap-10 lg:grid lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16">
           <div className="order-2 lg:order-1">
             <Reveal delay={0.12}>
-              <div className="mx-auto w-full max-w-[520px] overflow-hidden rounded-[30px] border" style={{ borderColor: "color-mix(in oklab, var(--charcoal) 8%, transparent)" }}>
+              <div
+                className="mx-auto w-full max-w-[520px] overflow-hidden rounded-[30px] border"
+                style={{ borderColor: "color-mix(in oklab, var(--charcoal) 8%, transparent)" }}
+              >
                 <img
                   src={berberineIndustrySolution}
                   alt="Beyond Better berberine industry solution visual"
@@ -774,10 +999,21 @@ function Benefits() {
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <ul className="mx-auto mt-12 max-w-md divide-y lg:mx-0" style={{ borderTop: "1px solid color-mix(in oklab, var(--charcoal) 10%, transparent)", borderBottom: "1px solid color-mix(in oklab, var(--charcoal) 10%, transparent)", borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)" }}>
+              <ul
+                className="mx-auto mt-12 max-w-md divide-y lg:mx-0"
+                style={{
+                  borderTop: "1px solid color-mix(in oklab, var(--charcoal) 10%, transparent)",
+                  borderBottom: "1px solid color-mix(in oklab, var(--charcoal) 10%, transparent)",
+                  borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)",
+                }}
+              >
                 {items.map((t) => (
                   <li key={t} className="flex items-center gap-4 py-4 text-left text-[15px]">
-                    <Check className="h-4 w-4 shrink-0" style={{ color: "var(--gold-deep)" }} strokeWidth={2} />
+                    <Check
+                      className="h-4 w-4 shrink-0"
+                      style={{ color: "var(--gold-deep)" }}
+                      strokeWidth={2}
+                    />
                     <span>{t}</span>
                   </li>
                 ))}
@@ -785,7 +1021,9 @@ function Benefits() {
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-10 lg:mt-12">
-                <CTAButton onClick={openCheckout} disabled={isLoading}>Buy Now — <PriceTag /></CTAButton>
+                <CTAButton onClick={openCheckout} disabled={isLoading}>
+                  {ctaLabel}
+                </CTAButton>
               </div>
             </Reveal>
           </div>
@@ -796,7 +1034,6 @@ function Benefits() {
 }
 
 function LabReport() {
-  
   return (
     <section id="lab" className="bg-background">
       <Reveal>
@@ -824,30 +1061,58 @@ function LabReport() {
               gap: "clamp(10px, 1.2vw, 16px)",
             }}
           >
-            <div style={{ fontSize: "clamp(9px, 1vw, 14px)", letterSpacing: "0.28em", textTransform: "uppercase", color: "#8a6b50", fontWeight: 500 }}>
+            <div
+              style={{
+                fontSize: "clamp(9px, 1vw, 14px)",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "#8a6b50",
+                fontWeight: 500,
+              }}
+            >
               Why Beyond Better
             </div>
             <h2
               className="font-display"
-              style={{ fontSize: "clamp(20px, 4.2vw, 54px)", fontWeight: 500, lineHeight: 1.05, letterSpacing: "-0.01em", color: "#1a1a1a", maxWidth: "450px" }}
+              style={{
+                fontSize: "clamp(20px, 4.2vw, 54px)",
+                fontWeight: 500,
+                lineHeight: 1.05,
+                letterSpacing: "-0.01em",
+                color: "#1a1a1a",
+                maxWidth: "450px",
+              }}
             >
               Nothing hidden.
               <br />
               <span style={{ color: "var(--forest)" }}>Every batch verified.</span>
             </h2>
-            <p style={{ maxWidth: "450px", fontSize: "clamp(12px, 0.95vw, 14px)", lineHeight: 1.6, color: "#355142" }}>
-              This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
+            <p
+              style={{
+                maxWidth: "450px",
+                fontSize: "clamp(12px, 0.95vw, 14px)",
+                lineHeight: 1.6,
+                color: "#355142",
+              }}
+            >
+              This is a real Certificate of Analysis from a recent production batch — not a stock
+              photo, not a summary. The same report ships with every batch we sell.
             </p>
             <div>
               <a
-                href="#lab"
+                href="/berberine-coa.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-85"
-                style={{ backgroundColor: "var(--forest)", color: "var(--ivory)", width: "fit-content" }}
+                style={{
+                  backgroundColor: "var(--forest)",
+                  color: "var(--ivory)",
+                  width: "fit-content",
+                }}
               >
                 View the full lab report <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
-
           </div>
         </div>
 
@@ -866,41 +1131,68 @@ function LabReport() {
             <div
               className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-6 pb-6 pt-16"
               style={{
-                background: "linear-gradient(to top, rgba(241,236,226,0.95) 0.65%, rgba(241,236,226,0.75) 0.3%, rgba(241,236,226,0) 100%)",
+                background:
+                  "linear-gradient(to top, rgba(241,236,226,0.95) 0.65%, rgba(241,236,226,0.75) 0.3%, rgba(241,236,226,0) 100%)",
               }}
             >
-              <div style={{ fontSize: "11px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#8a6b50", fontWeight: 500 }}>
+              <div
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  color: "#8a6b50",
+                  fontWeight: 500,
+                }}
+              >
                 Why Beyond Better
               </div>
-              <h2 className="font-display" style={{ fontSize: "26px", fontWeight: 500, lineHeight: 1.1, letterSpacing: "-0.01em", color: "#1a1a1a" }}>
+              <h2
+                className="font-display"
+                style={{
+                  fontSize: "26px",
+                  fontWeight: 500,
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.01em",
+                  color: "#1a1a1a",
+                }}
+              >
                 Nothing hidden.
                 <br />
                 <span style={{ color: "var(--forest)" }}>Every batch verified.</span>
               </h2>
               <p style={{ marginTop: 6, fontSize: "12px", lineHeight: 1.55, color: "#355142" }}>
-                This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
+                This is a real Certificate of Analysis from a recent production batch — not a stock
+                photo, not a summary. The same report ships with every batch we sell.
               </p>
               <a
-                href="#lab"
+                href="/berberine-coa.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs transition hover:opacity-85"
-                style={{ backgroundColor: "var(--forest)", color: "var(--ivory)", width: "fit-content", pointerEvents: "auto" }}
+                style={{
+                  backgroundColor: "var(--forest)",
+                  color: "var(--ivory)",
+                  width: "fit-content",
+                  pointerEvents: "auto",
+                }}
               >
                 View the full lab report <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
-
         </div>
-
       </Reveal>
     </section>
   );
 }
 
-
 function SocialProof() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const featuredReview = { q: "Finally a brand I actually trust. The COA sealed it.", n: "Arjun M." };
+  const { ctaLabel } = usePreorderStatus();
+  const featuredReview = {
+    q: "Finally a brand I actually trust. The COA sealed it.",
+    n: "Arjun M.",
+  };
   const reviews = [
     { q: "I noticed better energy levels within weeks.", n: "Priya R." },
     { q: "Quality feels far superior to anything else I've tried.", n: "Sneha K." },
@@ -911,19 +1203,30 @@ function SocialProof() {
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              This is a real Certificate of Analysis from a recent production batch — not a stock photo, not a summary. The same report ships with every batch we sell.
+              This is a real Certificate of Analysis from a recent production batch — not a stock
+              photo, not a summary. The same report ships with every batch we sell.
             </p>
           </div>
         </Reveal>
         <Reveal delay={0.08}>
-          <figure className="mx-auto mt-10 max-w-3xl rounded-3xl border px-8 py-9 text-center shadow-[0_24px_60px_-40px_rgba(23,63,47,0.35)]" style={{ borderColor: "color-mix(in oklab, var(--forest) 14%, transparent)", background: "color-mix(in oklab, #fff 92%, var(--ivory) 8%)" }}>
+          <figure
+            className="mx-auto mt-10 max-w-3xl rounded-3xl border px-8 py-9 text-center shadow-[0_24px_60px_-40px_rgba(23,63,47,0.35)]"
+            style={{
+              borderColor: "color-mix(in oklab, var(--forest) 14%, transparent)",
+              background: "color-mix(in oklab, #fff 92%, var(--ivory) 8%)",
+            }}
+          >
             <div className="flex justify-center gap-1" style={{ color: "var(--gold-deep)" }}>
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} className="h-5 w-5 fill-current" />
               ))}
             </div>
-            <blockquote className="mt-5 font-display text-2xl leading-tight md:text-3xl">&quot;{featuredReview.q}&quot;</blockquote>
-            <figcaption className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">— {featuredReview.n}</figcaption>
+            <blockquote className="mt-5 font-display text-2xl leading-tight md:text-3xl">
+              &quot;{featuredReview.q}&quot;
+            </blockquote>
+            <figcaption className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              — {featuredReview.n}
+            </figcaption>
           </figure>
         </Reveal>
         <Reveal delay={0.12}>
@@ -941,20 +1244,27 @@ function SocialProof() {
           {reviews.map((r, i) => (
             <Reveal key={r.n} delay={i * 0.08}>
               <figure className="text-center md:text-left">
-                <div className="flex justify-center gap-0.5 md:justify-start" style={{ color: "var(--gold-deep)" }}>
+                <div
+                  className="flex justify-center gap-0.5 md:justify-start"
+                  style={{ color: "var(--gold-deep)" }}
+                >
                   {[0, 1, 2, 3, 4].map((s) => (
                     <Star key={s} className="h-3.5 w-3.5 fill-current" />
                   ))}
                 </div>
                 <blockquote className="mt-4 font-display text-lg leading-snug">"{r.q}"</blockquote>
-                <figcaption className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">— {r.n}</figcaption>
+                <figcaption className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  — {r.n}
+                </figcaption>
               </figure>
             </Reveal>
           ))}
         </div>
         <Reveal delay={0.3}>
           <div className="mt-14 flex justify-center">
-            <CTAButton onClick={openCheckout} disabled={isLoading}>Shop Now — <PriceTag /></CTAButton>
+            <CTAButton onClick={openCheckout} disabled={isLoading}>
+              {ctaLabel}
+            </CTAButton>
           </div>
         </Reveal>
       </div>
@@ -981,22 +1291,37 @@ function Ingredients() {
         <Reveal delay={0.1}>
           <div>
             <SectionLabel>Inside the bottle</SectionLabel>
-            <h2 className="mt-4 font-display text-3xl leading-[1.1] md:text-5xl">One ingredient. Done right.</h2>
+            <h2 className="mt-4 font-display text-3xl leading-[1.1] md:text-5xl">
+              One ingredient. Done right.
+            </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
               Pure Berberine HCL — extracted with water, verified at 97% by HPLC. Nothing else.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-              Most extractors use solvents to hit purity targets faster and cheaper. We use a water-only extraction process — slower, more expensive, and free of chemical residue. It&apos;s the difference between a number on a label and a number you can actually stand behind.
+              Most extractors use solvents to hit purity targets faster and cheaper. We use a
+              water-only extraction process — slower, more expensive, and free of chemical residue.
+              It&apos;s the difference between a number on a label and a number you can actually
+              stand behind.
             </p>
-            <dl className="mt-10 grid grid-cols-3 gap-6 border-t pt-6" style={{ borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)" }}>
+            <dl
+              className="mt-10 grid grid-cols-3 gap-6 border-t pt-6"
+              style={{ borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)" }}
+            >
               {[
                 { n: "97%", l: "Purity" },
                 { n: "500mg", l: "Per capsule" },
                 { n: "0", l: "Fillers" },
               ].map((s) => (
                 <div key={s.l}>
-                  <dt className="font-display text-2xl md:text-3xl" style={{ color: "var(--gold-deep)" }}>{s.n}</dt>
-                  <dd className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.l}</dd>
+                  <dt
+                    className="font-display text-2xl md:text-3xl"
+                    style={{ color: "var(--gold-deep)" }}
+                  >
+                    {s.n}
+                  </dt>
+                  <dd className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                    {s.l}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -1028,7 +1353,9 @@ function ResearchSimple() {
           {studies.map((s, i) => (
             <Reveal key={s.t} delay={i * 0.08}>
               <div className="text-center">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">Study 0{i + 1}</p>
+                <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                  Study 0{i + 1}
+                </p>
                 <h3 className="mt-3 font-display text-xl">{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
               </div>
@@ -1037,7 +1364,9 @@ function ResearchSimple() {
         </div>
         <Reveal delay={0.3}>
           <div className="mt-12">
-            <CTAButton href="/research-library" variant="ghost">View Research Library</CTAButton>
+            <CTAButton href="/research-library" variant="ghost">
+              View Research Library
+            </CTAButton>
           </div>
         </Reveal>
       </div>
@@ -1053,7 +1382,9 @@ function FAQ() {
         <Reveal>
           <div className="text-center">
             <SectionLabel>FAQ</SectionLabel>
-            <h2 className="mt-4 font-display text-3xl leading-tight md:text-5xl">Questions, answered.</h2>
+            <h2 className="mt-4 font-display text-3xl leading-tight md:text-5xl">
+              Questions, answered.
+            </h2>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
@@ -1074,9 +1405,14 @@ function FAQ() {
                     className="flex w-full items-center justify-between gap-6 py-5 text-left"
                   >
                     <span className="font-display text-base leading-snug md:text-lg">{it.q}</span>
-                    <span className="shrink-0">{isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}</span>
+                    <span className="shrink-0">
+                      {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                    </span>
                   </button>
-                  <div className="grid overflow-hidden transition-all duration-500 ease-out" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}>
+                  <div
+                    className="grid overflow-hidden transition-all duration-500 ease-out"
+                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                  >
                     <div className="min-h-0">
                       <p className="pb-6 text-sm leading-relaxed text-muted-foreground">{it.a}</p>
                     </div>
@@ -1093,6 +1429,7 @@ function FAQ() {
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   const bullets = [
     "500mg HPLC-verified per capsule — not a proprietary blend hiding the real number",
     "97% purity, tested to Japanese HPLC standard — most berberine on the market sits between 70–90%",
@@ -1168,7 +1505,10 @@ function FinalCTA() {
                 style={{ color: "color-mix(in oklab, var(--forest) 88%, transparent)" }}
               >
                 {bullets.map((b) => (
-                  <li key={b} className="flex items-center justify-center gap-2.5 lg:items-start lg:justify-start lg:gap-3 lg:text-left lg:leading-relaxed">
+                  <li
+                    key={b}
+                    className="flex items-center justify-center gap-2.5 lg:items-start lg:justify-start lg:gap-3 lg:text-left lg:leading-relaxed"
+                  >
                     <span
                       aria-hidden
                       className="inline-flex h-4 w-4 items-center justify-center rounded-full text-[10px]"
@@ -1185,7 +1525,10 @@ function FinalCTA() {
 
           <div className="lg:ml-auto lg:w-full lg:max-w-[620px]">
             <Reveal delay={0.15}>
-              <ProductImageGallery images={galleryImages} className="mx-auto mt-10 max-w-full lg:mt-0" />
+              <ProductImageGallery
+                images={galleryImages}
+                className="mx-auto mt-10 max-w-full lg:mt-0"
+              />
             </Reveal>
 
             <Reveal delay={0.2}>
@@ -1199,18 +1542,7 @@ function FinalCTA() {
 
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-col items-center gap-3 lg:mt-5">
-                
-                <div className="flex items-baseline justify-center gap-3">
-                  <span
-                    className="font-display text-[15px] line-through"
-                    style={{ color: "color-mix(in oklab, var(--forest) 55%, transparent)" }}
-                  >
-                    {MRP}
-                  </span>
-                  <span className="font-display text-4xl md:text-5xl lg:text-[58px]" style={{ color: "var(--forest)" }}>
-                    {PRICE}
-                  </span>
-                </div>
+                <PriceDisplay variant="block" align="center" />
               </div>
             </Reveal>
 
@@ -1226,8 +1558,16 @@ function FinalCTA() {
                   boxShadow: "0 14px 30px -10px rgba(30,55,35,0.45)",
                 }}
               >
-                Balance Your Life <ArrowUpRight className="h-4 w-4" />
+                {ctaLabel} <ArrowUpRight className="h-4 w-4" />
               </button>
+              {preorder && (
+                <p
+                  className="mt-3 text-[11px]"
+                  style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
+                >
+                  {PREORDER_FULL_PAYMENT_NOTE}
+                </p>
+              )}
             </Reveal>
           </div>
         </div>
@@ -1236,37 +1576,50 @@ function FinalCTA() {
   );
 }
 
-
 function StickyBuy() {
   const { openCheckout, isLoading } = useMagicCheckout();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-3 border-t px-4 py-3 md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t md:hidden"
       style={{
         backgroundColor: "color-mix(in oklab, var(--ivory) 96%, transparent)",
         backdropFilter: "blur(14px)",
         borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)",
       }}
     >
-      <div className="flex flex-col leading-tight">
-        <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Berberine HCL</span>
-        <span className="font-display text-lg" style={{ color: "var(--forest)" }}><PriceTag /></span>
+      {preorder && (
+        <div
+          className="flex items-center justify-center border-b py-1.5"
+          style={{ borderColor: "color-mix(in oklab, var(--charcoal) 8%, transparent)" }}
+        >
+          <RestockCountdown variant="compact" />
+        </div>
+      )}
+      <div className="flex items-center justify-between gap-3 px-4 py-3">
+        <div className="flex flex-col leading-tight">
+          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Berberine HCL
+          </span>
+          <span className="font-display text-lg" style={{ color: "var(--forest)" }}>
+            <PriceDisplay variant="inline" />
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={openCheckout}
+          disabled={isLoading}
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[13px] transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
+          style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
+        >
+          <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={openCheckout}
-        disabled={isLoading}
-        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
-        style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
-      >
-        <ShoppingBag className="h-4 w-4" /> Buy Now
-      </button>
     </div>
   );
 }
 
 function Footer() {
-  const { openCheckout, isLoading } = useMagicCheckout();
   return (
     <footer className="bg-background py-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -1274,7 +1627,9 @@ function Footer() {
           <div>
             <div className="flex items-center gap-2.5">
               <img src={logoLeaf} alt="" className="h-7 w-7 object-contain" />
-              <span className="font-display text-base" style={{ color: "var(--forest)" }}>Beyond Better</span>
+              <span className="font-display text-base" style={{ color: "var(--forest)" }}>
+                Beyond Better
+              </span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
               The transparent berberine standard.
@@ -1284,15 +1639,31 @@ function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Shop</div>
               <ul className="mt-4 space-y-2">
-                <li><button type="button" onClick={openCheckout} disabled={isLoading} className="hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-70">Berberine HCL</button></li>
-                <li><a href="#lab" className="hover:opacity-60">Lab Report</a></li>
+                <li>
+                  <Link to="/products/berberine-hcl" className="hover:opacity-60">
+                    Berberine HCL
+                  </Link>
+                </li>
+                <li>
+                  <a href="#lab" className="hover:opacity-60">
+                    Lab Report
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Learn</div>
               <ul className="mt-4 space-y-2">
-                <li><a href="#science" className="hover:opacity-60">Science</a></li>
-                <li><a href="#faq" className="hover:opacity-60">FAQ</a></li>
+                <li>
+                  <a href="#science" className="hover:opacity-60">
+                    Science
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="hover:opacity-60">
+                    FAQ
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -1318,7 +1689,10 @@ function Footer() {
             </button>
           </div>
         </div>
-        <p className="mt-4 text-center text-[10px] opacity-60 md:text-left">*These statements have not been evaluated by any food or drug authority. Not intended to diagnose, treat or cure any disease.</p>
+        <p className="mt-4 text-center text-[10px] opacity-70 md:text-left">
+          *These statements have not been evaluated by any food or drug authority. Not intended to
+          diagnose, treat or cure any disease.
+        </p>
       </div>
     </footer>
   );

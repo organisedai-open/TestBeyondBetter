@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import { z } from "zod";
 
 import { PRODUCT_CATALOG } from "@/lib/product";
+import { getActivePriceInr, isPreorderActive } from "@/lib/pricing";
 
 // Server-only. Reads RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET from process.env inside the
 // handler (never at module scope) so the values are never bundled into the client and
@@ -46,7 +47,11 @@ export const createRazorpayOrder = createServerFn({ method: "POST" })
     }
 
     const quantity = data.quantity;
-    const unitOfferPricePaise = inrToPaise(PRODUCT_CATALOG.unitPrice);
+    // Authoritative, server-side: whatever the client displayed, the actual charge is
+    // always derived fresh from the current server time against RESTOCK_AT_UTC — this is
+    // what makes the pre-order -> in-stock price change automatic on the exact restock
+    // moment with no deploy required.
+    const unitOfferPricePaise = inrToPaise(getActivePriceInr());
     const unitMrpPaise = inrToPaise(PRODUCT_CATALOG.unitMrp);
     const lineItemsTotal = unitOfferPricePaise * quantity;
     const receipt = `bb_${Date.now()}_${crypto.randomBytes(6).toString("hex")}`;
@@ -76,7 +81,7 @@ export const createRazorpayOrder = createServerFn({ method: "POST" })
           weight: PRODUCT_CATALOG.weightGrams,
         },
       ],
-      notes: { productId: PRODUCT_CATALOG.id },
+      notes: { productId: PRODUCT_CATALOG.id, preorder: String(isPreorderActive()) },
     };
 
     const auth = Buffer.from(`${keyId}:${keySecret}`).toString("base64");

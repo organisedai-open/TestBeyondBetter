@@ -16,6 +16,18 @@ export interface ArticleFAQ {
 
 import berberineInsulinResearch from "../assets/Berberine Insulin research.webp";
 import berberineNatureOzempic from "../assets/Berberine Nature Ozempic.webp";
+// Self-hosted, on-brand images reused for the remaining article heroes — removes the
+// images.unsplash.com hotlink dependency (previously 14 broken/unreliable external
+// requests per Semrush's audit) without sourcing any new photography.
+import berberineComparisonImg from "../assets/Berberine Comparison.webp";
+import berberineSugarControlImg from "../assets/Berberine Sugar Control.webp";
+import berberineBenefitsImg from "../assets/Berberine Benefits.webp";
+import berberineIngredientInfoImg from "../assets/Berberine Ingredient info.webp";
+import berberineDirectionToUseImg from "../assets/Berberine Direction to use.webp";
+import shopBerberineImg from "../assets/shop-berberine.webp";
+import berberineCapsuleImg from "../assets/berberine-capsule.webp";
+import transparencyHeroImg from "../assets/transparency-hero.webp";
+import heroBerberineProductImg from "../assets/hero-berberine-product.webp";
 
 export interface Article {
   slug: string;
@@ -42,18 +54,15 @@ export const ARTICLE_AUTHOR = AUTHOR;
 export const ARTICLES: Article[] = [
   {
     slug: "berberine-metabolic-health",
-    title:
-      "Why Berberine Is Becoming The Most Studied Natural Compound For Metabolic Health",
-    seoTitle:
-      "Berberine & Metabolic Health Research | Beyond Better",
+    title: "Why Berberine Is Becoming The Most Studied Natural Compound For Metabolic Health",
+    seoTitle: "Berberine & Metabolic Health Research | Beyond Better",
     seoDescription:
       "An evidence-based look at why berberine has become the most researched natural compound for metabolic health, AMPK activation, and insulin sensitivity.",
     category: "Metabolic Health",
     tag: "Featured",
     readTime: "11 min read",
     publishedDate: "March 4, 2026",
-    image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1600&q=75",
+    image: berberineComparisonImg,
     excerpt:
       "Berberine has emerged as one of the most researched plant compounds for blood sugar regulation, insulin sensitivity, and long-term metabolic wellness.",
     description:
@@ -120,16 +129,46 @@ export const ARTICLES: Article[] = [
       "Purity verified by HPLC, not extract weight, determines the actual delivered alkaloid dose.",
     ],
     references: [
-      { title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes", source: "Metabolism", year: "2008" },
-      { title: "Lan J et al. — Meta-analysis of Berberine on Glucose and Lipid Metabolism", source: "J Ethnopharmacology", year: "2015" },
-      { title: "Turner N et al. — Berberine and Its More Biologically Available Derivative as Mitochondrial Inhibitors", source: "Diabetes", year: "2008" },
-      { title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine", source: "J Clin Endocrinol Metab", year: "2008" },
-      { title: "Habtemariam S — Berberine Pharmacology and the Gut Microbiome", source: "Pharmacological Research", year: "2020" },
+      {
+        title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes",
+        source: "Metabolism",
+        year: "2008",
+      },
+      {
+        title: "Lan J et al. — Meta-analysis of Berberine on Glucose and Lipid Metabolism",
+        source: "J Ethnopharmacology",
+        year: "2015",
+      },
+      {
+        title:
+          "Turner N et al. — Berberine and Its More Biologically Available Derivative as Mitochondrial Inhibitors",
+        source: "Diabetes",
+        year: "2008",
+      },
+      {
+        title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine",
+        source: "J Clin Endocrinol Metab",
+        year: "2008",
+      },
+      {
+        title: "Habtemariam S — Berberine Pharmacology and the Gut Microbiome",
+        source: "Pharmacological Research",
+        year: "2020",
+      },
     ],
     faqs: [
-      { q: "Is berberine as effective as metformin?", a: "Head-to-head clinical trials show broadly comparable effects on fasting and postprandial glucose, though metformin retains decades more outcomes data. Berberine is best positioned as a research-supported nutraceutical, not a replacement for prescribed therapy." },
-      { q: "How long does it take to see effects?", a: "Most trials report measurable changes in fasting glucose and lipid markers within 8–12 weeks of consistent dosing." },
-      { q: "Does berberine work without dietary change?", a: "Effects are observed in controlled trials regardless of diet, but combined with reduced refined carbohydrate intake and regular activity, the metabolic benefits are substantially greater." },
+      {
+        q: "Is berberine as effective as metformin?",
+        a: "Head-to-head clinical trials show broadly comparable effects on fasting and postprandial glucose, though metformin retains decades more outcomes data. Berberine is best positioned as a research-supported nutraceutical, not a replacement for prescribed therapy.",
+      },
+      {
+        q: "How long does it take to see effects?",
+        a: "Most trials report measurable changes in fasting glucose and lipid markers within 8–12 weeks of consistent dosing.",
+      },
+      {
+        q: "Does berberine work without dietary change?",
+        a: "Effects are observed in controlled trials regardless of diet, but combined with reduced refined carbohydrate intake and regular activity, the metabolic benefits are substantially greater.",
+      },
     ],
     relatedSlugs: [
       "berberine-vs-metformin",
@@ -139,8 +178,7 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-vs-metformin",
-    title:
-      "Berberine Vs Metformin: The Natural Alternative Scientists Are Watching Closely",
+    title: "Berberine Vs Metformin: The Natural Alternative Scientists Are Watching Closely",
     seoTitle: "Berberine vs Metformin: Mechanism & Trials | Beyond Better",
     seoDescription:
       "A scientific comparison of berberine and metformin: AMPK mechanism, clinical trial data, glucose lowering, insulin sensitivity, safety and microbiome effects.",
@@ -148,8 +186,7 @@ export const ARTICLES: Article[] = [
     tag: "Comparison",
     readTime: "12 min read",
     publishedDate: "February 18, 2026",
-    image:
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=75",
+    image: berberineComparisonImg,
     excerpt:
       "A research-backed comparison between berberine and metformin for blood glucose management and insulin sensitivity.",
     description:
@@ -219,35 +256,55 @@ export const ARTICLES: Article[] = [
       "Berberine is best positioned for proactive metabolic support, not as a replacement for prescribed therapy.",
     ],
     references: [
-      { title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes", source: "Metabolism", year: "2008" },
-      { title: "Dong H et al. — Berberine in Type 2 Diabetes: Meta-analysis vs Metformin", source: "Evid Based Complement Alternat Med", year: "2012" },
-      { title: "Brunmair B et al. — Thiazolidinediones, Like Metformin, Inhibit Respiratory Complex I", source: "Diabetes", year: "2004" },
-      { title: "Zhang H et al. — Berberine Lowers Blood Glucose Through Multiple Pathways", source: "Metabolism", year: "2010" },
+      {
+        title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes",
+        source: "Metabolism",
+        year: "2008",
+      },
+      {
+        title: "Dong H et al. — Berberine in Type 2 Diabetes: Meta-analysis vs Metformin",
+        source: "Evid Based Complement Alternat Med",
+        year: "2012",
+      },
+      {
+        title:
+          "Brunmair B et al. — Thiazolidinediones, Like Metformin, Inhibit Respiratory Complex I",
+        source: "Diabetes",
+        year: "2004",
+      },
+      {
+        title: "Zhang H et al. — Berberine Lowers Blood Glucose Through Multiple Pathways",
+        source: "Metabolism",
+        year: "2010",
+      },
     ],
     faqs: [
-      { q: "Can I take berberine instead of metformin?", a: "No. Any decision to change prescribed medication must be made with the clinician who prescribed it. Berberine can be considered as a supportive nutraceutical in adults who have not been prescribed metformin." },
-      { q: "Do they have the same side effects?", a: "Both can cause transient gastrointestinal symptoms. Berberine tends to produce more pronounced early symptoms that resolve quickly; metformin's symptoms tend to persist longer in some patients." },
+      {
+        q: "Can I take berberine instead of metformin?",
+        a: "No. Any decision to change prescribed medication must be made with the clinician who prescribed it. Berberine can be considered as a supportive nutraceutical in adults who have not been prescribed metformin.",
+      },
+      {
+        q: "Do they have the same side effects?",
+        a: "Both can cause transient gastrointestinal symptoms. Berberine tends to produce more pronounced early symptoms that resolve quickly; metformin's symptoms tend to persist longer in some patients.",
+      },
     ],
     relatedSlugs: [
       "berberine-metabolic-health",
-      "berberine-insulin-resistance",
+      "berberine-metformin-combination",
       "berberine-blood-sugar",
     ],
   },
   {
     slug: "berberine-blood-sugar",
-    title:
-      "New Research Suggests Berberine May Support Healthy Blood Sugar Regulation Naturally",
-    seoTitle:
-      "Berberine For Blood Sugar Support | Beyond Better",
+    title: "New Research Suggests Berberine May Support Healthy Blood Sugar Regulation Naturally",
+    seoTitle: "Berberine For Blood Sugar Support | Beyond Better",
     seoDescription:
       "How berberine supports healthy blood sugar regulation through GLUT4 pathways, insulin receptor sensitivity, and glucose transport \u2014 backed by clinical research.",
     category: "Blood Sugar",
     tag: "Blood Sugar",
     readTime: "10 min read",
     publishedDate: "February 8, 2026",
-    image:
-      "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=1600&q=75",
+    image: berberineSugarControlImg,
     excerpt:
       "Understanding how berberine improves glucose metabolism through AMPK activation and insulin pathway support.",
     description:
@@ -309,13 +366,32 @@ export const ARTICLES: Article[] = [
       "Clinical trials show meaningful improvements in fasting glucose, postprandial glucose and HbA1c at 900–1500 mg/day.",
     ],
     references: [
-      { title: "Lee YS et al. — Berberine, a Natural Plant Product, Activates AMPK", source: "Diabetes", year: "2006" },
-      { title: "Kim WS et al. — Berberine Improves Lipid Dysregulation in Obesity", source: "Am J Physiol Endocrinol Metab", year: "2009" },
-      { title: "Zhang H et al. — Berberine Lowers Blood Glucose in Type 2 Diabetes Through Multiple Pathways", source: "Metabolism", year: "2010" },
+      {
+        title: "Lee YS et al. — Berberine, a Natural Plant Product, Activates AMPK",
+        source: "Diabetes",
+        year: "2006",
+      },
+      {
+        title: "Kim WS et al. — Berberine Improves Lipid Dysregulation in Obesity",
+        source: "Am J Physiol Endocrinol Metab",
+        year: "2009",
+      },
+      {
+        title:
+          "Zhang H et al. — Berberine Lowers Blood Glucose in Type 2 Diabetes Through Multiple Pathways",
+        source: "Metabolism",
+        year: "2010",
+      },
     ],
     faqs: [
-      { q: "How quickly does berberine affect blood sugar?", a: "Acute effects on postprandial glucose can be observed within hours of a dose. Sustained changes in fasting glucose and HbA1c typically require 8–12 weeks of consistent dosing." },
-      { q: "Is berberine safe for prediabetic adults?", a: "Berberine has been studied in prediabetic populations with consistent improvements in fasting insulin and glucose. Anyone taking prescription medication should consult a clinician first." },
+      {
+        q: "How quickly does berberine affect blood sugar?",
+        a: "Acute effects on postprandial glucose can be observed within hours of a dose. Sustained changes in fasting glucose and HbA1c typically require 8–12 weeks of consistent dosing.",
+      },
+      {
+        q: "Is berberine safe for prediabetic adults?",
+        a: "Berberine has been studied in prediabetic populations with consistent improvements in fasting insulin and glucose. Anyone taking prescription medication should consult a clinician first.",
+      },
     ],
     relatedSlugs: [
       "berberine-vs-metformin",
@@ -325,18 +401,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-weight-loss",
-    title:
-      "Can Berberine Support Weight Management? Emerging Evidence Says It Might",
-    seoTitle:
-      "Berberine For Weight Management | Beyond Better",
+    title: "Can Berberine Support Weight Management? Emerging Evidence Says It Might",
+    seoTitle: "Berberine For Weight Management | Beyond Better",
     seoDescription:
       "Emerging research on berberine and weight management: fat metabolism, AMPK-driven fat oxidation, lipogenesis suppression and appetite regulation.",
     category: "Metabolism",
     tag: "Weight",
     readTime: "9 min read",
     publishedDate: "January 28, 2026",
-    image:
-      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=75",
+    image: berberineBenefitsImg,
     excerpt:
       "Research suggests berberine may influence metabolism, appetite signaling, and insulin pathways linked to weight control.",
     description:
@@ -396,25 +469,33 @@ export const ARTICLES: Article[] = [
       "Clinical trials show modest but consistent reductions in BMI and waist circumference at 1.5 g/day.",
     ],
     references: [
-      { title: "Hu Y et al. — Lipid-Lowering Effect of Berberine in Human Subjects", source: "Phytomedicine", year: "2012" },
-      { title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine", source: "J Clin Endocrinol Metab", year: "2008" },
+      {
+        title: "Hu Y et al. — Lipid-Lowering Effect of Berberine in Human Subjects",
+        source: "Phytomedicine",
+        year: "2012",
+      },
+      {
+        title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine",
+        source: "J Clin Endocrinol Metab",
+        year: "2008",
+      },
     ],
     faqs: [
-      { q: "How much weight do people typically lose?", a: "Clinical trials report modest reductions on the order of 2–5% of body mass over three months. The compound is best positioned as a metabolic support, not a standalone weight loss agent." },
-      { q: "Does it work without diet change?", a: "Measurable changes occur even without major dietary change, but combined with reduced refined carbohydrate intake, results are substantially greater." },
+      {
+        q: "How much weight do people typically lose?",
+        a: "Clinical trials report modest reductions on the order of 2–5% of body mass over three months. The compound is best positioned as a metabolic support, not a standalone weight loss agent.",
+      },
+      {
+        q: "Does it work without diet change?",
+        a: "Measurable changes occur even without major dietary change, but combined with reduced refined carbohydrate intake, results are substantially greater.",
+      },
     ],
-    relatedSlugs: [
-      "berberine-insulin-resistance",
-      "berberine-metabolic-health",
-      "berberine-pcos",
-    ],
+    relatedSlugs: ["berberine-insulin-resistance", "berberine-metabolic-health", "berberine-pcos"],
   },
   {
     slug: "berberine-insulin-resistance",
-    title:
-      "The Science Of Insulin Resistance: Why Modern Lifestyles Are Breaking Human Metabolism",
-    seoTitle:
-      "Insulin Resistance & Berberine Research | Beyond Better",
+    title: "The Science Of Insulin Resistance: Why Modern Lifestyles Are Breaking Human Metabolism",
+    seoTitle: "Insulin Resistance & Berberine Research | Beyond Better",
     seoDescription:
       "An evidence-based explanation of insulin resistance: what causes it, how lifestyle drives it, and how berberine fits into the research.",
     category: "Insulin Resistance",
@@ -476,13 +557,31 @@ export const ARTICLES: Article[] = [
       "The compound complements but does not replace structural lifestyle change.",
     ],
     references: [
-      { title: "DeFronzo RA — Insulin Resistance, Lipotoxicity, Type 2 Diabetes", source: "Diabetologia", year: "2010" },
-      { title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes", source: "Metabolism", year: "2008" },
-      { title: "Hotamisligil GS — Inflammation and Metabolic Disorders", source: "Nature", year: "2006" },
+      {
+        title: "DeFronzo RA — Insulin Resistance, Lipotoxicity, Type 2 Diabetes",
+        source: "Diabetologia",
+        year: "2010",
+      },
+      {
+        title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes",
+        source: "Metabolism",
+        year: "2008",
+      },
+      {
+        title: "Hotamisligil GS — Inflammation and Metabolic Disorders",
+        source: "Nature",
+        year: "2006",
+      },
     ],
     faqs: [
-      { q: "Can insulin resistance be reversed?", a: "In its earlier stages, substantially yes — particularly through changes in nutrition, sleep, body composition and regular muscular activity. Berberine can support this process." },
-      { q: "How do I know if I have it?", a: "Fasting insulin combined with fasting glucose (HOMA-IR) is the most accessible early marker. A standard fasting glucose alone misses early insulin resistance." },
+      {
+        q: "Can insulin resistance be reversed?",
+        a: "In its earlier stages, substantially yes — particularly through changes in nutrition, sleep, body composition and regular muscular activity. Berberine can support this process.",
+      },
+      {
+        q: "How do I know if I have it?",
+        a: "Fasting insulin combined with fasting glucose (HOMA-IR) is the most accessible early marker. A standard fasting glucose alone misses early insulin resistance.",
+      },
     ],
     relatedSlugs: [
       "berberine-metabolic-health",
@@ -492,18 +591,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-cognitive-function",
-    title:
-      "Berberine And Cognitive Function: Can Metabolic Health Influence Brain Performance?",
-    seoTitle:
-      "Berberine & Cognitive Function | Beyond Better",
+    title: "Berberine And Cognitive Function: Can Metabolic Health Influence Brain Performance?",
+    seoTitle: "Berberine & Cognitive Function | Beyond Better",
     seoDescription:
       "How metabolic health and insulin resistance affect cognitive function and brain energy, and what emerging berberine research suggests.",
     category: "Cognitive",
     tag: "Brain",
     readTime: "9 min read",
     publishedDate: "January 6, 2026",
-    image:
-      "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=1600&q=75",
+    image: transparencyHeroImg,
     excerpt:
       "Emerging research on how metabolic health and insulin signalling shape cognitive performance.",
     description:
@@ -566,32 +662,36 @@ export const ARTICLES: Article[] = [
       "Stable glucose supports sustained attention, working memory and subjective focus.",
     ],
     references: [
-      { title: "de la Monte SM — Type 3 Diabetes Is Sporadic Alzheimer Disease", source: "Eur Neuropsychopharmacol", year: "2014" },
-      { title: "Kulkarni SK et al. — Berberine: A Plant Alkaloid with Therapeutic Potential", source: "Phytother Res", year: "2010" },
+      {
+        title: "de la Monte SM — Type 3 Diabetes Is Sporadic Alzheimer Disease",
+        source: "Eur Neuropsychopharmacol",
+        year: "2014",
+      },
+      {
+        title: "Kulkarni SK et al. — Berberine: A Plant Alkaloid with Therapeutic Potential",
+        source: "Phytother Res",
+        year: "2010",
+      },
     ],
     faqs: [
-      { q: "Does berberine improve focus directly?", a: "Direct cognitive effects in humans are still under investigation. The most likely mechanism is indirect: improved glucose stability and reduced systemic inflammation." },
+      {
+        q: "Does berberine improve focus directly?",
+        a: "Direct cognitive effects in humans are still under investigation. The most likely mechanism is indirect: improved glucose stability and reduced systemic inflammation.",
+      },
     ],
-    relatedSlugs: [
-      "berberine-blood-sugar",
-      "berberine-inflammation",
-      "berberine-longevity",
-    ],
+    relatedSlugs: ["berberine-blood-sugar", "berberine-inflammation", "berberine-longevity"],
   },
   {
     slug: "berberine-gut-microbiome",
-    title:
-      "The Gut Microbiome Connection: Why Your Metabolism Begins In The Digestive System",
-    seoTitle:
-      "Berberine & The Gut Microbiome | Beyond Better",
+    title: "The Gut Microbiome Connection: Why Your Metabolism Begins In The Digestive System",
+    seoTitle: "Berberine & The Gut Microbiome | Beyond Better",
     seoDescription:
       "How the gut microbiome shapes metabolic health, why microbial diversity matters, and what research shows about berberine's effects on gut bacteria.",
     category: "Microbiome",
     tag: "Microbiome",
     readTime: "10 min read",
     publishedDate: "December 21, 2025",
-    image:
-      "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=1600&q=75",
+    image: berberineIngredientInfoImg,
     excerpt:
       "The gut microbiome is increasingly recognised as a central regulator of metabolic health.",
     description:
@@ -642,11 +742,22 @@ export const ARTICLES: Article[] = [
       "Berberine modulates gut microbial composition favourably, with high luminal concentrations from oral dosing.",
     ],
     references: [
-      { title: "Cani PD et al. — Gut Microbiota and Metabolic Endotoxemia", source: "Diabetes", year: "2007" },
-      { title: "Habtemariam S — Berberine Pharmacology and the Gut Microbiome", source: "Pharmacological Research", year: "2020" },
+      {
+        title: "Cani PD et al. — Gut Microbiota and Metabolic Endotoxemia",
+        source: "Diabetes",
+        year: "2007",
+      },
+      {
+        title: "Habtemariam S — Berberine Pharmacology and the Gut Microbiome",
+        source: "Pharmacological Research",
+        year: "2020",
+      },
     ],
     faqs: [
-      { q: "Does berberine kill good bacteria?", a: "Clinical and laboratory data suggest berberine selectively favours beneficial populations rather than producing broad-spectrum disruption." },
+      {
+        q: "Does berberine kill good bacteria?",
+        a: "Clinical and laboratory data suggest berberine selectively favours beneficial populations rather than producing broad-spectrum disruption.",
+      },
     ],
     relatedSlugs: [
       "berberine-insulin-resistance",
@@ -656,22 +767,17 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-sleep-quality",
-    title:
-      "Poor Sleep Quality May Be Quietly Damaging Your Metabolism",
-    seoTitle:
-      "Sleep & Metabolic Health Science | Beyond Better",
+    title: "Poor Sleep Quality May Be Quietly Damaging Your Metabolism",
+    seoTitle: "Sleep & Metabolic Health Science | Beyond Better",
     seoDescription:
       "How sleep deprivation impairs glucose tolerance, raises cortisol and damages metabolic health, plus the recovery science behind restoring metabolic function.",
     category: "Sleep & Recovery",
     tag: "Sleep",
     readTime: "9 min read",
     publishedDate: "December 10, 2025",
-    image:
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1600&q=75",
-    excerpt:
-      "Sleep is one of the most underappreciated determinants of metabolic health.",
-    description:
-      "Sleep is one of the most underappreciated determinants of metabolic health.",
+    image: berberineDirectionToUseImg,
+    excerpt: "Sleep is one of the most underappreciated determinants of metabolic health.",
+    description: "Sleep is one of the most underappreciated determinants of metabolic health.",
     sections: [
       {
         heading: "Introduction",
@@ -717,11 +823,22 @@ export const ARTICLES: Article[] = [
       "Late-evening eating produces larger glycemic excursions than identical earlier meals.",
     ],
     references: [
-      { title: "Spiegel K et al. — Impact of Sleep Debt on Metabolic and Endocrine Function", source: "Lancet", year: "1999" },
-      { title: "Tasali E et al. — Slow-Wave Sleep and the Risk of Type 2 Diabetes", source: "PNAS", year: "2008" },
+      {
+        title: "Spiegel K et al. — Impact of Sleep Debt on Metabolic and Endocrine Function",
+        source: "Lancet",
+        year: "1999",
+      },
+      {
+        title: "Tasali E et al. — Slow-Wave Sleep and the Risk of Type 2 Diabetes",
+        source: "PNAS",
+        year: "2008",
+      },
     ],
     faqs: [
-      { q: "Can supplements compensate for poor sleep?", a: "No. Sleep is structurally restorative in ways no compound replicates. Supplementation including berberine works best when sleep is also addressed." },
+      {
+        q: "Can supplements compensate for poor sleep?",
+        a: "No. Sleep is structurally restorative in ways no compound replicates. Supplementation including berberine works best when sleep is also addressed.",
+      },
     ],
     relatedSlugs: [
       "berberine-insulin-resistance",
@@ -731,18 +848,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-athletes-metabolism",
-    title:
-      "Why Athletes Are Paying More Attention To Metabolic Health Than Ever Before",
-    seoTitle:
-      "Metabolic Health For Athletes | Beyond Better",
+    title: "Why Athletes Are Paying More Attention To Metabolic Health Than Ever Before",
+    seoTitle: "Metabolic Health For Athletes | Beyond Better",
     seoDescription:
       "How athletes use metabolic health, stable blood sugar and insulin sensitivity to optimise energy systems, recovery and long-term performance.",
     category: "Performance",
     tag: "Athletes",
     readTime: "8 min read",
     publishedDate: "November 30, 2025",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&q=75",
+    image: shopBerberineImg,
     excerpt:
       "Metabolic flexibility is becoming a core performance metric in serious athletic training.",
     description:
@@ -792,10 +906,17 @@ export const ARTICLES: Article[] = [
       "Berberine supports the underlying metabolic pathways that drive performance.",
     ],
     references: [
-      { title: "Goodpaster BH, Sparks LM — Metabolic Flexibility in Health and Disease", source: "Cell Metabolism", year: "2017" },
+      {
+        title: "Goodpaster BH, Sparks LM — Metabolic Flexibility in Health and Disease",
+        source: "Cell Metabolism",
+        year: "2017",
+      },
     ],
     faqs: [
-      { q: "Is berberine on banned substance lists?", a: "Berberine is not currently on the WADA prohibited list. Competing athletes should always confirm with current WADA documentation and verify supplement testing on individual products." },
+      {
+        q: "Is berberine on banned substance lists?",
+        a: "Berberine is not currently on the WADA prohibited list. Competing athletes should always confirm with current WADA documentation and verify supplement testing on individual products.",
+      },
     ],
     relatedSlugs: [
       "berberine-sleep-quality",
@@ -805,18 +926,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-inflammation",
-    title:
-      "The Hidden Inflammation Problem Most People Never Notice",
-    seoTitle:
-      "Chronic Inflammation & Berberine Research | Beyond Better",
+    title: "The Hidden Inflammation Problem Most People Never Notice",
+    seoTitle: "Chronic Inflammation & Berberine Research | Beyond Better",
     seoDescription:
       "What chronic silent inflammation does to metabolic health, the markers that reveal it, and how berberine is being studied as anti-inflammatory support.",
     category: "Inflammation",
     tag: "Inflammation",
     readTime: "10 min read",
     publishedDate: "November 18, 2025",
-    image:
-      "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=1600&q=75",
+    image: berberineCapsuleImg,
     excerpt:
       "Chronic low-grade inflammation is now recognised as a central driver of metabolic disease and accelerated aging.",
     description:
@@ -866,11 +984,22 @@ export const ARTICLES: Article[] = [
       "Berberine reduces inflammatory markers through direct and indirect mechanisms.",
     ],
     references: [
-      { title: "Franceschi C, Campisi J — Chronic Inflammation (Inflammaging)", source: "J Gerontol", year: "2014" },
-      { title: "Liu Y et al. — Berberine Anti-inflammatory Effects in Metabolic Disease", source: "Inflammation Research", year: "2019" },
+      {
+        title: "Franceschi C, Campisi J — Chronic Inflammation (Inflammaging)",
+        source: "J Gerontol",
+        year: "2014",
+      },
+      {
+        title: "Liu Y et al. — Berberine Anti-inflammatory Effects in Metabolic Disease",
+        source: "Inflammation Research",
+        year: "2019",
+      },
     ],
     faqs: [
-      { q: "How do I know if I have chronic inflammation?", a: "High-sensitivity C-reactive protein is the most accessible single marker. Levels above 1 mg/L warrant attention even when within the technical reference range." },
+      {
+        q: "How do I know if I have chronic inflammation?",
+        a: "High-sensitivity C-reactive protein is the most accessible single marker. Levels above 1 mg/L warrant attention even when within the technical reference range.",
+      },
     ],
     relatedSlugs: [
       "berberine-insulin-resistance",
@@ -880,18 +1009,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-pcos",
-    title:
-      "Can Berberine Support Hormonal Balance In Women With PCOS?",
-    seoTitle:
-      "Berberine For PCOS: Clinical Evidence | Beyond Better",
+    title: "Can Berberine Support Hormonal Balance In Women With PCOS?",
+    seoTitle: "Berberine For PCOS: Clinical Evidence | Beyond Better",
     seoDescription:
       "How insulin resistance drives PCOS symptoms, why hormones depend on metabolic health, and what clinical research shows about berberine in PCOS.",
     category: "Women's Health",
     tag: "PCOS",
     readTime: "10 min read",
     publishedDate: "November 4, 2025",
-    image:
-      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1600&q=75",
+    image: berberineBenefitsImg,
     excerpt:
       "Polycystic ovary syndrome is at heart a metabolic condition, and the research on berberine in PCOS is among the most encouraging.",
     description:
@@ -942,11 +1068,22 @@ export const ARTICLES: Article[] = [
       "Berberine is not appropriate during pregnancy and may interact with medications.",
     ],
     references: [
-      { title: "Wei W et al. — Berberine in Women with PCOS: A Randomised Controlled Trial", source: "Eur J Endocrinol", year: "2012" },
-      { title: "Rondanelli M et al. — Berberine Supplementation in PCOS", source: "J Obstet Gynaecol", year: "2020" },
+      {
+        title: "Wei W et al. — Berberine in Women with PCOS: A Randomised Controlled Trial",
+        source: "Eur J Endocrinol",
+        year: "2012",
+      },
+      {
+        title: "Rondanelli M et al. — Berberine Supplementation in PCOS",
+        source: "J Obstet Gynaecol",
+        year: "2020",
+      },
     ],
     faqs: [
-      { q: "Is berberine safe during pregnancy?", a: "No. Berberine is not recommended during pregnancy or breastfeeding. Women planning conception should consult their clinician." },
+      {
+        q: "Is berberine safe during pregnancy?",
+        a: "No. Berberine is not recommended during pregnancy or breastfeeding. Women planning conception should consult their clinician.",
+      },
     ],
     relatedSlugs: [
       "berberine-insulin-resistance",
@@ -956,18 +1093,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-liver-health",
-    title:
-      "Liver Health And Metabolism: Why The Liver Controls More Than You Think",
-    seoTitle:
-      "Liver Health & Berberine Research | Beyond Better",
+    title: "Liver Health And Metabolism: Why The Liver Controls More Than You Think",
+    seoTitle: "Liver Health & Berberine Research | Beyond Better",
     seoDescription:
       "How liver function governs metabolic health, why fatty liver disease is rising rapidly, and what research shows about berberine for hepatic metabolism.",
     category: "Liver Health",
     tag: "Liver",
     readTime: "10 min read",
     publishedDate: "October 22, 2025",
-    image:
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1600&q=75",
+    image: transparencyHeroImg,
     excerpt:
       "The liver is the principal regulator of systemic metabolism, and modern lifestyles place it under unprecedented strain.",
     description:
@@ -1017,11 +1151,23 @@ export const ARTICLES: Article[] = [
       "Berberine reduces hepatic fat content and improves liver enzymes in NAFLD trials.",
     ],
     references: [
-      { title: "Yan HM et al. — Efficacy of Berberine in Patients with Non-Alcoholic Fatty Liver Disease", source: "PLOS One", year: "2015" },
-      { title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine", source: "J Clin Endocrinol Metab", year: "2008" },
+      {
+        title:
+          "Yan HM et al. — Efficacy of Berberine in Patients with Non-Alcoholic Fatty Liver Disease",
+        source: "PLOS One",
+        year: "2015",
+      },
+      {
+        title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine",
+        source: "J Clin Endocrinol Metab",
+        year: "2008",
+      },
     ],
     faqs: [
-      { q: "Can berberine reverse fatty liver?", a: "Trials show meaningful reductions in liver fat content over 3–6 months, particularly when combined with dietary changes addressing refined carbohydrates and alcohol." },
+      {
+        q: "Can berberine reverse fatty liver?",
+        a: "Trials show meaningful reductions in liver fat content over 3–6 months, particularly when combined with dietary changes addressing refined carbohydrates and alcohol.",
+      },
     ],
     relatedSlugs: [
       "berberine-insulin-resistance",
@@ -1031,18 +1177,15 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-longevity",
-    title:
-      "Longevity Science: Why Researchers Believe Metabolic Health Determines How Well We Age",
-    seoTitle:
-      "Longevity, AMPK & Berberine Research | Beyond Better",
+    title: "Longevity Science: Why Researchers Believe Metabolic Health Determines How Well We Age",
+    seoTitle: "Longevity, AMPK & Berberine Research | Beyond Better",
     seoDescription:
       "How metabolic health, mitochondrial function and AMPK signalling shape healthy aging, and what makes compounds like berberine of interest in longevity research.",
     category: "Longevity",
     tag: "Longevity",
     readTime: "12 min read",
     publishedDate: "October 8, 2025",
-    image:
-      "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=1600&q=75",
+    image: heroBerberineProductImg,
     excerpt:
       "Longevity research has converged on a small set of biological pathways — and metabolism sits at their intersection.",
     description:
@@ -1106,11 +1249,22 @@ export const ARTICLES: Article[] = [
     ],
     references: [
       { title: "López-Otín C et al. — The Hallmarks of Aging", source: "Cell", year: "2013" },
-      { title: "Barzilai N et al. — Metformin as a Tool to Target Aging", source: "Cell Metabolism", year: "2016" },
-      { title: "López-Otín C et al. — Hallmarks of Aging: An Expanding Universe", source: "Cell", year: "2023" },
+      {
+        title: "Barzilai N et al. — Metformin as a Tool to Target Aging",
+        source: "Cell Metabolism",
+        year: "2016",
+      },
+      {
+        title: "López-Otín C et al. — Hallmarks of Aging: An Expanding Universe",
+        source: "Cell",
+        year: "2023",
+      },
     ],
     faqs: [
-      { q: "Is berberine being studied for longevity?", a: "Yes. Its mechanistic overlap with metformin and other AMPK-activating compounds has made it of sustained interest, though human longevity trials remain limited." },
+      {
+        q: "Is berberine being studied for longevity?",
+        a: "Yes. Its mechanistic overlap with metformin and other AMPK-activating compounds has made it of sustained interest, though human longevity trials remain limited.",
+      },
     ],
     relatedSlugs: [
       "berberine-metabolic-health",
@@ -1120,25 +1274,24 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-vs-ozempic",
-    title:
-      "Berberine vs Ozempic: Understanding The Science Of \"Nature's Ozempic\"",
+    title: 'Berberine vs Ozempic: Understanding The Science Of "Nature\'s Ozempic"',
     seoTitle: "Berberine vs Ozempic: The Science | Beyond Better",
     seoDescription:
-      "A science-first comparison of berberine and Ozempic: AMPK activation vs GLP-1 receptor agonism, mechanisms, evidence and what \"nature's Ozempic\" really means.",
+      'A science-first comparison of berberine and Ozempic: AMPK activation vs GLP-1 receptor agonism, mechanisms, evidence and what "nature\'s Ozempic" really means.',
     category: "Comparisons",
     tag: "Featured",
     readTime: "10 min read",
     publishedDate: "October 15, 2025",
     image: berberineNatureOzempic,
     excerpt:
-      "Berberine is increasingly nicknamed \"nature's Ozempic\" online. The mechanisms behind each compound tell a more nuanced story.",
+      'Berberine is increasingly nicknamed "nature\'s Ozempic" online. The mechanisms behind each compound tell a more nuanced story.',
     description:
-      "Berberine is increasingly nicknamed \"nature's Ozempic\" online. The mechanisms behind each compound tell a more nuanced story.",
+      'Berberine is increasingly nicknamed "nature\'s Ozempic" online. The mechanisms behind each compound tell a more nuanced story.',
     sections: [
       {
         heading: "Introduction",
         paragraphs: [
-          "Berberine has become widely described in popular media as \"nature's Ozempic.\" The comparison reflects shared interest in metabolic and weight-related outcomes, but the underlying mechanisms of the two compounds are distinct. A clear-eyed look at the science is more useful than the marketing label.",
+          'Berberine has become widely described in popular media as "nature\'s Ozempic." The comparison reflects shared interest in metabolic and weight-related outcomes, but the underlying mechanisms of the two compounds are distinct. A clear-eyed look at the science is more useful than the marketing label.',
         ],
       },
       {
@@ -1166,7 +1319,7 @@ export const ARTICLES: Article[] = [
         ],
       },
       {
-        heading: "What \"Nature's Ozempic\" Actually Means",
+        heading: 'What "Nature\'s Ozempic" Actually Means',
         paragraphs: [
           "The phrase is a heuristic, not a pharmacological equivalence claim. Berberine is of interest because of its metabolic activity through a different pathway — not because it reproduces semaglutide's mechanism. Anyone considering either compound for a clinical indication should do so under medical guidance.",
         ],
@@ -1176,26 +1329,321 @@ export const ARTICLES: Article[] = [
       "Ozempic is a GLP-1 receptor agonist; berberine primarily activates AMPK.",
       "The two mechanisms are distinct, not equivalent.",
       "Semaglutide has large phase 3 trial evidence; berberine has a different evidence profile.",
-      "\"Nature's Ozempic\" is a popular nickname, not a pharmacological claim.",
+      '"Nature\'s Ozempic" is a popular nickname, not a pharmacological claim.',
       "Clinical decisions should be made with a qualified healthcare professional.",
     ],
     references: [
-      { title: "Wilding JPH et al. — Once-Weekly Semaglutide in Adults with Overweight or Obesity", source: "NEJM", year: "2021" },
-      { title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes", source: "Metabolism", year: "2008" },
-      { title: "Lan J et al. — Meta-analysis of Berberine on Glucose and Lipid Metabolism", source: "J Ethnopharmacology", year: "2015" },
+      {
+        title: "Wilding JPH et al. — Once-Weekly Semaglutide in Adults with Overweight or Obesity",
+        source: "NEJM",
+        year: "2021",
+      },
+      {
+        title: "Yin J et al. — Efficacy of Berberine in Patients with Type 2 Diabetes",
+        source: "Metabolism",
+        year: "2008",
+      },
+      {
+        title: "Lan J et al. — Meta-analysis of Berberine on Glucose and Lipid Metabolism",
+        source: "J Ethnopharmacology",
+        year: "2015",
+      },
     ],
     faqs: [
-      { q: "Is berberine the same as Ozempic?", a: "No. Ozempic is a prescription GLP-1 receptor agonist; berberine is a plant alkaloid that primarily activates AMPK. The mechanisms are different." },
-      { q: "Why is berberine called \"nature's Ozempic\"?", a: "Because both have been associated with metabolic and weight-related effects in popular coverage. The label compares outcomes loosely, not mechanisms." },
+      {
+        q: "Is berberine the same as Ozempic?",
+        a: "No. Ozempic is a prescription GLP-1 receptor agonist; berberine is a plant alkaloid that primarily activates AMPK. The mechanisms are different.",
+      },
+      {
+        q: 'Why is berberine called "nature\'s Ozempic"?',
+        a: "Because both have been associated with metabolic and weight-related effects in popular coverage. The label compares outcomes loosely, not mechanisms.",
+      },
+    ],
+    relatedSlugs: ["berberine-weight-loss", "berberine-metabolic-health", "berberine-vs-metformin"],
+  },
+  {
+    slug: "berberine-metformin-combination",
+    title: "Berberine and Metformin: Can You Take Them Together?",
+    seoTitle: "Berberine and Metformin Together — Safety & Research | Beyond Better",
+    seoDescription:
+      "A direct look at whether berberine and metformin can be combined safely, what the combination research actually shows, and why medical supervision matters.",
+    category: "Safety",
+    tag: "Safety",
+    readTime: "9 min read",
+    publishedDate: "July 14, 2026",
+    image: berberineComparisonImg,
+    excerpt:
+      "Berberine and metformin lower blood glucose through overlapping mechanisms. Combining them is a genuinely common question — here's what the research and the safety considerations actually say.",
+    description:
+      "A direct look at whether berberine and metformin can be combined safely, what the combination research shows, and why medical supervision matters.",
+    sections: [
+      {
+        heading: "The Question Behind the Question",
+        paragraphs: [
+          "It's one of the most common questions in berberine research, and for good reason: metformin is the most widely prescribed oral medication for type 2 diabetes worldwide, and berberine has repeatedly been described in the research literature as a 'natural metformin' because of how closely their downstream effects overlap. If you're already on metformin and considering berberine, or already taking berberine and wondering whether it's safe alongside a prescription, the question isn't academic.",
+          "The short answer is that combining them is an active area of clinical research, with real trial data — but it is not a decision to make without your physician, because the two compounds don't just have similar effects. They act through overlapping mechanisms, which changes the risk calculation.",
+        ],
+      },
+      {
+        heading: "Why the Comparison Exists: A Shared Mechanism",
+        paragraphs: [
+          "Metformin's primary mechanism, established over decades of research, is a mild inhibition of Complex I in the mitochondrial electron transport chain, which raises the cellular AMP:ATP ratio and activates AMP-activated protein kinase (AMPK) — the master regulator of cellular energy metabolism. Once activated, AMPK suppresses hepatic glucose production, increases glucose uptake in skeletal muscle, and shifts metabolism toward fat oxidation.",
+          "Berberine activates the same AMPK pathway through a strikingly similar route — transient inhibition of mitochondrial Complex I. This convergence, documented by Turner et al. in a 2008 study published in Diabetes, is the mechanistic reason berberine and metformin produce comparable effects on fasting glucose and HbA1c in head-to-head trials, and it's also the reason combining them requires more care than combining two unrelated supplements.",
+        ],
+      },
+      {
+        heading: "What the Combination Research Actually Shows",
+        paragraphs: [
+          "Because the 'can you combine them' question comes up so often, it has actually been studied directly, not just inferred from separate trials. A randomized controlled trial published in Nutrients in 2021 by Sartore et al. tested a nutraceutical combination of berberine, hesperidin and chromium picolinate (BHC) as an add-on to metformin monotherapy in type 2 diabetes patients with suboptimal glycemic control. After 12 weeks, the metformin-plus-BHC group saw fasting blood glucose fall by 11.7% and HbA1c fall by 7.5% from baseline — a meaningfully larger improvement than metformin alone produced in the same trial.",
+          "Earlier work pointed the same direction. Di Pierro et al., in a 2012 pilot study published in Diabetes, Metabolic Syndrome and Obesity, tested a berberine and silymarin combination (Berberol®) as an add-on to patients' existing oral diabetes regimens — which for most participants included metformin — over 90 days, and found it to be a viable add-on option for patients whose glycemic control remained suboptimal on oral therapy alone.",
+          "Taken together, the available trial evidence supports berberine-based combinations as a studied, plausible add-on to metformin therapy for some patients — not an untested pairing.",
+        ],
+      },
+      {
+        heading: "The Real Risk: Hypoglycemia and Monitoring",
+        paragraphs: [
+          "The mechanistic overlap that makes the combination effective is the same reason it needs supervision. Two agents lowering blood glucose through the same downstream pathway can produce an additive — not just complementary — effect, which raises the risk of hypoglycemia (blood glucose dropping too low), particularly in patients whose dose of metformin or other diabetes medication was calibrated before berberine was added.",
+          "This isn't a theoretical concern unique to berberine. It's the standard clinical logic behind combining any two glucose-lowering agents, prescription or otherwise, and it's exactly why the trials above were conducted under medical supervision with regular glucose monitoring, not as unsupervised self-combination.",
+        ],
+      },
+      {
+        heading: "Practical Guidance",
+        paragraphs: [
+          "If you're taking metformin and considering adding berberine, the responsible starting point is a conversation with the physician managing your diabetes care — not a decision made independently. They can advise on appropriate monitoring, whether your current metformin dose needs adjustment, and how to watch for signs of hypoglycemia (shakiness, sweating, confusion, dizziness) during the adjustment period.",
+          "This is general information, not personalized medical advice, and it doesn't replace a conversation with your physician, particularly if you're on any other glucose-lowering medication.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Berberine and metformin both activate AMPK via a similar mechanism — transient inhibition of mitochondrial Complex I.",
+      "A 2021 randomized controlled trial (Sartore et al., Nutrients) found berberine-based add-on therapy improved glucose control beyond metformin alone.",
+      "A 2012 pilot study (Di Pierro et al.) supported berberine-based combinations as an add-on for patients with suboptimal control on oral therapy.",
+      "Because both agents lower glucose through overlapping pathways, combining them raises hypoglycemia risk and needs medical supervision.",
+      "This is a studied, plausible combination — not an untested one — but the decision and monitoring should involve your physician.",
+    ],
+    references: [
+      {
+        title:
+          "Sartore G et al. — Effect of a New Formulation of Nutraceuticals as an Add-On to Metformin Monotherapy",
+        source: "Nutrients",
+        year: "2021",
+      },
+      {
+        title:
+          "Di Pierro F et al. — Pilot Study on the Additive Effects of Berberine and Oral Type 2 Diabetes Agents",
+        source: "Diabetes, Metabolic Syndrome and Obesity",
+        year: "2012",
+      },
+      {
+        title:
+          "Turner N et al. — Berberine and Its More Biologically Available Derivative as Mitochondrial Inhibitors",
+        source: "Diabetes",
+        year: "2008",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can I take berberine and metformin at the same time?",
+        a: "Some clinical trials have combined them under medical supervision with positive results, but this should only be done with your physician's guidance, since both lower blood glucose through overlapping pathways.",
+      },
+      {
+        q: "Is berberine as strong as metformin?",
+        a: "Head-to-head trials show broadly comparable effects on fasting and postprandial glucose, but metformin has decades more safety and outcomes data. They aren't interchangeable.",
+      },
+      {
+        q: "What are the signs of taking too much glucose-lowering medication?",
+        a: "Shakiness, sweating, confusion, rapid heartbeat and dizziness can indicate hypoglycemia. Contact your physician if you experience these symptoms while combining glucose-lowering agents.",
+      },
+    ],
+    relatedSlugs: ["berberine-vs-metformin", "berberine-metabolic-health", "berberine-blood-sugar"],
+  },
+  {
+    slug: "berberine-side-effects",
+    title: "Berberine Side Effects: What the Research Actually Shows",
+    seoTitle: "Berberine Side Effects & Safety — What Research Shows | Beyond Better",
+    seoDescription:
+      "An honest, evidence-based look at berberine's tolerability: how common gastrointestinal side effects actually are, who should be cautious, and what the clinical trial data shows.",
+    category: "Safety",
+    tag: "Safety",
+    readTime: "9 min read",
+    publishedDate: "July 21, 2026",
+    image: berberineDirectionToUseImg,
+    excerpt:
+      "Berberine has a generally favorable safety profile in clinical research, but it isn't side-effect-free. Here's an honest look at what the trial data actually shows.",
+    description:
+      "An honest, evidence-based look at berberine's tolerability, common side effects, and what the clinical research shows about who should be cautious.",
+    sections: [
+      {
+        heading: "Why Tolerability Deserves a Straight Answer",
+        paragraphs: [
+          "Supplement marketing tends to undersell side effects or ignore them entirely. That's not the standard this brand holds itself to, and it shouldn't be the standard you accept from any supplement you take daily. Berberine has a genuinely favorable safety profile across the clinical trial literature — but 'favorable' doesn't mean 'without side effects,' and the honest answer is more useful than the flattering one.",
+        ],
+      },
+      {
+        heading: "The Most Common Side Effect: Gastrointestinal Symptoms",
+        paragraphs: [
+          "Across the clinical trial literature, gastrointestinal symptoms — nausea, diarrhea, constipation, and abdominal discomfort — are consistently the most frequently reported adverse events associated with berberine, and this pattern holds across multiple independent systematic reviews covering different patient populations and endpoints, not just one isolated study.",
+          "A 2022 systematic review and meta-analysis by Xie et al., published in Frontiers in Pharmacology, pooled data from 37 randomized controlled trials involving 3,048 patients with type 2 diabetes. The analysis found that berberine, whether used alone or combined with oral hypoglycemic agents, did not significantly increase the incidence of total adverse events or the risk of hypoglycemia compared to control groups — a meaningful finding given how often the hypoglycemia question comes up for a compound that lowers blood glucose.",
+          "The mechanism behind the GI effects is reasonably well understood: berberine has direct antimicrobial activity against certain gut bacteria and interacts with the gut microbiome as part of how it exerts its metabolic effects, and this same interaction is thought to be the driver of the digestive symptoms some users experience, particularly at higher doses or early in use.",
+        ],
+      },
+      {
+        heading: "Dose Dependence and Timing",
+        paragraphs: [
+          "GI tolerability in the research literature tends to track with dose: symptoms are less common at lower doses and more common as total daily intake rises toward the upper end of studied ranges (900–1500 mg/day, divided). Taking berberine with meals — the standard recommendation, and the one used in most trials — appears to reduce gastrointestinal irritation compared to taking it on an empty stomach.",
+          "Symptoms, when they occur, are also typically front-loaded: most reports describe mild-to-moderate GI discomfort in the first one to two weeks of use that improves with continued, consistent dosing, rather than a persistent issue that worsens over time.",
+        ],
+      },
+      {
+        heading: "Who Should Be More Cautious",
+        paragraphs: [
+          "Because berberine lowers blood glucose and interacts with several drug-metabolizing pathways, certain groups warrant specific caution: people taking diabetes medication (due to additive hypoglycemia risk with some combinations), people on anticoagulants such as warfarin, and pregnant or breastfeeding women, for whom safety data is limited. Berberine is also not recommended for children.",
+          "None of this makes berberine unusually risky compared to other actives with physiological effects — it makes it a compound worth discussing with a physician before use if you fall into one of these groups, exactly as you would with any supplement or medication that affects blood sugar or blood clotting.",
+        ],
+      },
+      {
+        heading: "What a Favorable Safety Profile Actually Means",
+        paragraphs: [
+          "'Favorable safety profile,' the phrase used across the systematic review literature on berberine, means the evidence doesn't show a pattern of serious adverse events, and that the side effects that do occur are predominantly mild, gastrointestinal, and dose-related rather than severe or systemic. It does not mean zero side effects, and any brand or article implying otherwise isn't representing the research accurately.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Gastrointestinal symptoms — nausea, diarrhea, constipation, abdominal discomfort — are the most commonly reported berberine side effects across the trial literature.",
+      "A 2022 meta-analysis of 37 RCTs (3,048 patients) found berberine did not significantly increase total adverse events or hypoglycemia risk versus control.",
+      "GI tolerability tends to track with dose and improves with continued use; taking berberine with meals reduces irritation.",
+      "People on diabetes medication or anticoagulants, pregnant or breastfeeding women, and children should use berberine only under medical supervision.",
+      "A favorable safety profile means no pattern of serious adverse events in the research — not the absence of any side effects.",
+    ],
+    references: [
+      {
+        title:
+          "Xie W et al. — Glucose-Lowering Effect of Berberine on Type 2 Diabetes: A Systematic Review and Meta-Analysis",
+        source: "Frontiers in Pharmacology",
+        year: "2022",
+      },
+      {
+        title: "Lan J et al. — Meta-analysis of Berberine on Glucose and Lipid Metabolism",
+        source: "J Ethnopharmacology",
+        year: "2015",
+      },
+      {
+        title: "Habtemariam S — Berberine Pharmacology and the Gut Microbiome",
+        source: "Pharmacological Research",
+        year: "2020",
+      },
+    ],
+    faqs: [
+      {
+        q: "What is the most common berberine side effect?",
+        a: "Gastrointestinal symptoms — nausea, diarrhea, constipation or abdominal discomfort — are the most frequently reported side effect across clinical trials, typically mild and dose-related.",
+      },
+      {
+        q: "Does berberine cause low blood sugar?",
+        a: "A 2022 meta-analysis of 37 trials found berberine did not significantly increase hypoglycemia risk on its own. Risk rises when combined with other glucose-lowering medications, which should be supervised by a physician.",
+      },
+      {
+        q: "How do I reduce berberine side effects?",
+        a: "Take it with meals rather than on an empty stomach, and consider starting at the lower end of the typical dosing range. Most GI symptoms, when they occur, ease within the first one to two weeks.",
+      },
     ],
     relatedSlugs: [
-      "berberine-weight-loss",
       "berberine-metabolic-health",
-      "berberine-vs-metformin",
+      "berberine-metformin-combination",
+      "berberine-blood-sugar",
     ],
   },
+  {
+    slug: "berberine-hplc-purity-testing",
+    title: "How Berberine Purity Is Tested: Inside the HPLC Process",
+    seoTitle: "How HPLC Tests Berberine Purity | Beyond Better",
+    seoDescription:
+      "A plain-language explanation of how HPLC (high-performance liquid chromatography) verifies berberine purity, why it matters, and how it differs from label claims.",
+    category: "Quality & Testing",
+    tag: "Transparency",
+    readTime: "8 min read",
+    publishedDate: "July 27, 2026",
+    image: transparencyHeroImg,
+    excerpt:
+      "A 97% purity claim on a label means nothing without the test behind it. Here's how HPLC actually verifies what's in a berberine capsule.",
+    description:
+      "A plain-language explanation of how HPLC verifies berberine purity, why it's the pharmaceutical-grade standard, and how it differs from an unverified label claim.",
+    sections: [
+      {
+        heading: "A Number Is Not a Test",
+        paragraphs: [
+          "Almost every berberine product on the market states a purity percentage somewhere on its label. Very few publish the test that produced that number. The gap between 'claimed purity' and 'verified purity' is exactly where quality varies most in the supplement industry, and understanding what HPLC actually measures is the difference between trusting a label and trusting a result.",
+        ],
+      },
+      {
+        heading: "What HPLC Actually Is",
+        paragraphs: [
+          "High-performance liquid chromatography (HPLC) is an analytical chemistry technique that physically separates the individual chemical compounds in a sample, then measures how much of each is present. A liquid sample is forced under high pressure through a column packed with a fine solid material — commonly a C18 (octadecylsilane) stationary phase — which interacts differently with each compound in the mixture based on its chemical properties, causing different compounds to travel through the column and exit at different times.",
+          "As each compound exits the column, it passes through a detector — typically a UV or diode-array detector (DAD) tuned to the wavelength at which berberine absorbs light most strongly — which produces a peak proportional to how much of that compound is present. The result is a chromatogram: a chart of peaks, each corresponding to a specific compound, with the size of the berberine peak revealing exactly what percentage of the sample is actual berberine HCl, as opposed to plant residue, degraded compound, or other alkaloids.",
+        ],
+      },
+      {
+        heading: "Why This Is the Pharmaceutical Standard",
+        paragraphs: [
+          "HPLC, coupled with UV/DAD or mass spectrometry detection, is widely described in the analytical chemistry literature as the gold standard for berberine analysis, and methods used for this purpose are typically developed and validated against ICH (International Council for Harmonisation) guidelines — the same regulatory framework pharmaceutical manufacturers use to validate drug testing methods. This is a meaningfully higher bar than the basic identity or weight testing that satisfies minimum supplement-industry requirements in most markets.",
+          "The practical difference matters: a supplement can legally list '500mg Berberine HCl Extract' on its label based on the weight of the raw extract used, without that extract actually containing anywhere near 500mg of active berberine. Extract weight and active-compound content are not the same measurement, and only a technique like HPLC — which identifies and quantifies the specific molecule, not just the total material — can confirm the difference.",
+        ],
+      },
+      {
+        heading: "What a Certificate of Analysis Actually Contains",
+        paragraphs: [
+          "A proper Certificate of Analysis (COA) for a berberine product reports the HPLC-verified assay result — the actual measured percentage of berberine HCl on a dried basis — alongside heavy metals screening (lead, arsenic, mercury, cadmium, typically via ICP-MS) and a microbial safety profile (total plate count, yeast and mould, and screens for pathogens like E. coli and Salmonella). Together, these confirm not just that a product contains berberine, but that it's free of the contamination risks associated with poorly controlled extraction and manufacturing.",
+          "A batch-specific COA — one tied to the exact production run a customer's bottle came from, not a generic specification sheet reused across batches — is what turns a purity claim into a verifiable result. Beyond Better's own Certificate of Analysis reports the assay against the Japanese Pharmacopoeia (JP) method by HPLC, the same 'Japanese Standard' referenced elsewhere on this site.",
+        ],
+      },
+      {
+        heading: "Reading a Purity Number Correctly",
+        paragraphs: [
+          "When a product states '97% HPLC-verified purity,' that number should be read as: 97% of the tested material, by weight, was confirmed via chromatographic separation and detection to be the specific molecule berberine hydrochloride. Anything below that — commonly reported in the 70–90% range for undisclosed drugstore and even some premium brands — represents fillers, residual extraction solvents, or degraded compound that dilutes the actual dose a capsule delivers, regardless of what the extract weight on the label suggests.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "HPLC separates and quantifies the individual compounds in a sample, revealing the exact percentage that is actual berberine HCl.",
+      "HPLC with UV/DAD or mass spectrometry detection is the analytical gold standard for berberine, validated against ICH pharmaceutical guidelines.",
+      "Extract weight on a label is not the same as active-compound content — only chromatographic testing like HPLC confirms the difference.",
+      "A proper Certificate of Analysis reports HPLC assay results alongside heavy metals and microbial safety screening.",
+      "Purity below the HPLC-verified figure represents fillers, residual solvents or degraded compound diluting the actual dose.",
+    ],
+    references: [
+      {
+        title: "Development and Validation of RP-HPLC Method for Quantification of Berberine",
+        source: "Oriental Journal of Chemistry",
+        year: "2017",
+      },
+      {
+        title: "Japanese Pharmacopoeia (JP XVII) — Berberine Chloride Hydrate Assay Method",
+        source: "Japanese Pharmacopoeia, 17th Edition",
+        year: "2016",
+      },
+      {
+        title: "Zhang Y et al. — Treatment of Type 2 Diabetes and Dyslipidemia with Berberine",
+        source: "J Clin Endocrinol Metab",
+        year: "2008",
+      },
+    ],
+    faqs: [
+      {
+        q: "What does HPLC stand for?",
+        a: "High-performance liquid chromatography — an analytical technique that separates and quantifies individual chemical compounds in a sample.",
+      },
+      {
+        q: "Is HPLC the same as a purity guarantee on a label?",
+        a: "No. A label claim is only as reliable as the test behind it. HPLC is the specific method that can actually verify a purity percentage; an unverified label claim cannot.",
+      },
+      {
+        q: "Why don't all berberine brands publish HPLC results?",
+        a: "HPLC testing costs more than basic identity testing, and publishing batch-specific results exposes exactly how a product compares to competitors — a disincentive for brands whose actual purity is lower than their marketing suggests.",
+      },
+    ],
+    relatedSlugs: ["berberine-metabolic-health", "berberine-blood-sugar", "berberine-side-effects"],
+  },
 ];
-
 
 export function getArticleBySlug(slug: string): Article | undefined {
   return ARTICLES.find((a) => a.slug === slug);
