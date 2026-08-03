@@ -12,7 +12,7 @@ export const RESTOCK_DATE_ISO = "2026-08-20";
 
 export const CURRENCY = "INR";
 export const MRP_INR = 1900;
-export const PREORDER_PRICE_INR = 693;
+export const PREORDER_PRICE_INR = 10;
 export const POST_LAUNCH_PRICE_INR = 990;
 
 export const PREORDER_CTA_LABEL = "Pre-Order Now — Save 30%";
