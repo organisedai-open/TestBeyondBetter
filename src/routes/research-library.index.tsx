@@ -9,6 +9,7 @@ import bloodSugarBerberine from "@/assets/Blood Sugar Berberine.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
+import { POLICY_PAGES } from "@/lib/seo";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -676,6 +677,18 @@ function Footer() {
                     FAQ
                   </Link>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Legal</div>
+              <ul className="mt-4 space-y-2">
+                {POLICY_PAGES.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className="hover:opacity-60">
+                      {p.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

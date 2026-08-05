@@ -24,6 +24,7 @@ import {
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { toIsoDate } from "@/lib/dates";
+import { POLICY_PAGES } from "@/lib/seo";
 
 export const Route = createFileRoute("/research-library/$slug")({
   loader: ({ params }) => {
@@ -341,6 +342,18 @@ function Footer() {
                     FAQ
                   </Link>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Legal</div>
+              <ul className="mt-4 space-y-2">
+                {POLICY_PAGES.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className="hover:opacity-60">
+                      {p.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

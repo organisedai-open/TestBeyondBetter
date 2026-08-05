@@ -17,6 +17,7 @@ import berberineDirectionToUse from "@/assets/Berberine Direction to use.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
 import transparencyHero from "@/assets/transparency-hero.webp";
 import { ArrowUpRight, ArrowRight, Instagram, Facebook, ShoppingBag } from "lucide-react";
+import { POLICY_PAGES } from "@/lib/seo";
 
 const SITE_URL = "https://www.bebeyondbetter.com";
 const PAGE_URL = `${SITE_URL}/products/berberine-hcl`;
@@ -540,6 +541,18 @@ function Footer() {
                     FAQ
                   </Link>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Legal</div>
+              <ul className="mt-4 space-y-2">
+                {POLICY_PAGES.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className="hover:opacity-60">
+                      {p.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

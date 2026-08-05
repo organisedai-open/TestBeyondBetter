@@ -19,6 +19,7 @@ import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { RestockCountdown } from "@/components/RestockCountdown";
 import { PREORDER_RESTOCK_CAPTION, PREORDER_FULL_PAYMENT_NOTE } from "@/lib/pricing";
+import { POLICY_PAGES } from "@/lib/seo";
 
 import heroSectionImage from "@/assets/Berberine Herosection.webp";
 import mobileHeroSectionImage from "@/assets/Berberine Mobile Hero.webp";
@@ -1664,6 +1665,18 @@ function Footer() {
                     FAQ
                   </a>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Legal</div>
+              <ul className="mt-4 space-y-2">
+                {POLICY_PAGES.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className="hover:opacity-60">
+                      {p.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
