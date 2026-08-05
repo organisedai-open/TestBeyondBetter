@@ -20,6 +20,7 @@ import { Route as ResearchLibraryIndexRouteImport } from './routes/research-libr
 import { Route as ResearchLibrarySlugRouteImport } from './routes/research-library.$slug'
 import { Route as ProductsBerberineHclRouteImport } from './routes/products.berberine-hcl'
 import { Route as ApiWebhooksRazorpayRouteImport } from './routes/api/webhooks/razorpay'
+import { Route as ApiRazorpayShippingInfoRouteImport } from './routes/api/razorpay/shipping-info'
 
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
@@ -76,6 +77,11 @@ const ApiWebhooksRazorpayRoute = ApiWebhooksRazorpayRouteImport.update({
   path: '/api/webhooks/razorpay',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiRazorpayShippingInfoRoute = ApiRazorpayShippingInfoRouteImport.update({
+  id: '/api/razorpay/shipping-info',
+  path: '/api/razorpay/shipping-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
+  '/api/razorpay/shipping-info': typeof ApiRazorpayShippingInfoRoute
   '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library': typeof ResearchLibraryIndexRoute
+  '/api/razorpay/shipping-info': typeof ApiRazorpayShippingInfoRoute
   '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
+  '/api/razorpay/shipping-info': typeof ApiRazorpayShippingInfoRoute
   '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/products/berberine-hcl'
     | '/research-library/$slug'
     | '/research-library/'
+    | '/api/razorpay/shipping-info'
     | '/api/webhooks/razorpay'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/products/berberine-hcl'
     | '/research-library/$slug'
     | '/research-library'
+    | '/api/razorpay/shipping-info'
     | '/api/webhooks/razorpay'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/products/berberine-hcl'
     | '/research-library/$slug'
     | '/research-library/'
+    | '/api/razorpay/shipping-info'
     | '/api/webhooks/razorpay'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   ProductsBerberineHclRoute: typeof ProductsBerberineHclRoute
   ResearchLibrarySlugRoute: typeof ResearchLibrarySlugRoute
   ResearchLibraryIndexRoute: typeof ResearchLibraryIndexRoute
+  ApiRazorpayShippingInfoRoute: typeof ApiRazorpayShippingInfoRoute
   ApiWebhooksRazorpayRoute: typeof ApiWebhooksRazorpayRoute
 }
 
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiWebhooksRazorpayRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/razorpay/shipping-info': {
+      id: '/api/razorpay/shipping-info'
+      path: '/api/razorpay/shipping-info'
+      fullPath: '/api/razorpay/shipping-info'
+      preLoaderRoute: typeof ApiRazorpayShippingInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsBerberineHclRoute: ProductsBerberineHclRoute,
   ResearchLibrarySlugRoute: ResearchLibrarySlugRoute,
   ResearchLibraryIndexRoute: ResearchLibraryIndexRoute,
+  ApiRazorpayShippingInfoRoute: ApiRazorpayShippingInfoRoute,
   ApiWebhooksRazorpayRoute: ApiWebhooksRazorpayRoute,
 }
 export const routeTree = rootRouteImport
