@@ -18,8 +18,14 @@ import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { RestockCountdown } from "@/components/RestockCountdown";
-import { PREORDER_RESTOCK_CAPTION, PREORDER_FULL_PAYMENT_NOTE } from "@/lib/pricing";
+import {
+  PREORDER_RESTOCK_CAPTION,
+  PREORDER_FULL_PAYMENT_NOTE,
+  getActivePriceInr,
+} from "@/lib/pricing";
 import { POLICY_PAGES } from "@/lib/seo";
+import { PRODUCT_CATALOG } from "@/lib/product";
+import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
 
 import heroSectionImage from "@/assets/Berberine Herosection.webp";
 import mobileHeroSectionImage from "@/assets/Berberine Mobile Hero.webp";
@@ -196,6 +202,17 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
+  useEffect(() => {
+    trackMetaEvent("ViewContent", {
+      customData: {
+        content_ids: [PRODUCT_CATALOG.id],
+        content_type: "product",
+        value: getActivePriceInr(),
+        currency: PRODUCT_CATALOG.currency,
+      },
+    });
+  }, []);
+
   return (
     <div className="bg-background text-foreground pb-20 md:pb-0">
       <OrgJsonLd />

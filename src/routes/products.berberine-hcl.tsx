@@ -6,8 +6,9 @@ import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
-import { PREORDER_FULL_PAYMENT_NOTE } from "@/lib/pricing";
+import { PREORDER_FULL_PAYMENT_NOTE, getActivePriceInr } from "@/lib/pricing";
 import { PRODUCT_CATALOG } from "@/lib/product";
+import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import innerBottle from "@/assets/shop-berberine.webp";
 import berberineBenefits from "@/assets/Berberine Benefits.webp";
@@ -646,6 +647,17 @@ function ResearchLink() {
 }
 
 function ProductPage() {
+  useEffect(() => {
+    trackMetaEvent("ViewContent", {
+      customData: {
+        content_ids: [PRODUCT_CATALOG.id],
+        content_type: "product",
+        value: getActivePriceInr(),
+        currency: PRODUCT_CATALOG.currency,
+      },
+    });
+  }, []);
+
   return (
     <div className="bg-background text-foreground pb-20 md:pb-0">
       <ProductJsonLd />
