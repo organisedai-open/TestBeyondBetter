@@ -18,13 +18,13 @@ import { buildPolicyPageHead } from "@/lib/seo";
 const PATH = "/shipping-policy";
 const TITLE = "Shipping Policy — Beyond Better";
 const DESCRIPTION =
-  "Shipping coverage, processing times and delivery timelines for Beyond Better orders across India.";
+  "Shipping coverage, processing times and delivery timelines for Beyond Better orders shipped worldwide.";
 const LAST_UPDATED = "August 2026";
 
 const FAQS = [
   {
     question: "Where does Beyond Better ship?",
-    answer: "Beyond Better currently ships across India.",
+    answer: "Beyond Better ships worldwide.",
   },
   {
     question: "How long does order processing take?",
@@ -33,7 +33,7 @@ const FAQS = [
   {
     question: "How long does delivery take?",
     answer:
-      "Delivery timelines depend on the customer's location and the courier partner but are generally completed within 3–7 business days.",
+      "Delivery timelines depend on the customer's location and the courier partner. Domestic orders within India are generally completed within 3–7 business days, while international deliveries may take longer depending on the destination and customs processing.",
   },
   {
     question: "Will I be able to track my order?",
@@ -88,13 +88,15 @@ function ShippingPolicyPage() {
         </PolicySection>
 
         <PolicySection id="delivery" heading="Delivery">
-          <PolicyParagraph>Beyond Better currently ships across India.</PolicyParagraph>
+          <PolicyParagraph>Beyond Better ships worldwide.</PolicyParagraph>
           <PolicyParagraph>
             Orders are typically processed within 1–2 business days after payment confirmation.
           </PolicyParagraph>
           <PolicyParagraph>
-            Delivery timelines depend on the customer's location and the courier partner but are
-            generally completed within 3–7 business days.
+            Delivery timelines depend on the customer's location and the courier partner. Domestic
+            orders within India are generally completed within 3–7 business days, while
+            international deliveries may take longer depending on the destination and customs
+            processing.
           </PolicyParagraph>
           <PolicyParagraph>
             Customers will receive shipment tracking details once the order has been dispatched.

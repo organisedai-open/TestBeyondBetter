@@ -36,7 +36,9 @@ export const ORGANIZATION_JSON_LD = {
     "@type": "ContactPoint",
     email: SUPPORT_EMAIL,
     contactType: "customer service",
-    areaServed: "IN",
+    // Beyond Better ships worldwide, not only within India — this must stay in sync with
+    // that fact rather than implying support is restricted to one country.
+    areaServed: "Worldwide",
     availableLanguage: ["en"],
   },
 } as const;
@@ -106,12 +108,14 @@ export function buildFaqJsonLd(items: QuestionAnswer[]) {
  * doesn't actually specify (who pays return shipping, method of return) are left out rather
  * than guessed, since fabricated policy fields here would misrepresent the business to search
  * engines and shopping surfaces that read this schema.
+ *
+ * `applicableCountry`/`returnPolicyCountry` are deliberately omitted rather than set to a
+ * single country: Beyond Better ships worldwide, and asserting "IN" only would misrepresent
+ * the policy's actual scope to anything reading this schema.
  */
 export function buildMerchantReturnPolicyJsonLd() {
   return {
     "@type": "MerchantReturnPolicy",
-    applicableCountry: "IN",
-    returnPolicyCountry: "IN",
     returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
     merchantReturnDays: 2,
     refundType: "https://schema.org/FullRefund",
