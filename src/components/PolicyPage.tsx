@@ -1,9 +1,27 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ArrowRight, Instagram, Facebook, Mail } from "lucide-react";
+import {
+  ArrowRight,
+  Instagram,
+  Facebook,
+  Mail,
+  ShieldCheck,
+  Lock,
+  Headphones,
+  FileCheck,
+  Clock,
+  CheckCircle2,
+  ChevronDown,
+} from "lucide-react";
 
 import logoLeaf from "@/assets/logo-leaf.webp";
-import { POLICY_PAGES, SUPPORT_EMAIL } from "@/lib/seo";
+import {
+  POLICY_PAGES,
+  POLICIES_HUB_PATH,
+  POLICIES_HUB_LABEL,
+  SUPPORT_EMAIL,
+  SITE_URL,
+} from "@/lib/seo";
 
 // Shared chrome for the five standalone legal pages. Every route file that renders these
 // (privacy-policy.tsx, terms-and-conditions.tsx, refund-policy.tsx, cancellation-policy.tsx,
@@ -60,14 +78,31 @@ export function PolicyHeader() {
   );
 }
 
+/**
+ * Three-level trail (Home > Policies > Current) — "Policies" links to the /policies hub,
+ * which is what gives that middle crumb a real destination for both users and BreadcrumbList
+ * JSON-LD. On the hub page itself `current` equals the hub's own label, so the middle crumb
+ * is dropped rather than linking "Policies" to itself.
+ */
 export function PolicyBreadcrumb({ current }: { current: string }) {
+  const onHub = current === POLICIES_HUB_LABEL;
   return (
     <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-muted-foreground">
       <Link to="/" className="hover:opacity-60">
         Home
       </Link>
       <span aria-hidden>/</span>
-      <span style={{ color: "var(--forest)" }}>{current}</span>
+      {onHub ? (
+        <span style={{ color: "var(--forest)" }}>{current}</span>
+      ) : (
+        <>
+          <Link to={POLICIES_HUB_PATH} className="hover:opacity-60">
+            {POLICIES_HUB_LABEL}
+          </Link>
+          <span aria-hidden>/</span>
+          <span style={{ color: "var(--forest)" }}>{current}</span>
+        </>
+      )}
     </nav>
   );
 }
@@ -76,12 +111,15 @@ export function PolicyHero({
   eyebrow,
   title,
   lastUpdated,
+  readingTime,
   intro,
   breadcrumbLabel,
 }: {
   eyebrow: string;
   title: string;
   lastUpdated: string;
+  /** e.g. "3 min read" */
+  readingTime: string;
   intro?: string;
   breadcrumbLabel: string;
 }) {
@@ -101,14 +139,64 @@ export function PolicyHero({
         >
           {title}
         </h1>
-        <p className="mt-5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          Last Updated: {lastUpdated}
-        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.14em]"
+            style={{ borderColor: forestTint(20), color: "var(--forest)" }}
+          >
+            <CheckCircle2 className="h-3 w-3" /> Last Updated: {lastUpdated}
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+            <Clock className="h-3.5 w-3.5" /> {readingTime}
+          </span>
+        </div>
         {intro && (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">{intro}</p>
         )}
       </div>
     </section>
+  );
+}
+
+const TRUST_BADGES = [
+  { icon: Lock, label: "Secure Payments" },
+  { icon: ShieldCheck, label: "Privacy Protected" },
+  { icon: Headphones, label: "Customer Support" },
+  { icon: FileCheck, label: "Transparent Policies" },
+] as const;
+
+/** Small trust-signal row shown near the top of every legal page. */
+export function TrustBadges() {
+  return (
+    <div className="flex flex-wrap gap-x-6 gap-y-3">
+      {TRUST_BADGES.map(({ icon: Icon, label }) => (
+        <span
+          key={label}
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"
+        >
+          <Icon className="h-3.5 w-3.5" style={{ color: "var(--forest)" }} /> {label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** Fixed, brand-wide "who we are" framing shown at the top of every legal page's content — reinforces the same entity facts search engines and LLMs see in the Organization JSON-LD. */
+export function WhoWeAreBlock() {
+  return (
+    <div className="mb-11 rounded-[22px] border bg-white p-8" style={{ borderColor: borderTint }}>
+      <div className="text-[10px] uppercase tracking-[0.28em]" style={{ color: "var(--forest)" }}>
+        Who We Are
+      </div>
+      <p
+        className="mt-3 text-[15px] leading-[1.85]"
+        style={{ color: "color-mix(in oklab, var(--charcoal) 88%, transparent)" }}
+      >
+        Beyond Better develops premium science-backed dietary supplements designed to support
+        long-term wellness. Our products are manufactured in accordance with applicable quality
+        standards and sold directly through our official website.
+      </p>
+    </div>
   );
 }
 
@@ -143,18 +231,6 @@ export function PolicySection({
   );
 }
 
-/** Question-phrased sub-heading paired with the verbatim policy sentence(s) as its answer — used where the source text already reads as an answer, for AEO/LLM-answer readability. Not a rewrite: only the heading is new. */
-export function PolicyAnswer({ question, children }: { question: string; children: ReactNode }) {
-  return (
-    <div className="mb-6">
-      <h3 className="font-display text-lg" style={{ color: "var(--forest)" }}>
-        {question}
-      </h3>
-      <div className="mt-2 space-y-3">{children}</div>
-    </div>
-  );
-}
-
 export function PolicyParagraph({ children }: { children: ReactNode }) {
   return (
     <p
@@ -183,6 +259,118 @@ export function PolicyList({ items }: { items: ReactNode[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+export interface StepFlowItem {
+  label: string;
+  detail?: string;
+}
+
+/** Reusable sequential-step visual — used for the shipping workflow, the refund timeline, and the refund request steps. Renders as a vertical list on mobile and a horizontal flow with arrows from sm breakpoint up. */
+export function StepFlow({ steps }: { steps: StepFlowItem[] }) {
+  return (
+    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-2">
+      {steps.map((step, i) => (
+        <div key={step.label} className="flex items-stretch gap-2">
+          <div
+            className="flex flex-1 flex-col justify-center rounded-2xl border bg-white px-5 py-3.5 sm:min-w-[132px]"
+            style={{ borderColor: borderTint }}
+          >
+            <div
+              className="text-[10px] uppercase tracking-[0.16em]"
+              style={{ color: "var(--forest)" }}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <div className="mt-1 text-sm font-medium" style={{ color: "var(--forest)" }}>
+              {step.label}
+            </div>
+            {step.detail && <div className="mt-1 text-xs text-muted-foreground">{step.detail}</div>}
+          </div>
+          {i < steps.length - 1 && (
+            <div className="hidden items-center sm:flex" aria-hidden>
+              <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "var(--forest)" }} />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Accordion-style FAQ block matching the pattern already used elsewhere on the site (research articles, homepage). The same `items` array should be passed to `buildFaqPageHead`'s `faqs` option so the visible Q&A and the FAQPage JSON-LD never drift apart. */
+export function FaqAccordionSection({ items }: { items: { question: string; answer: string }[] }) {
+  return (
+    <div className="mb-11">
+      <h2
+        className="font-display text-2xl leading-tight sm:text-[1.7rem]"
+        style={{ color: "var(--forest)" }}
+      >
+        Frequently Asked Questions
+      </h2>
+      <div className="mt-5 space-y-3">
+        {items.map((item) => (
+          <details
+            key={item.question}
+            className="group overflow-hidden rounded-2xl border bg-white"
+            style={{ borderColor: borderTint }}
+          >
+            <summary
+              className="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-4 font-display text-base transition hover:bg-[color:var(--cream)]"
+              style={{ color: "var(--forest)" }}
+            >
+              {item.question}
+              <ChevronDown className="h-4 w-4 flex-shrink-0 transition group-open:rotate-180" />
+            </summary>
+            <p className="px-6 pb-5 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Standardized end-of-page block for every policy: a "need help" nudge plus the same Email / Website / Last Updated line on all five pages. */
+export function PolicyClosing({ lastUpdated }: { lastUpdated: string }) {
+  return (
+    <div
+      className="mt-4 overflow-hidden rounded-[22px] p-8 text-center sm:p-10"
+      style={{
+        background:
+          "linear-gradient(160deg, var(--forest) 0%, color-mix(in oklab, var(--forest) 78%, black) 100%)",
+        color: "var(--ivory)",
+      }}
+    >
+      <div className="text-[11px] uppercase tracking-[0.28em] opacity-80">
+        Still Have Questions?
+      </div>
+      <h2 className="mt-3 font-display text-2xl sm:text-3xl">
+        Our customer support team is happy to help.
+      </h2>
+      <a
+        href={`mailto:${SUPPORT_EMAIL}`}
+        className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm transition hover:opacity-90"
+        style={{ backgroundColor: "var(--ivory)", color: "var(--forest)" }}
+      >
+        Contact Support <ArrowRight className="h-3.5 w-3.5" />
+      </a>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-white/15 pt-6 text-xs opacity-80">
+        <span>
+          Email:{" "}
+          <a href={`mailto:${SUPPORT_EMAIL}`} className="underline">
+            {SUPPORT_EMAIL}
+          </a>
+        </span>
+        <span>
+          Website:{" "}
+          <a href={SITE_URL} className="underline">
+            {SITE_URL.replace("https://www.", "")}
+          </a>
+        </span>
+        <span>Last Updated: {lastUpdated}</span>
+      </div>
+    </div>
   );
 }
 
@@ -265,6 +453,11 @@ export function PolicyFooter() {
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Legal</div>
               <ul className="mt-4 space-y-2">
+                <li>
+                  <Link to={POLICIES_HUB_PATH} className="hover:opacity-60">
+                    All Policies
+                  </Link>
+                </li>
                 {POLICY_PAGES.map((p) => (
                   <li key={p.path}>
                     <Link to={p.path} className="hover:opacity-60">

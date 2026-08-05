@@ -5,28 +5,43 @@ import {
   PolicyHero,
   PolicyContent,
   PolicySection,
-  PolicyAnswer,
   PolicyParagraph,
   PolicyList,
+  StepFlow,
+  FaqAccordionSection,
   RelatedPolicies,
+  WhoWeAreBlock,
+  TrustBadges,
+  PolicyClosing,
 } from "@/components/PolicyPage";
 import { buildPolicyPageHead } from "@/lib/seo";
 
 const PATH = "/refund-policy";
 const TITLE = "Refund Policy — Beyond Better";
 const DESCRIPTION =
-  "When Beyond Better issues refunds — wrong, damaged or lost shipments — and how to request one.";
+  "When Beyond Better issues refunds — wrong, damaged or lost shipments — how to request one, and how long it takes.";
+const LAST_UPDATED = "August 2026";
 
-// Headings are phrased as questions for AEO readability; the answer beneath each one is the
-// verbatim policy sentence, unaltered — only the navigational heading above it is new text.
-const WHEN_ELIGIBLE_ANSWER =
-  "Refunds are available only if the wrong product is delivered, the product arrives damaged, or the shipment is confirmed lost by the courier.";
-const HOW_TO_REQUEST_ANSWER =
-  "Customers should contact us within 48 hours of delivery and provide photographs of the product and packaging.";
-const HOW_ISSUED_ANSWER =
-  "Refunds are processed after verification. Approved refunds are issued to the original payment method within a reasonable processing period.";
-const OPENED_PRODUCTS_ANSWER =
-  "Opened or used products are generally not eligible for refunds unless required under applicable law.";
+const FAQS = [
+  {
+    question: "Can I return an opened supplement?",
+    answer:
+      "No. Opened or used products are generally not eligible for refunds unless required under applicable law.",
+  },
+  {
+    question: "Can I cancel after shipping?",
+    answer:
+      "No. Once an order has been packed or dispatched, cancellation may no longer be possible.",
+  },
+  {
+    question: "When will I receive my refund?",
+    answer: "Usually within 5–7 business days of approval, once your bank has processed it.",
+  },
+  {
+    question: "Will shipping charges be refunded?",
+    answer: "Only under eligible circumstances, as determined during verification.",
+  },
+];
 
 export const Route = createFileRoute("/refund-policy")({
   head: () =>
@@ -35,15 +50,8 @@ export const Route = createFileRoute("/refund-policy")({
       title: TITLE,
       description: DESCRIPTION,
       breadcrumbName: "Refund Policy",
-      faqs: [
-        { question: "When am I eligible for a refund?", answer: WHEN_ELIGIBLE_ANSWER },
-        { question: "How do I request a refund?", answer: HOW_TO_REQUEST_ANSWER },
-        { question: "How will my refund be issued?", answer: HOW_ISSUED_ANSWER },
-        {
-          question: "Are opened or used products eligible for a refund?",
-          answer: OPENED_PRODUCTS_ANSWER,
-        },
-      ],
+      includeMerchantReturnPolicy: true,
+      faqs: FAQS,
     }),
   component: RefundPolicyPage,
 });
@@ -54,41 +62,67 @@ function RefundPolicyPage() {
       <PolicyHero
         eyebrow="Legal"
         title="Refund Policy"
-        lastUpdated="August 2026"
+        lastUpdated={LAST_UPDATED}
+        readingTime="3 min read"
         intro="Customer satisfaction is important to us."
         breadcrumbLabel="Refund Policy"
       />
       <PolicyContent>
+        <div className="mb-11">
+          <TrustBadges />
+        </div>
+        <WhoWeAreBlock />
+
         <PolicySection id="refund-eligibility" heading="Refund Eligibility">
-          <PolicyAnswer question="When am I eligible for a refund?">
-            <PolicyParagraph>Refunds are available only if:</PolicyParagraph>
-            <PolicyList
-              items={[
-                "the wrong product is delivered",
-                "the product arrives damaged",
-                "the shipment is confirmed lost by the courier",
-              ]}
-            />
-          </PolicyAnswer>
-
-          <PolicyAnswer question="How do I request a refund?">
-            <PolicyParagraph>{HOW_TO_REQUEST_ANSWER}</PolicyParagraph>
-          </PolicyAnswer>
-
-          <PolicyAnswer question="How will my refund be issued?">
-            <PolicyParagraph>Refunds are processed after verification.</PolicyParagraph>
-            <PolicyParagraph>
-              Approved refunds are issued to the original payment method within a reasonable
-              processing period.
-            </PolicyParagraph>
-          </PolicyAnswer>
-
-          <PolicyAnswer question="Are opened or used products eligible for a refund?">
-            <PolicyParagraph>{OPENED_PRODUCTS_ANSWER}</PolicyParagraph>
-          </PolicyAnswer>
+          <PolicyParagraph>Refunds are available only if:</PolicyParagraph>
+          <PolicyList
+            items={[
+              "the wrong product is delivered",
+              "the product arrives damaged",
+              "the shipment is confirmed lost by the courier",
+            ]}
+          />
+          <PolicyParagraph>
+            Customers should contact us within 48 hours of delivery and provide photographs of the
+            product and packaging.
+          </PolicyParagraph>
+          <PolicyParagraph>
+            Refunds are processed after verification. Approved refunds are issued to the original
+            payment method within a reasonable processing period.
+          </PolicyParagraph>
+          <PolicyParagraph>
+            Opened or used products are generally not eligible for refunds unless required under
+            applicable law.
+          </PolicyParagraph>
         </PolicySection>
 
+        <PolicySection id="how-to-request-a-refund" heading="How to Request a Refund">
+          <StepFlow
+            steps={[
+              { label: "Email Us", detail: "care@bebeyondbetter.com" },
+              { label: "Mention Order ID" },
+              { label: "Attach Photographs", detail: "Product and packaging" },
+              { label: "Our Team Reviews" },
+              { label: "Refund Decision" },
+            ]}
+          />
+        </PolicySection>
+
+        <PolicySection id="refund-timeline" heading="Refund Timeline">
+          <StepFlow
+            steps={[
+              { label: "Inspection", detail: "1–2 business days" },
+              { label: "Refund Approval" },
+              { label: "Refund Initiated" },
+              { label: "Bank Processing", detail: "5–7 business days" },
+            ]}
+          />
+        </PolicySection>
+
+        <FaqAccordionSection items={FAQS} />
+
         <RelatedPolicies currentPath={PATH} />
+        <PolicyClosing lastUpdated={LAST_UPDATED} />
       </PolicyContent>
     </PolicyPageShell>
   );

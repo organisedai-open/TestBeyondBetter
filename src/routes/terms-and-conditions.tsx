@@ -8,6 +8,9 @@ import {
   PolicyParagraph,
   PolicyList,
   RelatedPolicies,
+  WhoWeAreBlock,
+  TrustBadges,
+  PolicyClosing,
 } from "@/components/PolicyPage";
 import { buildPolicyPageHead } from "@/lib/seo";
 
@@ -15,6 +18,7 @@ const PATH = "/terms-and-conditions";
 const TITLE = "Terms & Conditions — Beyond Better";
 const DESCRIPTION =
   "The terms that govern purchases from Beyond Better, our premium science-backed dietary supplement store.";
+const LAST_UPDATED = "August 2026";
 
 export const Route = createFileRoute("/terms-and-conditions")({
   head: () =>
@@ -33,11 +37,17 @@ function TermsPage() {
       <PolicyHero
         eyebrow="Legal"
         title="Terms & Conditions"
-        lastUpdated="August 2026"
+        lastUpdated={LAST_UPDATED}
+        readingTime="3 min read"
         intro="Welcome to Beyond Better. By accessing or purchasing from our website, you agree to these Terms & Conditions."
         breadcrumbLabel="Terms & Conditions"
       />
       <PolicyContent>
+        <div className="mb-11">
+          <TrustBadges />
+        </div>
+        <WhoWeAreBlock />
+
         <PolicySection id="products" heading="Products">
           <PolicyParagraph>
             Our products are dietary supplements intended to support general wellness.
@@ -45,6 +55,30 @@ function TermsPage() {
           <PolicyParagraph>
             They are not medicines and are not intended to diagnose, treat, cure or prevent any
             disease.
+          </PolicyParagraph>
+        </PolicySection>
+
+        <PolicySection id="product-safety" heading="Product Safety">
+          <PolicyList
+            items={[
+              "Products are dietary supplements.",
+              "Products are not medicines.",
+              "Consult your physician before use.",
+              "Keep away from children.",
+              "Follow the recommended dosage.",
+              "Individual results may vary.",
+            ]}
+          />
+        </PolicySection>
+
+        <PolicySection id="buying-from-official-sources" heading="Buying From Official Sources">
+          <PolicyParagraph>
+            To ensure authenticity, purchase Beyond Better products only through our official
+            website or sellers we have explicitly authorized.
+          </PolicyParagraph>
+          <PolicyParagraph>
+            We cannot guarantee the authenticity of products purchased from unauthorized third
+            parties.
           </PolicyParagraph>
         </PolicySection>
 
@@ -78,6 +112,7 @@ function TermsPage() {
         </PolicySection>
 
         <RelatedPolicies currentPath={PATH} />
+        <PolicyClosing lastUpdated={LAST_UPDATED} />
       </PolicyContent>
     </PolicyPageShell>
   );

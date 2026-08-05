@@ -8,7 +8,9 @@ import {
   PolicyParagraph,
   PolicyList,
   RelatedPolicies,
-  SupportEmailLink,
+  WhoWeAreBlock,
+  TrustBadges,
+  PolicyClosing,
 } from "@/components/PolicyPage";
 import { buildPolicyPageHead } from "@/lib/seo";
 
@@ -16,6 +18,7 @@ const PATH = "/privacy-policy";
 const TITLE = "Privacy Policy — Beyond Better";
 const DESCRIPTION =
   "How Beyond Better collects, uses and protects your personal information when you shop for our science-backed dietary supplements.";
+const LAST_UPDATED = "August 2026";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () =>
@@ -34,11 +37,17 @@ function PrivacyPolicyPage() {
       <PolicyHero
         eyebrow="Legal"
         title="Privacy Policy"
-        lastUpdated="August 2026"
+        lastUpdated={LAST_UPDATED}
+        readingTime="2 min read"
         intro="Beyond Better respects your privacy and is committed to protecting your personal information."
         breadcrumbLabel="Privacy Policy"
       />
       <PolicyContent>
+        <div className="mb-11">
+          <TrustBadges />
+        </div>
+        <WhoWeAreBlock />
+
         <PolicySection id="information-we-collect" heading="Information We Collect">
           <PolicyParagraph>We may collect:</PolicyParagraph>
           <PolicyList
@@ -73,6 +82,10 @@ function PrivacyPolicyPage() {
           <PolicyParagraph>
             Beyond Better does not store your complete payment card details.
           </PolicyParagraph>
+          <PolicyParagraph>
+            We use Razorpay, a PCI-DSS compliant payment processor, and our checkout is secured with
+            SSL encryption to help keep your payment information safe.
+          </PolicyParagraph>
         </PolicySection>
 
         <PolicySection id="cookies" heading="Cookies">
@@ -94,14 +107,8 @@ function PrivacyPolicyPage() {
           <PolicyList items={["payment processing", "shipping", "analytics", "customer support"]} />
         </PolicySection>
 
-        <PolicySection id="contact" heading="Contact">
-          <PolicyParagraph>
-            If you have questions regarding this Privacy Policy, please contact us at{" "}
-            <SupportEmailLink />.
-          </PolicyParagraph>
-        </PolicySection>
-
         <RelatedPolicies currentPath={PATH} />
+        <PolicyClosing lastUpdated={LAST_UPDATED} />
       </PolicyContent>
     </PolicyPageShell>
   );

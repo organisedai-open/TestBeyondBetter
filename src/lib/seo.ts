@@ -9,10 +9,12 @@ import logoLeaf from "@/assets/logo-leaf.webp";
 export const SITE_URL = "https://www.bebeyondbetter.com";
 export const SITE_NAME = "Beyond Better";
 export const SUPPORT_EMAIL = "care@bebeyondbetter.com";
+export const POLICIES_HUB_PATH = "/policies";
+export const POLICIES_HUB_LABEL = "Policies";
 
 // Single source of truth for the five legal pages — the footer, the in-page "related
-// policies" links, and each page's own breadcrumb all read from this list so a URL or
-// label never has to be kept in sync by hand across multiple files.
+// policies" links, each page's own breadcrumb, and the /policies hub all read from this
+// list so a URL or label never has to be kept in sync by hand across multiple files.
 export const POLICY_PAGES = [
   { path: "/privacy-policy", label: "Privacy Policy" },
   { path: "/terms-and-conditions", label: "Terms & Conditions" },
@@ -30,6 +32,13 @@ export const ORGANIZATION_JSON_LD = {
   description:
     "Beyond Better manufactures HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
   email: SUPPORT_EMAIL,
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: SUPPORT_EMAIL,
+    contactType: "customer service",
+    areaServed: "IN",
+    availableLanguage: ["en"],
+  },
 } as const;
 
 export const WEBSITE_JSON_LD = {
@@ -89,6 +98,28 @@ export function buildFaqJsonLd(items: QuestionAnswer[]) {
   };
 }
 
+/**
+ * Only used on the Refund Policy page. Kept narrow and literal: schema.org's return-policy
+ * vocabulary is built around ordinary change-of-mind return windows, which Beyond Better does
+ * not offer — refunds are conditional on a delivery fault (wrong/damaged/lost) reported within
+ * 48 hours. `merchantReturnDays: 2` reflects that 48-hour reporting window; fields this policy
+ * doesn't actually specify (who pays return shipping, method of return) are left out rather
+ * than guessed, since fabricated policy fields here would misrepresent the business to search
+ * engines and shopping surfaces that read this schema.
+ */
+export function buildMerchantReturnPolicyJsonLd() {
+  return {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: "IN",
+    returnPolicyCountry: "IN",
+    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+    merchantReturnDays: 2,
+    refundType: "https://schema.org/FullRefund",
+    returnPolicyDescription:
+      "Refunds are available only if the wrong product is delivered, the product arrives damaged, or the shipment is confirmed lost by the courier. Customers must contact us within 48 hours of delivery.",
+  } as const;
+}
+
 interface PolicyHeadOptions {
   /** e.g. "/privacy-policy" */
   path: string;
@@ -98,12 +129,15 @@ interface PolicyHeadOptions {
   breadcrumbName: string;
   /** Rendered visually as Q&A on the page — only pass real, matching on-page content. */
   faqs?: QuestionAnswer[];
+  /** Refund Policy only. */
+  includeMerchantReturnPolicy?: boolean;
 }
 
 /**
  * Builds the full `head()` return value (meta/links/scripts) for a standalone legal page:
  * unique title/description, canonical, Open Graph + Twitter Card, and JSON-LD for
- * Organization, WebSite, WebPage and BreadcrumbList (plus FAQPage when faqs are supplied).
+ * Organization, WebSite, WebPage and a three-level BreadcrumbList (Home > Policies > Page)
+ * (plus FAQPage when faqs are supplied, and MerchantReturnPolicy on the refund page).
  */
 export function buildPolicyPageHead({
   path,
@@ -111,12 +145,17 @@ export function buildPolicyPageHead({
   description,
   breadcrumbName,
   faqs,
+  includeMerchantReturnPolicy,
 }: PolicyHeadOptions) {
   const url = `${SITE_URL}${path}`;
   const ogImage = `${SITE_URL}${logoLeaf}`;
 
+  const organizationJsonLd = includeMerchantReturnPolicy
+    ? { ...ORGANIZATION_JSON_LD, hasMerchantReturnPolicy: buildMerchantReturnPolicyJsonLd() }
+    : ORGANIZATION_JSON_LD;
+
   const scripts = [
-    { type: "application/ld+json", children: JSON.stringify(ORGANIZATION_JSON_LD) },
+    { type: "application/ld+json", children: JSON.stringify(organizationJsonLd) },
     { type: "application/ld+json", children: JSON.stringify(WEBSITE_JSON_LD) },
     {
       type: "application/ld+json",
@@ -127,6 +166,7 @@ export function buildPolicyPageHead({
       children: JSON.stringify(
         buildBreadcrumbJsonLd([
           { name: "Home", path: "/" },
+          { name: POLICIES_HUB_LABEL, path: POLICIES_HUB_PATH },
           { name: breadcrumbName, path },
         ]),
       ),
@@ -153,5 +193,50 @@ export function buildPolicyPageHead({
     ],
     links: [{ rel: "canonical", href: url }],
     scripts,
+  };
+}
+
+/** head() for the /policies hub itself — a two-level breadcrumb (Home > Policies). */
+export function buildPoliciesHubHead() {
+  const title = "Policies — Beyond Better";
+  const description =
+    "Beyond Better's privacy, terms, refund, cancellation and shipping policies in one place.";
+  const url = `${SITE_URL}${POLICIES_HUB_PATH}`;
+  const ogImage = `${SITE_URL}${logoLeaf}`;
+
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:image", content: ogImage },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: ogImage },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(ORGANIZATION_JSON_LD) },
+      { type: "application/ld+json", children: JSON.stringify(WEBSITE_JSON_LD) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          buildWebPageJsonLd({ path: POLICIES_HUB_PATH, name: title, description }),
+        ),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          buildBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: POLICIES_HUB_LABEL, path: POLICIES_HUB_PATH },
+          ]),
+        ),
+      },
+    ],
   };
 }
