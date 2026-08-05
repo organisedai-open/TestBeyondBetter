@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResearchLibraryIndexRouteImport } from './routes/research-library.index'
 import { Route as ResearchLibrarySlugRouteImport } from './routes/research-library.$slug'
 import { Route as ProductsBerberineHclRouteImport } from './routes/products.berberine-hcl'
+import { Route as ApiWebhooksRazorpayRouteImport } from './routes/api/webhooks/razorpay'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const ProductsBerberineHclRoute = ProductsBerberineHclRouteImport.update({
   path: '/products/berberine-hcl',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWebhooksRazorpayRoute = ApiWebhooksRazorpayRouteImport.update({
+  id: '/api/webhooks/razorpay',
+  path: '/api/webhooks/razorpay',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
+  '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library': typeof ResearchLibraryIndexRoute
+  '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,6 +61,7 @@ export interface FileRoutesById {
   '/products/berberine-hcl': typeof ProductsBerberineHclRoute
   '/research-library/$slug': typeof ResearchLibrarySlugRoute
   '/research-library/': typeof ResearchLibraryIndexRoute
+  '/api/webhooks/razorpay': typeof ApiWebhooksRazorpayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -61,18 +70,21 @@ export interface FileRouteTypes {
     | '/products/berberine-hcl'
     | '/research-library/$slug'
     | '/research-library/'
+    | '/api/webhooks/razorpay'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/products/berberine-hcl'
     | '/research-library/$slug'
     | '/research-library'
+    | '/api/webhooks/razorpay'
   id:
     | '__root__'
     | '/'
     | '/products/berberine-hcl'
     | '/research-library/$slug'
     | '/research-library/'
+    | '/api/webhooks/razorpay'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,6 +92,7 @@ export interface RootRouteChildren {
   ProductsBerberineHclRoute: typeof ProductsBerberineHclRoute
   ResearchLibrarySlugRoute: typeof ResearchLibrarySlugRoute
   ResearchLibraryIndexRoute: typeof ResearchLibraryIndexRoute
+  ApiWebhooksRazorpayRoute: typeof ApiWebhooksRazorpayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -112,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsBerberineHclRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/webhooks/razorpay': {
+      id: '/api/webhooks/razorpay'
+      path: '/api/webhooks/razorpay'
+      fullPath: '/api/webhooks/razorpay'
+      preLoaderRoute: typeof ApiWebhooksRazorpayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -120,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsBerberineHclRoute: ProductsBerberineHclRoute,
   ResearchLibrarySlugRoute: ResearchLibrarySlugRoute,
   ResearchLibraryIndexRoute: ResearchLibraryIndexRoute,
+  ApiWebhooksRazorpayRoute: ApiWebhooksRazorpayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
