@@ -6,7 +6,7 @@ import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
-import { PREORDER_FULL_PAYMENT_NOTE, getActivePriceInr } from "@/lib/pricing";
+import { PREORDER_FULL_PAYMENT_NOTE, RESTOCK_DATE_ISO, getActivePriceInr } from "@/lib/pricing";
 import { PRODUCT_CATALOG } from "@/lib/product";
 import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
 import logoLeaf from "@/assets/logo-leaf.webp";
@@ -35,11 +35,13 @@ function ProductJsonLd() {
     offers: {
       "@type": "Offer",
       url: PAGE_URL,
-      priceCurrency: "INR",
-      price: "693",
+      priceCurrency: PRODUCT_CATALOG.currency,
+      // Derived, not hardcoded: a stale price in structured data is what makes Google show a
+      // price in search results that no longer matches the page — a Merchant Center mismatch.
+      price: String(getActivePriceInr()),
       availability: "https://schema.org/PreOrder",
-      availabilityStarts: "2026-08-20",
-      priceValidUntil: "2026-08-20",
+      availabilityStarts: RESTOCK_DATE_ISO,
+      priceValidUntil: RESTOCK_DATE_ISO,
     },
     // No AggregateRating/Review - there are no real customer reviews yet.
   };

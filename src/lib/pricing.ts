@@ -12,12 +12,21 @@ export const RESTOCK_DATE_ISO = "2026-08-20";
 
 export const CURRENCY = "INR";
 export const MRP_INR = 1900;
-export const PREORDER_PRICE_INR = 693;
+export const PREORDER_PRICE_INR = 969;
 export const POST_LAUNCH_PRICE_INR = 990;
 
-export const PREORDER_CTA_LABEL = "Pre-Order Now — Save 30%";
+/**
+ * Derived, never hardcoded — the headline discount is the one number a customer can check
+ * against the two prices shown next to it, so it must not be able to drift from them. Change
+ * PREORDER_PRICE_INR above and every "Save X%" on the site follows.
+ */
+export const PREORDER_DISCOUNT_PCT = Math.round((1 - PREORDER_PRICE_INR / MRP_INR) * 100);
+
+export const PREORDER_CTA_LABEL = `Pre-Order Now — Save ${PREORDER_DISCOUNT_PCT}%`;
 export const IN_STOCK_CTA_LABEL = "Buy Now";
-export const PREORDER_BADGE_LABEL = "Pre-Order · Save 30% (Reg. ₹990)";
+// Deliberately does NOT name the post-restock price: the badge sits directly beside the
+// struck-through MRP and the live price, and a third number there read as clutter.
+export const PREORDER_BADGE_LABEL = `Pre-Order · Save ${PREORDER_DISCOUNT_PCT}%`;
 export const PREORDER_RESTOCK_CAPTION =
   "Restocking August 20 — pre-order now to guarantee yours from the first batch.";
 export const PREORDER_FULL_PAYMENT_NOTE =
