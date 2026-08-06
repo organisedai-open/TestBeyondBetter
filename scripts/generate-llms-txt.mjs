@@ -21,29 +21,66 @@ const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = "https://www.bebeyondbetter.com";
 
 const CORE_PAGES = [
-  { title: "Home", url: `${SITE_URL}/`, desc: "Brand overview, the 97% HPLC purity claim, and how each batch is verified." },
+  {
+    title: "Home",
+    url: `${SITE_URL}/`,
+    desc: "Brand overview, the 97% HPLC purity claim, and how each batch is verified.",
+  },
   {
     title: "Herbal Berberine HCL Extract",
     url: `${SITE_URL}/products/berberine-hcl`,
     desc: "Product page for the flagship berberine supplement: formulation, dosage, testing and sourcing.",
   },
-  { title: "Research Library", url: `${SITE_URL}/research-library`, desc: "Index of educational, citation-backed articles on berberine and metabolic health." },
+  {
+    title: "Research Library",
+    url: `${SITE_URL}/research-library`,
+    desc: "Index of educational, citation-backed articles on berberine and metabolic health.",
+  },
 ];
 
 const REFERENCE_PAGES = [
-  { title: "Certificate of Analysis (PDF)", url: `${SITE_URL}/berberine-coa.pdf`, desc: "Third-party HPLC assay results for the current batch." },
-  { title: "Policies", url: `${SITE_URL}/policies`, desc: "Index of all customer-facing policies." },
-  { title: "Shipping Policy", url: `${SITE_URL}/shipping-policy`, desc: "Dispatch timelines and worldwide shipping terms." },
-  { title: "Refund Policy", url: `${SITE_URL}/refund-policy`, desc: "Refund eligibility and process." },
-  { title: "Cancellation Policy", url: `${SITE_URL}/cancellation-policy`, desc: "Order cancellation windows and conditions." },
-  { title: "Privacy Policy", url: `${SITE_URL}/privacy-policy`, desc: "What customer data is collected and how it is handled." },
-  { title: "Terms and Conditions", url: `${SITE_URL}/terms-and-conditions`, desc: "Terms governing use of the site and purchases." },
+  {
+    title: "Certificate of Analysis (PDF)",
+    url: `${SITE_URL}/berberine-coa.pdf`,
+    desc: "Third-party HPLC assay results for the current batch.",
+  },
+  {
+    title: "Policies",
+    url: `${SITE_URL}/policies`,
+    desc: "Index of all customer-facing policies.",
+  },
+  {
+    title: "Shipping Policy",
+    url: `${SITE_URL}/shipping-policy`,
+    desc: "Dispatch timelines and worldwide shipping terms.",
+  },
+  {
+    title: "Refund Policy",
+    url: `${SITE_URL}/refund-policy`,
+    desc: "Refund eligibility and process.",
+  },
+  {
+    title: "Cancellation Policy",
+    url: `${SITE_URL}/cancellation-policy`,
+    desc: "Order cancellation windows and conditions.",
+  },
+  {
+    title: "Privacy Policy",
+    url: `${SITE_URL}/privacy-policy`,
+    desc: "What customer data is collected and how it is handled.",
+  },
+  {
+    title: "Terms and Conditions",
+    url: `${SITE_URL}/terms-and-conditions`,
+    desc: "Terms governing use of the site and purchases.",
+  },
 ];
 
 // A single-line, pipe-safe description for a Markdown list item.
 const clean = (s) => String(s).replace(/\s+/g, " ").trim();
 
-const linkList = (items) => items.map((i) => `- [${clean(i.title)}](${i.url}): ${clean(i.desc)}`).join("\n");
+const linkList = (items) =>
+  items.map((i) => `- [${clean(i.title)}](${i.url}): ${clean(i.desc)}`).join("\n");
 
 async function main() {
   const server = await createServer({

@@ -63,4 +63,6 @@ for (const [name, url] of [...wanted].sort()) {
   console.log(`${(buf.length / 1024).toFixed(1).padStart(7)} KiB  src/assets/fonts/${name}`);
 }
 
-console.log(`\nWrote ${wanted.size} font files. Verify the unicode-range values in src/styles.css still match.`);
+console.log(
+  `\nWrote ${wanted.size} font files. Verify the unicode-range values in src/styles.css still match.`,
+);
