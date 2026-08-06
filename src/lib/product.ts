@@ -12,7 +12,7 @@ export const PRODUCT_CATALOG = {
   sku: "BB-BERB-60CAP",
   variantId: "bb-berb-60cap-default",
   name: "Herbal Berberine HCL Extract",
-  description: "97% HPLC-verified Berberine HCL, 500mg x 60 capsules",
+  description: "97% Japanese HPLC-verified Berberine HCL, 500mg x 60 capsules",
   imageUrl: `${SITE_URL}${productImage}`,
   productUrl: `${SITE_URL}/products/berberine-hcl`,
   currency: CURRENCY,

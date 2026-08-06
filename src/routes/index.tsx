@@ -58,7 +58,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Why does purity actually matter?",
-    a: "Berberine HCl below 97% purity often contains residual solvents, fillers, or degraded compound left over from cheaper extraction methods. Most drugstore — and even many premium — brands sit between 70–90% purity without disclosing it. Ours is tested via HPLC (high-performance liquid chromatography), the same standard used in pharmaceutical testing, and every batch result is published, not just claimed.",
+    a: "Berberine HCl below 97% purity often contains residual solvents, fillers, or degraded compound left over from cheaper extraction methods. Most drugstore — and even many premium — brands sit between 70–90% purity without disclosing it. Ours is tested to the Japanese HPLC Standard (high-performance liquid chromatography aligned with the Japanese Pharmacopoeia), the same rigor used in pharmaceutical testing, and every batch result is published, not just claimed.",
   },
   {
     q: "How do I take it?",
@@ -90,11 +90,11 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "What does 97% HPLC purity actually mean, in plain terms?",
-    a: "It means 97% of the tested material is confirmed, via high-performance liquid chromatography, to be actual berberine HCl — not fillers, solvents, or degraded compound. Most drugstore brands test between 70–90% and don't publish the number.",
+    a: "It means 97% of the tested material is confirmed, via Japanese HPLC Standard testing (high-performance liquid chromatography), to be actual berberine HCl — not fillers, solvents, or degraded compound. Most drugstore brands test between 70–90% and don't publish the number.",
   },
   {
     q: "How is Beyond Better's berberine different from other brands?",
-    a: "Every batch is HPLC-verified to 97% purity and the Certificate of Analysis is published, not just claimed. Extraction is water-only, not solvent-based, and testing is done by an independent third party.",
+    a: "Every batch is verified to 97% purity via the Japanese HPLC Standard, and the Certificate of Analysis is published, not just claimed. Extraction is water-only, not solvent-based, and testing is done by an independent third party.",
   },
   {
     q: "Where is Beyond Better's berberine manufactured and tested?",
@@ -137,7 +137,7 @@ function OrgJsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}${logoLeaf}`,
     description:
-      "Beyond Better manufactures HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
+      "Beyond Better manufactures Japanese HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
     // TODO(founder): add sameAs (real social handles) and contactPoint (support
     // email/phone) once available — intentionally omitted rather than filled with
     // placeholders.
@@ -167,7 +167,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "97% HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.",
+          "97% Japanese HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.",
       },
       {
         name: "keywords",
@@ -177,7 +177,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "97% HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open.",
+          "97% Japanese HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open.",
       },
       { property: "og:image", content: `${SITE_URL}${productTube}` },
       { property: "og:url", content: SITE_URL },
@@ -433,7 +433,9 @@ function Nav() {
 function Hero() {
   return (
     <>
-      <h1 className="sr-only">Beyond Better — 97% HPLC Verified Berberine HCL Supplement</h1>
+      <h1 className="sr-only">
+        Beyond Better — 97% Japanese HPLC Verified Berberine HCL Supplement
+      </h1>
       <DesktopHero />
       <MobileHero />
     </>
@@ -563,7 +565,7 @@ function DesktopHero() {
               ),
               sub: "Daily Glucose Support",
             },
-            { icon: "mountain", title: "Japanese Standard", sub: "Precision Tested" },
+            { icon: "mountain", title: "Japanese HPLC Standard", sub: "Precision Tested" },
             {
               icon: "leaf-shield",
               title: (
@@ -726,7 +728,7 @@ function MobileHero() {
               ),
               sub: "Daily Glucose Support",
             },
-            { icon: "mountain", title: "Japanese Standard", sub: "Precision Tested" },
+            { icon: "mountain", title: "Japanese HPLC Standard", sub: "Precision Tested" },
             {
               icon: "leaf-shield",
               title: (
@@ -818,7 +820,7 @@ function MobileHero() {
 function TrustStrip() {
   const badges = [
     { icon: FlaskConical, title: "HPLC VERIFIED" },
-    { icon: Mountain, title: "JAPANESE STANDARD" },
+    { icon: Mountain, title: "JAPANESE HPLC STANDARD" },
     { icon: null, label: "97%", title: "VERIFIED PURITY" },
   ];
   return (
@@ -1321,7 +1323,8 @@ function Ingredients() {
               One ingredient. Done right.
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
-              Pure Berberine HCL — extracted with water, verified at 97% by HPLC. Nothing else.
+              Pure Berberine HCL — extracted with water, verified at 97% by Japanese HPLC standard.
+              Nothing else.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
               Most extractors use solvents to hit purity targets faster and cheaper. We use a
@@ -1562,7 +1565,7 @@ function FinalCTA() {
                 className="mt-4 text-[11px] uppercase tracking-[0.22em] lg:mt-3"
                 style={{ color: "color-mix(in oklab, var(--forest) 70%, transparent)" }}
               >
-                60 Capsules · 60 Day Supply
+                60 Capsules · 30 Day Supply
               </p>
             </Reveal>
 

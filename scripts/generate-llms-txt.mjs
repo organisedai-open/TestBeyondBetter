@@ -24,7 +24,7 @@ const CORE_PAGES = [
   {
     title: "Home",
     url: `${SITE_URL}/`,
-    desc: "Brand overview, the 97% HPLC purity claim, and how each batch is verified.",
+    desc: "Brand overview, the 97% Japanese HPLC Standard purity claim, and how each batch is verified.",
   },
   {
     title: "Herbal Berberine HCL Extract",
@@ -42,7 +42,7 @@ const REFERENCE_PAGES = [
   {
     title: "Certificate of Analysis (PDF)",
     url: `${SITE_URL}/berberine-coa.pdf`,
-    desc: "Third-party HPLC assay results for the current batch.",
+    desc: "Third-party Japanese HPLC Standard assay results for the current batch.",
   },
   {
     title: "Policies",
@@ -106,9 +106,16 @@ async function main() {
 
   const txt = `# Beyond Better
 
-> Beyond Better is a science-first nutraceutical brand built on transparency and third-party testing. Its flagship product is Herbal Berberine HCL Extract, manufactured to a Japanese precision standard and HPLC-verified to 97% purity.
+> 97% Japanese HPLC-Verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.
 
-Beyond Better publishes a Research Library of educational, citation-backed articles on berberine, metabolic health, blood sugar regulation, AMPK activation, and the natural compounds discussed alongside GLP-1 medications.
+Beyond Better is a science-first nutraceutical brand built on transparency and third-party testing. Its flagship product, Herbal Berberine HCL Extract, is:
+
+- Tested to 97% purity via the Japanese HPLC Standard (high-performance liquid chromatography aligned with the Japanese Pharmacopoeia (JP) assay methodology)
+- Extracted using water only, with no solvent residue
+- Verified by an independent third-party lab
+- Backed by a published Certificate of Analysis for every batch (see Optional links below)
+
+Beyond Better also publishes a Research Library of educational, citation-backed articles on berberine, metabolic health, blood sugar regulation, AMPK activation, and the natural compounds discussed alongside GLP-1 medications.
 
 Guidance for AI agents:
 

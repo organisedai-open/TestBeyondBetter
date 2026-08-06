@@ -84,7 +84,7 @@ const FAQS = [
   },
   {
     q: "How is Beyond Better berberine different?",
-    a: "Beyond Better publishes 97%+ HPLC-verified purity, uses water-only extraction, and provides third-party Certificates of Analysis for every batch — full transparency over marketing claims.",
+    a: "Beyond Better publishes 97%+ Japanese HPLC-verified purity, uses water-only extraction, and provides third-party Certificates of Analysis for every batch — full transparency over marketing claims.",
   },
   {
     q: "Are herbal extracts better than synthetic alternatives?",
@@ -344,7 +344,7 @@ function TrustSection() {
     },
     {
       icon: FlaskConical,
-      title: "Japanese Standard HPLC Testing",
+      title: "Japanese HPLC Standard Testing",
       desc: "Precision verification beyond industry standards.",
     },
     { icon: Droplets, title: "Water Only Extraction", desc: "No chemical solvent contamination." },

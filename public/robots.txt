@@ -1,4 +1,25 @@
 User-agent: *
 Allow: /
 
+# Explicit allowances for AI crawlers and search engines. The wildcard rule above already
+# permits everyone, since there are no Disallow rules on this site — these entries exist so
+# each crawler's own compliance checks see an explicit, unambiguous Allow for its name.
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://www.bebeyondbetter.com/sitemap.xml

@@ -669,7 +669,7 @@ function ArticlePage() {
                     />
                     <div className="mt-4 font-display text-lg">Beyond Better Berberine</div>
                     <p className="mt-2 text-xs opacity-80">
-                      97% HPLC verified purity. Water extraction. Independent testing.
+                      97% Japanese HPLC-verified purity. Water extraction. Independent testing.
                     </p>
                     <button
                       type="button"
@@ -784,7 +784,8 @@ function ArticlePage() {
                   Better Was Never <em className="italic">Enough.</em>
                 </h2>
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-                  97% HPLC verified purity. Water-only extraction. Full transparency at every batch.
+                  97% Japanese HPLC-verified purity. Water-only extraction. Full transparency at
+                  every batch.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <button

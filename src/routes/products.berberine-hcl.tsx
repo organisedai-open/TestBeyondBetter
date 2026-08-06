@@ -27,11 +27,19 @@ function ProductJsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "Beyond Better Berberine HCL — 500mg, 97% HPLC Verified",
+    name: "Beyond Better Berberine HCL — 500mg, 97% Japanese HPLC Verified",
     image: PRODUCT_CATALOG.imageUrl,
     description: PRODUCT_CATALOG.description,
     brand: { "@type": "Brand", name: "Beyond Better" },
     sku: PRODUCT_CATALOG.sku,
+    // Machine-readable anchor for the Japanese HPLC Standard claim made in prose elsewhere
+    // on this page — gives crawlers and AI retrieval systems a structured fact to cite,
+    // not just text to parse.
+    additionalProperty: {
+      "@type": "PropertyValue",
+      name: "Testing Standard",
+      value: "Japanese Pharmacopoeia (JP) HPLC Methodology",
+    },
     offers: {
       "@type": "Offer",
       url: PAGE_URL,
@@ -67,17 +75,20 @@ function BreadcrumbJsonLd() {
 export const Route = createFileRoute("/products/berberine-hcl")({
   head: () => ({
     meta: [
-      { title: "Berberine HCL 500mg — 97% HPLC Verified | Beyond Better" },
+      { title: "Berberine HCL 500mg — 97% Japanese HPLC Verified | Beyond Better" },
       {
         name: "description",
         content:
-          "97% HPLC-verified Berberine HCL, 500mg per capsule, 60 capsules. Water-only extraction, third-party tested, published Certificate of Analysis per batch.",
+          "97% Japanese HPLC-verified Berberine HCL, 500mg per capsule, 60 capsules. Water-only extraction, third-party tested, published Certificate of Analysis per batch.",
       },
-      { property: "og:title", content: "Berberine HCL 500mg — 97% HPLC Verified | Beyond Better" },
+      {
+        property: "og:title",
+        content: "Berberine HCL 500mg — 97% Japanese HPLC Verified | Beyond Better",
+      },
       {
         property: "og:description",
         content:
-          "97% HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. Published Certificate of Analysis for every batch.",
+          "97% Japanese HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. Published Certificate of Analysis for every batch.",
       },
       { property: "og:image", content: PRODUCT_CATALOG.imageUrl },
       { property: "og:url", content: PAGE_URL },
@@ -215,14 +226,15 @@ function ProductIntro() {
               Herbal Berberine HCL Extract
             </h1>
             <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-              500mg per capsule, 60 capsules. 97% HPLC-verified purity, water-only extraction,
-              third-party tested with a published Certificate of Analysis for every batch.
+              500mg per capsule, 60 capsules. 97% Japanese HPLC-verified purity, water-only
+              extraction, third-party tested with a published Certificate of Analysis for every
+              batch.
             </p>
             <p
               className="mt-2 text-[11px] uppercase tracking-[0.22em]"
               style={{ color: "color-mix(in oklab, var(--forest) 70%, transparent)" }}
             >
-              60 Capsules · 60 Day Supply
+              60 Capsules · 30 Day Supply
             </p>
 
             <div className="mt-8 flex justify-center lg:justify-start">
@@ -318,7 +330,8 @@ function IngredientBreakdown() {
               One ingredient. Done right.
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
-              Pure Berberine HCL — extracted with water, verified at 97% by HPLC. Nothing else.
+              Pure Berberine HCL — extracted with water, verified at 97% by Japanese HPLC standard.
+              Nothing else.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
               Most extractors use solvents to hit purity targets faster and cheaper. We use a
@@ -381,7 +394,7 @@ function CoaSection() {
                 maxWidth: "450px",
               }}
             >
-              97.24% actual tested purity.
+              97% actual tested purity.
               <br />
               <span style={{ color: "var(--forest)" }}>Third-party verified.</span>
             </h2>
@@ -393,9 +406,9 @@ function CoaSection() {
                 color: "#355142",
               }}
             >
-              This is a real Certificate of Analysis from a recent production batch — HPLC assay,
-              heavy metals screening, and microbial profile, every result published. The same report
-              ships with every batch we sell.
+              This is a real Certificate of Analysis from a recent production batch — Japanese HPLC
+              Standard assay, heavy metals screening, and microbial profile, every result published.
+              The same report ships with every batch we sell.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a
@@ -462,13 +475,14 @@ function CoaSection() {
                   color: "#1a1a1a",
                 }}
               >
-                97.24% actual tested purity.
+                97% actual tested purity.
                 <br />
                 <span style={{ color: "var(--forest)" }}>Third-party verified.</span>
               </h2>
               <p style={{ marginTop: 6, fontSize: "12px", lineHeight: 1.55, color: "#355142" }}>
-                A real Certificate of Analysis from a recent production batch — HPLC assay, heavy
-                metals screening, and microbial profile, every result published.
+                A real Certificate of Analysis from a recent production batch — Japanese HPLC
+                Standard assay, heavy metals screening, and microbial profile, every result
+                published.
               </p>
               <a
                 href="/berberine-coa.pdf"

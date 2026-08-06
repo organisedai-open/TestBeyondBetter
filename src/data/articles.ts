@@ -1593,7 +1593,7 @@ export const ARTICLES: Article[] = [
         heading: "What a Certificate of Analysis Actually Contains",
         paragraphs: [
           "A proper Certificate of Analysis (COA) for a berberine product reports the HPLC-verified assay result — the actual measured percentage of berberine HCl on a dried basis — alongside heavy metals screening (lead, arsenic, mercury, cadmium, typically via ICP-MS) and a microbial safety profile (total plate count, yeast and mould, and screens for pathogens like E. coli and Salmonella). Together, these confirm not just that a product contains berberine, but that it's free of the contamination risks associated with poorly controlled extraction and manufacturing.",
-          "A batch-specific COA — one tied to the exact production run a customer's bottle came from, not a generic specification sheet reused across batches — is what turns a purity claim into a verifiable result. Beyond Better's own Certificate of Analysis reports the assay against the Japanese Pharmacopoeia (JP) method by HPLC, the same 'Japanese Standard' referenced elsewhere on this site.",
+          "A batch-specific COA — one tied to the exact production run a customer's bottle came from, not a generic specification sheet reused across batches — is what turns a purity claim into a verifiable result. Beyond Better's own Certificate of Analysis reports the assay against the Japanese Pharmacopoeia (JP) method by HPLC, the same 'Japanese HPLC Standard' referenced elsewhere on this site.",
         ],
       },
       {
