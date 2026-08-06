@@ -12,6 +12,11 @@ import { type ReactNode, useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import logoLeaf from "@/assets/logo-leaf.webp";
+// Imported rather than written as literal paths so these hrefs carry the same
+// content hash Vite stamps onto the @font-face URLs in styles.css — otherwise
+// the preload misses and the browser fetches each font twice.
+import interLatinFont from "@/assets/fonts/inter-latin.woff2";
+import frauncesLatinFont from "@/assets/fonts/fraunces-latin.woff2";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
@@ -97,6 +102,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "icon",
         href: logoLeaf,
         type: "image/webp",
+      },
+      // Self-hosted fonts are applied from styles.css on every route, so they
+      // are preloaded here rather than per-route. Font fetches are CORS-mode
+      // even same-origin, hence crossOrigin.
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: interLatinFont,
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: frauncesLatinFont,
+        crossOrigin: "anonymous",
       },
     ],
   }),

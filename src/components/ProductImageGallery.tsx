@@ -193,11 +193,14 @@ export function ProductImageGallery({ images, className = "" }: ProductImageGall
                     : "0 6px 16px rgba(26, 20, 10, 0.15)",
                 }}
               >
+                {/* Lazy, not eager: React hoists SSR'd eager images into
+                    <link rel="preload">, which put every thumbnail in
+                    contention with the hero during the LCP window. */}
                 <img
                   src={image.src}
                   alt={image.thumbnailAlt ?? image.alt}
                   className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
                 />
               </button>

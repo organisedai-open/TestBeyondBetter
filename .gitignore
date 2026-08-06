@@ -32,3 +32,6 @@ dist-ssr
 *.sw?
 .kimchi
 .env*
+
+# Pristine pre-compression copies of src/assets images (local only)
+.image-originals/

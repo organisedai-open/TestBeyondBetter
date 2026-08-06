@@ -185,16 +185,24 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: SITE_URL + "/" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      { rel: "preconnect", href: "https://scripts.clarity.ms" },
+      { rel: "preconnect", href: "https://connect.facebook.net" },
+      // The hero is the LCP element and is painted as a CSS background, so the
+      // browser can't discover it from markup — preload it explicitly. `media`
+      // keeps each viewport from fetching the hero it will never show.
       {
         rel: "preload",
         as: "image",
         href: heroSectionImage,
+        media: "(min-width: 768px)",
+        fetchPriority: "high",
       },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&display=swap",
+        rel: "preload",
+        as: "image",
+        href: mobileHeroSectionImage,
+        media: "(max-width: 767.98px)",
+        fetchPriority: "high",
       },
     ],
   }),
