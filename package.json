@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/generate-sitemap.mjs && vite build",
-    "build:dev": "node scripts/generate-sitemap.mjs && vite build --mode development",
+    "build": "node scripts/generate-sitemap.mjs && node scripts/generate-llms-txt.mjs && vite build",
+    "build:dev": "node scripts/generate-sitemap.mjs && node scripts/generate-llms-txt.mjs && vite build --mode development",
     "sitemap": "node scripts/generate-sitemap.mjs",
+    "llms": "node scripts/generate-llms-txt.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
