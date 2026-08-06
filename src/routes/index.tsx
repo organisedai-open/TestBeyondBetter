@@ -20,7 +20,7 @@ import { PriceDisplay } from "@/components/PriceDisplay";
 import { CancellationNote } from "@/components/CancellationNote";
 import { RestockCountdown } from "@/components/RestockCountdown";
 import { StarRating } from "@/components/StarRating";
-import { TESTIMONIALS, AVERAGE_RATING } from "@/data/testimonials";
+import { TESTIMONIALS, AVERAGE_RATING, REVIEW_COUNT } from "@/data/testimonials";
 import { PREORDER_RESTOCK_CAPTION, getActivePriceInr } from "@/lib/pricing";
 import { POLICY_PAGES } from "@/lib/seo";
 import { PRODUCT_CATALOG } from "@/lib/product";
@@ -1533,6 +1533,21 @@ function FinalCTA() {
                 <br />
                 <span style={{ color: "#8B6B2E" }}>Less Cravings. More Energy.</span>
               </h2>
+            </Reveal>
+
+            <Reveal delay={0.05}>
+              <div className="mt-4 flex items-center justify-center gap-2 lg:justify-start">
+                <StarRating rating={Math.round(AVERAGE_RATING)} />
+                <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
+                  {AVERAGE_RATING}/5
+                </span>
+                <span
+                  className="text-xs"
+                  style={{ color: "color-mix(in oklab, var(--forest) 70%, transparent)" }}
+                >
+                  ({REVIEW_COUNT} early tester reviews)
+                </span>
+              </div>
             </Reveal>
 
             <Reveal delay={0.1}>
