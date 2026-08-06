@@ -1274,10 +1274,11 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-vs-ozempic",
-    title: 'Berberine vs Ozempic: Understanding The Science Of "Nature\'s Ozempic"',
-    seoTitle: "Berberine vs Ozempic: The Science | Beyond Better",
+    title:
+      'Is Berberine "Nature\'s Ozempic"? What the Comparison Gets Right — and Where It Breaks Down',
+    seoTitle: 'Berberine vs Ozempic: Is It Really "Nature\'s Ozempic"? | Beyond Better',
     seoDescription:
-      'A science-first comparison of berberine and Ozempic: AMPK activation vs GLP-1 receptor agonism, mechanisms, evidence and what "nature\'s Ozempic" really means.',
+      'Is berberine really "nature\'s Ozempic"? A science-first look at the AMPK and GLP-1 pathways — what the comparison gets right, and where it breaks down.',
     category: "Comparisons",
     tag: "Featured",
     readTime: "10 min read",
@@ -1291,6 +1292,7 @@ export const ARTICLES: Article[] = [
       {
         heading: "Introduction",
         paragraphs: [
+          "Berberine and Ozempic (semaglutide) are not interchangeable, and berberine is not a substitute for Ozempic or any other prescription GLP-1 medication. They work through different biological pathways, are backed by different levels of clinical evidence, and any decision involving a prescription medication should be made with a qualified healthcare professional.",
           'Berberine has become widely described in popular media as "nature\'s Ozempic." The comparison reflects shared interest in metabolic and weight-related outcomes, but the underlying mechanisms of the two compounds are distinct. A clear-eyed look at the science is more useful than the marketing label.',
         ],
       },
@@ -1319,7 +1321,7 @@ export const ARTICLES: Article[] = [
         ],
       },
       {
-        heading: 'What "Nature\'s Ozempic" Actually Means',
+        heading: "Where the Comparison Breaks Down",
         paragraphs: [
           "The phrase is a heuristic, not a pharmacological equivalence claim. Berberine is of interest because of its metabolic activity through a different pathway — not because it reproduces semaglutide's mechanism. Anyone considering either compound for a clinical indication should do so under medical guidance.",
         ],
@@ -1555,8 +1557,8 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "berberine-hplc-purity-testing",
-    title: "How Berberine Purity Is Tested: Inside the HPLC Process",
-    seoTitle: "How HPLC Tests Berberine Purity | Beyond Better",
+    title: "How Berberine Purity Is Tested: Inside the Japanese HPLC Standard",
+    seoTitle: "Japanese HPLC Standard: How Berberine Purity Is Tested | Beyond Better",
     seoDescription:
       "A plain-language explanation of how HPLC (high-performance liquid chromatography) verifies berberine purity, why it matters, and how it differs from label claims.",
     category: "Quality & Testing",
@@ -1570,8 +1572,9 @@ export const ARTICLES: Article[] = [
       "A plain-language explanation of how HPLC verifies berberine purity, why it's the pharmaceutical-grade standard, and how it differs from an unverified label claim.",
     sections: [
       {
-        heading: "A Number Is Not a Test",
+        heading: "What 'Japanese HPLC Standard' Actually Means",
         paragraphs: [
+          "The Japanese Pharmacopoeia (JP) publishes official HPLC (high-performance liquid chromatography) assay methods used to verify the identity and purity of pharmaceutical and nutraceutical ingredients — a role comparable to the United States Pharmacopeia (USP) in the US. Testing an ingredient to the Japanese HPLC Standard means verifying it against this independent, published reference methodology, rather than a manufacturer's own internal benchmark. Beyond Better's Berberine HCL is tested to this standard for every production batch, with results published in a public Certificate of Analysis — the most recent batch verified at 97% purity.",
           "Almost every berberine product on the market states a purity percentage somewhere on its label. Very few publish the test that produced that number. The gap between 'claimed purity' and 'verified purity' is exactly where quality varies most in the supplement industry, and understanding what HPLC actually measures is the difference between trusting a label and trusting a result.",
         ],
       },
@@ -1628,6 +1631,18 @@ export const ARTICLES: Article[] = [
       },
     ],
     faqs: [
+      {
+        q: "What is the Japanese HPLC standard?",
+        a: "It refers to HPLC assay methods published in the Japanese Pharmacopoeia (JP) — an official reference used to verify the identity and purity of pharmaceutical and nutraceutical ingredients, comparable to the United States Pharmacopeia (USP). Testing 'to the Japanese HPLC Standard' means a product is verified against this independent, published methodology rather than a brand's own internal benchmark.",
+      },
+      {
+        q: "What does Japanese standard berberine testing mean?",
+        a: "It means a berberine product's purity has been verified using HPLC assay methodology aligned with the Japanese Pharmacopoeia, rather than relying on the raw weight of the extract used or an unverified label claim. Beyond Better's berberine is tested this way for every batch, with the result published in a public Certificate of Analysis.",
+      },
+      {
+        q: "Is Beyond Better tested to Japanese Pharmacopoeia standards?",
+        a: "Yes. Every batch of Beyond Better's Berberine HCL is assayed against the Japanese Pharmacopoeia (JP) HPLC method, with the result — 97% purity on the most recent batch — published in a batch-specific Certificate of Analysis.",
+      },
       {
         q: "What does HPLC stand for?",
         a: "High-performance liquid chromatography — an analytical technique that separates and quantifies individual chemical compounds in a sample.",

@@ -936,7 +936,17 @@ function Comparison() {
                         className="text-left font-normal"
                         style={{ color: "color-mix(in oklab, var(--ivory) 92%, transparent)" }}
                       >
-                        {r.k}
+                        {r.k === "Japanese HPLC Standard" ? (
+                          <Link
+                            to="/research-library/$slug"
+                            params={{ slug: "berberine-hplc-purity-testing" }}
+                            className="underline decoration-dotted underline-offset-4 hover:opacity-80"
+                          >
+                            {r.k}
+                          </Link>
+                        ) : (
+                          r.k
+                        )}
                       </th>
                       <td className="flex justify-center">
                         <Check

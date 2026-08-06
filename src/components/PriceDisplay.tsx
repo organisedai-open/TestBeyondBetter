@@ -18,8 +18,12 @@ export function PriceDisplay({
   if (variant === "inline") {
     return (
       <span className={`inline-flex items-baseline gap-2 ${className}`}>
-        <span className="line-through" style={{ color: "color-mix(in oklab, currentColor 80%, transparent)" }}>
-          {formatInr(mrp)}
+        <span
+          className="inline-flex items-baseline gap-1"
+          style={{ color: "color-mix(in oklab, currentColor 80%, transparent)" }}
+        >
+          <span className="text-[9px] uppercase tracking-[0.1em]">MRP</span>
+          <span className="line-through">{formatInr(mrp)}</span>
         </span>
         <span>{formatInr(price)}</span>
       </span>
@@ -33,19 +37,26 @@ export function PriceDisplay({
       {isPreorderActive && (
         <span
           className="inline-flex items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.16em]"
-          style={{ backgroundColor: "color-mix(in oklab, var(--gold) 20%, transparent)", color: "var(--forest)" }}
+          style={{
+            backgroundColor: "color-mix(in oklab, var(--gold) 20%, transparent)",
+            color: "var(--forest)",
+          }}
         >
           {PREORDER_BADGE_LABEL}
         </span>
       )}
       <div className="flex items-baseline gap-3">
         <span
-          className="font-display text-[15px] line-through"
+          className="inline-flex items-baseline gap-1.5"
           style={{ color: "color-mix(in oklab, var(--forest) 80%, transparent)" }}
         >
-          {formatInr(mrp)}
+          <span className="text-[10px] uppercase tracking-[0.14em]">MRP</span>
+          <span className="font-display text-[15px] line-through">{formatInr(mrp)}</span>
         </span>
-        <span className="font-display text-4xl md:text-5xl lg:text-[58px]" style={{ color: "var(--forest)" }}>
+        <span
+          className="font-display text-4xl md:text-5xl lg:text-[58px]"
+          style={{ color: "var(--forest)" }}
+        >
           {formatInr(price)}
         </span>
       </div>
