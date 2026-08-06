@@ -13,7 +13,7 @@ export const RESTOCK_DATE_ISO = "2026-08-20";
 export const CURRENCY = "INR";
 export const MRP_INR = 1900;
 export const PREORDER_PRICE_INR = 969;
-export const POST_LAUNCH_PRICE_INR = 990;
+export const POST_LAUNCH_PRICE_INR = 1390;
 
 /**
  * Derived, never hardcoded — the headline discount is the one number a customer can check
