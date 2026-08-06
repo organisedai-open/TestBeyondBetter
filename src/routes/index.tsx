@@ -19,6 +19,8 @@ import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { CancellationNote } from "@/components/CancellationNote";
 import { RestockCountdown } from "@/components/RestockCountdown";
+import { StarRating } from "@/components/StarRating";
+import { TESTIMONIALS, AVERAGE_RATING } from "@/data/testimonials";
 import { PREORDER_RESTOCK_CAPTION, getActivePriceInr } from "@/lib/pricing";
 import { POLICY_PAGES } from "@/lib/seo";
 import { PRODUCT_CATALOG } from "@/lib/product";
@@ -41,12 +43,12 @@ import {
   Facebook,
   Check,
   X,
-  Star,
   ShoppingBag,
+  BadgeCheck,
 } from "lucide-react";
 
 const SITE_URL = "https://www.bebeyondbetter.com";
-const SHOW_TESTIMONIALS = false;
+const SHOW_TESTIMONIALS = true;
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
@@ -234,7 +236,7 @@ function Landing() {
         <FinalCTA />
         <Benefits />
         <LabReport />
-        {SHOW_TESTIMONIALS ? <SocialProof /> : null}
+        {SHOW_TESTIMONIALS ? <Testimonials /> : null}
         <Ingredients />
         <ResearchSimple />
         <FAQ />
@@ -1227,82 +1229,73 @@ function LabReport() {
   );
 }
 
-function SocialProof() {
+function Testimonials() {
   const { openCheckout, isLoading } = useMagicCheckout();
   const { ctaLabel } = usePreorderStatus();
-  const featuredReview = {
-    q: "Finally a brand I actually trust. The COA sealed it.",
-    n: "Arjun M.",
-  };
-  const reviews = [
-    { q: "I noticed better energy levels within weeks.", n: "Priya R." },
-    { q: "Quality feels far superior to anything else I've tried.", n: "Sneha K." },
-  ];
   return (
     <section id="reviews" className="py-20 md:py-28" style={{ background: "#F8F5EF" }}>
-      <div className="mx-auto max-w-5xl px-6 lg:px-10">
+      <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              This is a real Certificate of Analysis from a recent production batch — not a stock
-              photo, not a summary. The same report ships with every batch we sell.
+          <div className="mx-auto max-w-2xl text-center">
+            <SectionLabel>Customer Stories</SectionLabel>
+            <h2
+              className="mt-4 font-display text-3xl leading-tight md:text-5xl"
+              style={{ color: "var(--forest)" }}
+            >
+              Trusted by customers who value quality.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+              Real experiences from people who chose Beyond Better as part of their daily wellness
+              routine.
             </p>
+            <div className="mt-6 flex items-center justify-center gap-2.5">
+              <StarRating rating={Math.round(AVERAGE_RATING)} />
+              <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
+                {AVERAGE_RATING}/5
+              </span>
+              <span className="text-sm text-muted-foreground">· Early tester feedback</span>
+            </div>
           </div>
         </Reveal>
-        <Reveal delay={0.08}>
-          <figure
-            className="mx-auto mt-10 max-w-3xl rounded-3xl border px-8 py-9 text-center shadow-[0_24px_60px_-40px_rgba(23,63,47,0.35)]"
-            style={{
-              borderColor: "color-mix(in oklab, var(--forest) 14%, transparent)",
-              background: "color-mix(in oklab, #fff 92%, var(--ivory) 8%)",
-            }}
-          >
-            <div className="flex justify-center gap-1" style={{ color: "var(--gold-deep)" }}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className="h-5 w-5 fill-current" />
-              ))}
-            </div>
-            <blockquote className="mt-5 font-display text-2xl leading-tight md:text-3xl">
-              &quot;{featuredReview.q}&quot;
-            </blockquote>
-            <figcaption className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              — {featuredReview.n}
-            </figcaption>
-          </figure>
-        </Reveal>
-        <Reveal delay={0.12}>
-          <div className="mt-12 text-center">
-            <div className="flex justify-center gap-1" style={{ color: "var(--gold-deep)" }}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className="h-5 w-5 fill-current" />
-              ))}
-            </div>
-            <p className="mt-3 font-display text-2xl md:text-3xl">4.8 / 5</p>
-            <p className="mt-1 text-sm text-muted-foreground">Trusted by 1,000+ customers</p>
-          </div>
-        </Reveal>
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {reviews.map((r, i) => (
-            <Reveal key={r.n} delay={i * 0.08}>
-              <figure className="text-center md:text-left">
-                <div
-                  className="flex justify-center gap-0.5 md:justify-start"
-                  style={{ color: "var(--gold-deep)" }}
+
+        <div className="mt-14 columns-1 gap-6 sm:columns-2 lg:columns-3">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={(i % 3) * 0.08}>
+              <figure
+                className="mb-6 break-inside-avoid rounded-[22px] border bg-white p-7 shadow-[0_20px_60px_-40px_rgba(23,61,36,0.25)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_-40px_rgba(23,61,36,0.4)]"
+                style={{ borderColor: "color-mix(in oklab, var(--forest) 10%, transparent)" }}
+              >
+                <StarRating rating={t.rating} size="h-3.5 w-3.5" />
+                <blockquote
+                  className="mt-4 text-[15px] leading-[1.75]"
+                  style={{ color: "color-mix(in oklab, var(--charcoal) 85%, transparent)" }}
                 >
-                  {[0, 1, 2, 3, 4].map((s) => (
-                    <Star key={s} className="h-3.5 w-3.5 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="mt-4 font-display text-lg leading-snug">"{r.q}"</blockquote>
-                <figcaption className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  — {r.n}
+                  &quot;{t.quote}&quot;
+                </blockquote>
+                <figcaption
+                  className="mt-5 flex items-center justify-between gap-3 border-t pt-4"
+                  style={{ borderColor: "color-mix(in oklab, var(--forest) 8%, transparent)" }}
+                >
+                  <span className="font-display text-sm" style={{ color: "var(--forest)" }}>
+                    {t.name}
+                  </span>
+                  <span
+                    className="inline-flex flex-shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-[10px] uppercase tracking-[0.1em]"
+                    style={{
+                      backgroundColor: "color-mix(in oklab, var(--forest) 8%, transparent)",
+                      color: "var(--forest)",
+                    }}
+                  >
+                    <BadgeCheck className="h-3 w-3" /> Verified Tester
+                  </span>
                 </figcaption>
               </figure>
             </Reveal>
           ))}
         </div>
-        <Reveal delay={0.3}>
-          <div className="mt-14 flex flex-col items-center gap-3">
+
+        <Reveal delay={0.2}>
+          <div className="mt-4 flex flex-col items-center gap-3">
             <CTAButton onClick={openCheckout} disabled={isLoading}>
               {ctaLabel}
             </CTAButton>

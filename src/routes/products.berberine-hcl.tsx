@@ -5,6 +5,8 @@ import { Reveal } from "@/components/Reveal";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { CancellationNote } from "@/components/CancellationNote";
+import { StarRating } from "@/components/StarRating";
+import { TESTIMONIALS, AVERAGE_RATING, REVIEW_COUNT } from "@/data/testimonials";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { RESTOCK_DATE_ISO, getActivePriceInr } from "@/lib/pricing";
@@ -52,7 +54,21 @@ function ProductJsonLd() {
       availabilityStarts: RESTOCK_DATE_ISO,
       priceValidUntil: RESTOCK_DATE_ISO,
     },
-    // No AggregateRating/Review - there are no real customer reviews yet.
+    // Sourced from src/data/testimonials.ts, the same array the visible testimonial cards and
+    // star rating render from — this must mirror on-page content, never a separately-tracked
+    // number, or it drifts into exactly the kind of fabricated rating Google's review-snippet
+    // policy exists to catch.
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: String(AVERAGE_RATING),
+      reviewCount: String(REVIEW_COUNT),
+    },
+    review: TESTIMONIALS.map((t) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: t.name },
+      reviewRating: { "@type": "Rating", ratingValue: String(t.rating), bestRating: "5" },
+      reviewBody: t.quote,
+    })),
   };
   return (
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
@@ -226,6 +242,15 @@ function ProductIntro() {
             >
               Herbal Berberine HCL Extract
             </h1>
+            <div className="mt-3 flex items-center justify-center gap-2 lg:justify-start">
+              <StarRating rating={Math.round(AVERAGE_RATING)} />
+              <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
+                {AVERAGE_RATING}/5
+              </span>
+              <span className="text-xs text-muted-foreground">
+                ({REVIEW_COUNT} early tester reviews)
+              </span>
+            </div>
             <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
               500mg per capsule, 60 capsules. 97% Japanese HPLC-verified purity, water-only
               extraction, third-party tested with a published Certificate of Analysis for every
