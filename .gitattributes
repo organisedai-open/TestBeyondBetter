@@ -1,0 +1,25 @@
+# Normalize line endings repo-wide.
+#
+# Without this, the convention lives only in each developer's local
+# `core.autocrlf`, so files land in the repo with whatever endings the machine
+# that wrote them happened to use. That is how src/routes/__root.tsx and
+# src/components/ProductImageGallery.tsx ended up stored as CRLF while every
+# sibling file is LF — which also made Prettier fail on those two with hundreds
+# of `Delete ␍` errors.
+#
+# `text=auto eol=lf` stores everything as LF in the repo. Working-copy endings
+# are still whatever the platform wants, so nothing changes about editing on
+# Windows.
+* text=auto eol=lf
+
+# Binary formats must be exempt: line-ending conversion corrupts them. Git's
+# binary heuristic usually catches these, but public/berberine-coa.pdf contains
+# byte sequences that look like CRLF, so mark the known types explicitly rather
+# than trusting detection.
+*.webp  binary
+*.woff2 binary
+*.pdf   binary
+
+# Generated lockfiles — keep them LF, but they are not worth reviewing in diffs.
+package-lock.json linguist-generated=true
+bun.lock          linguist-generated=true
