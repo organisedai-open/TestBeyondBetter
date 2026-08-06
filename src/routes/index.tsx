@@ -19,11 +19,7 @@ import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { CancellationNote } from "@/components/CancellationNote";
 import { RestockCountdown } from "@/components/RestockCountdown";
-import {
-  PREORDER_RESTOCK_CAPTION,
-  PREORDER_FULL_PAYMENT_NOTE,
-  getActivePriceInr,
-} from "@/lib/pricing";
+import { PREORDER_RESTOCK_CAPTION, getActivePriceInr } from "@/lib/pricing";
 import { POLICY_PAGES } from "@/lib/seo";
 import { PRODUCT_CATALOG } from "@/lib/product";
 import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
@@ -63,7 +59,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "How do I take it?",
-    a: "500 mg, two to three times daily with meals. Always consult your physician.",
+    a: "500 mg, two times daily with meals.",
   },
   {
     q: "Is it third-party tested?",
@@ -79,15 +75,15 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Who should not take berberine?",
-    a: "Berberine should be avoided or used only under medical supervision by pregnant or breastfeeding women, people taking diabetes medication (due to hypoglycemia risk), people on anticoagulants, and children. Always consult a physician before starting.",
+    a: "Berberine should be avoided or used only under medical supervision by pregnant or breastfeeding women, people taking diabetes medication (due to hypoglycemia risk), people on anticoagulants, and children. Speak with your doctor first if any of these apply to you.",
   },
   {
     q: "Does berberine interact with any medications?",
-    a: "Yes. It can intensify the effect of diabetes medications, raising hypoglycemia risk, and may interact with anticoagulants such as warfarin. Always check with your physician before combining berberine with a prescription medication.",
+    a: "Yes. It can intensify the effect of diabetes medications, raising hypoglycemia risk, and may interact with anticoagulants such as warfarin — worth mentioning to your doctor if you're on either.",
   },
   {
     q: "Can I take berberine with metformin?",
-    a: "Only with medical supervision. Berberine and metformin lower blood glucose through overlapping mechanisms, so taking them together can increase hypoglycemia risk. Your physician can advise on whether combining them is appropriate for you.",
+    a: "Berberine and metformin lower blood glucose through overlapping mechanisms, so taking them together can increase hypoglycemia risk. Worth discussing with your doctor before combining them.",
   },
   {
     q: "What does 97% HPLC purity actually mean, in plain terms?",
@@ -115,7 +111,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Can I take this alongside other supplements?",
-    a: "Generally yes. Berberine's main interactions are with medications that affect blood sugar or blood clotting (see above), not with most other supplements. If you're on medication or unsure, check with your physician first.",
+    a: "Generally yes. Berberine's main interactions are with medications that affect blood sugar or blood clotting (see above), not with most other supplements.",
   },
 ];
 
@@ -1476,7 +1472,7 @@ function FAQ() {
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
+  const { ctaLabel } = usePreorderStatus();
   const bullets = [
     "500mg HPLC-verified per capsule — not a proprietary blend hiding the real number",
     "97% purity, tested to Japanese HPLC standard — most berberine on the market sits between 70–90%",
@@ -1607,14 +1603,6 @@ function FinalCTA() {
               >
                 {ctaLabel} <ArrowUpRight className="h-4 w-4" />
               </button>
-              {preorder && (
-                <p
-                  className="mt-3 text-[11px]"
-                  style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
-                >
-                  {PREORDER_FULL_PAYMENT_NOTE}
-                </p>
-              )}
               <CancellationNote className="mt-2" />
             </Reveal>
           </div>

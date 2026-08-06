@@ -7,7 +7,7 @@ import { PriceDisplay } from "@/components/PriceDisplay";
 import { CancellationNote } from "@/components/CancellationNote";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
-import { PREORDER_FULL_PAYMENT_NOTE, RESTOCK_DATE_ISO, getActivePriceInr } from "@/lib/pricing";
+import { RESTOCK_DATE_ISO, getActivePriceInr } from "@/lib/pricing";
 import { PRODUCT_CATALOG } from "@/lib/product";
 import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
 import logoLeaf from "@/assets/logo-leaf.webp";
@@ -163,7 +163,7 @@ function Header() {
 
 function ProductIntro() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
+  const { ctaLabel } = usePreorderStatus();
 
   const galleryImages = [
     {
@@ -257,14 +257,6 @@ function ProductIntro() {
                 {ctaLabel} <ArrowUpRight className="h-4 w-4" />
               </button>
             </div>
-            {preorder && (
-              <p
-                className="mt-3 text-center text-[11px] lg:text-left"
-                style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
-              >
-                {PREORDER_FULL_PAYMENT_NOTE}
-              </p>
-            )}
             <div className="flex justify-center lg:justify-start">
               <CancellationNote className="mt-2" />
             </div>

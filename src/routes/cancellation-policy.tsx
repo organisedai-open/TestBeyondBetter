@@ -26,9 +26,6 @@ const LAST_UPDATED = "August 2026";
 // on-page date on this site, rather than importing and formatting RESTOCK_DATE_ISO -- update
 // both together if the ship date ever moves.
 const SHIP_DATE_HUMAN = "August 20, 2026";
-// Not specified by the site owner as of Phase 3 -- flagged rather than invented. Replace with a
-// real figure (and delete this comment) before this page ships.
-const REFUND_TIMELINE_PLACEHOLDER = "[X business days — confirm with owner]";
 
 const FAQS = [
   {
@@ -37,11 +34,12 @@ const FAQS = [
   },
   {
     question: "How do I cancel my order?",
-    answer: `Email ${SUPPORT_EMAIL} with your order ID. This is currently the only way we can process a cancellation request — we don't yet offer a self-serve cancel option, live chat or phone line.`,
+    answer: `If you'd like to cancel your order, simply email ${SUPPORT_EMAIL} with your order ID as soon as possible. We'll do our best to process your cancellation before your order is shipped.`,
   },
   {
     question: "How long does a refund take after I cancel?",
-    answer: `Refunds for cancelled orders are processed to your original payment method within ${REFUND_TIMELINE_PLACEHOLDER}.`,
+    answer:
+      "Refunds for cancelled orders are processed to your original payment method. We don't have a fixed processing window to share yet — you'll receive confirmation once your refund has been issued.",
   },
   {
     question: "What happens if my order has already shipped?",
@@ -70,7 +68,7 @@ function CancellationPolicyPage() {
         title="Cancellation Policy"
         lastUpdated={LAST_UPDATED}
         readingTime="2 min read"
-        intro={`Charged in full today, ships ${SHIP_DATE_HUMAN} — here's exactly when and how you can cancel for a full refund before then.`}
+        intro={`Your order ships ${SHIP_DATE_HUMAN} — here's exactly when and how you can cancel for a full refund before then.`}
         breadcrumbLabel="Cancellation Policy"
       />
       <PolicyContent>
@@ -85,9 +83,9 @@ function CancellationPolicyPage() {
             current batch is scheduled to ship {SHIP_DATE_HUMAN}.
           </PolicyParagraph>
           <PolicyParagraph>
-            To cancel, email <SupportEmailLink /> with your order ID. This is currently the only way
-            we can process a cancellation — we don't yet offer a self-serve cancel option, live chat
-            or phone line.
+            If you'd like to cancel your order, simply email <SupportEmailLink /> with your order ID
+            as soon as possible. We'll do our best to process your cancellation before your order is
+            shipped.
           </PolicyParagraph>
           <PolicyParagraph>
             Once an order has shipped, it is no longer eligible for cancellation or refund under
@@ -101,7 +99,7 @@ function CancellationPolicyPage() {
               { label: "Email Us", detail: SUPPORT_EMAIL },
               { label: "Include Order ID" },
               { label: "We Confirm", detail: "Before your batch ships" },
-              { label: "Refund Issued", detail: REFUND_TIMELINE_PLACEHOLDER },
+              { label: "Refund Issued" },
             ]}
           />
         </PolicySection>
