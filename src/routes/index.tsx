@@ -17,6 +17,7 @@ import logoLeaf from "@/assets/logo-leaf.webp";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PriceDisplay } from "@/components/PriceDisplay";
+import { CancellationNote } from "@/components/CancellationNote";
 import { RestockCountdown } from "@/components/RestockCountdown";
 import {
   PREORDER_RESTOCK_CAPTION,
@@ -99,6 +100,10 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   {
     q: "Where is Beyond Better's berberine manufactured and tested?",
     a: "Manufactured in India from Berberis aristata root. Every batch is HPLC-tested and third-party verified before release, with the Certificate of Analysis published for that batch.",
+  },
+  {
+    q: "Can I cancel my order?",
+    a: "Yes — orders can be canceled for a full refund any time before your batch ships. The current batch ships August 20, 2026. To cancel, email care@bebeyondbetter.com. Once your order has shipped, it's no longer eligible for cancellation or refund.",
   },
   {
     q: "How should I store the capsules?",
@@ -549,6 +554,7 @@ function DesktopHero() {
               >
                 {PREORDER_RESTOCK_CAPTION}
               </p>
+              <CancellationNote style={{ marginTop: 8, maxWidth: 280, pointerEvents: "auto" }} />
             </div>
           )}
         </div>
@@ -1062,6 +1068,7 @@ function Benefits() {
                 <CTAButton onClick={openCheckout} disabled={isLoading}>
                   {ctaLabel}
                 </CTAButton>
+                <CancellationNote className="mt-3" />
               </div>
             </Reveal>
           </div>
@@ -1299,10 +1306,11 @@ function SocialProof() {
           ))}
         </div>
         <Reveal delay={0.3}>
-          <div className="mt-14 flex justify-center">
+          <div className="mt-14 flex flex-col items-center gap-3">
             <CTAButton onClick={openCheckout} disabled={isLoading}>
               {ctaLabel}
             </CTAButton>
+            <CancellationNote />
           </div>
         </Reveal>
       </div>
@@ -1607,6 +1615,7 @@ function FinalCTA() {
                   {PREORDER_FULL_PAYMENT_NOTE}
                 </p>
               )}
+              <CancellationNote className="mt-2" />
             </Reveal>
           </div>
         </div>
@@ -1654,6 +1663,7 @@ function StickyBuy() {
           <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
         </button>
       </div>
+      <CancellationNote className="pb-2 text-center" style={{ fontSize: 9.5 }} />
     </div>
   );
 }

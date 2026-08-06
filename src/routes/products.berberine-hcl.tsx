@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Reveal } from "@/components/Reveal";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { PriceDisplay } from "@/components/PriceDisplay";
+import { CancellationNote } from "@/components/CancellationNote";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PREORDER_FULL_PAYMENT_NOTE, RESTOCK_DATE_ISO, getActivePriceInr } from "@/lib/pricing";
@@ -264,6 +265,9 @@ function ProductIntro() {
                 {PREORDER_FULL_PAYMENT_NOTE}
               </p>
             )}
+            <div className="flex justify-center lg:justify-start">
+              <CancellationNote className="mt-2" />
+            </div>
           </div>
         </Reveal>
       </div>
@@ -609,30 +613,33 @@ function StickyBuy() {
   const { ctaLabel } = usePreorderStatus();
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between gap-3 border-t px-4 py-3 md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t px-4 py-3 md:hidden"
       style={{
         backgroundColor: "color-mix(in oklab, var(--ivory) 96%, transparent)",
         backdropFilter: "blur(14px)",
         borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)",
       }}
     >
-      <div className="flex flex-col leading-tight">
-        <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-          Berberine HCL
-        </span>
-        <span className="font-display text-lg" style={{ color: "var(--forest)" }}>
-          <PriceDisplay variant="inline" />
-        </span>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-col leading-tight">
+          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Berberine HCL
+          </span>
+          <span className="font-display text-lg" style={{ color: "var(--forest)" }}>
+            <PriceDisplay variant="inline" />
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={openCheckout}
+          disabled={isLoading}
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[13px] transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
+          style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
+        >
+          <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={openCheckout}
-        disabled={isLoading}
-        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[13px] transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
-        style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
-      >
-        <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
-      </button>
+      <CancellationNote className="pt-2 text-center" style={{ fontSize: 9.5 }} />
     </div>
   );
 }

@@ -23,6 +23,7 @@ import {
 } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
+import { CancellationNote } from "@/components/CancellationNote";
 import { toIsoDate } from "@/lib/dates";
 import { POLICY_PAGES } from "@/lib/seo";
 
@@ -680,6 +681,7 @@ function ArticlePage() {
                     >
                       {ctaLabel} <ArrowRight className="h-3.5 w-3.5" />
                     </button>
+                    <CancellationNote className="mt-3" style={{ opacity: 0.85 }} />
                   </div>
                 </div>
               </aside>
@@ -808,6 +810,7 @@ function ArticlePage() {
                     <ChevronLeft className="h-4 w-4" /> All Articles
                   </Link>
                 </div>
+                <CancellationNote className="mt-3" />
               </Reveal>
               <Reveal delay={0.15}>
                 <div className="relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center">

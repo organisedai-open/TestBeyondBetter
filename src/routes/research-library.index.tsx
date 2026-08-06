@@ -9,6 +9,7 @@ import bloodSugarBerberine from "@/assets/Blood Sugar Berberine.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
 import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
+import { CancellationNote } from "@/components/CancellationNote";
 import { POLICY_PAGES } from "@/lib/seo";
 import {
   ArrowUpRight,
@@ -207,6 +208,7 @@ function Hero() {
               {ctaLabel}
             </button>
           </div>
+          <CancellationNote className="mt-3" />
         </Reveal>
 
         <Reveal delay={0.15}>
@@ -604,6 +606,7 @@ function FinalCTA() {
           >
             {ctaLabel} <ArrowRight className="h-4 w-4" />
           </button>
+          <CancellationNote className="mt-3" />
         </Reveal>
         <Reveal delay={0.15}>
           <div className="relative mx-auto flex aspect-square w-full max-w-[460px] items-center justify-center">
