@@ -247,9 +247,6 @@ function ProductIntro() {
               <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
                 {AVERAGE_RATING}/5
               </span>
-              <span className="text-xs text-muted-foreground">
-                ({REVIEW_COUNT} early tester reviews)
-              </span>
             </div>
             <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
               500mg per capsule, 60 capsules. 97% Japanese HPLC-verified purity, water-only
