@@ -1541,6 +1541,12 @@ function FinalCTA() {
                 <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
                   {AVERAGE_RATING}/5
                 </span>
+                <span
+                  className="text-xs"
+                  style={{ color: "color-mix(in oklab, var(--forest) 70%, transparent)" }}
+                >
+                  (early tester reviews)
+                </span>
               </div>
             </Reveal>
 
