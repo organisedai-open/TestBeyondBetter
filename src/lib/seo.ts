@@ -30,7 +30,7 @@ export const ORGANIZATION_JSON_LD = {
   url: SITE_URL,
   logo: `${SITE_URL}${logoLeaf}`,
   description:
-    "Beyond Better manufactures Japanese HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
+    "Beyond Better manufactures Japanese Standard Berberine — Berberine HCl assayed to Japanese Pharmacopoeia HPLC methodology at 97% verified purity, screened against a 545-pesticide residue panel, extracted with water only, third-party tested, with a public Certificate of Analysis published for every batch.",
   email: SUPPORT_EMAIL,
   contactPoint: {
     "@type": "ContactPoint",

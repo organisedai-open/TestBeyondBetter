@@ -1596,7 +1596,15 @@ export const ARTICLES: Article[] = [
         heading: "What a Certificate of Analysis Actually Contains",
         paragraphs: [
           "A proper Certificate of Analysis (COA) for a berberine product reports the HPLC-verified assay result — the actual measured percentage of berberine HCl on a dried basis — alongside heavy metals screening (lead, arsenic, mercury, cadmium, typically via ICP-MS) and a microbial safety profile (total plate count, yeast and mould, and screens for pathogens like E. coli and Salmonella). Together, these confirm not just that a product contains berberine, but that it's free of the contamination risks associated with poorly controlled extraction and manufacturing.",
-          "A batch-specific COA — one tied to the exact production run a customer's bottle came from, not a generic specification sheet reused across batches — is what turns a purity claim into a verifiable result. Beyond Better's own Certificate of Analysis reports the assay against the Japanese Pharmacopoeia (JP) method by HPLC, the same 'Japanese HPLC Standard' referenced elsewhere on this site.",
+          "A batch-specific COA — one tied to the exact production run a customer's bottle came from, not a generic specification sheet reused across batches — is what turns a purity claim into a verifiable result. Beyond Better's own Certificate of Analysis reports the assay against the Japanese Pharmacopoeia (JP) method by HPLC, the same 'Japanese HPLC Standard' referenced elsewhere on this site, alongside screening against a 545-compound pesticide residue panel.",
+        ],
+      },
+      {
+        heading: "Why Purity Alone Is an Incomplete Answer",
+        paragraphs: [
+          "An HPLC assay answers one question precisely: how much of the sample is the target molecule. It does not answer what else is present in the fraction that isn't berberine. Those are separate analytical questions requiring separate methods — heavy metals by ICP-MS, microbial load by plate count, and pesticide residues by multi-residue chromatography-mass spectrometry.",
+          "This distinction matters more for botanicals than for synthesised compounds. Berberine is extracted from Berberis aristata root, an agricultural crop grown in soil, which means the finished extract can carry residues of whatever was applied to the plant during cultivation. A product can be genuinely 97% pure by assay and still have never been screened for those residues, because purity and contamination are measured by different instruments answering different questions.",
+          "Screening against a broad multi-residue panel — Beyond Better uses one covering 545 individual pesticide compounds — is what closes that gap. Purity verified by Japanese HPLC Standard assay, residues screened separately, both reported on the same batch-specific Certificate of Analysis.",
         ],
       },
       {
@@ -1610,8 +1618,9 @@ export const ARTICLES: Article[] = [
       "HPLC separates and quantifies the individual compounds in a sample, revealing the exact percentage that is actual berberine HCl.",
       "HPLC with UV/DAD or mass spectrometry detection is the analytical gold standard for berberine, validated against ICH pharmaceutical guidelines.",
       "Extract weight on a label is not the same as active-compound content — only chromatographic testing like HPLC confirms the difference.",
-      "A proper Certificate of Analysis reports HPLC assay results alongside heavy metals and microbial safety screening.",
+      "A proper Certificate of Analysis reports HPLC assay results alongside heavy metals, microbial safety and pesticide residue screening.",
       "Purity below the HPLC-verified figure represents fillers, residual solvents or degraded compound diluting the actual dose.",
+      "Purity and contamination are different questions: Beyond Better pairs the Japanese HPLC Standard assay with screening against a 545-compound pesticide residue panel.",
     ],
     references: [
       {
@@ -1656,7 +1665,204 @@ export const ARTICLES: Article[] = [
         a: "HPLC testing costs more than basic identity testing, and publishing batch-specific results exposes exactly how a product compares to competitors — a disincentive for brands whose actual purity is lower than their marketing suggests.",
       },
     ],
-    relatedSlugs: ["berberine-metabolic-health", "berberine-blood-sugar", "berberine-side-effects"],
+    relatedSlugs: [
+      "berberine-pesticide-screening",
+      "third-party-vs-manufacturer-testing",
+      "berberine-metabolic-health",
+    ],
+  },
+  {
+    slug: "berberine-pesticide-screening",
+    title: "Why 545-Pesticide Screening Matters in Herbal Supplements",
+    seoTitle: "545 Pesticides Screened: Why It Matters in Berberine | Beyond Better",
+    seoDescription:
+      "Why pesticide residue screening matters for herbal supplements, what a 545-compound multi-residue panel actually tests, and why purity alone doesn't cover it.",
+    category: "Quality & Testing",
+    tag: "Transparency",
+    readTime: "7 min read",
+    publishedDate: "August 4, 2026",
+    image: berberineIngredientInfoImg,
+    excerpt:
+      "A purity number tells you how much berberine is in the capsule. It tells you nothing about what the plant absorbed before it was extracted.",
+    description:
+      "What pesticide residue screening measures, why herbal extracts need it more than synthesised compounds, and what a 545-compound panel covers.",
+    sections: [
+      {
+        heading: "What '545 Pesticides Screened' Means",
+        paragraphs: [
+          "It means the raw material is tested against a multi-residue analytical panel covering 545 individual pesticide compounds — not a spot check on a handful of the most common ones. Multi-residue screening of this kind is performed by gas and liquid chromatography coupled to tandem mass spectrometry (GC-MS/MS and LC-MS/MS), typically following a QuEChERS extraction protocol, which allows hundreds of distinct compounds to be separated and identified from a single prepared sample.",
+          "The size of the panel matters because pesticide use is regional and crop-specific. A panel of twenty compounds will only find the twenty it looks for. A broad panel is the difference between testing for the residues you expected and testing for the residues that are actually there.",
+        ],
+      },
+      {
+        heading: "Why Botanicals Carry This Risk Differently",
+        paragraphs: [
+          "Berberine sold as a supplement is not synthesised in a reactor — it is extracted from plant material, most commonly the root of Berberis aristata. That plant is grown in soil, on farmland, subject to whatever agricultural inputs were used during cultivation. Anything systemic the plant took up during growth travels with the biomass into the extraction process.",
+          "This is the structural difference between a botanical extract and a synthesised pharmaceutical ingredient. The pharmaceutical starts from defined reagents under controlled conditions. The botanical starts from a field. That is not a reason to distrust botanicals — it is the reason residue screening exists as a distinct analytical discipline for them, codified in standards like USP <561> for articles of botanical origin and the WHO's guidance on contaminants and residues in herbal medicines.",
+        ],
+      },
+      {
+        heading: "Why a Purity Assay Cannot Answer This",
+        paragraphs: [
+          "An HPLC purity assay quantifies the target molecule. If a sample is 97% berberine HCl, the assay has told you about the 97% — it has not characterised the remaining 3%, and it was never designed to. Residues appear at parts-per-million or parts-per-billion concentrations, far below the resolution at which a purity assay operates, and they require different detection chemistry entirely.",
+          "This is why a complete quality picture needs both, reported separately: identity and potency by chromatographic assay, contamination by dedicated residue and heavy-metal screening. A brand publishing only a purity figure has answered one question and left the other unasked.",
+        ],
+      },
+      {
+        heading: "What to Look For on a Certificate of Analysis",
+        paragraphs: [
+          "A Certificate of Analysis that covers residue screening should state the method used, the scope of the panel, and the outcome against a defined limit — not simply the word 'passed'. Regulatory maximum residue limits (MRLs) for botanicals are published by bodies including the Codex Alimentarius Commission and, in the European Union, under Regulation (EC) No 396/2005; a meaningful report is one that can be read against those references.",
+          "Beyond Better publishes a batch-specific Certificate of Analysis covering the Japanese HPLC Standard purity assay, heavy metals, microbial profile and screening against a 545-compound pesticide residue panel. It is available to read before purchase rather than on request afterwards.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "A 545-compound multi-residue panel screens for hundreds of individual pesticides, rather than spot-checking a common few.",
+      "Botanical extracts carry residue risk structurally, because they begin as farmed crops rather than synthesised reagents.",
+      "A purity assay quantifies the target molecule and cannot detect trace residues — the two require different analytical methods.",
+      "Multi-residue screening uses GC-MS/MS and LC-MS/MS, commonly with QuEChERS sample preparation.",
+      "A meaningful residue report states the method, the panel scope and the result against a defined limit, not just 'passed'.",
+    ],
+    references: [
+      {
+        title: "AOAC Official Method 2007.01 — Pesticide Residues in Foods by QuEChERS",
+        source: "AOAC International",
+        year: "2007",
+      },
+      {
+        title: "USP <561> Articles of Botanical Origin — Limits for Pesticide Residues",
+        source: "United States Pharmacopeia",
+        year: "2023",
+      },
+      {
+        title:
+          "WHO Guidelines for Assessing Quality of Herbal Medicines with Reference to Contaminants and Residues",
+        source: "World Health Organization",
+        year: "2007",
+      },
+      {
+        title: "Regulation (EC) No 396/2005 on Maximum Residue Levels of Pesticides",
+        source: "European Union",
+        year: "2005",
+      },
+    ],
+    faqs: [
+      {
+        q: "What does 545 pesticides screened mean?",
+        a: "It means the material is tested against a multi-residue analytical panel covering 545 individual pesticide compounds, using chromatography coupled to mass spectrometry, rather than checking for a small subset of common residues.",
+      },
+      {
+        q: "Why do herbal supplements need pesticide screening?",
+        a: "Because they are made from farmed plants. Anything the crop absorbed during cultivation can travel into the extract, which is a contamination pathway that does not exist for synthesised ingredients.",
+      },
+      {
+        q: "Doesn't a high purity percentage already prove a product is clean?",
+        a: "No. A purity assay quantifies how much of the target molecule is present. Pesticide residues occur at trace concentrations detected by entirely different methods, so purity and residue screening answer separate questions.",
+      },
+      {
+        q: "Is Beyond Better berberine screened for pesticide residues?",
+        a: "Yes — against a 545-compound panel, reported on the same batch-specific Certificate of Analysis as the Japanese HPLC Standard purity assay, heavy metals and microbial testing.",
+      },
+    ],
+    relatedSlugs: [
+      "berberine-hplc-purity-testing",
+      "third-party-vs-manufacturer-testing",
+      "berberine-side-effects",
+    ],
+  },
+  {
+    slug: "third-party-vs-manufacturer-testing",
+    title: "Third-Party Testing vs Manufacturer Testing: What the Difference Actually Means",
+    seoTitle: "Third-Party Tested Berberine: Why Independent Testing Matters | Beyond Better",
+    seoDescription:
+      "The difference between a manufacturer's in-house test and independent third-party verification, what ISO/IEC 17025 accreditation signals, and how to tell which one a brand is showing you.",
+    category: "Quality & Testing",
+    tag: "Transparency",
+    readTime: "6 min read",
+    publishedDate: "August 6, 2026",
+    image: transparencyHeroImg,
+    excerpt:
+      "Almost every supplement brand says it tests its products. Far fewer say who did the testing — and that distinction carries most of the meaning.",
+    description:
+      "What separates independent third-party laboratory verification from in-house manufacturer testing, and why accreditation and batch specificity are the details that matter.",
+    sections: [
+      {
+        heading: "Who Ran the Test Changes What It Proves",
+        paragraphs: [
+          "'Tested' is not a regulated word. A manufacturer running an assay on its own material in its own laboratory can accurately describe that product as tested. So can a brand that sent a sample to an independent accredited laboratory with no commercial stake in the outcome. Both statements are true; they carry very different evidential weight.",
+          "The difference is structural rather than a question of honesty. In-house testing means the party with a financial interest in the result is also the party producing it. Third-party testing separates those roles, which is the entire mechanism by which the result becomes independently meaningful.",
+        ],
+      },
+      {
+        heading: "What Accreditation Signals",
+        paragraphs: [
+          "The relevant benchmark for testing laboratories is ISO/IEC 17025, the international standard for the competence of testing and calibration laboratories. Accreditation to it means an external assessment body has evaluated the laboratory's methods, equipment calibration, personnel competence and quality management system — and re-evaluates periodically.",
+          "This is a meaningfully higher bar than a facility simply owning the instrument. Chromatography equipment produces a number regardless of whether the method was properly validated, the column was in specification, or the reference standard was current. Accreditation is what attests to the process behind the number, which is why analytical methods are validated against frameworks such as ICH Q2(R1).",
+        ],
+      },
+      {
+        heading: "Batch-Specific Versus Representative",
+        paragraphs: [
+          "A second distinction matters as much as who tested: what was tested. A specification sheet describes what a product is supposed to contain. A batch-specific Certificate of Analysis reports what one identified production run actually contained, tied to a lot number that appears on the bottle.",
+          "Supplement manufacturing is governed by good manufacturing practice requirements — 21 CFR Part 111 in the United States, and FSSAI's nutraceutical regulations in India — which set expectations for identity and quality testing. Those frameworks govern process. They do not require that any resulting document be published for customers to read, which is why publication remains a brand decision rather than a regulatory outcome.",
+        ],
+      },
+      {
+        heading: "How to Tell Which One You're Being Shown",
+        paragraphs: [
+          "Three questions separate a substantive claim from a decorative one. Does the document name the laboratory that performed the analysis? Does it reference a specific batch or lot number rather than a product category? Does it state the methods used and the results against defined limits, rather than a summary verdict?",
+          "Beyond Better publishes a batch-specific Certificate of Analysis covering the Japanese HPLC Standard purity assay, heavy metals, microbial profile and screening against a 545-compound pesticide residue panel — available to read before purchase, not supplied on request afterwards.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "'Tested' is unregulated language — the meaningful question is who performed the test and whether they had a stake in the result.",
+      "ISO/IEC 17025 accreditation attests to a laboratory's methods, calibration and competence, not merely that it owns the equipment.",
+      "A specification sheet describes intent; a batch-specific Certificate of Analysis reports what one production run actually contained.",
+      "GMP frameworks such as 21 CFR Part 111 and FSSAI nutraceutical rules govern testing process, but do not require publication.",
+      "A substantive report names the laboratory, identifies the batch, and states methods and results against defined limits.",
+    ],
+    references: [
+      {
+        title:
+          "ISO/IEC 17025:2017 — General Requirements for the Competence of Testing and Calibration Laboratories",
+        source: "International Organization for Standardization",
+        year: "2017",
+      },
+      {
+        title: "21 CFR Part 111 — Current Good Manufacturing Practice for Dietary Supplements",
+        source: "US Food and Drug Administration",
+        year: "2007",
+      },
+      {
+        title: "ICH Q2(R1) — Validation of Analytical Procedures: Text and Methodology",
+        source: "International Council for Harmonisation",
+        year: "2005",
+      },
+    ],
+    faqs: [
+      {
+        q: "What does third-party tested actually mean?",
+        a: "That the analysis was performed by an independent laboratory with no commercial stake in the outcome, rather than by the manufacturer producing the material. It separates the party reporting the result from the party benefiting from it.",
+      },
+      {
+        q: "Is manufacturer testing worthless?",
+        a: "No — in-process manufacturer testing is a normal and necessary part of quality control. It simply cannot substitute for independent verification, because the same party produces both the product and the result.",
+      },
+      {
+        q: "What is ISO/IEC 17025?",
+        a: "The international standard for the competence of testing laboratories. Accreditation means an external body has assessed the lab's methods, equipment calibration, personnel and quality systems, and reassesses periodically.",
+      },
+      {
+        q: "Why does a batch-specific COA matter more than a specification sheet?",
+        a: "A specification sheet states what a product should contain. A batch-specific Certificate of Analysis reports what one identified production run did contain, tied to a lot number you can match to your bottle.",
+      },
+    ],
+    relatedSlugs: [
+      "berberine-hplc-purity-testing",
+      "berberine-pesticide-screening",
+      "berberine-metabolic-health",
+    ],
   },
 ];
 

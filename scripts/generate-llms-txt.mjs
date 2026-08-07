@@ -24,7 +24,7 @@ const CORE_PAGES = [
   {
     title: "Home",
     url: `${SITE_URL}/`,
-    desc: "Brand overview, the 97% Japanese HPLC Standard purity claim, and how each batch is verified.",
+    desc: "Brand overview, the Japanese Standard Berberine positioning, 97% HPLC verified purity, and 545-pesticide residue screening.",
   },
   {
     title: "Herbal Berberine HCL Extract",
@@ -106,14 +106,15 @@ async function main() {
 
   const txt = `# Beyond Better
 
-> 97% Japanese HPLC-Verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.
+> Japanese Standard Berberine with 97% HPLC verified purity, screened against 545 pesticide residues. Water-only extraction. Third-party tested. India's transparent berberine standard.
 
 Beyond Better is a science-first nutraceutical brand built on transparency and third-party testing. Its flagship product, Herbal Berberine HCL Extract, is:
 
-- Tested to 97% purity via the Japanese HPLC Standard (high-performance liquid chromatography aligned with the Japanese Pharmacopoeia (JP) assay methodology)
+- Japanese Standard Berberine — assayed to 97% purity against the Japanese Pharmacopoeia (JP) HPLC methodology, an official published reference standard rather than an internal benchmark
+- Screened against a multi-residue panel covering 545 individual pesticide compounds
 - Extracted using water only, with no solvent residue
 - Verified by an independent third-party lab
-- Backed by a published Certificate of Analysis for every batch (see Optional links below)
+- Backed by a public Certificate of Analysis for every batch (see Optional links below)
 
 Beyond Better also publishes a Research Library of educational, citation-backed articles on berberine, metabolic health, blood sugar regulation, AMPK activation, and the natural compounds discussed alongside GLP-1 medications.
 

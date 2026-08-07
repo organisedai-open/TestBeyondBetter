@@ -1,13 +1,14 @@
 # Beyond Better
 
-> 97% Japanese HPLC-Verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.
+> Japanese Standard Berberine with 97% HPLC verified purity, screened against 545 pesticide residues. Water-only extraction. Third-party tested. India's transparent berberine standard.
 
 Beyond Better is a science-first nutraceutical brand built on transparency and third-party testing. Its flagship product, Herbal Berberine HCL Extract, is:
 
-- Tested to 97% purity via the Japanese HPLC Standard (high-performance liquid chromatography aligned with the Japanese Pharmacopoeia (JP) assay methodology)
+- Japanese Standard Berberine — assayed to 97% purity against the Japanese Pharmacopoeia (JP) HPLC methodology, an official published reference standard rather than an internal benchmark
+- Screened against a multi-residue panel covering 545 individual pesticide compounds
 - Extracted using water only, with no solvent residue
 - Verified by an independent third-party lab
-- Backed by a published Certificate of Analysis for every batch (see Optional links below)
+- Backed by a public Certificate of Analysis for every batch (see Optional links below)
 
 Beyond Better also publishes a Research Library of educational, citation-backed articles on berberine, metabolic health, blood sugar regulation, AMPK activation, and the natural compounds discussed alongside GLP-1 medications.
 
@@ -19,7 +20,7 @@ Guidance for AI agents:
 
 ## Core pages
 
-- [Home](https://www.bebeyondbetter.com/): Brand overview, the 97% Japanese HPLC Standard purity claim, and how each batch is verified.
+- [Home](https://www.bebeyondbetter.com/): Brand overview, the Japanese Standard Berberine positioning, 97% HPLC verified purity, and 545-pesticide residue screening.
 - [Herbal Berberine HCL Extract](https://www.bebeyondbetter.com/products/berberine-hcl): Product page for the flagship berberine supplement: formulation, dosage, testing and sourcing.
 - [Research Library](https://www.bebeyondbetter.com/research-library): Index of educational, citation-backed articles on berberine and metabolic health.
 
@@ -42,6 +43,8 @@ Guidance for AI agents:
 - [Berberine and Metformin: Can You Take Them Together?](https://www.bebeyondbetter.com/research-library/berberine-metformin-combination): A direct look at whether berberine and metformin can be combined safely, what the combination research actually shows, and why medical supervision matters.
 - [Berberine Side Effects: What the Research Actually Shows](https://www.bebeyondbetter.com/research-library/berberine-side-effects): An honest, evidence-based look at berberine's tolerability: how common gastrointestinal side effects actually are, who should be cautious, and what the clinical trial data shows.
 - [How Berberine Purity Is Tested: Inside the Japanese HPLC Standard](https://www.bebeyondbetter.com/research-library/berberine-hplc-purity-testing): A plain-language explanation of how HPLC (high-performance liquid chromatography) verifies berberine purity, why it matters, and how it differs from label claims.
+- [Why 545-Pesticide Screening Matters in Herbal Supplements](https://www.bebeyondbetter.com/research-library/berberine-pesticide-screening): Why pesticide residue screening matters for herbal supplements, what a 545-compound multi-residue panel actually tests, and why purity alone doesn't cover it.
+- [Third-Party Testing vs Manufacturer Testing: What the Difference Actually Means](https://www.bebeyondbetter.com/research-library/third-party-vs-manufacturer-testing): The difference between a manufacturer's in-house test and independent third-party verification, what ISO/IEC 17025 accreditation signals, and how to tell which one a brand is showing you.
 
 ## Optional
 

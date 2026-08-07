@@ -16,7 +16,7 @@ import {
   ArrowRight,
   ShieldCheck,
   FlaskConical,
-  Droplets,
+  Leaf,
   FileText,
   Clock,
   Plus,
@@ -32,16 +32,20 @@ import {
 export const Route = createFileRoute("/research-library/")({
   head: () => ({
     meta: [
-      { title: "Research Library — Berberine Science | Beyond Better" },
+      { title: "Research Library — Japanese Standard Berberine Science | Beyond Better" },
       {
         name: "description",
         content:
-          "Evidence-based research on berberine, blood sugar, AMPK activation, purity testing, and metabolic health from Beyond Better.",
+          "Evidence-based research on berberine: Japanese HPLC Standard purity testing, pesticide residue screening, third-party verification, blood sugar and metabolic health.",
       },
-      { property: "og:title", content: "Research Library — Berberine Science | Beyond Better" },
+      {
+        property: "og:title",
+        content: "Research Library — Japanese Standard Berberine Science | Beyond Better",
+      },
       {
         property: "og:description",
-        content: "Science-backed education on berberine, metabolic health and supplement quality.",
+        content:
+          "Science-backed education on berberine purity, Japanese HPLC Standard testing, pesticide screening and supplement quality.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.bebeyondbetter.com/research-library" },
@@ -85,7 +89,11 @@ const FAQS = [
   },
   {
     q: "How is Beyond Better berberine different?",
-    a: "Beyond Better publishes 97%+ Japanese HPLC-verified purity, uses water-only extraction, and provides third-party Certificates of Analysis for every batch — full transparency over marketing claims.",
+    a: "Beyond Better is Japanese Standard Berberine: assayed to the Japanese Pharmacopoeia HPLC method at 97% verified purity, screened against a 545-pesticide residue panel, extracted with water only, and published with a third-party Certificate of Analysis for every batch — verifiable documents rather than marketing claims.",
+  },
+  {
+    q: "Is Beyond Better berberine tested for pesticide residues?",
+    a: "Yes. Because berberine is extracted from Berberis aristata root — a farmed botanical — the raw material is screened against a multi-residue panel covering 545 individual pesticide compounds, separately from the Japanese HPLC Standard purity assay, heavy metals and microbial testing.",
   },
   {
     q: "Are herbal extracts better than synthetic alternatives?",
@@ -342,18 +350,22 @@ function TrustSection() {
     {
       icon: ShieldCheck,
       title: "97% Purity Verified",
-      desc: "Every batch undergoes advanced purity testing.",
+      desc: "Berberine HCl content confirmed by HPLC assay, not estimated from extract weight.",
     },
     {
       icon: FlaskConical,
       title: "Japanese HPLC Standard Testing",
-      desc: "Precision verification beyond industry standards.",
+      desc: "Assayed against the Japanese Pharmacopoeia method, an external published reference.",
     },
-    { icon: Droplets, title: "Water Only Extraction", desc: "No chemical solvent contamination." },
+    {
+      icon: Leaf,
+      title: "545 Pesticides Screened",
+      desc: "Raw material tested against a 545-compound multi-residue pesticide panel.",
+    },
     {
       icon: FileText,
-      title: "Full Transparency",
-      desc: "Every product backed by verifiable quality reports.",
+      title: "Public Batch COA",
+      desc: "Third-party Certificate of Analysis published for every production batch.",
     },
   ];
   return (

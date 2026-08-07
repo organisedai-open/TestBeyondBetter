@@ -56,8 +56,24 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
     a: "A plant compound studied for healthy glucose, lipid balance and energy metabolism.",
   },
   {
+    q: "What is Japanese Standard Berberine?",
+    a: "Japanese Standard Berberine is berberine HCl whose identity and purity have been verified against the Japanese Pharmacopoeia (JP) HPLC assay method — an official, published reference standard comparable in role to the United States Pharmacopeia (USP). It means the purity figure comes from an independent reference methodology rather than a manufacturer's own internal benchmark. Beyond Better's berberine is assayed to this standard for every production batch, verified at 97% purity, and the Certificate of Analysis is published publicly.",
+  },
+  {
     q: "Why does purity actually matter?",
     a: "Berberine HCl below 97% purity often contains residual solvents, fillers, or degraded compound left over from cheaper extraction methods. Most drugstore — and even many premium — brands sit between 70–90% purity without disclosing it. Ours is tested to the Japanese HPLC Standard (high-performance liquid chromatography aligned with the Japanese Pharmacopoeia), the same rigor used in pharmaceutical testing, and every batch result is published, not just claimed.",
+  },
+  {
+    q: "What does 545 pesticides screened mean?",
+    a: "It means the raw material is tested against a multi-residue analytical panel covering 545 individual pesticide compounds, rather than a handful of common ones. Berberine is extracted from Berberis aristata root — an agricultural crop — so residue screening tests what the plant absorbed before it ever reached the extractor. Beyond Better screens against a 545-pesticide panel in addition to the Japanese HPLC Standard purity assay, heavy metals and microbial testing.",
+  },
+  {
+    q: "Why does pesticide screening matter for herbal supplements?",
+    a: "A purity assay answers how much of the active compound is present; it does not answer what else came along with it. Because herbal extracts start as farmed botanicals, pesticide residues are a separate contamination pathway that a purity number alone will never reveal. Screening the two independently — purity by HPLC, residues by a multi-residue panel — is what makes a quality claim complete rather than partial.",
+  },
+  {
+    q: "Why does Japanese HPLC testing matter?",
+    a: "High-performance liquid chromatography separates and quantifies the individual compounds in a sample, so it can confirm the specific molecule present rather than just the total weight of extract used. Running that assay against the Japanese Pharmacopoeia method means the result is measured against an external, published standard — so the number can be checked rather than taken on trust.",
   },
   {
     q: "How do I take it?",
@@ -140,7 +156,7 @@ function OrgJsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}${logoLeaf}`,
     description:
-      "Beyond Better manufactures Japanese HPLC-verified, third-party tested Berberine HCL supplements using water-only extraction, with a published Certificate of Analysis for every batch.",
+      "Beyond Better manufactures Japanese Standard Berberine — Berberine HCl assayed to Japanese Pharmacopoeia HPLC methodology at 97% verified purity, screened against a 545-pesticide residue panel, extracted with water only, third-party tested, with a public Certificate of Analysis published for every batch.",
     // TODO(founder): add sameAs (real social handles) and contactPoint (support
     // email/phone) once available — intentionally omitted rather than filled with
     // placeholders.
@@ -166,21 +182,25 @@ function WebSiteJsonLd() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Beyond Better — Berberine HCL 97% " },
+      { title: "Japanese Standard Berberine — 545 Pesticides Screened | Beyond Better" },
       {
         name: "description",
         content:
-          "97% Japanese HPLC-verified Berberine HCL. Water-only extraction. Third-party tested. India's transparent berberine standard.",
+          "Japanese Standard Berberine with 97% HPLC verified purity, screened against 545 pesticide residues. Water-only extraction, third-party tested, public Certificate of Analysis for every batch.",
       },
       {
         name: "keywords",
-        content: "berberine, berberine HCL, best berberine India, HPLC berberine, metabolic health",
+        content:
+          "Japanese Standard Berberine, 545 pesticides screened, Japanese HPLC berberine, 97% HPLC berberine, third party tested berberine, public COA berberine, premium berberine HCl",
       },
-      { property: "og:title", content: "Beyond Better — The Transparent Berberine Standard" },
+      {
+        property: "og:title",
+        content: "Japanese Standard Berberine — 545 Pesticides Screened | Beyond Better",
+      },
       {
         property: "og:description",
         content:
-          "97% Japanese HPLC-verified Berberine HCL. Third-party tested. Every batch, every number, in the open.",
+          "97% HPLC verified purity, screened against 545 pesticide residues, third-party tested. Every batch, every number, in the open.",
       },
       { property: "og:image", content: `${SITE_URL}${productTube}` },
       { property: "og:url", content: SITE_URL },
@@ -437,7 +457,8 @@ function Hero() {
   return (
     <>
       <h1 className="sr-only">
-        Beyond Better — 97% Japanese HPLC Verified Berberine HCL Supplement
+        Beyond Better — Japanese Standard Berberine HCl, 97% HPLC Verified and Screened for 545
+        Pesticide Residues
       </h1>
       <DesktopHero />
       <MobileHero />
@@ -478,7 +499,7 @@ function DesktopHero() {
               marginBottom: 16,
             }}
           >
-            BEYOND BETTER · BERBERINE HCL
+            BEYOND BETTER · JAPANESE STANDARD BERBERINE
           </p>
           <p
             className="font-display"
@@ -503,7 +524,8 @@ function DesktopHero() {
               maxWidth: 315,
             }}
           >
-            Most berberine brands ask you to trust the label. We publish the batch report instead.
+            Japanese Standard Berberine — 97% HPLC verified, 545 pesticides screened, every batch
+            report published.
           </p>
           <div className="flex items-center gap-5" style={{ marginTop: 28 }}>
             <button
@@ -569,7 +591,7 @@ function DesktopHero() {
               ),
               sub: "Daily Glucose Support",
             },
-            { icon: "mountain", title: "Japanese HPLC Standard", sub: "Precision Tested" },
+            { icon: "mountain", title: "Japanese HPLC Standard", sub: "545 Pesticides Screened" },
             {
               icon: "leaf-shield",
               title: (
@@ -700,7 +722,8 @@ function MobileHero() {
             maxWidth: 330,
           }}
         >
-          Most berberine brands ask you to trust the label. We publish the batch report instead.
+          Japanese Standard Berberine — 97% HPLC verified, 545 pesticides screened, every batch
+          report published.
         </p>
         <a
           href="#science"
@@ -732,7 +755,7 @@ function MobileHero() {
               ),
               sub: "Daily Glucose Support",
             },
-            { icon: "mountain", title: "Japanese HPLC Standard", sub: "Precision Tested" },
+            { icon: "mountain", title: "Japanese HPLC Standard", sub: "545 Pesticides Screened" },
             {
               icon: "leaf-shield",
               title: (
@@ -823,7 +846,7 @@ function MobileHero() {
 
 function TrustStrip() {
   const badges = [
-    { icon: FlaskConical, title: "HPLC VERIFIED" },
+    { icon: FlaskConical, title: "545 PESTICIDES SCREENED" },
     { icon: Mountain, title: "JAPANESE HPLC STANDARD" },
     { icon: null, label: "97%", title: "VERIFIED PURITY" },
   ];
@@ -868,12 +891,25 @@ function TrustStrip() {
 }
 
 function Comparison() {
-  const rows = [
-    { k: "97% HPLC Purity", us: true, them: false },
-    { k: "Third-Party Tested", us: true, them: false },
-    { k: "Public COA Reports", us: true, them: false },
+  // `slug` turns a row label into a contextual link to the article explaining that claim —
+  // the rows a visitor is most likely to want substantiated are the ones worth linking.
+  const rows: { k: string; us: boolean; them: boolean; slug?: string }[] = [
+    { k: "97% HPLC Verified Purity", us: true, them: false },
+    {
+      k: "545 Pesticides Screened",
+      us: true,
+      them: false,
+      slug: "berberine-pesticide-screening",
+    },
+    {
+      k: "Third-Party Tested",
+      us: true,
+      them: false,
+      slug: "third-party-vs-manufacturer-testing",
+    },
+    { k: "Public Batch COA", us: true, them: false },
     { k: "Water-Only Extraction", us: true, them: false },
-    { k: "Japanese HPLC Standard", us: true, them: false },
+    { k: "Japanese HPLC Standard", us: true, them: false, slug: "berberine-hplc-purity-testing" },
   ];
   return (
     <section
@@ -892,8 +928,16 @@ function Comparison() {
                   The difference
                 </p>
                 <h2 className="mt-4 font-display text-3xl leading-tight md:text-5xl">
-                  Why Beyond Better.
+                  What makes Beyond Better different.
                 </h2>
+                <p
+                  className="mt-5 max-w-md text-sm leading-relaxed"
+                  style={{ color: "color-mix(in oklab, var(--ivory) 78%, transparent)" }}
+                >
+                  Every batch is assayed to the Japanese HPLC Standard, screened against a
+                  545-pesticide residue panel, verified by an independent third-party lab, and
+                  published as a Certificate of Analysis you can open before you buy.
+                </p>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
@@ -940,10 +984,10 @@ function Comparison() {
                         className="text-left font-normal"
                         style={{ color: "color-mix(in oklab, var(--ivory) 92%, transparent)" }}
                       >
-                        {r.k === "Japanese HPLC Standard" ? (
+                        {r.slug ? (
                           <Link
                             to="/research-library/$slug"
-                            params={{ slug: "berberine-hplc-purity-testing" }}
+                            params={{ slug: r.slug }}
                             className="underline decoration-dotted underline-offset-4 hover:opacity-80"
                           >
                             {r.k}
@@ -985,7 +1029,7 @@ function Comparison() {
             >
               <img
                 src={berberineComparison}
-                alt="Beyond Better berberine comparison visual"
+                alt="Japanese Standard Berberine compared against ordinary berberine supplements on purity and testing"
                 className="block h-full w-full object-cover"
                 width={880}
                 height={1100}
@@ -1005,7 +1049,7 @@ function Benefits() {
   const { ctaLabel } = usePreorderStatus();
   const items = [
     "Most supplement brands blend, dilute, or round up their purity numbers, because nobody checks.",
-    "We built Beyond Better for the people who do — the ones who want the batch report, not just the buzzword.",
+    "Beyond Better is assayed to the Japanese HPLC Standard and screened against 545 pesticide residues — then the batch report is published.",
     "Better was never enough. We wanted proof.",
   ];
   return (
@@ -1020,7 +1064,7 @@ function Benefits() {
               >
                 <img
                   src={berberineIndustrySolution}
-                  alt="Beyond Better berberine industry solution visual"
+                  alt="Beyond Better Japanese Standard Berberine — 97% HPLC verified purity and 545 pesticides screened"
                   className="block h-full w-full object-cover"
                   width={900}
                   height={1100}
@@ -1087,7 +1131,7 @@ function LabReport() {
         >
           <img
             src={transparencyHero}
-            alt="Beyond Better Berberine HCL — lab tested supplement"
+            alt="Beyond Better Japanese Standard Berberine Certificate of Analysis — third-party batch report"
             className="absolute inset-0 h-full w-full select-none object-cover"
             width={1920}
             height={1071}
@@ -1138,8 +1182,9 @@ function LabReport() {
                 color: "#355142",
               }}
             >
-              This is a real Certificate of Analysis from a recent production batch — not a stock
-              photo, not a summary. The same report ships with every batch we sell.
+              This is a real Certificate of Analysis from a recent production batch — Japanese HPLC
+              Standard assay, heavy metals, microbial profile, and screening against 545 pesticide
+              residues. Not a stock photo, not a summary. The same report ships with every batch.
             </p>
             <div>
               <a
@@ -1164,7 +1209,7 @@ function LabReport() {
           <div className="relative w-full">
             <img
               src={transparencyHero}
-              alt="Beyond Better Berberine HCL — lab tested supplement"
+              alt="Beyond Better Japanese Standard Berberine Certificate of Analysis — third-party batch report"
               className="block w-full h-auto select-none"
               width={1920}
               height={1071}
@@ -1204,8 +1249,8 @@ function LabReport() {
                 <span style={{ color: "var(--forest)" }}>Every batch verified.</span>
               </h2>
               <p style={{ marginTop: 6, fontSize: "12px", lineHeight: 1.55, color: "#355142" }}>
-                This is a real Certificate of Analysis from a recent production batch — not a stock
-                photo, not a summary. The same report ships with every batch we sell.
+                A real Certificate of Analysis from a recent batch — Japanese HPLC Standard assay,
+                heavy metals, microbial profile, and 545 pesticide residues screened.
               </p>
               <a
                 href="/berberine-coa.pdf"
@@ -1314,7 +1359,7 @@ function Ingredients() {
         <Reveal>
           <img
             src={berberineCapsule}
-            alt="Berberine HCL extract"
+            alt="97% HPLC verified Beyond Better berberine HCl capsules, water-only extraction"
             className="w-full object-contain"
             width={700}
             height={700}
@@ -1330,8 +1375,8 @@ function Ingredients() {
               One ingredient. Done right.
             </h2>
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
-              Pure Berberine HCL — extracted with water, verified at 97% by Japanese HPLC standard.
-              Nothing else.
+              Pure Berberine HCL — extracted with water, verified at 97% by Japanese HPLC Standard
+              assay, and screened against 545 pesticide residues. Nothing else.
             </p>
             <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
               Most extractors use solvents to hit purity targets faster and cheaper. We use a
@@ -1467,42 +1512,42 @@ function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
   const { ctaLabel } = usePreorderStatus();
   const bullets = [
-    "500mg HPLC-verified per capsule — not a proprietary blend hiding the real number",
-    "97% purity, tested to Japanese HPLC standard — most berberine on the market sits between 70–90%",
-    "No fillers, no binders, no rounding up — built for people who read the label before the reviews",
+    "500mg per capsule, verified by Japanese HPLC Standard assay — not a proprietary blend hiding the real number",
+    "97% HPLC verified purity — most berberine on the market sits between 70–90%",
+    "Screened against 545 pesticide residues, with the third-party Certificate of Analysis published for every batch",
   ];
   const galleryImages = [
     {
       src: innerBottle,
-      alt: "Beyond Better berberine bottle with capsules",
+      alt: "Beyond Better Japanese Standard Berberine bottle with capsules",
       thumbnailAlt: "Bottle front view",
       width: 384,
       height: 576,
     },
     {
       src: berberineBenefits,
-      alt: "Beyond Better berberine benefits visual",
+      alt: "Japanese Standard Berberine benefits — 97% HPLC verified purity",
       thumbnailAlt: "Benefits visual",
       width: 384,
       height: 576,
     },
     {
       src: berberineSugarControl,
-      alt: "Beyond Better berberine sugar control product visual",
+      alt: "Beyond Better berberine for healthy blood sugar support",
       thumbnailAlt: "Sugar control visual",
       width: 384,
       height: 576,
     },
     {
       src: berberineIngredientInfo,
-      alt: "Beyond Better berberine ingredient information visual",
+      alt: "Berberine HCl ingredient detail — water-only extraction, no fillers",
       thumbnailAlt: "Ingredient information visual",
       width: 384,
       height: 576,
     },
     {
       src: berberineDirectionToUse,
-      alt: "Beyond Better berberine directions to use visual",
+      alt: "How to take Beyond Better berberine — 500mg twice daily with meals",
       thumbnailAlt: "Directions to use visual",
       width: 384,
       height: 576,
