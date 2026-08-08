@@ -245,9 +245,9 @@ function Landing() {
   }, []);
 
   return (
-    // pb clears the mobile-only StickyBuy bar (countdown + price/CTA + cancellation badge ≈ 175px)
-    // so the end of the footer isn't stranded behind it. md:pb-0 because the bar is md:hidden.
-    <div className="bg-background text-foreground pb-48 md:pb-0">
+    // pb clears the mobile-only StickyBuy bar (price/CTA + cancellation badge ≈ 122px) so the end
+    // of the footer isn't stranded behind it. md:pb-0 because the bar is md:hidden.
+    <div className="bg-background text-foreground pb-36 md:pb-0">
       <OrgJsonLd />
       <WebSiteJsonLd />
       <FaqJsonLd />
@@ -1512,7 +1512,7 @@ function FAQ() {
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
+  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   const bullets = [
     "500mg per capsule, verified by Japanese HPLC Standard assay — not a proprietary blend hiding the real number",
     "97% HPLC verified purity — most berberine on the market sits between 70–90%",
@@ -1638,6 +1638,20 @@ function FinalCTA() {
               </p>
             </Reveal>
 
+            {preorder && (
+              <Reveal delay={0.22}>
+                <div className="mt-6 flex flex-col items-center gap-2 lg:mt-4">
+                  <RestockCountdown variant="hero" className="justify-center" />
+                  <p
+                    className="text-[10px] uppercase tracking-[0.2em]"
+                    style={{ color: "color-mix(in oklab, var(--forest) 72%, transparent)" }}
+                  >
+                    Until the first batch ships
+                  </p>
+                </div>
+              </Reveal>
+            )}
+
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-col items-center gap-3 lg:mt-5">
                 <PriceDisplay variant="block" align="center" />
@@ -1669,7 +1683,7 @@ function FinalCTA() {
 
 function StickyBuy() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
+  const { ctaLabel } = usePreorderStatus();
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-40 border-t md:hidden"
@@ -1679,14 +1693,6 @@ function StickyBuy() {
         borderColor: "color-mix(in oklab, var(--charcoal) 10%, transparent)",
       }}
     >
-      {preorder && (
-        <div
-          className="flex items-center justify-center border-b py-1.5"
-          style={{ borderColor: "color-mix(in oklab, var(--charcoal) 8%, transparent)" }}
-        >
-          <RestockCountdown variant="compact" />
-        </div>
-      )}
       <div className="flex items-center justify-between gap-3 px-4 py-3">
         <div className="flex flex-col leading-tight">
           <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
