@@ -245,7 +245,9 @@ function Landing() {
   }, []);
 
   return (
-    <div className="bg-background text-foreground pb-20 md:pb-0">
+    // pb clears the mobile-only StickyBuy bar (countdown + price/CTA + cancellation badge ≈ 175px)
+    // so the end of the footer isn't stranded behind it. md:pb-0 because the bar is md:hidden.
+    <div className="bg-background text-foreground pb-48 md:pb-0">
       <OrgJsonLd />
       <WebSiteJsonLd />
       <FaqJsonLd />
@@ -574,7 +576,7 @@ function DesktopHero() {
               >
                 {PREORDER_RESTOCK_CAPTION}
               </p>
-              <CancellationNote style={{ marginTop: 8, maxWidth: 280, pointerEvents: "auto" }} />
+              <CancellationNote style={{ marginTop: 12 }} />
             </div>
           )}
         </div>
@@ -1704,7 +1706,7 @@ function StickyBuy() {
           <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
         </button>
       </div>
-      <CancellationNote className="pb-2 text-center" style={{ fontSize: 9.5 }} />
+      <CancellationNote className="pb-2 text-center" />
     </div>
   );
 }

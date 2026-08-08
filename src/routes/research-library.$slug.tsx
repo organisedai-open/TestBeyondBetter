@@ -681,7 +681,7 @@ function ArticlePage() {
                     >
                       {ctaLabel} <ArrowRight className="h-3.5 w-3.5" />
                     </button>
-                    <CancellationNote className="mt-3" style={{ opacity: 0.85 }} />
+                    <CancellationNote className="mt-3" />
                   </div>
                 </div>
               </aside>
