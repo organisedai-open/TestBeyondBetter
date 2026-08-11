@@ -115,13 +115,11 @@ function BreadcrumbJsonLd() {
 export const Route = createFileRoute("/products/berberine-hcl")({
   head: () => ({
     meta: [
-      {
-        title: "Japanese Standard Berberine HCl 500mg — 545 Pesticides Screened | Beyond Better",
-      },
+      { title: "Japanese Standard Berberine HCl 500mg | Beyond Better" },
       {
         name: "description",
         content:
-          "Japanese Standard Berberine HCl, 500mg per capsule, 60 capsules. 97% HPLC verified purity, screened against 545 pesticide residues, water-only extraction, third-party tested with a public Certificate of Analysis per batch.",
+          "Japanese Standard Berberine HCl, 500mg x 60 capsules. 97% HPLC verified purity, 545 pesticides screened, third-party tested with a public batch COA.",
       },
       {
         property: "og:title",

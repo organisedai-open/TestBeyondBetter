@@ -289,7 +289,7 @@ export const ARTICLES: Article[] = [
       },
     ],
     relatedSlugs: [
-      "berberine-metabolic-health",
+      "berberine-vs-ozempic",
       "berberine-metformin-combination",
       "berberine-blood-sugar",
     ],
@@ -490,7 +490,7 @@ export const ARTICLES: Article[] = [
         a: "Measurable changes occur even without major dietary change, but combined with reduced refined carbohydrate intake, results are substantially greater.",
       },
     ],
-    relatedSlugs: ["berberine-insulin-resistance", "berberine-metabolic-health", "berberine-pcos"],
+    relatedSlugs: ["berberine-insulin-resistance", "berberine-vs-ozempic", "berberine-pcos"],
   },
   {
     slug: "berberine-insulin-resistance",
@@ -584,7 +584,7 @@ export const ARTICLES: Article[] = [
       },
     ],
     relatedSlugs: [
-      "berberine-metabolic-health",
+      "berberine-cognitive-function",
       "berberine-vs-metformin",
       "berberine-inflammation",
     ],
@@ -843,7 +843,7 @@ export const ARTICLES: Article[] = [
     relatedSlugs: [
       "berberine-insulin-resistance",
       "berberine-athletes-metabolism",
-      "berberine-longevity",
+      "berberine-cognitive-function",
     ],
   },
   {
@@ -1464,7 +1464,7 @@ export const ARTICLES: Article[] = [
     title: "Berberine Side Effects: What the Research Actually Shows",
     seoTitle: "Berberine Side Effects & Safety — What Research Shows | Beyond Better",
     seoDescription:
-      "An honest, evidence-based look at berberine's tolerability: how common gastrointestinal side effects actually are, who should be cautious, and what the clinical trial data shows.",
+      "An evidence-based look at berberine tolerability: how common gastrointestinal effects really are, who should be cautious, and what trials show.",
     category: "Safety",
     tag: "Safety",
     readTime: "9 min read",
@@ -1560,7 +1560,7 @@ export const ARTICLES: Article[] = [
     title: "How Berberine Purity Is Tested: Inside the Japanese HPLC Standard",
     seoTitle: "Japanese HPLC Standard: How Berberine Purity Is Tested | Beyond Better",
     seoDescription:
-      "A plain-language explanation of how HPLC (high-performance liquid chromatography) verifies berberine purity, why it matters, and how it differs from label claims.",
+      "How the Japanese HPLC Standard verifies berberine purity, what the assay actually measures, and why it cannot answer contamination on its own.",
     category: "Quality & Testing",
     tag: "Transparency",
     readTime: "8 min read",
@@ -1773,9 +1773,9 @@ export const ARTICLES: Article[] = [
   {
     slug: "third-party-vs-manufacturer-testing",
     title: "Third-Party Testing vs Manufacturer Testing: What the Difference Actually Means",
-    seoTitle: "Third-Party Tested Berberine: Why Independent Testing Matters | Beyond Better",
+    seoTitle: "Third-Party Tested Berberine: What It Means | Beyond Better",
     seoDescription:
-      "The difference between a manufacturer's in-house test and independent third-party verification, what ISO/IEC 17025 accreditation signals, and how to tell which one a brand is showing you.",
+      "Independent third-party testing vs a manufacturer's own lab: what ISO/IEC 17025 accreditation signals, and how to tell which one a brand is showing you.",
     category: "Quality & Testing",
     tag: "Transparency",
     readTime: "6 min read",

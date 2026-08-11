@@ -186,7 +186,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Japanese Standard Berberine with 97% HPLC verified purity, screened against 545 pesticide residues. Water-only extraction, third-party tested, public Certificate of Analysis for every batch.",
+          "Japanese Standard Berberine, 97% HPLC verified and screened against 545 pesticide residues. Third-party tested with a public COA for every batch.",
       },
       {
         name: "keywords",

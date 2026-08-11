@@ -27,10 +27,14 @@ async function main() {
     logLevel: "error",
   });
 
-  let articles, toIsoDate;
+  let articles, toIsoDate, policyPages, policiesHubPath;
   try {
     ({ ARTICLES: articles } = await server.ssrLoadModule("/src/data/articles.ts"));
     ({ toIsoDate } = await server.ssrLoadModule("/src/lib/dates.ts"));
+    // Read the legal pages from the same list the footer and /policies hub render from, so a
+    // page can never be live and linked but missing from the sitemap again.
+    ({ POLICY_PAGES: policyPages, POLICIES_HUB_PATH: policiesHubPath } =
+      await server.ssrLoadModule("/src/lib/seo.ts"));
   } finally {
     await server.close();
   }
@@ -44,13 +48,23 @@ async function main() {
       lastmod: toIsoDate(a.publishedDate),
       priority: "0.7",
     })),
+    // Legal pages: indexable and linked from every footer, so they belong in the sitemap.
+    // Low priority — they exist to be findable, not to compete with commercial pages.
+    ...[{ path: policiesHubPath }, ...policyPages].map((p) => ({
+      loc: `${SITE_URL}${p.path}`,
+      lastmod: today,
+      priority: "0.3",
+    })),
   ];
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     urls
-      .map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority></url>`)
+      .map(
+        (u) =>
+          `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority></url>`,
+      )
       .join("\n") +
     `\n</urlset>\n`;
 

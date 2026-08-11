@@ -119,8 +119,12 @@ export function buildMerchantReturnPolicyJsonLd() {
     returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
     merchantReturnDays: 2,
     refundType: "https://schema.org/FullRefund",
-    returnPolicyDescription:
-      "Refunds are available only if the wrong product is delivered, the product arrives damaged, or the shipment is confirmed lost by the courier. Customers must contact us within 48 hours of delivery.",
+    // The human-readable terms live on the linked page. There is deliberately no
+    // `returnPolicyDescription` here: despite reading like a plausible field, it is not part of
+    // the MerchantReturnPolicy vocabulary, and shipping it produced the schema.org validation
+    // error Ahrefs flagged on /refund-policy. `merchantReturnLink` is the supported way to point
+    // at the full policy.
+    merchantReturnLink: `${SITE_URL}/refund-policy`,
   } as const;
 }
 
@@ -204,7 +208,7 @@ export function buildPolicyPageHead({
 export function buildPoliciesHubHead() {
   const title = "Policies — Beyond Better";
   const description =
-    "Beyond Better's privacy, terms, refund, cancellation and shipping policies in one place.";
+    "Beyond Better's privacy, terms, refund, cancellation and shipping policies in one place — including free cancellation any time before your order ships.";
   const url = `${SITE_URL}${POLICIES_HUB_PATH}`;
   const ogImage = `${SITE_URL}${logoLeaf}`;
 

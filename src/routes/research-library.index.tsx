@@ -36,7 +36,7 @@ export const Route = createFileRoute("/research-library/")({
       {
         name: "description",
         content:
-          "Evidence-based research on berberine: Japanese HPLC Standard purity testing, pesticide residue screening, third-party verification, blood sugar and metabolic health.",
+          "Berberine research: Japanese HPLC Standard purity testing, 545-pesticide residue screening, third-party verification, blood sugar and metabolic health.",
       },
       {
         property: "og:title",

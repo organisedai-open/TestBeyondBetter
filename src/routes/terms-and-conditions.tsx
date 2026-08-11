@@ -17,7 +17,7 @@ import { buildPolicyPageHead } from "@/lib/seo";
 const PATH = "/terms-and-conditions";
 const TITLE = "Terms & Conditions — Beyond Better";
 const DESCRIPTION =
-  "The terms that govern purchases from Beyond Better, our premium science-backed dietary supplement store.";
+  "The terms that govern purchases from Beyond Better — ordering, pricing, acceptable use, and your rights and responsibilities as a customer.";
 const LAST_UPDATED = "August 2026";
 
 export const Route = createFileRoute("/terms-and-conditions")({

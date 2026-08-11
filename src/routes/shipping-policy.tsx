@@ -18,7 +18,7 @@ import { buildPolicyPageHead } from "@/lib/seo";
 const PATH = "/shipping-policy";
 const TITLE = "Shipping Policy — Beyond Better";
 const DESCRIPTION =
-  "Shipping coverage, processing times and delivery timelines for Beyond Better orders shipped worldwide.";
+  "Shipping coverage, processing times and delivery timelines for Beyond Better orders, which ship worldwide from the first verified batch onward.";
 const LAST_UPDATED = "August 2026";
 
 const FAQS = [
