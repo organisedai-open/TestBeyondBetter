@@ -13,14 +13,20 @@ type ProductImageGalleryProps = {
   className?: string;
 };
 
+/** Horizontal travel required before a drag counts as a swipe rather than a tap. */
+const SWIPE_THRESHOLD_PX = 40;
+
 export function ProductImageGallery({ images, className = "" }: ProductImageGalleryProps) {
   const safeImages = useMemo(() => images.filter((img) => img?.src), [images]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [previousIndex, setPreviousIndex] = useState<number | null>(null);
   const [fadeToken, setFadeToken] = useState(0);
-  const [naturalRatios, setNaturalRatios] = useState<Record<string, { width: number; height: number }>>({});
+  const [naturalRatios, setNaturalRatios] = useState<
+    Record<string, { width: number; height: number }>
+  >({});
   const clearPreviousTimeoutRef = useRef<number | null>(null);
   const thumbRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const swipeStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
 
   useEffect(() => {
     if (!safeImages.length) {
@@ -35,7 +41,10 @@ export function ProductImageGallery({ images, className = "" }: ProductImageGall
         }
         setNaturalRatios((prev) => {
           const existing = prev[img.src];
-          if (existing?.width === preload.naturalWidth && existing?.height === preload.naturalHeight) {
+          if (
+            existing?.width === preload.naturalWidth &&
+            existing?.height === preload.naturalHeight
+          ) {
             return prev;
           }
           return {
@@ -82,6 +91,44 @@ export function ProductImageGallery({ images, className = "" }: ProductImageGall
     }, 320);
   };
 
+  // Swipe is touch/pen only. A mouse drag on desktop shouldn't hijack image selection —
+  // pointer users already have the thumbnails, and claiming mouse drags would also fight
+  // the browser's native image drag.
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse") {
+      return;
+    }
+    swipeStartRef.current = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+  };
+
+  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+
+    if (!start || start.pointerId !== event.pointerId || safeImages.length < 2) {
+      return;
+    }
+
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+
+    // Ignore taps, and ignore drags that travelled further vertically than horizontally —
+    // those are the user scrolling the page, not changing the image.
+    if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) <= Math.abs(dy)) {
+      return;
+    }
+
+    const total = safeImages.length;
+    // Wraps at both ends, matching the arrow-key behaviour on the thumbnails.
+    selectImage(dx < 0 ? (activeIndex + 1) % total : (activeIndex - 1 + total) % total);
+  };
+
+  // Fires when the browser takes the gesture over for scrolling — drop the pending swipe so
+  // the next pointerup can't be read as a stale one.
+  const onPointerCancel = () => {
+    swipeStartRef.current = null;
+  };
+
   const onThumbKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
       return;
@@ -118,7 +165,15 @@ export function ProductImageGallery({ images, className = "" }: ProductImageGall
     <div className={className}>
       <div
         className="relative mx-auto w-full max-w-[384px] lg:max-w-[500px]"
-        style={{ aspectRatio: `${activeWidth} / ${activeHeight}` }}
+        // pan-y keeps vertical page scrolling native; pinch-zoom is kept explicitly so the
+        // swipe handler doesn't cost users the ability to zoom into the product photo.
+        style={{
+          aspectRatio: `${activeWidth} / ${activeHeight}`,
+          touchAction: "pan-y pinch-zoom",
+        }}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerCancel}
         aria-live="polite"
         aria-atomic="true"
       >
