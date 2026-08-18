@@ -27,15 +27,17 @@ import {
  * well because it is the event that fires most reliably in practice, and the idempotency
  * layer makes receiving both for one order a no-op.
  *
- * `order.placed` is the COD case. Nothing is captured at checkout for a Cash on Delivery
- * order, so neither of the prepaid events ever fires and the order silently never reached
- * Shiprocket. Magic Checkout announces it with `order.placed`, and the order lands in
- * Razorpay with status `placed` (see RazorpayOrder.status).
+ * `payment.pending` is the COD case. Nothing is captured at checkout for a Cash on Delivery
+ * order, so neither prepaid event ever fires and the order silently never reached Shiprocket.
+ * Magic Checkout instead creates a payment with `method: "cod"` in `pending` (see
+ * RazorpayPayment), which is what raises `payment.pending`.
  *
- * Fulfilment re-reads the order from Razorpay and refuses anything not actually payable
- * (see fulfilRazorpayOrder), so listening here can never ship an unpaid prepaid order.
+ * `payment.pending` is not COD-exclusive — some prepaid methods also sit pending before they
+ * succeed or fail. That is handled downstream rather than here: fulfilment re-reads the order
+ * from Razorpay and ships only what is genuinely payable (see isShippable), so a pending card
+ * payment that later fails never produces a shipment.
  */
-const FULFILLABLE_EVENTS = new Set(["order.paid", "payment.captured", "order.placed"]);
+const FULFILLABLE_EVENTS = new Set(["order.paid", "payment.captured", "payment.pending"]);
 
 function json(body: unknown, status: number): Response {
   return new Response(JSON.stringify(body), {

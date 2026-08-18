@@ -35,13 +35,21 @@ export type FulfilmentOutcome =
   | { status: "not_ready"; orderStatus: string };
 
 /**
- * An order is shippable when money is either secured (prepaid, `paid`) or committed on
- * delivery (COD, `placed`). Anything still in `created` has had no successful payment and
- * no COD commitment, so it must not produce a shipment — this is what makes subscribing to
- * `order.placed` safe even if Razorpay ever emits it before a prepaid payment completes.
+ * An order is shippable when money is either secured (prepaid) or committed on delivery (COD).
+ *
+ * This is what makes subscribing to `payment.pending` safe: that event is not COD-exclusive,
+ * so a pending card or UPI payment also reaches here. Such an order is still `created` with
+ * nothing paid and no COD commitment, so it is refused and no shipment is produced — if the
+ * payment later succeeds, `payment.captured` arrives and ships it then.
  */
-function isShippable(order: RazorpayOrder): boolean {
-  return order.status === "paid" || order.status === "placed" || (order.amount_paid ?? 0) > 0;
+function isShippable(order: RazorpayOrder, payment: RazorpayPayment | undefined): boolean {
+  // Prepaid: money actually captured.
+  if (order.status === "paid" || (order.amount_paid ?? 0) > 0) return true;
+  // COD: Magic Checkout marks the order `placed` and raises a `cod` payment in `pending`.
+  // Either signal alone is enough — the customer has committed to pay on delivery.
+  if (order.status === "placed") return true;
+  if (payment?.method === "cod") return true;
+  return false;
 }
 
 const paiseToRupees = (paise: number) => Math.round(paise) / 100;
@@ -248,8 +256,13 @@ export async function fulfilRazorpayOrder(
 
   // Read from Razorpay, not from the webhook body: the payload can be replayed or arrive out
   // of order, but a fresh fetch is always the current truth about whether this is payable.
-  if (!isShippable(order)) {
-    log.info("fulfilment.skipped_not_ready", { razorpayOrderId, orderStatus: order.status });
+  if (!isShippable(order, payment)) {
+    log.info("fulfilment.skipped_not_ready", {
+      razorpayOrderId,
+      orderStatus: order.status,
+      paymentMethod: payment?.method,
+      paymentStatus: payment?.status,
+    });
     return { status: "not_ready", orderStatus: order.status };
   }
 
