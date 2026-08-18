@@ -31,7 +31,18 @@ import {
 
 export type FulfilmentOutcome =
   | { status: "created"; shiprocketOrderId: number; shipmentId: number; awbCode?: string | null }
-  | { status: "already_fulfilled"; via: "memory" | "razorpay_notes" | "shiprocket_duplicate" };
+  | { status: "already_fulfilled"; via: "memory" | "razorpay_notes" | "shiprocket_duplicate" }
+  | { status: "not_ready"; orderStatus: string };
+
+/**
+ * An order is shippable when money is either secured (prepaid, `paid`) or committed on
+ * delivery (COD, `placed`). Anything still in `created` has had no successful payment and
+ * no COD commitment, so it must not produce a shipment — this is what makes subscribing to
+ * `order.placed` safe even if Razorpay ever emits it before a prepaid payment completes.
+ */
+function isShippable(order: RazorpayOrder): boolean {
+  return order.status === "paid" || order.status === "placed" || (order.amount_paid ?? 0) > 0;
+}
 
 const paiseToRupees = (paise: number) => Math.round(paise) / 100;
 
@@ -234,6 +245,14 @@ export async function fulfilRazorpayOrder(
 
   const credentials = getRazorpayCredentials();
   const order = await fetchRazorpayOrder(razorpayOrderId, credentials);
+
+  // Read from Razorpay, not from the webhook body: the payload can be replayed or arrive out
+  // of order, but a fresh fetch is always the current truth about whether this is payable.
+  if (!isShippable(order)) {
+    log.info("fulfilment.skipped_not_ready", { razorpayOrderId, orderStatus: order.status });
+    return { status: "not_ready", orderStatus: order.status };
+  }
+
   const notes = normalizeNotes(order.notes);
 
   const marker = readFulfilmentMarker(notes);

@@ -21,12 +21,21 @@ import {
 // same bundle and, unlike a bare Vercel function, also run under `vite dev`.
 
 /**
- * Only these two events can mean "money is secured and the parcel should move".
+ * Events that can mean "this order should move to fulfilment".
+ *
  * `order.paid` carries both entities in one payload; `payment.captured` is subscribed as
  * well because it is the event that fires most reliably in practice, and the idempotency
  * layer makes receiving both for one order a no-op.
+ *
+ * `order.placed` is the COD case. Nothing is captured at checkout for a Cash on Delivery
+ * order, so neither of the prepaid events ever fires and the order silently never reached
+ * Shiprocket. Magic Checkout announces it with `order.placed`, and the order lands in
+ * Razorpay with status `placed` (see RazorpayOrder.status).
+ *
+ * Fulfilment re-reads the order from Razorpay and refuses anything not actually payable
+ * (see fulfilRazorpayOrder), so listening here can never ship an unpaid prepaid order.
  */
-const FULFILLABLE_EVENTS = new Set(["order.paid", "payment.captured"]);
+const FULFILLABLE_EVENTS = new Set(["order.paid", "payment.captured", "order.placed"]);
 
 function json(body: unknown, status: number): Response {
   return new Response(JSON.stringify(body), {
@@ -97,17 +106,26 @@ export const Route = createFileRoute("/api/webhooks/razorpay")({
         try {
           const outcome = await fulfilRazorpayOrder(razorpayOrderId, paymentEntity);
 
-          return json(
-            outcome.status === "created"
-              ? {
-                  ok: true,
-                  created: true,
-                  shiprocketOrderId: outcome.shiprocketOrderId,
-                  shipmentId: outcome.shipmentId,
-                }
-              : { ok: true, created: false, reason: outcome.via },
-            200,
-          );
+          if (outcome.status === "created") {
+            return json(
+              {
+                ok: true,
+                created: true,
+                shiprocketOrderId: outcome.shiprocketOrderId,
+                shipmentId: outcome.shipmentId,
+              },
+              200,
+            );
+          }
+
+          // Not yet payable. 200 rather than 500 — a retry of the same event cannot change
+          // the order's status, and the `order.paid` / `order.placed` that eventually does
+          // will arrive as its own delivery.
+          if (outcome.status === "not_ready") {
+            return json({ ok: true, created: false, reason: "not_ready" }, 200);
+          }
+
+          return json({ ok: true, created: false, reason: outcome.via }, 200);
         } catch (error) {
           const details = describeError(error);
 
