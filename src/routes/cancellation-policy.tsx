@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import {
   PolicyPageShell,
@@ -15,22 +15,18 @@ import {
   SupportEmailLink,
 } from "@/components/PolicyPage";
 import { buildPolicyPageHead, SUPPORT_EMAIL } from "@/lib/seo";
+import { DISPATCH_NOTE } from "@/lib/pricing";
 
 const PATH = "/cancellation-policy";
 const TITLE = "Cancellation Policy — Beyond Better";
 const DESCRIPTION =
-  "Beyond Better orders can be cancelled for a full refund any time before they ship. The current batch ships August 20, 2026 — here's how to cancel.";
+  "Beyond Better orders can be cancelled for a full refund any time before dispatch. Orders are dispatched within 1–2 business days — here's how to cancel.";
 const LAST_UPDATED = "August 2026";
-// Human-readable form of pricing.ts's RESTOCK_DATE_ISO ("2026-08-20"), matching the wording
-// already used sitewide (e.g. PREORDER_FULL_PAYMENT_NOTE). Kept as a literal, like every other
-// on-page date on this site, rather than importing and formatting RESTOCK_DATE_ISO -- update
-// both together if the ship date ever moves.
-const SHIP_DATE_HUMAN = "August 20, 2026";
 
 const FAQS = [
   {
     question: "Can I cancel my order?",
-    answer: `Yes — orders can be cancelled for a full refund any time before your batch ships. The current batch ships ${SHIP_DATE_HUMAN}. Once your order has shipped, it's no longer eligible for cancellation or refund.`,
+    answer: `Yes — orders can be cancelled for a full refund any time before they are dispatched. ${DISPATCH_NOTE} Once an order has been dispatched, the normal refund policy applies instead.`,
   },
   {
     question: "How do I cancel my order?",
@@ -44,7 +40,7 @@ const FAQS = [
   {
     question: "What happens if my order has already shipped?",
     answer:
-      "Once an order has shipped, it is no longer eligible for cancellation or refund under this policy.",
+      "Once an order has been dispatched it can no longer be cancelled, and the normal refund policy applies instead — refunds are available if the wrong product is delivered, it arrives damaged, or the shipment is confirmed lost.",
   },
 ];
 
@@ -68,7 +64,7 @@ function CancellationPolicyPage() {
         title="Cancellation Policy"
         lastUpdated={LAST_UPDATED}
         readingTime="2 min read"
-        intro={`Your order ships ${SHIP_DATE_HUMAN} — here's exactly when and how you can cancel for a full refund before then.`}
+        intro={`${DISPATCH_NOTE} You can cancel for a full refund any time before your order leaves us.`}
         breadcrumbLabel="Cancellation Policy"
       />
       <PolicyContent>
@@ -79,8 +75,8 @@ function CancellationPolicyPage() {
 
         <PolicySection id="cancelling-an-order" heading="Cancelling Your Order">
           <PolicyParagraph>
-            Orders are eligible for full cancellation and refund any time before they ship. The
-            current batch is scheduled to ship {SHIP_DATE_HUMAN}.
+            Orders are eligible for full cancellation and refund any time before they are
+            dispatched. {DISPATCH_NOTE}
           </PolicyParagraph>
           <PolicyParagraph>
             If you'd like to cancel your order, simply email <SupportEmailLink /> with your order ID
@@ -88,8 +84,11 @@ function CancellationPolicyPage() {
             shipped.
           </PolicyParagraph>
           <PolicyParagraph>
-            Once an order has shipped, it is no longer eligible for cancellation or refund under
-            this policy.
+            Once an order has been dispatched it can no longer be cancelled. From that point the{" "}
+            <Link to="/refund-policy" className="underline" style={{ color: "var(--forest)" }}>
+              Refund Policy
+            </Link>{" "}
+            applies instead.
           </PolicyParagraph>
         </PolicySection>
 
@@ -98,7 +97,7 @@ function CancellationPolicyPage() {
             steps={[
               { label: "Email Us", detail: SUPPORT_EMAIL },
               { label: "Include Order ID" },
-              { label: "We Confirm", detail: "Before your batch ships" },
+              { label: "We Confirm", detail: "Before dispatch" },
               { label: "Refund Issued" },
             ]}
           />

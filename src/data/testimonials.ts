@@ -1,10 +1,9 @@
-// Early-tester feedback for the first Beyond Better Berberine HCL batch, collected before the
-// public pre-order opened. Displayed on the homepage testimonials section and summarized as an
-// aggregate rating on the product page.
+// Early-tester feedback for Beyond Better Berberine HCL, collected before the product went on
+// public sale. Displayed on the homepage testimonials section and summarized as an aggregate
+// rating on the product page.
 //
-// The average and count are derived from this array, never hardcoded — the same "derived, not
-// hardcoded" rule pricing.ts uses for the discount percentage, so the displayed number can never
-// drift from what the individual ratings below actually say.
+// The average and count are derived from this array, never hardcoded, so the displayed number
+// can never drift from what the individual ratings below actually say.
 export interface Testimonial {
   name: string;
   rating: 4 | 5;

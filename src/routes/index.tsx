@@ -15,13 +15,11 @@ import shopSectionBackground from "@/assets/Berberine Shop background.webp";
 import berberineCapsule from "@/assets/berberine-capsule.webp";
 import logoLeaf from "@/assets/logo-leaf.webp";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
-import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { PriceDisplay } from "@/components/PriceDisplay";
 import { CancellationNote } from "@/components/CancellationNote";
-import { RestockCountdown } from "@/components/RestockCountdown";
 import { StarRating } from "@/components/StarRating";
 import { TESTIMONIALS, AVERAGE_RATING } from "@/data/testimonials";
-import { PREORDER_RESTOCK_CAPTION, getActivePriceInr } from "@/lib/pricing";
+import { CTA_LABEL, DISPATCH_NOTE, PRICE_INR } from "@/lib/pricing";
 import { POLICY_PAGES } from "@/lib/seo";
 import { PRODUCT_CATALOG } from "@/lib/product";
 import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
@@ -117,7 +115,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Can I cancel my order?",
-    a: "Yes — orders can be canceled for a full refund any time before your batch ships. The current batch ships August 20, 2026. To cancel, email care@bebeyondbetter.com. Once your order has shipped, it's no longer eligible for cancellation or refund.",
+    a: "Yes — orders can be cancelled for a full refund any time before they are dispatched. Orders are dispatched within 1–2 business days, so email care@bebeyondbetter.com as soon as possible. Once an order has been dispatched, the normal refund policy applies.",
   },
   {
     q: "How should I store the capsules?",
@@ -238,7 +236,7 @@ function Landing() {
       customData: {
         content_ids: [PRODUCT_CATALOG.id],
         content_type: "product",
-        value: getActivePriceInr(),
+        value: PRICE_INR,
         currency: PRODUCT_CATALOG.currency,
       },
     });
@@ -470,7 +468,6 @@ function Hero() {
 
 function DesktopHero() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   return (
     <section
       className="relative hidden md:block w-full overflow-hidden pointer-events-none"
@@ -547,7 +544,7 @@ function DesktopHero() {
                 pointerEvents: "auto",
               }}
             >
-              {ctaLabel} <span className="ml-2">↗</span>
+              {CTA_LABEL} <span className="ml-2">↗</span>
             </button>
             <a
               href="#science"
@@ -562,23 +559,19 @@ function DesktopHero() {
               Explore the Science ↗
             </a>
           </div>
-          {preorder && (
-            <div style={{ marginTop: 22, pointerEvents: "auto" }}>
-              <RestockCountdown variant="hero" />
-              <p
-                style={{
-                  marginTop: 10,
-                  fontSize: 10.5,
-                  lineHeight: 1.5,
-                  opacity: 0.82,
-                  maxWidth: 280,
-                }}
-              >
-                {PREORDER_RESTOCK_CAPTION}
-              </p>
-              <CancellationNote style={{ marginTop: 12 }} />
-            </div>
-          )}
+          <div style={{ marginTop: 22, pointerEvents: "auto" }}>
+            <p
+              style={{
+                fontSize: 10.5,
+                lineHeight: 1.5,
+                opacity: 0.82,
+                maxWidth: 280,
+              }}
+            >
+              {DISPATCH_NOTE}
+            </p>
+            <CancellationNote style={{ marginTop: 10 }} />
+          </div>
         </div>
         <div className="flex flex-col items-center shrink-0" style={{ color: "#1f3a2a" }}>
           {[
@@ -1048,7 +1041,6 @@ function Comparison() {
 
 function Benefits() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   const items = [
     "Most supplement brands blend, dilute, or round up their purity numbers, because nobody checks.",
     "Beyond Better is assayed to the Japanese HPLC Standard and screened against 545 pesticide residues — then the batch report is published.",
@@ -1110,7 +1102,7 @@ function Benefits() {
             <Reveal delay={0.2}>
               <div className="mt-10 lg:mt-12">
                 <CTAButton onClick={openCheckout} disabled={isLoading}>
-                  {ctaLabel}
+                  {CTA_LABEL}
                 </CTAButton>
                 <CancellationNote className="mt-3" />
               </div>
@@ -1278,7 +1270,6 @@ function LabReport() {
 
 function Testimonials() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   return (
     <section id="reviews" className="py-20 md:py-28" style={{ background: "#F8F5EF" }}>
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
@@ -1344,7 +1335,7 @@ function Testimonials() {
         <Reveal delay={0.2}>
           <div className="mt-4 flex flex-col items-center gap-3">
             <CTAButton onClick={openCheckout} disabled={isLoading}>
-              {ctaLabel}
+              {CTA_LABEL}
             </CTAButton>
             <CancellationNote />
           </div>
@@ -1512,7 +1503,6 @@ function FAQ() {
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel, isPreorderActive: preorder } = usePreorderStatus();
   const bullets = [
     "500mg per capsule, verified by Japanese HPLC Standard assay — not a proprietary blend hiding the real number",
     "97% HPLC verified purity — most berberine on the market sits between 70–90%",
@@ -1638,20 +1628,6 @@ function FinalCTA() {
               </p>
             </Reveal>
 
-            {preorder && (
-              <Reveal delay={0.22}>
-                <div className="mt-6 flex flex-col items-center gap-2 lg:mt-4">
-                  <RestockCountdown variant="hero" className="justify-center" />
-                  <p
-                    className="text-[10px] uppercase tracking-[0.2em]"
-                    style={{ color: "color-mix(in oklab, var(--forest) 72%, transparent)" }}
-                  >
-                    Until the first batch ships
-                  </p>
-                </div>
-              </Reveal>
-            )}
-
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-col items-center gap-3 lg:mt-5">
                 <PriceDisplay variant="block" align="center" />
@@ -1670,8 +1646,14 @@ function FinalCTA() {
                   boxShadow: "0 14px 30px -10px rgba(30,55,35,0.45)",
                 }}
               >
-                {ctaLabel} <ArrowUpRight className="h-4 w-4" />
+                {CTA_LABEL} <ArrowUpRight className="h-4 w-4" />
               </button>
+              <p
+                className="mt-3 text-[11px]"
+                style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
+              >
+                {DISPATCH_NOTE}
+              </p>
               <CancellationNote className="mt-2" />
             </Reveal>
           </div>
@@ -1683,7 +1665,6 @@ function FinalCTA() {
 
 function StickyBuy() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-40 border-t md:hidden"
@@ -1709,7 +1690,7 @@ function StickyBuy() {
           className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[13px] transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
-          <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
+          <ShoppingBag className="h-4 w-4 shrink-0" /> {CTA_LABEL}
         </button>
       </div>
       <CancellationNote className="pb-2 text-center" />

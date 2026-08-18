@@ -16,14 +16,18 @@ export function loadMagicCheckoutScript(): Promise<void> {
   }
 
   scriptPromise = new Promise<void>((resolve, reject) => {
-    const existing = document.querySelector<HTMLScriptElement>(`script[src="${MAGIC_CHECKOUT_SRC}"]`);
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${MAGIC_CHECKOUT_SRC}"]`,
+    );
     if (existing) {
       if (window.Razorpay) {
         resolve();
         return;
       }
       existing.addEventListener("load", () => resolve());
-      existing.addEventListener("error", () => reject(new Error("Failed to load Razorpay checkout script")));
+      existing.addEventListener("error", () =>
+        reject(new Error("Failed to load Razorpay checkout script")),
+      );
       return;
     }
 

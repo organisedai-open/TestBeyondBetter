@@ -8,8 +8,8 @@ import weightBerberine from "@/assets/Weight Berberine.webp";
 import bloodSugarBerberine from "@/assets/Blood Sugar Berberine.webp";
 import { ARTICLES } from "@/data/articles";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
-import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
 import { CancellationNote } from "@/components/CancellationNote";
+import { CTA_LABEL } from "@/lib/pricing";
 import { POLICY_PAGES } from "@/lib/seo";
 import {
   ArrowUpRight,
@@ -104,7 +104,6 @@ const FAQS = [
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -162,7 +161,7 @@ function Header() {
           className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
-          {ctaLabel} <ArrowUpRight className="h-3.5 w-3.5" />
+          {CTA_LABEL} <ArrowUpRight className="h-3.5 w-3.5" />
         </button>
       </div>
     </header>
@@ -171,7 +170,6 @@ function Header() {
 
 function Hero() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   return (
     <section
       className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28"
@@ -213,7 +211,7 @@ function Hero() {
                 color: "var(--forest)",
               }}
             >
-              {ctaLabel}
+              {CTA_LABEL}
             </button>
           </div>
           <CancellationNote className="mt-3" />
@@ -586,7 +584,6 @@ function FaqAccordion() {
 
 function FinalCTA() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   return (
     <section
       className="relative overflow-hidden px-6 py-24 lg:px-10 lg:py-32"
@@ -616,7 +613,7 @@ function FinalCTA() {
             className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
             style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
           >
-            {ctaLabel} <ArrowRight className="h-4 w-4" />
+            {CTA_LABEL} <ArrowRight className="h-4 w-4" />
           </button>
           <CancellationNote className="mt-3" />
         </Reveal>
@@ -741,7 +738,6 @@ function Footer() {
 function StickyShop() {
   const [show, setShow] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
     onScroll();
@@ -762,7 +758,7 @@ function StickyShop() {
         pointerEvents: show ? "auto" : "none",
       }}
     >
-      {ctaLabel} <ArrowUpRight className="h-3.5 w-3.5" />
+      {CTA_LABEL} <ArrowUpRight className="h-3.5 w-3.5" />
     </button>
   );
 }

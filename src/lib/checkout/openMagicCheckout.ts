@@ -2,12 +2,13 @@ import { toast } from "sonner";
 
 import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/api/checkout.functions";
 import { PRODUCT_CATALOG } from "@/lib/product";
-import { getActivePriceInr, isPreorderActive } from "@/lib/pricing";
+import { PRICE_INR } from "@/lib/pricing";
 import { trackMetaEvent, trackMetaPurchase } from "@/lib/analytics/trackMetaEvent";
 import logoLeaf from "@/assets/logo-leaf.webp";
 
 import { loadMagicCheckoutScript } from "./loadMagicCheckoutScript";
 import { isCheckoutInProgress, setCheckoutInProgress } from "./magicCheckoutStore";
+import { ORDER_CONFIRMED_PATH, storeConfirmedOrder } from "./orderConfirmation";
 
 function productCustomData(quantity: number, valueInr: number) {
   return {
@@ -28,7 +29,7 @@ export async function openMagicCheckout(quantity = 1) {
   // Fired the moment the customer commits to buying. There's no separate cart step in this
   // one-click-checkout flow, so this is the closest equivalent to a classic "Add to Cart".
   trackMetaEvent("AddToCart", {
-    customData: productCustomData(quantity, getActivePriceInr() * quantity),
+    customData: productCustomData(quantity, PRICE_INR * quantity),
   });
 
   try {
@@ -79,9 +80,6 @@ export async function openMagicCheckout(quantity = 1) {
   }
 }
 
-const PREORDER_FULFILLMENT_NOTE =
-  "This is a pre-order — your Beyond Better berberine ships starting August 20, 2026.";
-
 interface OrderContext {
   quantity: number;
   /** Paise, as returned by createRazorpayOrder. */
@@ -93,45 +91,49 @@ async function handleCheckoutCompleted(
   response: RazorpayHandlerResponse,
   orderContext: OrderContext,
 ) {
-  // Purely a display decision (which confirmation copy to show) — the amount actually
-  // charged was already decided authoritatively server-side at order creation.
-  const preorder = isPreorderActive();
-
   try {
-    if (response.razorpay_payment_id && response.razorpay_signature) {
+    const isPrepaid = Boolean(response.razorpay_payment_id && response.razorpay_signature);
+
+    if (isPrepaid) {
       const { verified } = await verifyRazorpayPayment({
         data: {
           razorpay_order_id: response.razorpay_order_id,
-          razorpay_payment_id: response.razorpay_payment_id,
-          razorpay_signature: response.razorpay_signature,
+          razorpay_payment_id: response.razorpay_payment_id!,
+          razorpay_signature: response.razorpay_signature!,
         },
       });
 
-      if (verified) {
-        toast.success(
-          preorder ? "Pre-order confirmed!" : "Payment received — your order is confirmed!",
-          preorder ? { description: PREORDER_FULFILLMENT_NOTE } : undefined,
-        );
-        trackPurchase(response.razorpay_order_id, orderContext);
-      } else {
+      if (!verified) {
         toast.error(
           "We couldn't verify that payment. If you were charged, please contact support.",
         );
+        setCheckoutInProgress(false);
+        return;
       }
-    } else {
-      // COD orders placed through Magic Checkout without an upfront payment.
-      toast.success(
-        preorder ? "Pre-order placed!" : "Order placed! We'll send a confirmation shortly.",
-        preorder ? { description: PREORDER_FULFILLMENT_NOTE } : undefined,
-      );
-      trackPurchase(response.razorpay_order_id, orderContext);
     }
+
+    trackPurchase(response.razorpay_order_id, orderContext);
+
+    storeConfirmedOrder({
+      orderId: response.razorpay_order_id,
+      paymentId: response.razorpay_payment_id,
+      quantity: orderContext.quantity,
+      amountPaise: orderContext.amount,
+      currency: orderContext.currency,
+      paymentMethod: isPrepaid ? "prepaid" : "cod",
+    });
+
+    // Full navigation rather than a router push: this module is not a component, and a hard
+    // load guarantees the customer lands on the confirmation even if the SPA router is in an
+    // odd state after the payment modal closes. Nothing is left in flight to interrupt.
+    window.location.assign(ORDER_CONFIRMED_PATH);
+    return;
   } catch (error) {
     console.error("Failed to verify Razorpay payment", error);
     toast.error("We couldn't confirm your order. If you were charged, please contact support.");
-  } finally {
-    setCheckoutInProgress(false);
   }
+
+  setCheckoutInProgress(false);
 }
 
 function trackPurchase(razorpayOrderId: string, orderContext: OrderContext) {

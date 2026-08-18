@@ -14,6 +14,7 @@ import { Route as ShippingPolicyRouteImport } from './routes/shipping-policy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as OrderConfirmedRouteImport } from './routes/order-confirmed'
 import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResearchLibraryIndexRouteImport } from './routes/research-library.index'
@@ -45,6 +46,11 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const PoliciesRoute = PoliciesRouteImport.update({
   id: '/policies',
   path: '/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderConfirmedRoute = OrderConfirmedRouteImport.update({
+  id: '/order-confirmed',
+  path: '/order-confirmed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CancellationPolicyRoute = CancellationPolicyRouteImport.update({
@@ -86,6 +92,7 @@ const ApiRazorpayShippingInfoRoute = ApiRazorpayShippingInfoRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
+  '/order-confirmed': typeof OrderConfirmedRoute
   '/policies': typeof PoliciesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
+  '/order-confirmed': typeof OrderConfirmedRoute
   '/policies': typeof PoliciesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
+  '/order-confirmed': typeof OrderConfirmedRoute
   '/policies': typeof PoliciesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cancellation-policy'
+    | '/order-confirmed'
     | '/policies'
     | '/privacy-policy'
     | '/refund-policy'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/cancellation-policy'
+    | '/order-confirmed'
     | '/policies'
     | '/privacy-policy'
     | '/refund-policy'
@@ -159,6 +170,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/cancellation-policy'
+    | '/order-confirmed'
     | '/policies'
     | '/privacy-policy'
     | '/refund-policy'
@@ -174,6 +186,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CancellationPolicyRoute: typeof CancellationPolicyRoute
+  OrderConfirmedRoute: typeof OrderConfirmedRoute
   PoliciesRoute: typeof PoliciesRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
@@ -221,6 +234,13 @@ declare module '@tanstack/react-router' {
       path: '/policies'
       fullPath: '/policies'
       preLoaderRoute: typeof PoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-confirmed': {
+      id: '/order-confirmed'
+      path: '/order-confirmed'
+      fullPath: '/order-confirmed'
+      preLoaderRoute: typeof OrderConfirmedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cancellation-policy': {
@@ -278,6 +298,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CancellationPolicyRoute: CancellationPolicyRoute,
+  OrderConfirmedRoute: OrderConfirmedRoute,
   PoliciesRoute: PoliciesRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundPolicyRoute: RefundPolicyRoute,

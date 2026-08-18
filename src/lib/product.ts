@@ -4,9 +4,9 @@ import productImage from "@/assets/hero-berberine-product.webp";
 const SITE_URL = "https://www.bebeyondbetter.com";
 
 // Single-SKU store: every "Buy"/"Shop" CTA on the site checks out this product.
-// The unit price is NOT here — it's pre-order/in-stock dependent, so it's computed fresh
-// per order via getActivePriceInr() in pricing.ts (see checkout.functions.ts), never
-// frozen at module load.
+// The unit price is NOT here — it lives in pricing.ts as PRICE_INR and is applied
+// server-side per order (see checkout.functions.ts), so there is exactly one place to
+// change it.
 export const PRODUCT_CATALOG = {
   id: "berberine-hcl-500mg",
   sku: "BB-BERB-60CAP",

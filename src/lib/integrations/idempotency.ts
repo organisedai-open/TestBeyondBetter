@@ -61,7 +61,7 @@ export function readFulfilmentMarker(
  * Builds the merged notes object to PATCH back onto the Razorpay order.
  *
  * Merging matters: PATCH replaces the notes object wholesale, and the existing notes carry
- * `productId` / `quantity` / `preorder` written at checkout time — dropping them would
+ * `productId` / `quantity` written at checkout time — dropping them would
  * destroy the very data a later redelivery needs to rebuild the shipment.
  */
 export function buildFulfilmentNotes(

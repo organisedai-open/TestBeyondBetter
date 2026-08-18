@@ -23,7 +23,6 @@ import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
 
 const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID;
 
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -190,7 +189,7 @@ function RootComponent() {
   useEffect(() => {
     trackMetaEvent("PageView");
   }, [location.pathname, location.search, location.hash]);
- 
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}

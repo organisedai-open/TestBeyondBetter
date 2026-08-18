@@ -26,7 +26,7 @@ const FAQS = [
   {
     question: "Can I return an opened supplement?",
     answer:
-      "No. Opened or used products are generally not eligible for refunds unless required under applicable law.",
+      "No. Products must be returned unopened with the seal intact — opened or used products are not eligible for a refund, except where required under applicable law.",
   },
   {
     question: "Can I cancel after shipping?",
@@ -91,8 +91,9 @@ function RefundPolicyPage() {
             payment method within a reasonable processing period.
           </PolicyParagraph>
           <PolicyParagraph>
-            Opened or used products are generally not eligible for refunds unless required under
-            applicable law.
+            The product must be returned unopened, with its seal intact and in its original
+            packaging. Opened or used products are not eligible for a refund, except where a refund
+            is required under applicable law.
           </PolicyParagraph>
         </PolicySection>
 

@@ -9,8 +9,7 @@ import { StarRating } from "@/components/StarRating";
 import { TESTIMONIALS, AVERAGE_RATING, REVIEW_COUNT } from "@/data/testimonials";
 import { PURITY_PCT, PESTICIDES_SCREENED } from "@/lib/quality";
 import { useMagicCheckout } from "@/lib/checkout/useMagicCheckout";
-import { usePreorderStatus } from "@/lib/checkout/usePreorderStatus";
-import { RESTOCK_DATE_ISO, getActivePriceInr } from "@/lib/pricing";
+import { CTA_LABEL, DISPATCH_NOTE, PRICE_INR } from "@/lib/pricing";
 import { PRODUCT_CATALOG } from "@/lib/product";
 import { trackMetaEvent } from "@/lib/analytics/trackMetaEvent";
 import logoLeaf from "@/assets/logo-leaf.webp";
@@ -70,12 +69,10 @@ function ProductJsonLd() {
       "@type": "Offer",
       url: PAGE_URL,
       priceCurrency: PRODUCT_CATALOG.currency,
-      // Derived, not hardcoded: a stale price in structured data is what makes Google show a
-      // price in search results that no longer matches the page — a Merchant Center mismatch.
-      price: String(getActivePriceInr()),
-      availability: "https://schema.org/PreOrder",
-      availabilityStarts: RESTOCK_DATE_ISO,
-      priceValidUntil: RESTOCK_DATE_ISO,
+      // Read from the same constant the server charges from, so the price in search results
+      // can never drift from the price actually taken — a Merchant Center mismatch.
+      price: String(PRICE_INR),
+      availability: "https://schema.org/InStock",
     },
     // Sourced from src/data/testimonials.ts, the same array the visible testimonial cards and
     // star rating render from — this must mirror on-page content, never a separately-tracked
@@ -142,7 +139,6 @@ export const Route = createFileRoute("/products/berberine-hcl")({
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -193,7 +189,7 @@ function Header() {
           className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
-          {ctaLabel} <ArrowUpRight className="h-3.5 w-3.5" />
+          {CTA_LABEL} <ArrowUpRight className="h-3.5 w-3.5" />
         </button>
       </div>
     </header>
@@ -202,7 +198,6 @@ function Header() {
 
 function ProductIntro() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
 
   const galleryImages = [
     {
@@ -300,9 +295,15 @@ function ProductIntro() {
                   boxShadow: "0 14px 30px -10px rgba(30,55,35,0.45)",
                 }}
               >
-                {ctaLabel} <ArrowUpRight className="h-4 w-4" />
+                {CTA_LABEL} <ArrowUpRight className="h-4 w-4" />
               </button>
             </div>
+            <p
+              className="mt-3 text-center text-[11px] lg:text-left"
+              style={{ color: "color-mix(in oklab, var(--forest) 82%, transparent)" }}
+            >
+              {DISPATCH_NOTE}
+            </p>
             <div className="flex justify-center lg:justify-start">
               <CancellationNote className="mt-2" />
             </div>
@@ -549,7 +550,6 @@ function CoaSection() {
 
 function Footer() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   return (
     <footer className="bg-background py-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -576,7 +576,7 @@ function Footer() {
                     disabled={isLoading}
                     className="hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    {ctaLabel}
+                    {CTA_LABEL}
                   </button>
                 </li>
                 <li>
@@ -647,7 +647,6 @@ function Footer() {
 
 function StickyBuy() {
   const { openCheckout, isLoading } = useMagicCheckout();
-  const { ctaLabel } = usePreorderStatus();
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-40 border-t px-4 py-3 md:hidden"
@@ -673,7 +672,7 @@ function StickyBuy() {
           className="inline-flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[13px] transition active:opacity-80 disabled:cursor-not-allowed disabled:opacity-70"
           style={{ backgroundColor: "var(--forest)", color: "var(--ivory)" }}
         >
-          <ShoppingBag className="h-4 w-4 shrink-0" /> {ctaLabel}
+          <ShoppingBag className="h-4 w-4 shrink-0" /> {CTA_LABEL}
         </button>
       </div>
       <CancellationNote className="pt-2 text-center" />
@@ -712,7 +711,7 @@ function ProductPage() {
       customData: {
         content_ids: [PRODUCT_CATALOG.id],
         content_type: "product",
-        value: getActivePriceInr(),
+        value: PRICE_INR,
         currency: PRODUCT_CATALOG.currency,
       },
     });

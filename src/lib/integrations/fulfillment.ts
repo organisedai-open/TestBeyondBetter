@@ -1,5 +1,5 @@
 import { PRODUCT_CATALOG } from "@/lib/product";
-import { getActivePriceInr } from "@/lib/pricing";
+import { PRICE_INR } from "@/lib/pricing";
 
 import {
   buildFulfilmentNotes,
@@ -91,11 +91,9 @@ function formatOrderDateIst(unixSeconds: number): string {
 }
 
 /**
- * Quantity is recorded in the order notes at checkout time (see checkout.functions.ts).
- * Orders placed before that existed fall back to dividing the line-item total by the unit
- * price that was active *when the order was created* — pricing is purely a function of
- * time, so this reconstructs the historical price correctly even across the restock
- * boundary, rather than using today's price and mis-deriving the count.
+ * Quantity is recorded in the order notes at checkout time (see checkout.functions.ts), so
+ * this fallback only runs for an order whose notes are missing or malformed. Pricing is a
+ * single fixed constant, so dividing the line-item total by it recovers the unit count.
  */
 function resolveQuantity(order: RazorpayOrder, notes: Record<string, string>): number {
   const fromNotes = Number.parseInt(notes.quantity ?? "", 10);
@@ -103,7 +101,7 @@ function resolveQuantity(order: RazorpayOrder, notes: Record<string, string>): n
 
   const lineItemsTotal = order.line_items_total;
   if (lineItemsTotal && lineItemsTotal > 0) {
-    const unitPricePaise = getActivePriceInr(new Date(order.created_at * 1000)) * 100;
+    const unitPricePaise = PRICE_INR * 100;
     const derived = Math.round(lineItemsTotal / unitPricePaise);
     if (derived > 0) return derived;
   }
