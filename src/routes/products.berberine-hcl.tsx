@@ -265,7 +265,7 @@ function ProductIntro() {
               <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
                 {AVERAGE_RATING}/5
               </span>
-              <span className="text-xs text-muted-foreground">(early tester reviews)</span>
+              <span className="text-xs text-muted-foreground">(customer reviews)</span>
             </div>
             <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
               Japanese Standard Berberine — 500mg per capsule, 60 capsules. 97% HPLC verified

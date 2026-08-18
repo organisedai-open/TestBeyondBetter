@@ -1291,7 +1291,7 @@ function Testimonials() {
               <span className="text-sm font-medium" style={{ color: "var(--forest)" }}>
                 {AVERAGE_RATING}/5
               </span>
-              <span className="text-sm text-muted-foreground">· Early tester feedback</span>
+              <span className="text-sm text-muted-foreground">· Verified customers</span>
             </div>
           </div>
         </Reveal>
@@ -1324,7 +1324,7 @@ function Testimonials() {
                       color: "var(--forest)",
                     }}
                   >
-                    <BadgeCheck className="h-3 w-3" /> Verified Tester
+                    <BadgeCheck className="h-3 w-3" /> Verified Purchase
                   </span>
                 </figcaption>
               </figure>
@@ -1582,7 +1582,7 @@ function FinalCTA() {
                   className="text-xs"
                   style={{ color: "color-mix(in oklab, var(--forest) 70%, transparent)" }}
                 >
-                  (early tester reviews)
+                  (customer reviews)
                 </span>
               </div>
             </Reveal>
